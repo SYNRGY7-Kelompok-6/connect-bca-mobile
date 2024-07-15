@@ -2,30 +2,47 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    tools:context=".ui.activity.LoginActivity">
+
+    <ImageView
+        android:id="@+id/topGradient"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="-360dp"
+        android:src="@drawable/gradient_login"
+        android:contentDescription="@string/logo_content_desc"
+        android:background="@drawable/gradient_login"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/ic_launcher_background"
+        android:contentDescription="@string/logo_content_desc"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="100dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/tvWelcome" />
 
     <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selamat Datang"
-        android:textSize="28sp"
-        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/welcome"
+        android:textSize="24sp"
+        android:textColor="?android:textColorPrimary"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/ivLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tilPassword"
         android:layout_marginTop="24dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -37,6 +54,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvWelcome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnLogin"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_lock"
         app:endIconMode="password_toggle">
@@ -45,7 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/kata_sandi"
-            android:paddingStart="38dp"
+            android:textSize="14sp"
+            android:paddingHorizontal="38dp"
             android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,11 +75,12 @@
         android:layout_height="wrap_content"
         android:text="@string/masuk"
         app:cornerRadius="12dp"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="?android:buttonTint"
         android:textAllCaps="false"
         app:layout_constraintTop_toBottomOf="@id/tilPassword"
         app:layout_constraintStart_toStartOf="@id/tilPassword"
         app:layout_constraintEnd_toEndOf="@id/tilPassword"
+        app:layout_constraintBottom_toTopOf="@id/tvForgotPassword"
         android:layout_marginTop="24dp"/>
 
     <TextView
@@ -68,61 +88,99 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lupa_kata_sandi"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/quickButtons"
         android:layout_marginTop="16dp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/quickButtons"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword">
+        app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword"
+        app:layout_constraintBottom_toTopOf="@id/footerBca"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:drawableTop="@drawable/ic_wallet"
-            android:text="@string/e_wallet"
+            android:paddingVertical="14dp"
+            android:backgroundTint="?android:buttonTint"
             android:textColor="?attr/colorSurface"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:contentDescription="@string/tombol_wallet"
+            app:icon="@drawable/ic_wallet"
+            app:iconGravity="textStart"
+            app:iconTint="@color/neutral01"
+            app:iconSize="32dp"
+            app:iconPadding="0dp"/>
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:drawableTop="@drawable/ic_qris"
+            android:paddingVertical="14dp"
+            android:backgroundTint="?android:buttonTint"
             android:textColor="?attr/colorSurface"
-            android:text="@string/qris"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:contentDescription="@string/tombol_qris"
+            app:icon="@drawable/ic_qris"
+            app:iconGravity="textStart"
+            app:iconTint="@color/neutral01"
+            app:iconSize="28dp"
+            app:iconPadding="0dp"/>
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/ic_transfer"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:paddingVertical="14dp"
+            android:backgroundTint="?android:buttonTint"
             android:textColor="?attr/colorSurface"
-            android:text="@string/transfer"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:contentDescription="@string/tombol_transfer"
+            app:icon="@drawable/ic_transfer"
+            app:iconGravity="textStart"
+            app:iconTint="@color/neutral01"
+            app:iconSize="28dp"
+            app:iconPadding="0dp"/>
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/footerBca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/by_bca"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/bottomGradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="-70dp"/>
+
+    <ImageView
+        android:id="@+id/bottomGradient"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginBottom="-340dp"
+        android:src="@drawable/gradient_login"
+        android:contentDescription="@string/logo_content_desc"
+        android:background="@drawable/gradient_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

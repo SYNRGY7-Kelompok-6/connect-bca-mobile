@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome">Selamat Datang</string>
+    <string name="logo_content_desc">Connect by BCA</string>
+    <string name="tombol_qris">Tombol Qris</string>
+    <string name="tombol_wallet">Tombol Wallet</string>
+    <string name="tombol_transfer">Tombol Transfer</string>
+</resources>
