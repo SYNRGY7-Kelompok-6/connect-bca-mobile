@@ -2,4 +2,8 @@
 <resources>
 
     <style name="Theme.ConnectBCA" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ConnectBCA" parent="Theme.Material3.DayNight.NoActionBar">
+
+    </style>
 </resources>
