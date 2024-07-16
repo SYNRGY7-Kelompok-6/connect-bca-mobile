@@ -51,7 +51,6 @@
             android:layout_marginBottom="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvExp"
             app:layout_constraintTop_toBottomOf="@id/cardNumberLayout"/>
 
         <com.google.android.material.textview.MaterialTextView
@@ -62,6 +61,7 @@
             android:text="EXP"
             app:layout_constraintBottom_toTopOf="@id/tvExpDate"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/tvSavingProduct" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -73,6 +73,7 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp"
             app:layout_constraintTop_toBottomOf="@id/tvExp"/>
 
         <com.google.android.material.imageview.ShapeableImageView
