@@ -17,4 +17,13 @@
     <string name="kata_sandi">Kata Sandi</string>
     <string name="qris">QRIS</string>
     <string name="transfer">Transfer</string>
+    <string name="info_icon">Info Icon</string>
+    <string name="title">Title</string>
+    <string name="price">Price</string>
+    <string name="lihat_nota">Lihat Nota</string>
+    <string name="logo_icon">Logo Icon</string>
+    <string name="logo_content_description">Logo Content Description</string>
+    <string name="e_wallet_description">E-wallet Description</string>
+    <string name="qris_description">Qris Description</string>
+    <string name="transfer_description">Transfer Description</string>
 </resources>

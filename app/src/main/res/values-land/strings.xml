@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="logo_content_description">Logo Content Description</string>
+    <string name="e_wallet_description">E-wallet Description</string>
+    <string name="qris_description">Qris Description</string>
+    <string name="transfer_description">Transfer Description</string>
+</resources>
