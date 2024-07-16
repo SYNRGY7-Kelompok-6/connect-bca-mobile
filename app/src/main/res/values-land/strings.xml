@@ -9,4 +9,5 @@
     <string name="title">Title</string>
     <string name="price">Price</string>
     <string name="lihat_nota">Lihat Nota</string>
+    <string name="back">Back</string>
 </resources>

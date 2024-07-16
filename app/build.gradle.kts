@@ -4,8 +4,8 @@ plugins {
     id("androidx.navigation.safeargs")
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    /*id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")*/
 }
 
 android {
@@ -67,11 +67,14 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
     implementation(platform("io.insert-koin:koin-bom:3.5.6"))
     implementation("io.insert-koin:koin-android")
-    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+
+    /*implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-crashlytics")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation("com.google.firebase:firebase-crashlytics")*/
+
+    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
     implementation("androidx.compose.material3:material3")
+
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 

@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <Button
         android:id="@+id/iconButtonInfo"
@@ -164,7 +163,7 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                app:iconTint="@color/white"
+                app:iconTint="@color/neutral01"
                 app:icon="@drawable/ic_qris"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
@@ -200,7 +199,7 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                app:iconTint="@color/white"
+                app:iconTint="@color/neutral01"
                 app:icon="@drawable/ic_transfer"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
