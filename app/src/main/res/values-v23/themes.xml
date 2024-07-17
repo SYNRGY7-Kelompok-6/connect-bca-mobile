@@ -7,5 +7,13 @@
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
         <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
         <item name="android:buttonTint">@color/colorPrimaryDark</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/colorPrimaryDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorPrimaryLight</item>
+        <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
+        <item name="colorOnSecondary">@color/colorPrimaryDark</item>
     </style>
 </resources>

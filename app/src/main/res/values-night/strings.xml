@@ -10,4 +10,6 @@
     <string name="price">Price</string>
     <string name="lihat_nota">Lihat Nota</string>
     <string name="back">Back</string>
+    <string name="ewallet_description">Akses cepat ke E-Wallet</string>
+    <string name="user_id">User ID</string>
 </resources>
