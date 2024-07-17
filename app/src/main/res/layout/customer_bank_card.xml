@@ -48,33 +48,37 @@
             android:layout_height="wrap_content"
             android:text="Tahapan Xpresi"
             android:textColor="@color/neutral01"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardNumberLayout"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvExp"
+        <LinearLayout
+            android:id="@+id/expLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/neutral01"
-            android:text="EXP"
-            app:layout_constraintBottom_toTopOf="@id/tvExpDate"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tvSavingProduct"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/tvSavingProduct" />
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvExpDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="03/28"
-            android:textColor="@color/neutral01"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="4dp"
-            app:layout_constraintTop_toBottomOf="@id/tvExp"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvExp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/neutral01"
+                android:text="EXP" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvExpDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="03/28"
+                android:textColor="@color/neutral01"
+                android:textSize="24sp"/>
+
+        </LinearLayout>
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivAppLogo"
@@ -82,9 +86,9 @@
             android:layout_height="65dp"
             android:layout_margin="12dp"
             android:src="@drawable/ic_launcher_background"
+            app:layout_constraintTop_toTopOf="@id/expLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvExp"/>
+            app:layout_constraintBottom_toBottomOf="@id/expLayout"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
