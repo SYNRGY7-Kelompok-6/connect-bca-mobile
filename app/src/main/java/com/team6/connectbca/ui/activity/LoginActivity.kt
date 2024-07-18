@@ -9,5 +9,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.btnLogin.setOnClickListener {
+            MainActivity.startActivity(this)
+        }
     }
 }
