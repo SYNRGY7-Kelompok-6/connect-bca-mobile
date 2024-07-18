@@ -2,6 +2,7 @@ package com.team6.connectbca.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.team6.connectbca.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,13 +17,16 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             title = "Informasi Rekening"
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
+            setDisplayHomeAsUpEnabled(false)
+            setDisplayShowHomeEnabled(false)
         }
 
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        bottomSheetBehavior.isHideable = false
     }
 
     override fun onSupportNavigateUp(): Boolean {
