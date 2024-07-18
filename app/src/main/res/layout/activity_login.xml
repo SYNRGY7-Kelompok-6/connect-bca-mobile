@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.LoginActivity">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/iconButtonInfo"
         style="?attr/materialIconButtonStyle"
         android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/ivLogo"/>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/topGradient"
         android:layout_width="match_parent"
         android:layout_height="500dp"
@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tvWelcome" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -135,11 +135,13 @@
         app:layout_constraintEnd_toEndOf="@id/tilPassword"
         app:layout_constraintBottom_toTopOf="@id/tvForgotPassword" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvForgotPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="15dp"
         android:text="@string/lupa_kata_sandi"
+        android:gravity="center"
         android:textColor="?android:textColorPrimary"
         android:textSize="14sp"
         android:clickable="true"
@@ -173,8 +175,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnWallet"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
@@ -188,14 +190,14 @@
                 android:backgroundTint="?android:buttonTint"
                 android:contentDescription="@string/ewallet_description" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvWallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textColor="?android:textColorPrimary"
                 android:text="@string/e_wallet"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -210,8 +212,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnQris"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
@@ -225,14 +227,14 @@
                 android:backgroundTint="?android:buttonTint"
                 android:contentDescription="@string/qris_description" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvQris"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/qris"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -246,8 +248,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTransfer"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
@@ -261,20 +263,20 @@
                 android:backgroundTint="?android:buttonTint"
                 android:contentDescription="@string/transfer_description" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTransfer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textColor="?android:textColorPrimary"
                 android:text="@string/transfer"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/footerBca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

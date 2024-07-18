@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Jumlah Saldo"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:textColor="@color/neutral01"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.team6.connectbca.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     companion object {
         fun startActivity(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))
