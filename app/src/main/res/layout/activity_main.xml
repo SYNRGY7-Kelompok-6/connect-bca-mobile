@@ -185,41 +185,23 @@
                     app:tabMode="fixed"
                     app:tabGravity="fill"
                     android:elevation="24dp"
+                    app:tabBackground="@color/neutral09"
                     app:circularflow_radiusInDP="24dp"
                     android:backgroundTint="@color/neutral09"
                     app:tabTextColor="@color/neutral01"
                     app:tabIndicatorColor="@color/neutral01"
                     app:layout_constraintTop_toBottomOf="@id/dragHandle"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-                    <com.google.android.material.tabs.TabItem
-                        android:id="@+id/tabToday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hari Ini" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:id="@+id/tabMonth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bulan" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:id="@+id/tabSearch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cari" />
-                </com.google.android.material.tabs.TabLayout>
-
-                <FrameLayout
-                    android:id="@+id/fragmentContainer"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                    android:layout_height="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="8dp" />
+                    app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
