@@ -16,4 +16,9 @@
         <item name="android:buttonTint">@color/colorPrimary</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="ProgressBar">
+        <item name="indicatorColor">@color/colorPrimary</item>
+        <item name="trackColor">@color/colorPrimaryLight</item>
+    </style>
 </resources>

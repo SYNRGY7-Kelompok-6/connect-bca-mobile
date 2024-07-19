@@ -1,5 +1,6 @@
 package com.team6.connectbca.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,23 +21,45 @@ class LoginViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                val responseMessage = authRepository.userLogin(userId, password)
-                authRepository.saveSessionData(userId, password)
-                _loading.value = false
+                delay(2000)
+//                val res = authRepository.userLogin(userId, password)
+//                if (res) {
+//                    _success.value = true
+//                    getUserSessionTime()
+//                }
                 _success.value = true
+                getUserSessionTime()
+                _loading.value = false
             } catch (error: Throwable) {
                 _error.value = error
+                _success.value = false
                 _loading.value = false
             }
         }
     }
 
-    fun getUserSessionTime() : LiveData<Long> {
+    fun userLogout() {
         viewModelScope.launch {
-            _sessionTime.value = authRepository.getSessionData().get("sessionTime") as Long
+            try {
+                _loading.value = true
+                authRepository.clearToken()
+                authRepository.clearSessionTime()
+                _loading.value = false
+                _success.value = true
+            } catch (error: Throwable) {
+                _error.value = error
+                _success.value = false
+                _loading.value = false
+            }
         }
+    }
 
-        return _sessionTime
+    fun getUserSessionTime() : Long {
+        var sessionTime: Long = 0
+        viewModelScope.launch {
+            sessionTime = authRepository.getSessionData().get("sessionTime") as Long
+        }
+        return sessionTime
     }
 
     fun getError() : LiveData<Throwable> {

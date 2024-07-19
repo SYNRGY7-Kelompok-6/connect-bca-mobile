@@ -32,4 +32,8 @@
     <string name="back">Back</string>
     <string name="ewallet_description">Akses cepat ke E-Wallet</string>
     <string name="user_id">User ID</string>
+    <string name="login_loading_description">Sedang memeriksa akun Anda</string>
+    <string name="userid_content_description">Masukkan user id Anda</string>
+    <string name="password_description">Masukkan password Anda</string>
+    <string name="submit_btn_description">Tekan tombol ini untuk masuk</string>
 </resources>
