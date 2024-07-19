@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center">
+    android:layout_margin="2dp"
+    app:cardCornerRadius="22dp"
+    app:strokeColor="@color/neutral09"
+    app:cardElevation="12dp">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivMutationLogo"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_margin="12dp"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        android:textColor="@color/neutral01"
-        android:layout_marginStart="12dp"
-        app:layout_constraintBottom_toTopOf="@id/tvPrice"
-        app:layout_constraintStart_toEndOf="@id/ivMutationLogo"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:background="@color/neutral09"
+        android:layout_margin="4dp"
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:textSize="21sp"
-        android:textColor="@color/neutral01"
-        app:cornerRadius="12dp"
-        android:text="@string/price"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toEndOf="@id/ivMutationLogo"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    
-    <Button
-        android:id="@+id/btnNote"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="12dp"
-        android:text="@string/lihat_nota"
-        android:backgroundTint="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivMutationLogo"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="12dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:textColor="@color/neutral01"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBottom_toTopOf="@id/tvPrice"
+            app:layout_constraintStart_toEndOf="@id/ivMutationLogo"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/neutral01"
+            android:textSize="21sp"
+            android:text="@string/price"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toEndOf="@id/ivMutationLogo"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="12dp"
+            android:text="@string/lihat_nota"
+            android:textColor="@color/neutral01"
+            android:backgroundTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
