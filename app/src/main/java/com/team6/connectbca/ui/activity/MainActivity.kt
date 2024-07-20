@@ -1,5 +1,7 @@
 package com.team6.connectbca.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
@@ -10,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         fun startActivity(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))
-        }S
+        }
     }
 
     private lateinit var binding: ActivityMainBinding
