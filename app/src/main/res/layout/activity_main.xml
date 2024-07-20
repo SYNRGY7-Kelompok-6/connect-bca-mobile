@@ -159,7 +159,7 @@
             android:backgroundTint="@color/neutral09"
             app:behavior_hideable="false"
             app:cardCornerRadius="28dp"
-            app:behavior_peekHeight="370dp"
+            app:behavior_peekHeight="0dp"
             app:strokeColor="@color/neutral09"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -180,6 +180,7 @@
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabLayout"
+                    android:contentDescription="Tabs Layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabMode="fixed"
