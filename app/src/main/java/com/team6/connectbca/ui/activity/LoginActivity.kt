@@ -2,7 +2,6 @@ package com.team6.connectbca.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.databinding.ActivityLoginBinding
@@ -52,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
             if (isSuccess) {
                 Snackbar.make(binding.root, "Login Berhasil!", Snackbar.LENGTH_SHORT).show()
                 MainActivity.startActivity(this)
+                finish();
             }
         }
     }
