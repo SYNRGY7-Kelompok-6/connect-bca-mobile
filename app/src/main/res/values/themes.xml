@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="Theme.ConnectBCA" parent="Base.Theme.ConnectBCA">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+    <style name="Base.Theme.ConnectBCA" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:buttonTint">@color/colorPrimaryDark</item>
+
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/colorPrimaryDark</item>
         <!-- Secondary brand color. -->
@@ -13,15 +14,6 @@
         <item name="colorOnSecondary">@color/colorPrimaryDark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
-        <!-- Customize your theme here -->
-        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
-        <item name="android:buttonTint">@color/colorPrimaryDark</item>
-    </style>
-
-    <!-- Base application theme for Material Components -->
-    <style name="Base.Theme.ConnectBCA" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
-        <item name="android:buttonTint">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimary"
         tools:context=".ui.activity.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,10 +22,10 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/neutral09"
+                android:background="?attr/colorPrimaryVariant"
                 app:title="Informasi Saldo"
                 android:layout_marginBottom="8dp"
-                app:titleTextColor="@color/neutral01"
+                app:titleTextColor="?android:textColorPrimary"
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
                 android:text="Jumlah Saldo"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="14dp"
-                android:textColor="@color/neutral01"
+                android:textColor="?android:textColorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar"/>
@@ -51,7 +51,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginStart="12dp"
-                android:textColor="@color/neutral01"
+                android:textColor="?android:textColorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/cardCustomer"
@@ -77,7 +77,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"
-                android:backgroundTint="@color/neutral09"
+                android:backgroundTint="?attr/colorOnSecondary"
                 android:elevation="14dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardCustomer">
@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:text="Bulan Juni"
                         android:textAlignment="center"
-                        android:textColor="@color/neutral01"/>
+                        android:textColor="?attr/colorSecondaryVariant"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvRecentMonthDepositAmount"
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:text="Rp 359.000"
                         android:textAlignment="center"
-                        android:textColor="@color/neutral01"/>
+                        android:textColor="?attr/colorSecondaryVariant"/>
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -118,7 +118,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="4dp"
                 android:orientation="vertical"
-                android:backgroundTint="@color/neutral09"
+                android:backgroundTint="?attr/colorOnSecondary"
                 android:elevation="14dp"
                 app:layout_constraintStart_toEndOf="@id/cvDeposit"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:text="Bulan Juni"
                         android:textAlignment="center"
-                        android:textColor="@color/neutral01"/>
+                        android:textColor="?attr/colorSecondaryVariant"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvRecentMonthWithdrawalAmount"
@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:text="Rp 359.000"
                         android:textAlignment="center"
-                        android:textColor="@color/neutral01"/>
+                        android:textColor="?attr/colorSecondaryVariant"/>
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -156,11 +156,10 @@
             android:id="@+id/bottomSheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/neutral09"
             app:behavior_hideable="false"
             app:cardCornerRadius="28dp"
-            app:behavior_peekHeight="0dp"
-            app:strokeColor="@color/neutral09"
+            app:behavior_peekHeight="230dp"
+            app:strokeColor="?attr/colorPrimaryVariant"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,7 +172,7 @@
                     android:id="@+id/dragHandle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tint="@color/neutral01"
+                    app:tint="?android:textColorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -186,11 +185,10 @@
                     app:tabMode="fixed"
                     app:tabGravity="fill"
                     android:elevation="24dp"
-                    app:tabBackground="@color/neutral09"
+                    app:tabBackground="?attr/colorPrimaryVariant"
                     app:circularflow_radiusInDP="24dp"
-                    android:backgroundTint="@color/neutral09"
-                    app:tabTextColor="@color/neutral01"
-                    app:tabIndicatorColor="@color/neutral01"
+                    app:tabTextColor="?android:textColorPrimary"
+                    app:tabIndicatorColor="?android:textColorPrimary"
                     app:layout_constraintTop_toBottomOf="@id/dragHandle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>

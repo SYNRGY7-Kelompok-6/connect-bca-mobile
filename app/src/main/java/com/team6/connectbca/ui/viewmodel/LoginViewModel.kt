@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team6.connectbca.domain.repository.AuthRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -33,7 +32,7 @@ class LoginViewModel(
 
     fun getUserSessionTime() : LiveData<Long> {
         viewModelScope.launch {
-            _sessionTime.value = authRepository.getSessionData().get("sessionTime") as Long
+            _sessionTime.value = authRepository.getSessionData()["sessionTime"] as Long
         }
 
         return _sessionTime
