@@ -9,7 +9,6 @@ class AuthRemoteDataSourceImpl(
     private val loginService : LoginService
 ) : AuthRemoteDataSource {
     override suspend fun userLogin(userId: String, password: String) : LoginResponse {
-//        return loginService.userLogin(userId, password)
-        return loginService.userLogin()
+        return loginService.userLogin(userId, password)
     }
 }

@@ -99,9 +99,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/user_id"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:paddingStart="35dp"
-            android:inputType="text"/>
+            android:paddingEnd="35dp"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,8 +130,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/kata_sandi"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:paddingStart="35dp"
+            android:paddingEnd="35dp"
             android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>

@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class LoginResponseData(
 
-    @field:SerializedName("accessToken") val accessToken: String? = null
+    @field:SerializedName("accessToken") val accessToken: String
 
 )

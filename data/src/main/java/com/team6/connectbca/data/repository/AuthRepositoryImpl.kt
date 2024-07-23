@@ -1,8 +1,10 @@
 package com.team6.connectbca.data.repository
 
+import android.util.Log
 import com.team6.connectbca.data.datasource.interfaces.AuthLocalDataSource
 import com.team6.connectbca.data.datasource.interfaces.AuthRemoteDataSource
 import com.team6.connectbca.data.model.LoginResponse
+import com.team6.connectbca.data.model.LoginResponseData
 import com.team6.connectbca.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
@@ -10,13 +12,20 @@ class AuthRepositoryImpl(
     private val authRemoteDataSource: AuthRemoteDataSource
 ) : AuthRepository {
     override suspend fun userLogin(userId: String, password: String) : Boolean {
-        val response: LoginResponse = authRemoteDataSource.userLogin(userId, password)
-        val data = response.data;
+        var data : LoginResponseData? = null;
 
-        if (data != null) {
-            saveSessionData(userId, data.accessToken!!)
+        try {
+            val response: LoginResponse = authRemoteDataSource.userLogin(userId, password)
+            data = response.data;
+
+            if (data != null) {
+                saveSessionData(userId, data.accessToken)
+            }
+        } catch (error: Throwable) {
+            Log.e("Failed with", error.toString())
         }
-        return data == null
+
+        return data != null
     }
 
     override suspend fun saveSessionData(userId: String, token: String) {

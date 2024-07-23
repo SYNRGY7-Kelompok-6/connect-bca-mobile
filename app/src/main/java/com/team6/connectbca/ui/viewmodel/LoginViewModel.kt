@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.team6.connectbca.domain.repository.AuthRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.UnsupportedOperationException
 
 class LoginViewModel(
     private val authRepository: AuthRepository
@@ -21,18 +22,19 @@ class LoginViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                delay(2000)
-//                val res = authRepository.userLogin(userId, password)
-//                if (res) {
-//                    _success.value = true
-//                    getUserSessionTime()
-//                }
-                _success.value = true
-                getUserSessionTime()
+//                delay(2000)
+                val res = authRepository.userLogin(userId, password)
+                if (res) {
+                    _success.value = true
+                    getUserSessionTime()
+                } else {
+                    _error.value = UnsupportedOperationException("Terdapat kesalahan saat login")
+                }
+//                _success.value = true
+//                getUserSessionTime()
                 _loading.value = false
             } catch (error: Throwable) {
                 _error.value = error
-                _success.value = false
                 _loading.value = false
             }
         }

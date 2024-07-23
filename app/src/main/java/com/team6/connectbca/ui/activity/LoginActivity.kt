@@ -43,7 +43,8 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getError().observe(this) { error ->
             if (error != null) {
                 Snackbar.make(binding.root, "Username atau password Anda salah", Snackbar.LENGTH_SHORT).show()
-                throw error
+                binding.etUserId.text?.clear()
+                binding.etPassword.text?.clear()
             }
         }
 
