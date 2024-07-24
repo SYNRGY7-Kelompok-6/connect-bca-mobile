@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Theme.ConnectBCA" parent="Base.Theme.ConnectBCA">
+    <style name="Theme.ConnectBCA" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
@@ -18,10 +18,13 @@
         <item name="android:buttonTint">@color/colorPrimaryDark</item>
     </style>
 
-    <!-- Base application theme for Material Components -->
-    <style name="Base.Theme.ConnectBCA" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
-        <item name="android:buttonTint">@color/colorPrimaryDark</item>
+    <style name="ProgressBar">
+        <item name="indicatorColor">@color/colorPrimaryLight</item>
+        <item name="trackColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AlertDialog">
+        <item name="backgroundTint">@color/colorPrimaryDark</item>
     </style>
 
 </resources>
