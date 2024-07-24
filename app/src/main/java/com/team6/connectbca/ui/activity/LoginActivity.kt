@@ -44,7 +44,8 @@ class LoginActivity : AppCompatActivity() {
         binding.tvForgotPassword.setOnClickListener {
             showAlertDialog()
         }
-
+        binding.etUserId.setText("test0@test.com")
+        binding.etPassword.setText("Password_0")
         viewModel.getUserSessionData().observe(this) { user ->
             if (user.isNullOrEmpty()) {
                 binding.tilUserId.visibility = View.VISIBLE
