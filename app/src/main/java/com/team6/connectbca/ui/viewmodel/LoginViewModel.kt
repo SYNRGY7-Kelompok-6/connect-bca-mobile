@@ -16,22 +16,18 @@ class LoginViewModel(
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
     private val _success: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
-    private val _sessionTime: MutableLiveData<Long> = MutableLiveData<Long>()
+    private val _sessionData: MutableLiveData<Map<String, Any>> = MutableLiveData<Map<String, Any>>()
 
     fun userLogin(userId: String, password: String) {
         viewModelScope.launch {
             try {
                 _loading.value = true
-//                delay(2000)
                 val res = authRepository.userLogin(userId, password)
                 if (res) {
                     _success.value = true
-                    getUserSessionTime()
                 } else {
                     _error.value = UnsupportedOperationException("Terdapat kesalahan saat login")
                 }
-//                _success.value = true
-//                getUserSessionTime()
                 _loading.value = false
             } catch (error: Throwable) {
                 _error.value = error
@@ -56,12 +52,11 @@ class LoginViewModel(
         }
     }
 
-    fun getUserSessionTime() : Long {
-        var sessionTime: Long = 0
+    fun getUserSessionData() : LiveData<Map<String, Any>> {
         viewModelScope.launch {
-            sessionTime = authRepository.getSessionData().get("sessionTime") as Long
+            _sessionData.value = authRepository.getSessionData()
         }
-        return sessionTime
+        return _sessionData
     }
 
     fun getError() : LiveData<Throwable> {

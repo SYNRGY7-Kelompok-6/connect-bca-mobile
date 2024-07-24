@@ -1,4 +1,4 @@
-package com.team6.connectbca.data.model
+package com.team6.connectbca.data.model.response
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

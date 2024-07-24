@@ -1,8 +1,9 @@
 package com.team6.connectbca.data.datasource.interfaces
 
-import com.team6.connectbca.data.model.LoginResponse
+import com.team6.connectbca.data.model.body.LoginBody
+import com.team6.connectbca.data.model.response.LoginResponse
 
 interface AuthRemoteDataSource {
-    suspend fun userLogin(userId: String, password: String) : LoginResponse
+    suspend fun userLogin(loginBody: LoginBody) : LoginResponse
 
 }

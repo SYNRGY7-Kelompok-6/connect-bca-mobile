@@ -3,6 +3,7 @@ package com.team6.connectbca.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.databinding.ActivityLoginBinding
 import com.team6.connectbca.ui.viewmodel.LoginViewModel
@@ -29,6 +30,17 @@ class LoginActivity : AppCompatActivity() {
                 binding.etPassword.error = null
 
                 viewModel.userLogin(userId, pass)
+            }
+        }
+
+        viewModel.getUserSessionData().observe(this) { user ->
+            if (user.isNullOrEmpty()) {
+                binding.tilUserId.visibility = View.VISIBLE
+            } else {
+                if (user.getValue("userId") != "") {
+                    binding.tilUserId.visibility = View.GONE
+                    (binding.etUserId as TextView).text = user.getValue("userId").toString()
+                }
             }
         }
 
