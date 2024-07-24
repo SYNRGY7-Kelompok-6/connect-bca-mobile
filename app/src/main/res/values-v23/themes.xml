@@ -12,7 +12,7 @@
         <item name="colorPrimaryVariant">@color/colorPrimaryLight</item>
         <item name="colorOnPrimary">@color/colorPrimaryDark</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorPrimaryLight</item>
+        <item name="colorSecondary">@color/neutral09</item>
         <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
         <item name="colorOnSecondary">@color/colorPrimary</item>
     </style>

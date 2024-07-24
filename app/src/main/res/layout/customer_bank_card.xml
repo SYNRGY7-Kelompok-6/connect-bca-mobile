@@ -35,8 +35,8 @@
                 style="?attr/materialIconButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/neutral01"
                 app:icon="@drawable/ic_copy"
+                app:iconTint="?attr/colorSecondary"
                 android:layout_marginStart="8dp"
                 android:contentDescription="@string/info_icon"/>
 

@@ -158,7 +158,7 @@
             android:layout_height="match_parent"
             app:behavior_hideable="false"
             app:cardCornerRadius="28dp"
-            app:behavior_peekHeight="230dp"
+            app:behavior_peekHeight="0dp"
             app:strokeColor="?attr/colorPrimaryVariant"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
