@@ -23,4 +23,8 @@
         <item name="trackColor">@color/colorPrimary</item>
     </style>
 
+    <style name="AlertDialog">
+        <item name="backgroundTint">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

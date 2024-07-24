@@ -157,13 +157,12 @@
         android:id="@+id/tvForgotPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:padding="12dp"
+        android:layout_marginBottom="6dp"
         android:text="@string/lupa_kata_sandi"
         android:gravity="center"
         android:textColor="?android:textColorPrimary"
         android:textSize="14sp"
-        android:clickable="true"
-        android:focusable="true"
         android:contentDescription="@string/lupa_kata_sandi"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +174,7 @@
         android:id="@+id/quickButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword"
@@ -195,8 +194,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnWallet"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
@@ -216,7 +215,7 @@
                 android:layout_marginTop="4dp"
                 android:textColor="?android:textColorPrimary"
                 android:text="@string/e_wallet"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -232,8 +231,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnQris"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
@@ -253,7 +252,7 @@
                 android:layout_marginTop="4dp"
                 android:text="@string/qris"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -268,8 +267,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTransfer"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
@@ -289,7 +288,7 @@
                 android:layout_marginTop="4dp"
                 android:textColor="?android:textColorPrimary"
                 android:text="@string/transfer"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
