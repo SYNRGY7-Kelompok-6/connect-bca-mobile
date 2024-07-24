@@ -1,10 +1,17 @@
 package com.team6.connectbca.ui.activity
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityMainBinding
+import com.team6.connectbca.databinding.CustomerBankCardBinding
 import com.team6.connectbca.ui.fragment.TabPagerAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         setupTabLayout()
         setupBottomSheet()
+
+        val customerBankcard = binding.root.findViewById<CardView>(R.id.cardCustomer)
+        val customerBankcardBinding = CustomerBankCardBinding.bind(customerBankcard)
+        customerBankcardBinding.iconButtonCopy.setOnClickListener {
+            copyToClipboard(customerBankcardBinding.tvCardNumber.text.toString())
+        }
     }
 
     private fun setupTabLayout() {
@@ -60,5 +73,16 @@ class MainActivity : AppCompatActivity() {
 
         val maxHeight = (screenHeight * 1.0).toInt()
         bottomSheetBehavior.maxHeight = maxHeight
+    }
+
+    private fun copyToClipboard(text: String) {
+        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("Copied Text", text)
+        clipboardManager.setPrimaryClip(clip)
+        showToast("Text copied to clipboard")
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

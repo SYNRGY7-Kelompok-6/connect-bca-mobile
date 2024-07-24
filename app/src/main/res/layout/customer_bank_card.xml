@@ -24,6 +24,7 @@
             app:layout_constraintBottom_toTopOf="@id/tvSavingProduct">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCardNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="145 267 389 5162"
@@ -31,7 +32,7 @@
                 android:textSize="24sp"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/iconButtonInfo"
+                android:id="@+id/iconButtonCopy"
                 style="?attr/materialIconButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
