@@ -14,6 +14,16 @@
         <item name="colorOnSecondary">@color/colorPrimaryDark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <!-- Customize your theme here -->
+    </style>
+
+    <style name="ProgressBar">
+        <item name="indicatorColor">@color/colorPrimaryLight</item>
+        <item name="trackColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AlertDialog">
+        <item name="backgroundTint">@color/colorPrimaryDark</item>
     </style>
 
 </resources>
