@@ -1,8 +1,7 @@
 package com.team6.connectbca.ui.activity
 
-import com.team6.connectbca.R
-import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityLoginBinding
 import com.team6.connectbca.ui.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -73,13 +73,22 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.getSuccess().observe(this) { isSuccess ->
+        /*viewModel.getSuccess().observe(this) { isSuccess ->
             if (isSuccess) {
                 Snackbar.make(binding.root, "Login Berhasil!", Snackbar.LENGTH_SHORT).show()
                 MainActivity.startActivity(this)
                 finish();
             }
+        }*/
+
+        viewModel.getSuccess().observe(this) { isSuccess ->
+            if (isSuccess) {
+                Snackbar.make(binding.root, "Login Berhasil!", Snackbar.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         }
+
     }
 
     private fun checkUserInput(userId: String, pass: String) : Boolean {
