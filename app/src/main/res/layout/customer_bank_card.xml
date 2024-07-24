@@ -5,9 +5,8 @@
     android:orientation="vertical"
     android:elevation="18dp"
     android:padding="12dp"
-    app:strokeColor="@color/neutral09"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/neutral09">
+    android:backgroundTint="@color/colorPrimaryDark">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
