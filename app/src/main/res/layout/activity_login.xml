@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.LoginActivity">
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/iconButtonInfo"
         style="?attr/materialIconButtonStyle"
         android:layout_width="wrap_content"
@@ -22,20 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/ivLogo"/>
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        style="@style/ProgressBar"
-        android:id="@+id/loginProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/login_loading_description"
-        android:visibility="gone"
-        android:indeterminate="true"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <ImageView
         android:id="@+id/topGradient"
         android:layout_width="match_parent"
@@ -48,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -60,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tvWelcome" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/tvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,7 +54,6 @@
         android:textSize="20sp"
         android:textColor="?android:textColorPrimary"
         android:textStyle="bold"
-        android:contentDescription="@string/welcome"
         app:layout_constraintTop_toBottomOf="@id/ivLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +68,6 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="12dp"
         android:visibility="visible"
-        android:contentDescription="@string/userid_content_description"
         app:startIconDrawable="@drawable/ic_user"
         app:boxCornerRadiusTopStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
@@ -99,10 +83,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/user_id"
-            android:textSize="14sp"
-            android:paddingStart="35dp"
-            android:paddingEnd="35dp"
-            android:inputType="text" />
+            android:textSize="12sp"
+            android:paddingStart="45dp"
+            android:paddingEnd="45dp"
+            android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +97,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="12dp"
-        android:contentDescription="@string/password_description"
         app:startIconDrawable="@drawable/ic_lock"
         app:endIconMode="password_toggle"
         app:boxCornerRadiusTopStart="16dp"
@@ -130,9 +113,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/kata_sandi"
-            android:textSize="14sp"
-            android:paddingStart="35dp"
-            android:paddingEnd="35dp"
+            android:textSize="12sp"
+            android:paddingStart="45dp"
+            android:paddingEnd="45dp"
             android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -144,7 +127,6 @@
         android:layout_marginTop="12dp"
         android:text="@string/masuk"
         android:textColor="@color/neutral01"
-        android:contentDescription="@string/submit_btn_description"
         app:cornerRadius="12dp"
         android:backgroundTint="?android:buttonTint"
         android:textAllCaps="false"
@@ -153,17 +135,15 @@
         app:layout_constraintEnd_toEndOf="@id/tilPassword"
         app:layout_constraintBottom_toTopOf="@id/tvForgotPassword" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/tvForgotPassword"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:layout_marginBottom="6dp"
         android:text="@string/lupa_kata_sandi"
-        android:gravity="center"
         android:textColor="?android:textColorPrimary"
         android:textSize="14sp"
-        android:contentDescription="@string/lupa_kata_sandi"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +154,7 @@
         android:id="@+id/quickButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword"
@@ -188,8 +168,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/ewallet_description">
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnWallet"
@@ -206,9 +185,10 @@
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="24dp"
-                android:backgroundTint="?android:buttonTint" />
+                android:backgroundTint="?android:buttonTint"
+                android:contentDescription="@string/ewallet_description" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvWallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -225,8 +205,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/qris_description" >
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnQris"
@@ -243,9 +222,10 @@
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="24dp"
-                android:backgroundTint="?android:buttonTint" />
+                android:backgroundTint="?android:buttonTint"
+                android:contentDescription="@string/qris_description" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvQris"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -261,8 +241,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:contentDescription="@string/transfer_description" >
+            android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTransfer"
@@ -279,9 +258,10 @@
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="24dp"
-                android:backgroundTint="?android:buttonTint" />
+                android:backgroundTint="?android:buttonTint"
+                android:contentDescription="@string/transfer_description" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/tvTransfer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -294,7 +274,7 @@
 
     </LinearLayout>
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/footerBca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -302,7 +282,6 @@
         android:textColor="?android:textColorPrimary"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:contentDescription="@string/by_bca"
         app:layout_constraintTop_toTopOf="@id/bottomGradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
