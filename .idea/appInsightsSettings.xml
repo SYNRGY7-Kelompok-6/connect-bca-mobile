@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.team6.connectbca" />
+                  <option name="mobileSdkAppId" value="1:666409592454:android:ea9422f0f99eb940909307" />
+                  <option name="projectId" value="connect-bca" />
+                  <option name="projectNumber" value="666409592454" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
