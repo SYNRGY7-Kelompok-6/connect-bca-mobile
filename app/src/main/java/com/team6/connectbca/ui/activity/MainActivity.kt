@@ -19,30 +19,6 @@ import com.team6.connectbca.ui.fragment.TabPagerAdapter
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.apply {
-            title = "Informasi Saldo"
-            setDisplayHomeAsUpEnabled(false)
-            setDisplayShowHomeEnabled(false)
-        }
-
-        setupTabLayout()
-        setupBottomSheet()
-
-        val customerBankcard = binding.root.findViewById<CardView>(R.id.cardCustomer)
-        val customerBankcardBinding = CustomerBankCardBinding.bind(customerBankcard)
-        customerBankcardBinding.iconButtonCopy.setOnClickListener {
-            copyToClipboard(customerBankcardBinding.tvCardNumber.text.toString())
-        }
-    }
-
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var navController: NavController
 
