@@ -32,7 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -83,7 +83,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="30dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvAccountNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,17 +94,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/ivIconCopy"
+            <com.google.android.material.button.MaterialButton
+                style="?attr/materialIconButtonStyle"
+                android:id="@+id/btnIconCopy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_close"
+                app:icon="@drawable/ic_copy"
+                android:contentDescription="Copy to clipboard"
                 app:layout_constraintBottom_toBottomOf="@id/tvAccountNumber"
                 app:layout_constraintStart_toEndOf="@id/tvAccountNumber"
                 app:layout_constraintTop_toTopOf="@id/tvAccountNumber" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvCurrency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,7 +116,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvAccountNumber" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,15 +128,19 @@
                 app:layout_constraintStart_toEndOf="@id/tvCurrency"
                 app:layout_constraintTop_toTopOf="@+id/tvCurrency" />
 
-            <ImageView
-                android:id="@+id/ivIconVisible"
+            <com.google.android.material.button.MaterialButton
+                style="?attr/materialIconButtonStyle"
+                android:id="@+id/btnIconVisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_close"
+                app:icon="@drawable/ic_visibility_off"
+                android:contentDescription="Visibility button"
                 app:layout_constraintBottom_toBottomOf="@id/tvCurrency"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvCurrency" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

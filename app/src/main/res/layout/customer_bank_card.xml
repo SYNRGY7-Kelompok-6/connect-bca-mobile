@@ -3,15 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:elevation="18dp"
+    android:elevation="24dp"
+    android:outlineAmbientShadowColor="@color/neutral09"
     android:padding="12dp"
-    app:strokeColor="@color/neutral09"
+    app:strokeColor="?attr/colorPrimaryVariant"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/neutral09">
+    android:contentDescription="Card view for displaying bank card details">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="12dp">
 
         <LinearLayout
@@ -22,24 +23,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvSavingProduct">
+            app:layout_constraintBottom_toTopOf="@id/tvSavingProduct"
+            android:contentDescription="Layout for card number and copy icon">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCardNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="145 267 389 5162"
-                android:textColor="@color/neutral01"
-                android:textSize="24sp"/>
+                android:textColor="?android:textColorPrimary"
+                android:textSize="24sp"
+                android:contentDescription="Text view displaying card number"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/iconButtonInfo"
+                android:id="@+id/iconButtonCopy"
                 style="?attr/materialIconButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/neutral01"
                 app:icon="@drawable/ic_copy"
+                app:iconTint="?attr/colorSecondary"
                 android:layout_marginStart="8dp"
-                android:contentDescription="@string/info_icon"/>
+                android:contentDescription="Button to copy card number"/>
 
         </LinearLayout>
 
@@ -48,11 +52,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tahapan Xpresi"
-            android:textColor="@color/neutral01"
+            android:textColor="?android:textColorPrimary"
             android:layout_marginBottom="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardNumberLayout"/>
+            app:layout_constraintTop_toBottomOf="@id/cardNumberLayout"
+            android:contentDescription="Text view displaying saving product name"/>
 
         <LinearLayout
             android:id="@+id/expLayout"
@@ -62,22 +67,25 @@
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/tvSavingProduct"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="Layout for expiration date details">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvExp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/neutral01"
-                android:text="EXP" />
+                android:textColor="?android:textColorPrimary"
+                android:text="EXP"
+                android:contentDescription="Text view displaying expiration label"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvExpDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="03/28"
-                android:textColor="@color/neutral01"
-                android:textSize="24sp"/>
+                android:textColor="?android:textColorPrimary"
+                android:textSize="24sp"
+                android:contentDescription="Text view displaying expiration date"/>
 
         </LinearLayout>
 
@@ -89,7 +97,8 @@
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintTop_toTopOf="@id/expLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/expLayout"/>
+            app:layout_constraintBottom_toBottomOf="@id/expLayout"
+            android:contentDescription="Image view displaying app logo"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

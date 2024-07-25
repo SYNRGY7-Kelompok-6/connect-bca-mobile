@@ -1,20 +1,23 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.ConnectBCA" parent="Theme.Material3.DayNight.NoActionBar">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.ConnectBCA" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryVariant">@color/neutral09</item>
         <item name="colorOnPrimary">@color/neutral01</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorPrimaryLight</item>
         <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
-        <item name="colorOnSecondary">@color/neutral01</item>
+        <item name="colorOnSecondary">@color/neutral09</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your dark theme here. -->
         <item name="android:textColorPrimary">@color/neutral01</item>
         <item name="android:buttonTint">@color/colorPrimary</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+
     </style>
 
     <style name="ProgressBar">
