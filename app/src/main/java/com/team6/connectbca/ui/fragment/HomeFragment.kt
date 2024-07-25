@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -17,13 +18,15 @@ class HomeFragment : Fragment() {
         FragmentHomeBinding.inflate(layoutInflater)
     }
 
+    private var isBalanceVisible = false
+    private val balance = "1234567890"
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,6 +35,10 @@ class HomeFragment : Fragment() {
         binding.btnIconCopy.setOnClickListener {
             val accountNumber = binding.tvAccountNumber.text.toString()
             copyToClipboard(accountNumber)
+        }
+
+        binding.btnIconVisible.setOnClickListener {
+            iconBalanceVisibility()
         }
     }
 
@@ -46,4 +53,14 @@ class HomeFragment : Fragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
+    private fun iconBalanceVisibility() {
+        isBalanceVisible = !isBalanceVisible
+        if (isBalanceVisible) {
+            binding.tvBalance.text = balance
+            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility)
+        } else {
+            binding.tvBalance.text = "***********"
+            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility_off)
+        }
+    }
 }
