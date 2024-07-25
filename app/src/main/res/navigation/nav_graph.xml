@@ -6,11 +6,6 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/qrisFragment"
-        android:name="com.team6.connectbca.ui.fragment.QrisFragment"
-        android:label="fragment_qris"
-        tools:layout="@layout/fragment_qris" />
-    <fragment
         android:id="@+id/homeFragment"
         android:name="com.team6.connectbca.ui.fragment.HomeFragment"
         android:label="fragment_home"
@@ -25,6 +20,11 @@
     <fragment
         android:id="@+id/mutationFragment"
         android:name="com.team6.connectbca.ui.fragment.MutationFragment"
-        android:label="MutationFragment" />
-
+        android:label="fragment_mutation"
+        tools:layout="@layout/fragment_mutation" />
+    <fragment
+        android:id="@+id/qrisFragment"
+        android:name="com.team6.connectbca.ui.fragment.QrisFragment"
+        android:label="fragment_qris"
+        tools:layout="@layout/fragment_qris" />
 </navigation>

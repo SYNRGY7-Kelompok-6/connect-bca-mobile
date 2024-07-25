@@ -9,15 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    private val binding by lazy {
-        FragmentHomeBinding.inflate(layoutInflater)
-    }
-
+    private lateinit var binding: FragmentHomeBinding
     private var isBalanceVisible = false
     private val balance = "1234567890"
 
@@ -26,20 +24,39 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return binding.root
+        return FragmentHomeBinding.inflate(inflater, container, false).also {
+            binding = it
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val accountNumber = binding.tvAccountNumber.text.toString()
+
+        binding.qrisIcon.setOnClickListener {
+            navigateToQRIS()
+        }
+        binding.mutationIcon.setOnClickListener {
+            navigateToMutation()
+        }
 
         binding.btnIconCopy.setOnClickListener {
-            val accountNumber = binding.tvAccountNumber.text.toString()
             copyToClipboard(accountNumber)
         }
 
         binding.btnIconVisible.setOnClickListener {
             iconBalanceVisibility()
         }
+    }
+
+    private fun navigateToQRIS() {
+        val action = HomeFragmentDirections.actionHomeFragmentToQrisFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToMutation() {
+        val action = HomeFragmentDirections.actionHomeFragmentToMutationFragment()
+        findNavController().navigate(action)
     }
 
     private fun copyToClipboard(text: String) {

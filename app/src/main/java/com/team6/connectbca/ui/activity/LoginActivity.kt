@@ -73,19 +73,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        /*viewModel.getSuccess().observe(this) { isSuccess ->
-            if (isSuccess) {
-                Snackbar.make(binding.root, "Login Berhasil!", Snackbar.LENGTH_SHORT).show()
-                MainActivity.startActivity(this)
-                finish();
-            }
-        }*/
-
         viewModel.getSuccess().observe(this) { isSuccess ->
             if (isSuccess) {
+                MainActivity.startActivity(this)
                 Snackbar.make(binding.root, "Login Berhasil!", Snackbar.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                finish();
             }
         }
 
