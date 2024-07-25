@@ -41,3 +41,17 @@ fun provideLoginService(context: Context) : LoginService {
         BASE_URL
     ).create(LoginService::class.java)
 }
+
+fun provideBankStatementService(context: Context) : BankStatementService {
+    return provideRetrofitBuilder(
+        context,
+        BASE_URL
+    ).create(BankStatementService::class.java)
+}
+
+fun provideBalanceInquiryService(context: Context) : BalanceInquiryService {
+    return provideRetrofitBuilder(
+        context,
+        BASE_URL
+    ).create(BalanceInquiryService::class.java)
+}
