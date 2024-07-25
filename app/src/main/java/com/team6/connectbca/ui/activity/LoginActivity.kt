@@ -16,6 +16,9 @@ import com.team6.connectbca.databinding.ActivityLoginBinding
 import com.team6.connectbca.ui.viewmodel.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+// USE THIS TO LOGIN
+// userID: "zg6kx3FFrDatGLHG",
+// password: "Password_0"
 
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
@@ -44,8 +47,7 @@ class LoginActivity : AppCompatActivity() {
         binding.tvForgotPassword.setOnClickListener {
             showAlertDialog()
         }
-        binding.etUserId.setText("test0@test.com")
-        binding.etPassword.setText("Password_0")
+
         viewModel.getUserSessionData().observe(this) { user ->
             if (user.isNullOrEmpty()) {
                 binding.tilUserId.visibility = View.VISIBLE
@@ -68,8 +70,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getError().observe(this) { error ->
             if (error != null) {
                 Snackbar.make(binding.root, "Username atau password Anda salah", Snackbar.LENGTH_SHORT).show()
-                binding.etUserId.text?.clear()
-                binding.etPassword.text?.clear()
             }
         }
 

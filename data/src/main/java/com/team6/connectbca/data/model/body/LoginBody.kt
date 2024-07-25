@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class LoginBody(
 
-	@field:SerializedName("username")
-	val username: String? = null,
+	@field:SerializedName("userID")
+	val userID: String? = null,
 
 	@field:SerializedName("password")
 	val password: String? = null

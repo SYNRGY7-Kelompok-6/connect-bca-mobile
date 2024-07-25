@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.databinding.ActivityLoginBinding
 import com.team6.connectbca.databinding.ActivityMainBinding
@@ -19,15 +20,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
     private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val navHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
-
-        navController = navHostFragment.navController
         setContentView(binding.root)
+        setupNavigationComponent()
 //        setSupportActionBar(binding.toolbar)
 //        supportActionBar?.apply {
 //            title = "Informasi Saldo"
@@ -35,6 +33,16 @@ class MainActivity : AppCompatActivity() {
 //            setDisplayShowHomeEnabled(false)
 //        }
 //        setupTabLayout()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
+        return host.navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    private fun setupNavigationComponent() {
+        val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
+        navController = host.navController
     }
 
 //    private fun setupTabLayout() {

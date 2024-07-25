@@ -13,7 +13,7 @@ class AuthRepositoryImpl(
     private val authRemoteDataSource: AuthRemoteDataSource
 ) : AuthRepository {
     override suspend fun userLogin(userId: String, password: String) : Boolean {
-        val loginBody = LoginBody(username = userId, password = password)
+        val loginBody = LoginBody(userID = userId, password = password)
         var data: LoginResponseData? = null
 
         try {
