@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/neutral09"
-    tools:context=".ui.fragment.MonthFragment">
+    tools:context=".ui.fragment.MonthMutationFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvMonth"

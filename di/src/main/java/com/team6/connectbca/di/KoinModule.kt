@@ -17,17 +17,21 @@ import com.team6.connectbca.data.repository.AuthRepositoryImpl
 import com.team6.connectbca.data.repository.BankStatementRepositoryImpl
 import com.team6.connectbca.domain.repository.AuthRepository
 import com.team6.connectbca.domain.repository.BankStatementRepository
-import com.team6.connectbca.domain.usecase.GetBankStatementUseCase
+import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
+import com.team6.connectbca.domain.usecase.GetMutationUseCase
+import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val koinModule = module {
     // Repositories
     single<AuthRepository> { AuthRepositoryImpl(authLocalDataSource = get(), authRemoteDataSource = get()) }
+    single<BankStatementRepository> { BankStatementRepositoryImpl(remoteDataSource = get()) }
 
     // Data Sources
     single<AuthLocalDataSource> { AuthLocalDataSourceImpl(dataStore = get()) }
     single<AuthRemoteDataSource> { AuthRemoteDataSourceImpl(loginService = get()) }
+    single<BankStatementRemoteDataSource> { BankStatementRemoteDataSourceImpl(bankStatementService = get()) }
 
     // Data Store
     single<DataStore<Preferences>> { androidContext().datastore }
@@ -36,12 +40,8 @@ val koinModule = module {
     single<LoginService> { provideLoginService(androidContext()) }
     single<BankStatementService> { provideBankStatementService(androidContext()) }
 
-    // Repositories
-    single<BankStatementRepository> { BankStatementRepositoryImpl(get()) }
-
-    // Data Sources
-    single<BankStatementRemoteDataSource> { BankStatementRemoteDataSourceImpl(get()) }
-
     // Use Cases
-    single { GetBankStatementUseCase(get()) }
+    single { GetBalanceInquiryUseCase(bankStatementRepository = get()) }
+    single { GetMutationUseCase(bankStatementRepository = get()) }
+    single { GetSessionDataUseCase(authRepository = get()) }
 }

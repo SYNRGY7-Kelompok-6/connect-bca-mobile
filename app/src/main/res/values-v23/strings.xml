@@ -20,4 +20,8 @@
     <string name="forget_password_alert_message">Segera perbarui kata sandi melalui layanan bank terdekat atau hubungi Customer Service kami melalui email :</string>
     <string name="close_button_text">Tutup</string>
     <string name="cs_email">haloconnect@connect.ac.id</string>
+    <string name="inquiry_mutation_description">Sedang memuat data</string>
+    <string name="transaction_name">Name</string>
+    <string name="beneficiary_account_name">Beneficiary Name</string>
+    <string name="beneficiary_account_number">Number</string>
 </resources>

@@ -1,21 +1,12 @@
 package com.team6.connectbca.ui.activity
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.cardview.widget.CardView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.tabs.TabLayoutMediator
-import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityMainBinding
-import com.team6.connectbca.databinding.CustomerBankCardBinding
-import com.team6.connectbca.ui.fragment.TabPagerAdapter
 
 class MainActivity : AppCompatActivity() {
     companion object {

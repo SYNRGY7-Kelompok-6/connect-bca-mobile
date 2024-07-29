@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.team6.connectbca.databinding.FragmentSearchBinding
 
-class SearchFragment : Fragment() {
+class SearchMutationFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!

@@ -48,10 +48,3 @@ fun provideBankStatementService(context: Context) : BankStatementService {
         BASE_URL
     ).create(BankStatementService::class.java)
 }
-
-fun provideBalanceInquiryService(context: Context) : BalanceInquiryService {
-    return provideRetrofitBuilder(
-        context,
-        BASE_URL
-    ).create(BalanceInquiryService::class.java)
-}

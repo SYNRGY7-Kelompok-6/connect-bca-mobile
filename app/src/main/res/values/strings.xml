@@ -42,4 +42,8 @@
     <string name="cs_email">haloconnect@connect.ac.id</string>
     <string name="close">Tutup</string>
     <string name="share">Bagikan</string>
+    <string name="inquiry_mutation_description">Sedang memuat data</string>
+    <string name="transaction_name">Name</string>
+    <string name="beneficiary_account_name">Beneficiary Name</string>
+    <string name="beneficiary_account_number">Number</string>
 </resources>
