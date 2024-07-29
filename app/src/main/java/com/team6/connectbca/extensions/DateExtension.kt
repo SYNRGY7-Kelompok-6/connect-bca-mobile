@@ -28,7 +28,7 @@ fun getFirstOfMonthDate() : String {
     val month = getMonth()
     val year = getYear()
 
-    return "1-$month-$year"
+    return "01-$month-$year"
 }
 
 private fun getEndDate() : String {
