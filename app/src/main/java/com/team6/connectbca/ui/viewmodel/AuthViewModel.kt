@@ -1,17 +1,19 @@
 package com.team6.connectbca.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.team6.connectbca.domain.repository.AuthRepository
-import kotlinx.coroutines.delay
+import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
+import com.team6.connectbca.domain.usecase.LoginUseCase
+import com.team6.connectbca.domain.usecase.LogoutUseCase
 import kotlinx.coroutines.launch
 import java.lang.UnsupportedOperationException
 
-class LoginViewModel(
-    private val authRepository: AuthRepository
+class AuthViewModel(
+    private val loginUseCase: LoginUseCase,
+    private val logoutUseCase: LogoutUseCase,
+    private val getSessionDataUseCase: GetSessionDataUseCase
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
@@ -22,7 +24,7 @@ class LoginViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                val res = authRepository.userLogin(userId, password)
+                val res = loginUseCase(userId, password)
                 if (res) {
                     _success.value = true
                 } else {
@@ -40,8 +42,7 @@ class LoginViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                authRepository.clearToken()
-                authRepository.clearSessionTime()
+                logoutUseCase()
                 _loading.value = false
                 _success.value = true
             } catch (error: Throwable) {
@@ -54,7 +55,11 @@ class LoginViewModel(
 
     fun getUserSessionData() : LiveData<Map<String, Any>> {
         viewModelScope.launch {
-            _sessionData.value = authRepository.getSessionData()
+            try {
+                _sessionData.value = getSessionDataUseCase()!!
+            } catch (error: Throwable) {
+                _error.value = error
+            }
         }
         return _sessionData
     }

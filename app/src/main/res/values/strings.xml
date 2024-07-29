@@ -46,4 +46,5 @@
     <string name="transaction_name">Name</string>
     <string name="beneficiary_account_name">Beneficiary Name</string>
     <string name="beneficiary_account_number">Number</string>
+    <string name="quick_access_feature_not_found">Mohon maaf, fitur akses cepat belum tersedia. Nantikan update fitur terbaru dari kami.</string>
 </resources>

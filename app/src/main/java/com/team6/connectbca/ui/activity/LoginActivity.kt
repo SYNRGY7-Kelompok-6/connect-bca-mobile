@@ -1,7 +1,6 @@
 package com.team6.connectbca.ui.activity
 
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,7 +12,8 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityLoginBinding
-import com.team6.connectbca.ui.viewmodel.LoginViewModel
+import com.team6.connectbca.databinding.ForgetPasswordAlertLayoutBinding
+import com.team6.connectbca.ui.viewmodel.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 // USE THIS TO LOGIN
@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
-    private val viewModel by viewModel<LoginViewModel>()
+    private val viewModel by viewModel<AuthViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +44,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.tvForgotPassword.setOnClickListener {
-            showAlertDialog()
+        binding.tvForgotPassword.setOnClickListener { showForgetPasswordAlertDialog() }
+
+        binding.btnWallet.setOnClickListener { showQuickAccessAlertDialog() }
+        binding.btnQris.setOnClickListener { showQuickAccessAlertDialog() }
+        binding.btnTransfer.setOnClickListener { showQuickAccessAlertDialog()
         }
 
         viewModel.getUserSessionData().observe(this) { user ->
@@ -87,17 +90,33 @@ class LoginActivity : AppCompatActivity() {
         return ((!userId.isNullOrEmpty()) && (!pass.isNullOrEmpty()))
     }
 
-    private fun showAlertDialog() {
+    private fun showForgetPasswordAlertDialog() {
         val dialog = Dialog(this)
+
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
+
         dialog.setContentView(R.layout.forget_password_alert_layout)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val closeBtn: MaterialButton = dialog.findViewById(R.id.alertCloseBtn)
-
         closeBtn.setOnClickListener { dialog.dismiss() }
+
         dialog.show()
     }
 
+    private fun showQuickAccessAlertDialog() {
+        val dialog = Dialog(this)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+
+        dialog.setContentView(R.layout.quick_access_notfound_alert_layout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val closeBtn: MaterialButton = dialog.findViewById(R.id.quickAccessAlertCloseBtn)
+        closeBtn.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
+    }
 }

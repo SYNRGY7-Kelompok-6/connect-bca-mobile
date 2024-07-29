@@ -20,6 +20,8 @@ import com.team6.connectbca.domain.repository.BankStatementRepository
 import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
 import com.team6.connectbca.domain.usecase.GetMutationUseCase
 import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
+import com.team6.connectbca.domain.usecase.LoginUseCase
+import com.team6.connectbca.domain.usecase.LogoutUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -41,6 +43,8 @@ val koinModule = module {
     single<BankStatementService> { provideBankStatementService(androidContext()) }
 
     // Use Cases
+    single { LoginUseCase(authRepository = get()) }
+    single { LogoutUseCase(authRepository = get()) }
     single { GetBalanceInquiryUseCase(bankStatementRepository = get()) }
     single { GetMutationUseCase(bankStatementRepository = get()) }
     single { GetSessionDataUseCase(authRepository = get()) }
