@@ -47,4 +47,18 @@
     <string name="beneficiary_account_name">Beneficiary Name</string>
     <string name="beneficiary_account_number">Number</string>
     <string name="quick_access_feature_not_found">Mohon maaf, fitur akses cepat belum tersedia. Nantikan update fitur terbaru dari kami.</string>
+    <string name="home_salutation_text">Hi, Binar Academy</string>
+    <string name="home_change_mode_description">Ubah Mode Light atau Dark</string>
+    <string name="lihat_notifikasi_description">Tombol Lihat Notifikasi</string>
+    <string name="home_main_account_number">145 267 389 5162</string>
+    <string name="copy_to_clipboard">Copy to clipboard</string>
+    <string name="currency">IDR</string>
+    <string name="card_balance_hidden">***********</string>
+    <string name="account_balance_visibility_description">Lihat Saldo Rekening Ini</string>
+    <string name="mutasi">Mutasi</string>
+    <string name="virtual_account">Virtual\nAccount</string>
+    <string name="tombol_mutasi">Tombol mutasi rekening</string>
+    <string name="tombol_virtual_account">Tombol virtual account</string>
+    <string name="tombol_flazz">Tombol flazz</string>
+    <string name="flazz">Flazz</string>
 </resources>
