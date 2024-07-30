@@ -17,13 +17,10 @@
         <!-- Customize your theme here -->
     </style>
 
-    <style name="ProgressBar">
-        <item name="indicatorColor">@color/colorPrimaryLight</item>
-        <item name="trackColor">@color/colorPrimary</item>
-    </style>
-
-    <style name="AlertDialog">
-        <item name="backgroundTint">@color/colorPrimaryDark</item>
+    <!-- Base application theme for Material Components -->
+    <style name="Base.Theme.ConnectBCA" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:buttonTint">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

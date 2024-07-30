@@ -19,13 +19,4 @@
 
 
     </style>
-
-    <style name="ProgressBar">
-        <item name="indicatorColor">@color/colorPrimary</item>
-        <item name="trackColor">@color/colorPrimaryLight</item>
-    </style>
-
-    <style name="AlertDialog">
-        <item name="backgroundTint">@color/colorPrimary</item>
-    </style>
 </resources>

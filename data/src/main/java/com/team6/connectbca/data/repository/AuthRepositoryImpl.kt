@@ -10,24 +10,23 @@ import com.team6.connectbca.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
     private val authLocalDataSource: AuthLocalDataSource,
-    private val authRemoteDataSource: AuthRemoteDataSource
+    private val remoteDataSource: AuthRemoteDataSource
 ) : AuthRepository {
     override suspend fun userLogin(userId: String, password: String) : Boolean {
         val loginBody = LoginBody(userID = userId, password = password)
         var data: LoginResponseData? = null
 
-        try {
-            val response: LoginResponse = authRemoteDataSource.userLogin(loginBody)
-            data = response.data
+        return if (isUserDataEmpty > 0) {
+            val response: UserResponse? = remoteDataSource.userLogin(userId, password)
 
-            if (data != null) {
-                saveSessionData(userId, data.accessToken)
-            }
-        } catch (error: Throwable) {
-            Log.e("Failed with", error.toString())
+            saveSessionData(userId, response?.token!!)
+
+            response.message
+        } else if (isUserDataEmpty == 1) {
+            "User ID tidak boleh kosong."
+        } else {
+            "Password tidak boleh kosong."
         }
-
-        return data != null
     }
 
     override suspend fun saveSessionData(userId: String, token: String) {
@@ -40,10 +39,6 @@ class AuthRepositoryImpl(
 
     override suspend fun clearToken() {
         return authLocalDataSource.clearToken()
-    }
-
-    override suspend fun clearSessionTime() {
-        return authLocalDataSource.clearSessionTime()
     }
 
     private fun checkUserData(userId: String, password: String): Int {

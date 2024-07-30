@@ -57,12 +57,6 @@ class AuthLocalDataSourceImpl(
         }
     }
 
-    override suspend fun clearSessionTime() {
-        dataStore.edit { pref ->
-            pref[DATASTORE_KEY_SESSION_TIME] = 0
-        }
-    }
-
     private suspend fun setToken(token: String) {
         dataStore.edit { pref ->
             pref[DATASTORE_KEY_TOKEN] = token

@@ -1,17 +1,18 @@
 package com.team6.connectbca.data.datasource.services
 
-import com.team6.connectbca.data.LOGIN_URL
-import com.team6.connectbca.data.model.body.LoginBody
-import com.team6.connectbca.data.model.response.LoginResponse
-import retrofit2.http.Body
+import com.team6.connectbca.data.model.UserResponse
+import retrofit2.http.GET
 import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface LoginService {
-    @POST(LOGIN_URL)
+    @GET("login")
     @Headers(
-        "Accept: application/json",
-        "Content-Type: application/json"
+        "accept: application/json",
+        "x-api-key: $API_KEY"
     )
-    suspend fun userLogin(@Body loginBody: LoginBody) : LoginResponse
+    suspend fun userLogin(
+        @Query("username") username: String,
+        @Query("password") password: String,
+    ) : UserResponse?
 }

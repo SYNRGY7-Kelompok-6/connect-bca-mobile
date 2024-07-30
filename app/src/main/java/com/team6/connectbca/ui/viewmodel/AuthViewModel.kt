@@ -8,7 +8,6 @@ import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
 import com.team6.connectbca.domain.usecase.LoginUseCase
 import com.team6.connectbca.domain.usecase.LogoutUseCase
 import kotlinx.coroutines.launch
-import java.lang.UnsupportedOperationException
 
 class AuthViewModel(
     private val loginUseCase: LoginUseCase,
@@ -18,7 +17,7 @@ class AuthViewModel(
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
     private val _success: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
-    private val _sessionData: MutableLiveData<Map<String, Any>> = MutableLiveData<Map<String, Any>>()
+    private val _sessionTime: MutableLiveData<Long> = MutableLiveData<Long>()
 
     fun userLogin(userId: String, password: String) {
         viewModelScope.launch {
@@ -47,13 +46,12 @@ class AuthViewModel(
                 _success.value = true
             } catch (error: Throwable) {
                 _error.value = error
-                _success.value = false
                 _loading.value = false
             }
         }
     }
 
-    fun getUserSessionData() : LiveData<Map<String, Any>> {
+    fun getUserSessionTime() : LiveData<Long> {
         viewModelScope.launch {
             try {
                 _sessionData.value = getSessionDataUseCase()!!
@@ -61,7 +59,8 @@ class AuthViewModel(
                 _error.value = error
             }
         }
-        return _sessionData
+
+        return _sessionTime
     }
 
     fun getError() : LiveData<Throwable> {
