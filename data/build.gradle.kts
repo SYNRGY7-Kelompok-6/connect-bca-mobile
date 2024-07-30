@@ -15,12 +15,19 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            buildConfigField("String", "BASE_URL", "\"https://banking-apps-d159984f6ed7.herokuapp.com/\"")
+            buildConfigField("String", "LOGIN_URL", "\"api/v1.0/auth/login\"")
+        }
+        release {
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://banking-apps-d159984f6ed7.herokuapp.com/\"")
+            buildConfigField("String", "LOGIN_URL", "\"api/v1.0/auth/login\"")
         }
     }
     compileOptions {

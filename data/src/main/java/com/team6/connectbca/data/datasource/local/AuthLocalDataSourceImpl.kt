@@ -43,9 +43,9 @@ class AuthLocalDataSourceImpl(
         val storedUserId: String? = getUserId()
 
         if ((!storedUserId.isNullOrEmpty())) {
-             if (storedUserId.compareTo(userId) == 0) {
-                 return true
-             }
+            if (storedUserId.compareTo(userId) == 0) {
+                return true
+            }
         }
 
         return false
@@ -54,6 +54,12 @@ class AuthLocalDataSourceImpl(
     override suspend fun clearToken() {
         dataStore.edit { pref ->
             pref[DATASTORE_KEY_TOKEN] = ""
+        }
+    }
+
+    override suspend fun clearSessionTime() {
+        dataStore.edit { pref ->
+            pref[DATASTORE_KEY_SESSION_TIME] = 0
         }
     }
 
