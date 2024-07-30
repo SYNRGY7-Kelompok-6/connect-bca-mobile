@@ -61,4 +61,26 @@
     <string name="tombol_virtual_account">Tombol virtual account</string>
     <string name="tombol_flazz">Tombol flazz</string>
     <string name="flazz">Flazz</string>
+    <string name="info_saldo_toolbar_description">Informasi Saldo dan Rekening</string>
+    <string name="customer_bank_card_description">Customer bank card</string>
+    <string name="card_deposit_description">Card menunjukkan deposit kartu</string>
+    <string name="card_deposit_month">Bulan Juni</string>
+    <string name="month_income_description">Jumlah pemasukan bulan ini</string>
+    <string name="month_income">Rp 359.000</string>
+    <string name="month_withdrawal_description">Jumlah pengeluaran bulan ini</string>
+    <string name="card_withdrawal_month">Bulan Juni</string>
+    <string name="month_withdrawal">Rp 359.000</string>
+    <string name="bottom_sheet_drag_description">Tarik ke atas untuk melihat mutasi dengan layar penuh</string>
+    <string name="tab_layout_description">Pilih mutasi berdasarkan hari ini, bulan ini, atau tanggal</string>
+    <string name="balance_inquiry_title">Jumlah Saldo</string>
+    <string name="balance_inquiry_value">Rp 28.062.003</string>
+    <string name="customer_card_description">Card berisi informasi kartu rekening</string>
+    <string name="account_number">145 267 389 5162</string>
+    <string name="account_number_description">Nomor rekening kartu</string>
+    <string name="account_number_copy_description">Tombol untuk menyalin nomor rekening</string>
+    <string name="card_type">Tahapan Xpresi</string>
+    <string name="card_type_description">Jenis kartu tabungan</string>
+    <string name="card_expiry_title">EXP</string>
+    <string name="card_expiry_date">03/28</string>
+    <string name="card_expiry_date_description">Bulan dan tahun kadaluwarsa kartu</string>
 </resources>
