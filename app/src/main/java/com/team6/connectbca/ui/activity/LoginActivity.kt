@@ -12,7 +12,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityLoginBinding
-import com.team6.connectbca.databinding.ForgetPasswordAlertLayoutBinding
 import com.team6.connectbca.ui.viewmodel.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
