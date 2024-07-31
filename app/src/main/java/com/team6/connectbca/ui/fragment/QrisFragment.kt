@@ -2,6 +2,7 @@ package com.team6.connectbca.ui.fragment
 
 import android.Manifest
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -12,24 +13,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentQrisBinding
+import com.team6.connectbca.databinding.LayoutCustomDialogBinding
 
 class QrisFragment : Fragment() {
 
     private lateinit var binding: FragmentQrisBinding
     private lateinit var codeScanner: CodeScanner
+
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = Runnable {
         showAlertDialog()
     }
+    private val dialogBinding by lazy { LayoutCustomDialogBinding.inflate(layoutInflater) }
 
     companion object {
         private const val REQUEST_CODE_PICK_IMAGE = 1001
@@ -50,6 +56,9 @@ class QrisFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val activity = requireActivity()
+        val navController = findNavController()
+        binding.toolbar.setupWithNavController(navController)
+        binding.toolbar.title = "Scan QR"
         codeScanner = CodeScanner(activity, binding.scannerView)
 
         codeScanner.decodeCallback = DecodeCallback {
@@ -69,9 +78,30 @@ class QrisFragment : Fragment() {
             }
         }
 
-        binding.cardFlash.setOnClickListener {
+        binding.ivFlash.setOnClickListener(View.OnClickListener {
             codeScanner.isFlashEnabled = !codeScanner.isFlashEnabled
-        }
+            if (codeScanner.isFlashEnabled) {
+                DrawableCompat.setTint(
+                    binding.ivFlash.drawable,
+                    ContextCompat.getColor(activity, R.color.colorPrimary)
+                )
+                val drawable = binding.ivFlash.background
+                DrawableCompat.setTint(
+                    drawable,
+                    ContextCompat.getColor(activity, android.R.color.white)
+                )
+            } else {
+                DrawableCompat.setTint(
+                    binding.ivFlash.drawable,
+                    ContextCompat.getColor(activity, android.R.color.white)
+                )
+                val drawable = binding.ivFlash.background
+                DrawableCompat.setTint(
+                    drawable,
+                    ContextCompat.getColor(activity, R.color.colorPrimary)
+                )
+            }
+        })
 
         binding.cardGallery.setOnClickListener {
             pickImageFromGallery()
@@ -132,14 +162,20 @@ class QrisFragment : Fragment() {
     }
 
     private fun showAlertDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("QR Code Not Detected")
-            .setMessage("No QR code detected in the last 10 seconds. Please try again.")
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-                startCountdown()  // Restart countdown after user presses OK
-            }
-            .show()
+
+        val dialogBinding = LayoutCustomDialogBinding.inflate(LayoutInflater.from(requireContext()))
+        val dialog = Dialog(requireContext())
+        dialogBinding.btnRetry.setOnClickListener {
+            dialog.dismiss()
+            startCountdown()  // Restart countdown after user presses OK
+        }
+
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+
     }
 
     private fun pickImageFromGallery() {

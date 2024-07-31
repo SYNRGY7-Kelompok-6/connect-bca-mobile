@@ -28,7 +28,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         supportActionBar?.hide()
-
+        binding.etUserId.setText("zg6kx3FFrDatGLHG")
+        binding.etPassword.setText("Password_0")
         binding.btnLogin.setOnClickListener {
             val userId = binding.etUserId.text.toString()
             val pass = binding.etPassword.text.toString()
