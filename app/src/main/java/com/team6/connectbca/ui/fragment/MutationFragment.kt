@@ -3,6 +3,7 @@ package com.team6.connectbca.ui.fragment
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +13,22 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.CornerSize
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.CustomerBankCardBinding
 import com.team6.connectbca.databinding.FragmentMutationBinding
+import com.team6.connectbca.ui.fragment.adapter.TabPagerAdapter
+import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MutationFragment : Fragment() {
     private lateinit var binding: FragmentMutationBinding
+    private val viewModel by viewModel<BalanceInquiryViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,13 +43,34 @@ class MutationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val customerBankcard = binding.root.findViewById<CardView>(R.id.cardCustomer)
         val customerBankcardBinding = CustomerBankCardBinding.bind(customerBankcard)
-
         val navController = findNavController()
+
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.setTitle("Informasi Saldo")
 
         setupTabLayout()
         setupBottomSheet()
+        setData()
+
+        viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                binding.mutationProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.mutationProgressBar.visibility = View.GONE
+            }
+        }
+
+        viewModel.getError().observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                Snackbar.make(binding.root, "Gagal memuat info saldo", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                // TO DO
+            }
+        }
 
         customerBankcardBinding.iconButtonCopy.setOnClickListener {
             copyToClipboard(customerBankcardBinding.tvCardNumber.text.toString())
@@ -54,7 +84,7 @@ class MutationFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
                 0 -> "Hari Ini"
-                1 -> "Bulan"
+                1 -> "Bulan Ini"
                 2 -> "Cari"
                 else -> null
             }
@@ -80,6 +110,14 @@ class MutationFragment : Fragment() {
 
         val maxHeight = (screenHeight * 1.0).toInt()
         bottomSheetBehavior.maxHeight = maxHeight
+    }
+
+    private fun setData() {
+        viewModel.getBalanceInquiry().observe(viewLifecycleOwner) { balanceInquiry ->
+            if (balanceInquiry != null) {
+                // DO SOMETHIN
+            }
+        }
     }
 
     private fun copyToClipboard(text: String) {

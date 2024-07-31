@@ -1,8 +1,8 @@
 package com.team6.connectbca.data.repository
 
 import android.util.Log
-import com.team6.connectbca.data.datasource.interfaces.AuthLocalDataSource
-import com.team6.connectbca.data.datasource.interfaces.AuthRemoteDataSource
+import com.team6.connectbca.data.datasource.interfaces.auth.AuthLocalDataSource
+import com.team6.connectbca.data.datasource.interfaces.auth.AuthRemoteDataSource
 import com.team6.connectbca.data.model.body.LoginBody
 import com.team6.connectbca.data.model.response.LoginResponse
 import com.team6.connectbca.data.model.response.LoginResponseData

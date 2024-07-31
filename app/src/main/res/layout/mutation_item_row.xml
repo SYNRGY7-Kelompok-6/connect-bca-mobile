@@ -4,63 +4,116 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp"
+    android:layout_margin="4dp"
     app:cardCornerRadius="22dp"
-    app:strokeColor="@color/neutral09"
     app:cardElevation="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/neutral09"
-        android:layout_margin="4dp"
+        android:padding="16dp"
         android:layout_gravity="center">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivMutationLogo"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_margin="12dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ic_launcher_background"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvTitle"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvTitle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/title"
-            android:textSize="21sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/neutral01"
+            android:textColor="?android:textColorPrimary"
             android:layout_marginStart="12dp"
-            app:layout_constraintBottom_toTopOf="@id/tvPrice"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/tvRemark"
             app:layout_constraintStart_toEndOf="@id/ivMutationLogo"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvPrice"
-            android:layout_width="0dp"
+            android:id="@+id/tvRemark"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:textColor="@color/neutral01"
-            android:textSize="21sp"
-            android:text="@string/price"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/transaction_name"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
             app:layout_constraintStart_toEndOf="@id/ivMutationLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvBeneficiaryName"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBeneficiaryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/beneficiary_account_name"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivMutationLogo"
+            app:layout_constraintEnd_toStartOf="@id/tvBeneficiaryNumber"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBeneficiaryNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="14sp"
+            android:text="@string/beneficiary_account_number"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvBeneficiaryName"
+            app:layout_constraintEnd_toStartOf="@id/btnNote"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/price"
+            android:textAlignment="textEnd"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/btnNote"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNote"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="12dp"
             android:text="@string/lihat_nota"
+            android:textSize="14sp"
             android:textColor="@color/neutral01"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="?android:buttonTint"
+            app:cornerRadius="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvPrice"
+            app:layout_constraintStart_toEndOf="@id/tvBeneficiaryNumber"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
