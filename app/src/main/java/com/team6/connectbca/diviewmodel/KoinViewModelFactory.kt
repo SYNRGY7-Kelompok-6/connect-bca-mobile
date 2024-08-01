@@ -11,5 +11,5 @@ val viewModelModule = module {
     viewModel { AuthViewModel(loginUseCase = get(), logoutUseCase = get(), getSessionDataUseCase = get()) }
     viewModel { BalanceInquiryViewModel(getBalanceInquiryUseCase = get(), getSessionDataUseCase = get()) }
     viewModel { TodayMutationViewModel(getMutationUseCase = get(), getSessionDataUseCase = get()) }
-    viewModel { MonthMutationViewModel(getMutationUseCase = get(), getSessionDataUseCase = get()) }
+    viewModel { MonthMutationViewModel(getThisMonthMutationUseCase = get(), getSessionDataUseCase = get()) }
 }

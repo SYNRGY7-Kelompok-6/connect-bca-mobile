@@ -74,10 +74,10 @@ class HomeFragment : Fragment() {
         isBalanceVisible = !isBalanceVisible
         if (isBalanceVisible) {
             binding.tvBalance.text = balance
-            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility)
+            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility_off)
         } else {
             binding.tvBalance.text = "***********"
-            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility_off)
+            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility)
         }
     }
 }

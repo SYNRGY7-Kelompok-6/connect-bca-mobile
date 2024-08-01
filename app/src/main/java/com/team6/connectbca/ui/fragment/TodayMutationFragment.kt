@@ -2,13 +2,17 @@ package com.team6.connectbca.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faltenreich.skeletonlayout.applySkeleton
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentTodayBinding
@@ -37,13 +41,12 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
         setData()
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
-            val skeleton = binding.todayMutationRecyclerView.applySkeleton(R.layout.mutation_item_row)
-
-            if (isLoading) {
-                skeleton.showSkeleton()
-            } else {
-                skeleton.showOriginal()
-            }
+//            val progressBar = view.findViewById<LinearProgressIndicator>(R.id.mutationProgressBar)
+//            if (isLoading) {
+//                progressBar.visibility = View.VISIBLE
+//            } else {
+//                progressBar.visibility = View.GONE
+//            }
         }
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
@@ -65,7 +68,7 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
     private fun setupRecyclerView(context: Context) {
         binding.todayMutationRecyclerView.layoutManager = LinearLayoutManager(
             context,
-            LinearLayoutManager.HORIZONTAL,
+            LinearLayoutManager.VERTICAL,
             false
         )
         binding.todayMutationRecyclerView.adapter = adapter
@@ -75,9 +78,10 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
     private fun setData() {
         viewModel.getTodayMutation().observe(viewLifecycleOwner) { mutations ->
             if (!mutations.isNullOrEmpty()) {
+                binding.tvNoMutationToday.visibility = View.VISIBLE
                 adapter.submitList(mutations)
             } else {
-                Snackbar.make(binding.root, "Gagal Memuat Data Mutasi", Snackbar.LENGTH_SHORT)
+                binding.tvNoMutationToday.visibility = View.VISIBLE
             }
         }
     }

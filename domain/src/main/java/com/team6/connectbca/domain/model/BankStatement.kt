@@ -1,7 +1,7 @@
 package com.team6.connectbca.domain.model
 
 data class BankStatement(
-    val data: BankStatementData,
+    val data: BankStatementData? = null,
     val message: String? = null,
     val status: String? = null
 )
@@ -49,6 +49,8 @@ data class MutationsItem(
     val beneficiaryAccount: BeneficiaryAccount? = null,
     val remark: String? = null,
     val transactionDate: String? = null,
+    val transactionId: String? = null,
+    val desc: String? = null,
     val type: String? = null
 )
 
@@ -77,4 +79,13 @@ data class StartingBalance(
     val dateTime: String? = null,
     val currency: String? = null,
     val value: Int? = null
+)
+
+data class DailyTransaction(
+    val dateTime: String? = null,
+    val transactionGroup: List<MutationsItem>?
+)
+
+data class MonthTransactionDate(
+    val dateTime: String
 )

@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/account_balance_visibility_description"
-                app:icon="@drawable/ic_visibility_off"
+                app:icon="@drawable/ic_visibility"
                 app:iconTint="@color/neutral01"
                 app:layout_constraintBottom_toBottomOf="@id/tvCurrency"
                 app:layout_constraintEnd_toEndOf="parent"

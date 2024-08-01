@@ -9,5 +9,5 @@ interface BankStatementRepository {
         toDate: String,
         page: String,
         pageSize: String
-    ) : BankStatementData
+    ) : BankStatementData?
 }

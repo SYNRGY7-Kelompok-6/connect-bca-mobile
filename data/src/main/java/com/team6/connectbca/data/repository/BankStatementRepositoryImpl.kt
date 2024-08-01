@@ -13,7 +13,7 @@ class BankStatementRepositoryImpl(
         toDate: String,
         page: String,
         pageSize: String
-    ) : BankStatementData {
+    ) : BankStatementData? {
         return remoteDataSource.getBankStatement(token, fromDate, toDate, page, pageSize).toEntity().data
     }
 }

@@ -28,4 +28,8 @@
     <style name="AlertDialog">
         <item name="backgroundTint">@color/colorPrimary</item>
     </style>
+
+    <style name="CardBackground">
+        <item name="backgroundTint">@color/neutral04</item>
+    </style>
 </resources>

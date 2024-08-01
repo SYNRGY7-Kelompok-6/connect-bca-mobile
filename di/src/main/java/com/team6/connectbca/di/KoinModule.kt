@@ -20,6 +20,7 @@ import com.team6.connectbca.domain.repository.BankStatementRepository
 import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
 import com.team6.connectbca.domain.usecase.GetMutationUseCase
 import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
+import com.team6.connectbca.domain.usecase.GetThisMonthMutationUseCase
 import com.team6.connectbca.domain.usecase.LoginUseCase
 import com.team6.connectbca.domain.usecase.LogoutUseCase
 import org.koin.android.ext.koin.androidContext
@@ -48,4 +49,5 @@ val koinModule = module {
     single { GetBalanceInquiryUseCase(bankStatementRepository = get()) }
     single { GetMutationUseCase(bankStatementRepository = get()) }
     single { GetSessionDataUseCase(authRepository = get()) }
+    single { GetThisMonthMutationUseCase(bankStatementRepository = get()) }
 }

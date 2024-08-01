@@ -1,11 +1,11 @@
-package com.team6.connectbca.ui.fragment.adapter.todaymutation
+package com.team6.connectbca.ui.fragment.adapter.monthmutation
 
 import androidx.recyclerview.widget.DiffUtil
 import com.team6.connectbca.domain.model.MutationsItem
 
-class TodayMutationDiffUtil : DiffUtil.ItemCallback<MutationsItem>() {
+class MonthMutationDiffUtil : DiffUtil.ItemCallback<MutationsItem>() {
     override fun areItemsTheSame(oldItem: MutationsItem, newItem: MutationsItem): Boolean {
-        return oldItem.transactionId == newItem.transactionId
+        return oldItem.remark == newItem.remark
     }
 
     override fun areContentsTheSame(

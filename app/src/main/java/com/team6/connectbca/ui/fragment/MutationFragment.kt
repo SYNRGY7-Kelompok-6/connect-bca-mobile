@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,9 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.faltenreich.skeletonlayout.SkeletonLayout
+import com.faltenreich.skeletonlayout.applySkeleton
+import com.faltenreich.skeletonlayout.createSkeleton
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.CornerSize
@@ -22,13 +26,18 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.CustomerBankCardBinding
 import com.team6.connectbca.databinding.FragmentMutationBinding
+import com.team6.connectbca.extensions.getFormattedAccountNo
+import com.team6.connectbca.extensions.getFormattedBalance
+import com.team6.connectbca.extensions.miliseondToDateMonth
 import com.team6.connectbca.ui.fragment.adapter.TabPagerAdapter
 import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MutationFragment : Fragment() {
     private lateinit var binding: FragmentMutationBinding
+    private lateinit var balance: String
     private val viewModel by viewModel<BalanceInquiryViewModel>()
+    private var isBalanceVisible: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,11 +75,7 @@ class MutationFragment : Fragment() {
             }
         }
 
-        viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                // TO DO
-            }
-        }
+        binding.btnShowBalance.setOnClickListener { showBalance() }
 
         customerBankcardBinding.iconButtonCopy.setOnClickListener {
             copyToClipboard(customerBankcardBinding.tvCardNumber.text.toString())
@@ -78,7 +83,7 @@ class MutationFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        val adapter = TabPagerAdapter(parentFragmentManager, lifecycle)
+        val adapter = TabPagerAdapter(childFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -115,7 +120,16 @@ class MutationFragment : Fragment() {
     private fun setData() {
         viewModel.getBalanceInquiry().observe(viewLifecycleOwner) { balanceInquiry ->
             if (balanceInquiry != null) {
-                // DO SOMETHIN
+                val amount = balanceInquiry.balance?.availableBalance?.value
+                val formattedAmount = getFormattedBalance(amount!!)
+                val formattedAccNo = getFormattedAccountNo(balanceInquiry.accountNo!!.toDouble())
+                val formattedExpDate = miliseondToDateMonth(balanceInquiry.accountCardExp!!.toLong())
+
+                binding.tvBalanceAmount.text = "*********"
+                balance = formattedAmount
+                binding.cardCustomer.tvCardNumber.text = formattedAccNo
+                binding.cardCustomer.tvSavingProduct.text = balanceInquiry.accountType
+                binding.cardCustomer.tvExpDate.text = formattedExpDate
             }
         }
     }
@@ -124,10 +138,22 @@ class MutationFragment : Fragment() {
         val clipboardManager = (requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).apply {
             setPrimaryClip(ClipData.newPlainText("Copied Text", text))
         }
-        showSnackbar("Account Number is copied to clipboard")
+        showSnackbar("Nomor rekening berhasil disalin")
     }
 
     private fun showSnackbar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun showBalance() {
+        isBalanceVisible = !isBalanceVisible
+
+        if (isBalanceVisible) {
+            binding.tvBalanceAmount.text = balance
+            binding.btnShowBalance.setIconResource(R.drawable.ic_visibility_off)
+        } else {
+            binding.tvBalanceAmount.text = "*********"
+            binding.btnShowBalance.setIconResource(R.drawable.ic_visibility)
+        }
     }
 }

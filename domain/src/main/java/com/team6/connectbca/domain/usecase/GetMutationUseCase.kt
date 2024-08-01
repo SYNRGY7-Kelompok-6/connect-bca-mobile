@@ -12,7 +12,7 @@ class GetMutationUseCase(
         toDate: String,
         page: String,
         pageSize: String
-    ): List<MutationsItem?> {
-        return bankStatementRepository.getBankStatement(token, fromDate, toDate, page, pageSize).mutations!!
+    ): List<MutationsItem?>? {
+        return bankStatementRepository.getBankStatement(token, fromDate, toDate, page, pageSize)?.mutations
     }
 }

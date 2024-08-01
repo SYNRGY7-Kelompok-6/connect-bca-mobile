@@ -18,7 +18,7 @@ import com.team6.connectbca.domain.model.StartingBalance
 data class BankStatementResponse(
 
 	@field:SerializedName("data")
-	val data: BankStatementDataResponse,
+	val data: BankStatementDataResponse? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -28,7 +28,7 @@ data class BankStatementResponse(
 ) {
 	fun toEntity() : BankStatement {
 		return BankStatement (
-			data = this.data.toEntity(),
+			data = this.data?.toEntity(),
 			message = this.message,
 			status = this.status
 		)
@@ -170,6 +170,12 @@ data class MutationsItemResponse(
 	@field:SerializedName("transactionDate")
 	val transactionDate: String? = null,
 
+	@field:SerializedName("transactionId")
+	val transactionId: String? = null,
+
+	@field:SerializedName("desc")
+	val desc: String? = null,
+
 	@field:SerializedName("type")
 	val type: String? = null
 ) {
@@ -180,6 +186,8 @@ data class MutationsItemResponse(
 			beneficiaryAccount = this.beneficiaryAccount?.toEntity(),
 			remark = this.remark,
 			transactionDate = this.transactionDate,
+			transactionId = this.transactionId,
+			desc = this.desc,
 			type = this.type
 		)
 	}
