@@ -37,6 +37,13 @@ fun miliseondToDateMonth(milisecond: Long) : String {
     return formatter.format(date)
 }
 
+fun getNonZeroMonth() : String {
+    val date = getCurrentDate()
+    val month = date.toString("M")
+
+    return month
+}
+
 private fun getEndDate() : String {
     val date = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
 

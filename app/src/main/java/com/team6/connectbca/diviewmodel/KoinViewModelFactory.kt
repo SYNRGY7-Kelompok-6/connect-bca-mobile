@@ -9,7 +9,11 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { AuthViewModel(loginUseCase = get(), logoutUseCase = get(), getSessionDataUseCase = get()) }
-    viewModel { BalanceInquiryViewModel(getBalanceInquiryUseCase = get(), getSessionDataUseCase = get()) }
+    viewModel { BalanceInquiryViewModel(
+        getBalanceInquiryUseCase = get(),
+        getSessionDataUseCase = get(),
+        getAccountMonthlyUseCase = get())
+    }
     viewModel { TodayMutationViewModel(getMutationUseCase = get(), getSessionDataUseCase = get()) }
     viewModel { MonthMutationViewModel(getThisMonthMutationUseCase = get(), getSessionDataUseCase = get()) }
 }

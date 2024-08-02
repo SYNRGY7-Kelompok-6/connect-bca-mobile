@@ -132,6 +132,14 @@
             app:layout_constraintTop_toBottomOf="@id/cardCustomer"
             android:contentDescription="@string/card_deposit_description">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/ic_input_add"
+                android:backgroundTint="@color/neutral01"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"/>
+
             <LinearLayout
                 android:id="@+id/depositLayout"
                 android:layout_width="match_parent"
@@ -176,6 +184,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardCustomer"
             android:contentDescription="@string/month_withdrawal_description">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/menu_frame"
+                android:backgroundTint="@color/neutral01"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"/>
 
             <LinearLayout
                 android:id="@+id/withdrawalLayout"

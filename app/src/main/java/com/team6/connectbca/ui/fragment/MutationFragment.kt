@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.CustomerBankCardBinding
 import com.team6.connectbca.databinding.FragmentMutationBinding
+import com.team6.connectbca.extensions.getEndOfMonthDate
 import com.team6.connectbca.extensions.getFormattedAccountNo
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.miliseondToDateMonth
@@ -123,6 +124,18 @@ class MutationFragment : Fragment() {
                 binding.cardCustomer.tvSavingProduct.text = balanceInquiry.accountType
                 binding.cardCustomer.tvExpDate.text = formattedExpDate
             }
+        }
+
+        viewModel.getAccountMonthly().observe(viewLifecycleOwner) { monthly ->
+            if (monthly != null) {
+                binding.tvRecentMonthDepositAmount.text = getFormattedBalance(monthly.monthlyIncome?.value!!)
+                binding.tvRecentMonthWithdrawalAmount.text = getFormattedBalance(monthly.monthlyOutcome?.value!!)
+            }
+        }
+
+        viewModel.getMonthName().observe(viewLifecycleOwner) { month ->
+            binding.tvRecentMonthDeposit.text = month
+            binding.tvRecentMonthWithdrawal.text = month
         }
     }
 
