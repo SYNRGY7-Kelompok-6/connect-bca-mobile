@@ -19,6 +19,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="QRIS" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/mutationProgressBar"
+        style="@style/ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/inquiry_mutation_description"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardCamera"
         android:layout_width="0dp"
@@ -37,6 +50,7 @@
             android:id="@+id/scanner_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/qr_scanner_description"
             android:focusableInTouchMode="true"
             app:autoFocusButtonVisible="false"
             app:flashButtonVisible="false"
@@ -70,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/gallery_button_description"
         app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@id/cardQrOption"
         app:layout_constraintStart_toStartOf="@id/cardQrOption">
@@ -96,6 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_item"
+            android:contentDescription="@string/flash_on_button_description"
             android:padding="15dp"
             android:src="@drawable/ic_flash_off" />
     </androidx.cardview.widget.CardView>
@@ -124,6 +140,7 @@
                 android:id="@+id/cardScanQr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/scan_qris_button_description"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp">
@@ -141,7 +158,7 @@
                         android:id="@+id/tvScanQr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Scan QRIS"
+                        android:text="@string/scan_qris"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -152,6 +169,7 @@
                 android:id="@+id/cardShowQr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/show_qr_button_description"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 app:cardBackgroundColor="@color/colorPrimary"
@@ -171,7 +189,7 @@
                         android:id="@+id/tvShowQr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tampilkan QR"
+                        android:text="@string/show_qr"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />

@@ -15,7 +15,6 @@ class BankStatementRemoteDataSourceImpl(
         pageSize: String
     ): BankStatementResponse {
         return bankStatementService.getBankStatement(
-            token,
             fromDate,
             toDate,
             page,

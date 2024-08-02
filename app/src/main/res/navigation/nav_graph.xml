@@ -26,5 +26,14 @@
         android:id="@+id/qrisFragment"
         android:name="com.team6.connectbca.ui.fragment.QrisFragment"
         android:label="fragment_qris"
-        tools:layout="@layout/fragment_qris" />
+        tools:layout="@layout/fragment_qris" >
+        <action
+            android:id="@+id/action_qrisFragment_to_qrisPaymentFragment"
+            app:destination="@id/qrisPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrisPaymentFragment"
+        android:name="com.team6.connectbca.ui.fragment.QrisPaymentFragment"
+        android:label="fragment_qris_payment"
+        tools:layout="@layout/fragment_qris_payment" />
 </navigation>
