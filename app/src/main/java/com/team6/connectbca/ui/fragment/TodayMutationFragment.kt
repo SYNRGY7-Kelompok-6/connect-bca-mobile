@@ -40,14 +40,14 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
         setupRecyclerView(view.context)
         setData()
 
-        viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
+//        viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
 //            val progressBar = view.findViewById<LinearProgressIndicator>(R.id.mutationProgressBar)
 //            if (isLoading) {
 //                progressBar.visibility = View.VISIBLE
 //            } else {
 //                progressBar.visibility = View.GONE
 //            }
-        }
+//        }
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
@@ -78,7 +78,7 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
     private fun setData() {
         viewModel.getTodayMutation().observe(viewLifecycleOwner) { mutations ->
             if (!mutations.isNullOrEmpty()) {
-                binding.tvNoMutationToday.visibility = View.VISIBLE
+                binding.tvNoMutationToday.visibility = View.GONE
                 adapter.submitList(mutations)
             } else {
                 binding.tvNoMutationToday.visibility = View.VISIBLE

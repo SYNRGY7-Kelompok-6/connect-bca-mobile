@@ -84,6 +84,7 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
             var count = 0
 
             if (!transactionGroup.isNullOrEmpty()) {
+                Snackbar.make(binding.root, "BERHASILLL 2", Snackbar.LENGTH_SHORT).show()
                 binding.tvNoMutationMonth.visibility = View.GONE
                 transactionGroup.forEach { transaction ->
                     count+=1

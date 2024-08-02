@@ -3,7 +3,6 @@ package com.team6.connectbca.ui.fragment
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,14 +12,7 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.faltenreich.skeletonlayout.SkeletonLayout
-import com.faltenreich.skeletonlayout.applySkeleton
-import com.faltenreich.skeletonlayout.createSkeleton
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.CornerSize
-import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
@@ -83,7 +75,7 @@ class MutationFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        val adapter = TabPagerAdapter(childFragmentManager, lifecycle)
+        val adapter = TabPagerAdapter(requireActivity())
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->

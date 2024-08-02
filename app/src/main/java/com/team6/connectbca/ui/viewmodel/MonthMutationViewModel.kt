@@ -11,7 +11,6 @@ import com.team6.connectbca.domain.usecase.GetThisMonthMutationUseCase
 import com.team6.connectbca.extensions.getEndOfMonthDate
 import com.team6.connectbca.extensions.getFirstOfMonthDate
 import kotlinx.coroutines.launch
-import java.lang.UnsupportedOperationException
 
 class MonthMutationViewModel(
     private val getThisMonthMutationUseCase: GetThisMonthMutationUseCase,

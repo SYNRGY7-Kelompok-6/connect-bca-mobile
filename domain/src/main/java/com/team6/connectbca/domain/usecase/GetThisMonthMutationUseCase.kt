@@ -15,33 +15,6 @@ class GetThisMonthMutationUseCase(
         page: String,
         pageSize: String
     ): List<DailyTransaction>? {
-        val allMutations = bankStatementRepository.getBankStatement(token, fromDate, toDate, page, pageSize)?.mutations
-        val result : MutableList<DailyTransaction> = mutableListOf()
-        var temp: MutableList<MutationsItem> = mutableListOf()
-//        var monthTransactionDates: MutableList<MonthTransactionDate> = mutableListOf()
-        var dateFlag = allMutations?.firstOrNull()?.transactionDate
-
-        if (allMutations != null) {
-            allMutations.forEach {mutationItem ->
-                val date = mutationItem?.transactionDate
-
-                if (dateFlag != null) {
-                    if (dateFlag.equals(date)) {
-                        temp.add(mutationItem!!)
-                    } else {
-                        result.add(DailyTransaction(dateFlag, temp))
-//                        monthTransactionDates.add(MonthTransactionDate(dateFlag!!))
-                        dateFlag = date
-                        temp.clear()
-                    }
-                } else {
-                    temp.clear()
-                }
-            }
-
-            return result
-        } else {
-            return null
-        }
+        return bankStatementRepository.getTransactionGroups(token, fromDate, toDate, page, pageSize)
     }
 }
