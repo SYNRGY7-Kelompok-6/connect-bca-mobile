@@ -15,6 +15,7 @@
         <!-- Customize your dark theme here. -->
         <item name="android:textColorPrimary">@color/neutral01</item>
         <item name="android:buttonTint">@color/colorPrimary</item>
+        <item name="iconTint">@color/neutral01</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
 
 

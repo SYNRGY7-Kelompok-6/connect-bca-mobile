@@ -42,6 +42,7 @@ class BalanceInquiryViewModel(
                     "0",
                     "1"
                 )
+
                 if (data != null) {
                     _balanceInquiry.value = data
                 } else {

@@ -99,7 +99,7 @@
             android:layout_marginStart="6dp"
             android:contentDescription="@string/account_balance_visibility_description"
             app:icon="@drawable/ic_visibility"
-            app:iconTint="@color/neutral01"
+            app:iconTint="?iconTint"
             app:layout_constraintBottom_toBottomOf="@id/tvBalanceAmount"
             app:layout_constraintStart_toEndOf="@id/tvBalanceAmount"
             app:layout_constraintEnd_toEndOf="parent"
@@ -254,7 +254,6 @@
                 android:layout_height="wrap_content"
                 app:tabMode="fixed"
                 app:tabGravity="fill"
-                android:elevation="10dp"
                 app:tabBackground="@android:color/transparent"
                 app:circularflow_radiusInDP="24dp"
                 app:tabTextColor="?android:textColorPrimary"
@@ -263,8 +262,9 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"/>
 
         </LinearLayout>
 

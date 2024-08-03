@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +11,20 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.CustomerBankCardBinding
 import com.team6.connectbca.databinding.FragmentMutationBinding
-import com.team6.connectbca.extensions.getEndOfMonthDate
 import com.team6.connectbca.extensions.getFormattedAccountNo
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.miliseondToDateMonth
 import com.team6.connectbca.ui.fragment.adapter.TabPagerAdapter
 import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MutationFragment : Fragment() {
     private lateinit var binding: FragmentMutationBinding
@@ -76,11 +76,17 @@ class MutationFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        val adapter = TabPagerAdapter(requireActivity())
+        val adapter = TabPagerAdapter(parentFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
+                0 -> "Hari Ini"
+                1 -> "Bulan Ini"
+                2 -> "Cari"
+                else -> null
+            }
+            tab.contentDescription = when (position) {
                 0 -> "Hari Ini"
                 1 -> "Bulan Ini"
                 2 -> "Cari"
@@ -128,8 +134,11 @@ class MutationFragment : Fragment() {
 
         viewModel.getAccountMonthly().observe(viewLifecycleOwner) { monthly ->
             if (monthly != null) {
-                binding.tvRecentMonthDepositAmount.text = getFormattedBalance(monthly.monthlyIncome?.value!!)
-                binding.tvRecentMonthWithdrawalAmount.text = getFormattedBalance(monthly.monthlyOutcome?.value!!)
+                val deposit = getFormattedBalance(monthly.monthlyIncome?.value!!)
+                val withdrawal = getFormattedBalance(monthly.monthlyOutcome?.value!!)
+
+                binding.tvRecentMonthDepositAmount.text = "Rp $deposit"
+                binding.tvRecentMonthWithdrawalAmount.text = "Rp $withdrawal"
             }
         }
 

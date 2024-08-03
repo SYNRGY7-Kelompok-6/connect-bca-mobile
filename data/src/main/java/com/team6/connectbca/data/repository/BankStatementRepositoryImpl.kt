@@ -3,6 +3,7 @@ package com.team6.connectbca.data.repository
 import com.team6.connectbca.data.datasource.interfaces.bankstatement.BankStatementRemoteDataSource
 import com.team6.connectbca.domain.model.BankStatementData
 import com.team6.connectbca.domain.model.DailyTransaction
+import com.team6.connectbca.domain.model.MonthTransactionDate
 import com.team6.connectbca.domain.model.MutationsItem
 import com.team6.connectbca.domain.repository.BankStatementRepository
 import java.text.SimpleDateFormat
@@ -45,14 +46,14 @@ class BankStatementRepositoryImpl(
                     if ((dateFlag.equals(date)) && (count <= allMutations.size)) {
                         temp.add(mutationItem!!)
                     } else {
-                        result.add(DailyTransaction(dateFlag, temp.toList()))
+                        result.add(DailyTransaction(MonthTransactionDate(dateFlag), temp.toList()))
 //                        monthTransactionDates.add(MonthTransactionDate(dateFlag!!))
                         dateFlag = date
                         temp.clear()
                     }
 
                     if (count == allMutations.size) {
-                        result.add(DailyTransaction(dateFlag, temp.toList()))
+                        result.add(DailyTransaction(MonthTransactionDate(dateFlag), temp.toList()))
                     }
                 } else {
                     temp.clear()

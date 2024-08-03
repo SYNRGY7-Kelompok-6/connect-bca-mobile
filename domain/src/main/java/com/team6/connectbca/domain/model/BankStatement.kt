@@ -52,7 +52,7 @@ data class MutationsItem(
     val transactionId: String? = null,
     val desc: String? = null,
     val type: String? = null
-)
+) : MonthMutationListItem()
 
 data class HoldAmount(
     val currency: String? = null,
@@ -82,10 +82,10 @@ data class StartingBalance(
 )
 
 data class DailyTransaction(
-    val dateTime: String? = null,
+    val dateTime: MonthTransactionDate?,
     val transactionGroup: List<MutationsItem>?
 )
 
 data class MonthTransactionDate(
     val dateTime: String
-)
+) : MonthMutationListItem()

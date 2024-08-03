@@ -4,6 +4,7 @@
     <style name="Base.Theme.ConnectBCA" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
         <item name="android:buttonTint">@color/colorPrimaryDark</item>
+        <item name="iconTint">@color/colorPrimaryDark</item>
 
         <item name="colorPrimary">@color/colorPrimaryLight</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>

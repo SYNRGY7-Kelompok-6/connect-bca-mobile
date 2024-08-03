@@ -9,8 +9,8 @@ import com.team6.connectbca.ui.fragment.MonthMutationFragment
 import com.team6.connectbca.ui.fragment.SearchMutationFragment
 import com.team6.connectbca.ui.fragment.TodayMutationFragment
 
-class TabPagerAdapter(fragmentActivity: FragmentActivity) :
-    FragmentStateAdapter(fragmentActivity) {
+class TabPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int = 3
 

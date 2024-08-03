@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentMonthBinding
+import com.team6.connectbca.domain.model.MonthMutationListItem
 import com.team6.connectbca.domain.model.MutationsItem
 import com.team6.connectbca.ui.fragment.adapter.monthmutation.MonthMutationAdapter
 import com.team6.connectbca.ui.fragment.adapter.monthmutation.MonthMutationAdapterListener
@@ -45,12 +46,11 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
         setData(view.context)
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
-//            val progressBar = view.findViewById<LinearProgressIndicator>(R.id.mutationProgressBar)
-//            if (isLoading) {
-//                progressBar.visibility = View.VISIBLE
-//            } else {
-//                progressBar.visibility = View.GONE
-//            }
+            if (isLoading) {
+                binding.monthMutationProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.monthMutationProgressBar.visibility = View.GONE
+            }
         }
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
@@ -72,7 +72,7 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
     private fun setupRecyclerView(context: Context) {
         binding.monthMutationRecyclerView.layoutManager = LinearLayoutManager(
             context,
-            LinearLayoutManager.HORIZONTAL,
+            LinearLayoutManager.VERTICAL,
             false
         )
         binding.monthMutationRecyclerView.adapter = adapter
@@ -81,42 +81,23 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
 
     private fun setData(context: Context) {
         viewModel.getThisMonthMutation().observe(viewLifecycleOwner) { transactionGroup ->
-            var count = 0
-
             if (!transactionGroup.isNullOrEmpty()) {
-                Snackbar.make(binding.root, "BERHASILLL 2", Snackbar.LENGTH_SHORT).show()
+                val newList = mutableListOf<MonthMutationListItem>()
+
                 binding.tvNoMutationMonth.visibility = View.GONE
                 transactionGroup.forEach { transaction ->
-                    count+=1
-
-                    if (count == 1) {
-//                        binding.tvMonth.text = transaction.dateTime
-                        adapter.submitList(transaction.transactionGroup)
-                    } else {
-                        addNewDailyMutationList(context, transaction.dateTime!!, transaction.transactionGroup!!)
+                    newList.apply {
+                        add(transaction.dateTime!!)
+                        transaction.transactionGroup?.forEach { mutation ->
+                            add(mutation)
+                        }
                     }
                 }
+
+                adapter.submitList(newList)
             } else {
                 binding.tvNoMutationMonth.visibility = View.VISIBLE
             }
         }
-    }
-
-    private fun addNewDailyMutationList(context: Context, text: String, transactions: List<MutationsItem>) {
-        val newLayout: ConstraintLayout = view?.findViewById(R.id.dailyMutationList) as ConstraintLayout
-        val date = newLayout.findViewById<MaterialTextView>(R.id.tvMonth)
-        val list = newLayout.findViewById<RecyclerView>(R.id.monthMutationRecyclerView)
-
-        date.text = text
-        list.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-        list.adapter = adapter
-        list.itemAnimator = DefaultItemAnimator()
-        adapter.submitList(transactions)
-
-        binding.root.addView(newLayout)
     }
 }
