@@ -40,20 +40,16 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
         setupRecyclerView(view.context)
         setData()
 
-//        viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
-//            val progressBar = view.findViewById<LinearProgressIndicator>(R.id.mutationProgressBar)
-//            if (isLoading) {
-//                progressBar.visibility = View.VISIBLE
-//            } else {
-//                progressBar.visibility = View.GONE
-//            }
-//        }
-
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
                 Snackbar.make(binding.root, "Gagal memuat info saldo", Snackbar.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
     }
 
     override fun onDestroyView() {

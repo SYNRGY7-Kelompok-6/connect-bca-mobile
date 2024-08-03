@@ -109,6 +109,11 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -145,6 +150,7 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
                 adapter.submitList(newList)
 
                 binding.flipperSearchMutation.displayedChild = 1
+                Snackbar.make(binding.root, "Berhasil mendapatkan transaksi", Snackbar.LENGTH_SHORT).show()
             } else {
                 binding.flipperSearchMutation.displayedChild = 0
                 Snackbar.make(binding.root, "Belum ada transaksi", Snackbar.LENGTH_SHORT).show()
