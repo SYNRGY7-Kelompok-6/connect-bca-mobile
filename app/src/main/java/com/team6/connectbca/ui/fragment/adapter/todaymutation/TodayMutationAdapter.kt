@@ -3,7 +3,7 @@ package com.team6.connectbca.ui.fragment.adapter.todaymutation
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.team6.connectbca.databinding.ItemMutationRowBinding
+import com.team6.connectbca.databinding.MutationItemRowBinding
 import com.team6.connectbca.domain.model.MutationsItem
 
 class TodayMutationAdapter (
@@ -11,7 +11,7 @@ class TodayMutationAdapter (
 ) : ListAdapter<MutationsItem, TodayMutationViewHolder>(TodayMutationDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodayMutationViewHolder {
         return TodayMutationViewHolder(
-            binding = ItemMutationRowBinding.inflate(
+            binding = MutationItemRowBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
