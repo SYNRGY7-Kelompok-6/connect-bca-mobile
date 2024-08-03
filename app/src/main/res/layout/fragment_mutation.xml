@@ -75,7 +75,7 @@
 
         <include
             android:id="@+id/cardCustomer"
-            layout="@layout/customer_bank_card"
+            layout="@layout/item_customer_bank_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"

@@ -75,7 +75,6 @@
     <string name="balance_inquiry_title">Jumlah Saldo</string>
     <string name="balance_inquiry_value">Rp 28.062.003</string>
     <string name="customer_card_description">Card berisi informasi kartu rekening</string>
-    <string name="account_number">145 267 389 5162</string>
     <string name="account_number_description">Nomor rekening kartu</string>
     <string name="account_number_copy_description">Tombol untuk menyalin nomor rekening</string>
     <string name="card_type">Tahapan Xpresi</string>
