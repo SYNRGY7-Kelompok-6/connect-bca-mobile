@@ -87,4 +87,14 @@
     <string name="transaction_date_description">Transaksi hari ini</string>
     <string name="no_transaction_today">Belum ada transaksi hari ini</string>
     <string name="no_transaction_month">Belum ada transaksi bulan ini.</string>
+    <string name="start_date_title">Tanggal Mulai</string>
+    <string name="choose_start_date">Pilih tanggal mulai</string>
+    <string name="no_mutation">Belum ada transaksi</string>
+    <string name="end_date_title">Tanggal Akhir</string>
+    <string name="choose_end_date">Pilih tanggal akhir</string>
+    <string name="use_same_date">Gunakan periode waktu yang sama</string>
+    <string name="use_same_date_description">Centang untuk memilih periode waktu yang sama</string>
+    <string name="search_mutation">Cari Mutasi</string>
+    <string name="loading_data_description">Sedang memuat data</string>
+    <string name="search_again">Cari Lagi</string>
 </resources>

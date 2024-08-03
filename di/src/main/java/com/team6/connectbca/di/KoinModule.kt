@@ -25,6 +25,7 @@ import com.team6.connectbca.domain.repository.AuthRepository
 import com.team6.connectbca.domain.repository.BankStatementRepository
 import com.team6.connectbca.domain.usecase.GetAccountMonthlyUseCase
 import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
+import com.team6.connectbca.domain.usecase.GetDateRangeMutationUseCase
 import com.team6.connectbca.domain.usecase.GetMutationUseCase
 import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
 import com.team6.connectbca.domain.usecase.GetThisMonthMutationUseCase
@@ -61,4 +62,5 @@ val koinModule = module {
     single { GetSessionDataUseCase(authRepository = get()) }
     single { GetThisMonthMutationUseCase(bankStatementRepository = get()) }
     single { GetAccountMonthlyUseCase(accountMonthlyRepository = get()) }
+    single { GetDateRangeMutationUseCase(bankStatementRepository = get()) }
 }

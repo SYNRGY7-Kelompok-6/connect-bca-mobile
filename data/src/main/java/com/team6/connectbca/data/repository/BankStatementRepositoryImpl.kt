@@ -1,5 +1,6 @@
 package com.team6.connectbca.data.repository
 
+import android.util.Log
 import com.team6.connectbca.data.datasource.interfaces.bankstatement.BankStatementRemoteDataSource
 import com.team6.connectbca.domain.model.BankStatementData
 import com.team6.connectbca.domain.model.DailyTransaction
@@ -35,7 +36,7 @@ class BankStatementRepositoryImpl(
         var temp: MutableList<MutationsItem> = mutableListOf()
         var count = 0
 
-        if (allMutations != null) {
+        if (!allMutations.isNullOrEmpty()) {
             var dateFlag = reformatDate(allMutations.firstOrNull()?.transactionDate!!)
 
             allMutations.forEach { mutationItem ->
