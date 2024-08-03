@@ -74,6 +74,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     implementation("com.github.yuriy-budiyev:code-scanner:2.3.0")
+    implementation("androidx.activity:activity:1.9.1")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")

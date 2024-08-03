@@ -2,12 +2,12 @@ package com.team6.connectbca.ui.fragment.adapter.todaymutation
 
 import androidx.recyclerview.widget.RecyclerView
 import com.team6.connectbca.R
-import com.team6.connectbca.databinding.MutationItemRowBinding
+import com.team6.connectbca.databinding.ItemMutationRowBinding
 import com.team6.connectbca.domain.model.MutationsItem
 
 class TodayMutationViewHolder(
     private val todayMutationAdapterListener: TodayMutationAdapterListener,
-    private val binding: MutationItemRowBinding
+    private val binding: ItemMutationRowBinding
 ) : RecyclerView.ViewHolder(binding.root) {
     fun render(data: MutationsItem) {
         binding.ivMutationLogo.setImageResource(R.drawable.ic_logo)

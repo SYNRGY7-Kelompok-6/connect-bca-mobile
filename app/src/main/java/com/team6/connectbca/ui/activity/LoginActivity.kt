@@ -12,7 +12,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityLoginBinding
-import com.team6.connectbca.databinding.ForgetPasswordAlertLayoutBinding
 import com.team6.connectbca.ui.viewmodel.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -96,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
 
-        dialog.setContentView(R.layout.forget_password_alert_layout)
+        dialog.setContentView(R.layout.item_forget_password_alert)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val closeBtn: MaterialButton = dialog.findViewById(R.id.alertCloseBtn)
@@ -111,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
 
-        dialog.setContentView(R.layout.quick_access_notfound_alert_layout)
+        dialog.setContentView(R.layout.item_quick_access_notfound_alert)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val closeBtn: MaterialButton = dialog.findViewById(R.id.quickAccessAlertCloseBtn)

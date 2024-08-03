@@ -15,55 +15,51 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
-import com.team6.connectbca.databinding.CustomerBankCardBinding
 import com.team6.connectbca.databinding.FragmentMutationBinding
+import com.team6.connectbca.databinding.ItemCustomerBankCardBinding
 import com.team6.connectbca.ui.fragment.adapter.TabPagerAdapter
 import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MutationFragment : Fragment() {
-    private lateinit var binding: FragmentMutationBinding
+    private var _binding: FragmentMutationBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModel<BalanceInquiryViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentMutationBinding.inflate(inflater, container, false).also {
-            binding = it
-        }.root
+        _binding = FragmentMutationBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val customerBankcard = binding.root.findViewById<CardView>(R.id.cardCustomer)
-        val customerBankcardBinding = CustomerBankCardBinding.bind(customerBankcard)
+        val customerBankcardBinding = ItemCustomerBankCardBinding.bind(customerBankcard)
         val navController = findNavController()
 
         binding.toolbar.setupWithNavController(navController)
-        binding.toolbar.setTitle("Informasi Saldo")
+        binding.toolbar.title = "Informasi Rekening"
 
         setupTabLayout()
         setupBottomSheet()
         setData()
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
-            if (isLoading) {
-                binding.mutationProgressBar.visibility = View.VISIBLE
-            } else {
-                binding.mutationProgressBar.visibility = View.GONE
-            }
+            binding.mutationProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
-            if (error != null) {
+            error?.let {
                 Snackbar.make(binding.root, "Gagal memuat info saldo", Snackbar.LENGTH_SHORT).show()
             }
         }
 
         viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess) {
-                // TO DO
+                Snackbar.make(binding.root, "Sukses memuat info saldo", Snackbar.LENGTH_SHORT).show()
             }
         }
 
@@ -102,15 +98,16 @@ class MutationFragment : Fragment() {
         }
 
         bottomSheetBehavior.peekHeight = peekHeight.toInt()
-
-        val maxHeight = (screenHeight * 1.0).toInt()
-        bottomSheetBehavior.maxHeight = maxHeight
+        bottomSheetBehavior.maxHeight = (screenHeight * 1.0).toInt()
     }
 
     private fun setData() {
         viewModel.getBalanceInquiry().observe(viewLifecycleOwner) { balanceInquiry ->
-            if (balanceInquiry != null) {
-                // DO SOMETHIN
+            balanceInquiry?.let { accountInfo ->
+                "Rp ${accountInfo.balance}".also { binding.tvBalanceAmount.text = it }
+                binding.cardCustomer.tvCardNumber.text = accountInfo.accountNo
+                binding.cardCustomer.tvSavingProduct.text = accountInfo.accountType
+                binding.cardCustomer.tvExpDate.text = accountInfo.accountCardExp
             }
         }
     }
@@ -124,5 +121,10 @@ class MutationFragment : Fragment() {
 
     private fun showSnackbar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

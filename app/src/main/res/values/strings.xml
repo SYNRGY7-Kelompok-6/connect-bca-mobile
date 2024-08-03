@@ -47,4 +47,9 @@
     <string name="beneficiary_account_name">Beneficiary Name</string>
     <string name="beneficiary_account_number">Number</string>
     <string name="quick_access_feature_not_found">Mohon maaf, fitur akses cepat belum tersedia. Nantikan update fitur terbaru dari kami.</string>
+    <string name="logo">Logo</string>
+    <string name="new_target">Tujuan Baru</string>
+    <string name="enter_recipient_data">Masukkan Data Penerima Baru</string>
+    <string name="bank_name">Nama Bank Tujuan</string>
+    <string name="account_number">Nomor Rekening</string>
 </resources>

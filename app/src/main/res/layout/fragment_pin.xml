@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.pin.PinFragment">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_margin="12dp"
+        android:layout_marginVertical="12dp"
+        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="Logo"
+        app:layout_constraintBottom_toTopOf="@id/inputPinTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/inputPinTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Masukkan PIN"
+        android:textStyle="bold"
+        android:lineSpacingExtra="-6sp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/inputPinSubtitle"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/inputPinSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Masukkan PIN ATM Anda"
+        android:textStyle="normal"
+        android:lineSpacingExtra="-6sp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/inputPinTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/pin_circles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="52dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/numeric_keypad"
+        app:layout_constraintTop_toTopOf="@id/inputPinSubtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/circle1"
+            style="@style/PinCircle"
+            android:contentDescription="PIN digit 1" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/circle2"
+            style="@style/PinCircle"
+            android:contentDescription="PIN digit 2" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/circle3"
+            style="@style/PinCircle"
+            android:contentDescription="PIN digit 3" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/circle4"
+            style="@style/PinCircle"
+            android:contentDescription="PIN digit 4" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/circle5"
+            style="@style/PinCircle"
+            android:contentDescription="PIN digit 5" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/circle6"
+            style="@style/PinCircle"
+            android:contentDescription="PIN digit 6" />
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/errorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PIN yang Anda Masukkan Salah"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/pin_circles"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <GridLayout
+        android:id="@+id/numeric_keypad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:columnCount="3"
+        android:padding="20dp"
+        android:rowCount="4"
+        android:useDefaultMargins="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_1"
+            style="@style/KeypadButton"
+            android:text="1"
+            android:contentDescription="Satu" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_2"
+            style="@style/KeypadButton"
+            android:text="2"
+            android:contentDescription="Dua" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_3"
+            style="@style/KeypadButton"
+            android:text="3"
+            android:contentDescription="Tiga" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_4"
+            style="@style/KeypadButton"
+            android:text="4"
+            android:contentDescription="Empat" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_5"
+            style="@style/KeypadButton"
+            android:text="5"
+            android:contentDescription="Lima" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_6"
+            style="@style/KeypadButton"
+            android:text="6"
+            android:contentDescription="Enam" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_7"
+            style="@style/KeypadButton"
+            android:text="7"
+            android:contentDescription="Tujuh" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_8"
+            style="@style/KeypadButton"
+            android:text="8"
+            android:contentDescription="Delapan" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_9"
+            style="@style/KeypadButton"
+            android:text="9"
+            android:contentDescription="Sembilan" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_0"
+            style="@style/KeypadButton"
+            android:text="0"
+            android:contentDescription="Nol" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_delete"
+            style="@style/backspaceButton"
+            android:contentDescription="Hapus"
+            android:layout_gravity="center"
+            app:iconGravity="textTop"
+            app:icon="@drawable/ic_backspace"
+            app:iconSize="38dp"
+            app:iconTint="@color/backspace_color"/>
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

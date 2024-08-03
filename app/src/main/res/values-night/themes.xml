@@ -28,4 +28,39 @@
     <style name="AlertDialog">
         <item name="backgroundTint">@color/colorPrimary</item>
     </style>
+
+    <style name="recepient_card">
+        <item name="background">@color/neutral06</item>
+    </style>
+
+    <style name="tab_color">
+        <item name="tabTextColor">@color/neutral01</item>
+        <item name="tabSelectedTextColor">@color/neutral01</item>
+        <item name="strokeColor">@color/neutral01</item>
+    </style>
+
+    <!-- Style for PIN circles -->
+    <style name="PinCircle">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">@drawable/empty_circle_background</item>
+    </style>
+
+    <!-- Style for keypad buttons -->
+    <style name="KeypadButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:layout_width">115dp</item>
+        <item name="android:layout_height">82dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/neutral01</item>
+        <item name="android:backgroundTintMode">multiply</item>
+        <item name="iconTint">@color/neutral01</item>
+    </style>
+
+    <style name="backspaceButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:layout_width">115dp</item>
+        <item name="android:layout_height">82dp</item>
+    </style>
+
 </resources>
