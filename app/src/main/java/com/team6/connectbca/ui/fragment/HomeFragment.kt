@@ -33,10 +33,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val accountNumber = binding.tvAccountNumber.text.toString()
 
-        binding.qrisIcon.setOnClickListener {
+        binding.homeQrisIcon.setOnClickListener {
             navigateToQRIS()
         }
-        binding.mutationIcon.setOnClickListener {
+        binding.homeMutationIcon.setOnClickListener {
             navigateToMutation()
         }
 

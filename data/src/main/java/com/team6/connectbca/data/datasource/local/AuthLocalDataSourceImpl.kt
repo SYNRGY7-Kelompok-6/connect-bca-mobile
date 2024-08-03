@@ -43,9 +43,9 @@ class AuthLocalDataSourceImpl(
         val storedUserId: String? = getUserId()
 
         if ((!storedUserId.isNullOrEmpty())) {
-             if (storedUserId.compareTo(userId) == 0) {
-                 return true
-             }
+            if (storedUserId.compareTo(userId) == 0) {
+                return true
+            }
         }
 
         return false
