@@ -18,6 +18,13 @@
         <item name="colorOnSecondary">@color/colorPrimary</item>
     </style>
 
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/neutral01</item>
+        <!-- Customize text field of the text input mode. -->
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="ProgressBar">
         <item name="indicatorColor">@color/colorPrimaryLight</item>
         <item name="trackColor">@color/colorPrimary</item>

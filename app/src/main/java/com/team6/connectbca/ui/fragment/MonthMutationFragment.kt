@@ -5,21 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
-import com.faltenreich.skeletonlayout.applySkeleton
-import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textview.MaterialTextView
-import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentMonthBinding
 import com.team6.connectbca.domain.model.MonthMutationListItem
-import com.team6.connectbca.domain.model.MutationsItem
 import com.team6.connectbca.ui.fragment.adapter.monthmutation.MonthMutationAdapter
 import com.team6.connectbca.ui.fragment.adapter.monthmutation.MonthMutationAdapterListener
 import com.team6.connectbca.ui.viewmodel.MonthMutationViewModel
@@ -43,7 +34,7 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView(view.context)
-        setData(view.context)
+        setData()
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
@@ -84,7 +75,7 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
         binding.monthMutationRecyclerView.itemAnimator = DefaultItemAnimator()
     }
 
-    private fun setData(context: Context) {
+    private fun setData() {
         viewModel.getThisMonthMutation().observe(viewLifecycleOwner) { transactionGroup ->
             if (!transactionGroup.isNullOrEmpty()) {
                 val newList = mutableListOf<MonthMutationListItem>()

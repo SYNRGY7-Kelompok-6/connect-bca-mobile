@@ -2,7 +2,6 @@ package com.team6.connectbca.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
 import com.google.android.material.snackbar.Snackbar
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentSearchBinding
 import com.team6.connectbca.domain.model.MonthMutationListItem
 import com.team6.connectbca.extensions.reformatDate
@@ -47,6 +46,7 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
                 MaterialDatePicker.Builder.datePicker()
                     .setTitleText("Pilih tanggal")
                     .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .setTheme(R.style.ThemeOverlay_App_DatePicker)
                     .build()
 
             datePicker.show(parentFragmentManager, "Show Date Picker")
@@ -66,6 +66,7 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
                 MaterialDatePicker.Builder.datePicker()
                     .setTitleText("Pilih tanggal")
                     .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .setTheme(R.style.ThemeOverlay_App_DatePicker)
                     .build()
 
             datePicker.show(parentFragmentManager, "Show Date Picker")
