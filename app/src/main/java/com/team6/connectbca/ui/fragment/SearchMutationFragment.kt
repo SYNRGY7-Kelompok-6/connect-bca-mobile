@@ -170,7 +170,15 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
     }
 
     private fun checkDateInput(startDate: String, endDate: String) : Boolean {
-        if (startDate.compareTo(endDate) > 0) {
+        val startDay = startDate.substring(0,2)
+        val endDay = endDate.substring(0,2)
+        val startMonth = startDate.substring(3,5)
+        val startYear = startDate.substring(6)
+        val endMonth = endDate.substring(3,5)
+        val endYear = endDate.substring(6)
+
+        if (startDate > endDate &&
+            (startMonth.compareTo(endMonth) >= 0 && startYear.compareTo(endYear) >= 0)) {
             binding.etStartDate.error = "Tanggal mulai lebih besar dari tanggal akhir"
             binding.etEndDate.error = "Tanggal akhir lebih kecil dari tanggal mulai"
 

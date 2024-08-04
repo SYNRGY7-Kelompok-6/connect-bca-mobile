@@ -13,8 +13,7 @@ import com.team6.connectbca.extensions.getFirstOfMonthDate
 import kotlinx.coroutines.launch
 
 class MonthMutationViewModel(
-    private val getThisMonthMutationUseCase: GetThisMonthMutationUseCase,
-    private val getSessionDataUseCase: GetSessionDataUseCase
+    private val getThisMonthMutationUseCase: GetThisMonthMutationUseCase
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
@@ -27,10 +26,7 @@ class MonthMutationViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                val sessionData = getSessionDataUseCase()
-                val token = sessionData.getValue("token") as String
                 val data: List<DailyTransaction>? = getThisMonthMutationUseCase(
-                    "Bearer $token",
                     firstDate,
                     endDate,
                     "0",

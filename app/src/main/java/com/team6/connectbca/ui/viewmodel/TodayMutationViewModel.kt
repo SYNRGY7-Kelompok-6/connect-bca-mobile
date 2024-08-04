@@ -13,8 +13,7 @@ import kotlinx.coroutines.launch
 import java.lang.UnsupportedOperationException
 
 class TodayMutationViewModel(
-    private val getMutationUseCase: GetMutationUseCase,
-    private val getSessionDataUseCase: GetSessionDataUseCase
+    private val getMutationUseCase: GetMutationUseCase
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
@@ -26,10 +25,7 @@ class TodayMutationViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                val sessionData = getSessionDataUseCase()
-                val token = sessionData.getValue("token") as String
                 val data: List<MutationsItem?>? = getMutationUseCase(
-                    "Bearer $token",
                     currentDate,
                     currentDate,
                     "0",

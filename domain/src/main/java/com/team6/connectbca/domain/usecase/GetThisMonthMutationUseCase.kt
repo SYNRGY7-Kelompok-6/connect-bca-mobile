@@ -9,12 +9,11 @@ class GetThisMonthMutationUseCase(
     private val bankStatementRepository: BankStatementRepository
 ) {
     suspend operator fun invoke(
-        token: String,
         fromDate: String,
         toDate: String,
         page: String,
         pageSize: String
     ): List<DailyTransaction>? {
-        return bankStatementRepository.getTransactionGroups(token, fromDate, toDate, page, pageSize)
+        return bankStatementRepository.getTransactionGroups(fromDate, toDate, page, pageSize)
     }
 }

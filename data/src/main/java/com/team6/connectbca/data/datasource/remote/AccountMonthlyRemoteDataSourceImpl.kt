@@ -7,8 +7,8 @@ import com.team6.connectbca.data.model.response.AccountMonthlyResponse
 class AccountMonthlyRemoteDataSourceImpl(
     private val accountMonthlyService: AccountMonthlyService
 ) : AccountMonthlyRemoteDataSource {
-    override suspend fun getAccountMonthly(token: String, month: String): AccountMonthlyResponse {
-        return accountMonthlyService.getAccountMonthly(token, month)
+    override suspend fun getAccountMonthly(month: String): AccountMonthlyResponse {
+        return accountMonthlyService.getAccountMonthly(month)
     }
 
 }

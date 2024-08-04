@@ -18,7 +18,6 @@ import java.lang.UnsupportedOperationException
 
 class BalanceInquiryViewModel(
     private val getBalanceInquiryUseCase: GetBalanceInquiryUseCase,
-    private val getSessionDataUseCase: GetSessionDataUseCase,
     private val getAccountMonthlyUseCase: GetAccountMonthlyUseCase
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
@@ -33,10 +32,7 @@ class BalanceInquiryViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                val sessionData = getSessionDataUseCase()
-                val token = sessionData.getValue("token") as String
                 val data: AccountInfo? = getBalanceInquiryUseCase(
-                    "Bearer $token",
                     currentDate,
                     currentDate,
                     "0",
@@ -62,12 +58,7 @@ class BalanceInquiryViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                val sessionData = getSessionDataUseCase()
-                val token = sessionData.getValue("token") as String
-                val data: AccountMonthlyData? = getAccountMonthlyUseCase(
-                    "Bearer $token",
-                    month
-                )
+                val data: AccountMonthlyData? = getAccountMonthlyUseCase(month)
                 if (data != null) {
                     _accountMonthly.value = data
                 } else {

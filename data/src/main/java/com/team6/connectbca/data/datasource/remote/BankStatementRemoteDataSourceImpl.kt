@@ -8,14 +8,12 @@ class BankStatementRemoteDataSourceImpl(
     private val bankStatementService: BankStatementService
 ) : BankStatementRemoteDataSource {
     override suspend fun getBankStatement(
-        token: String,
         fromDate: String,
         toDate: String,
         page: String,
         pageSize: String
     ): BankStatementResponse {
         return bankStatementService.getBankStatement(
-            token,
             fromDate,
             toDate,
             page,

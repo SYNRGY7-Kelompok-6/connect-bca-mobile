@@ -2,30 +2,39 @@ package com.team6.connectbca.ui.fragment
 
 import android.Manifest
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentQrisBinding
+import com.team6.connectbca.databinding.LayoutCustomDialogBinding
+import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
+import com.team6.connectbca.ui.viewmodel.QrisViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QrisFragment : Fragment() {
 
     private lateinit var binding: FragmentQrisBinding
     private lateinit var codeScanner: CodeScanner
+    private val viewModel by viewModel<QrisViewModel>()
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = Runnable {
         showAlertDialog()
@@ -50,12 +59,29 @@ class QrisFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val activity = requireActivity()
+        val navController = findNavController()
+        binding.toolbar.setupWithNavController(navController)
+        binding.toolbar.title = "Scan QR"
+        binding.toolbar.navigationContentDescription =
+            getString(R.string.back_to_menu_button_description)
         codeScanner = CodeScanner(activity, binding.scannerView)
 
         codeScanner.decodeCallback = DecodeCallback {
             activity.runOnUiThread {
-                handler.removeCallbacks(runnable)  // Stop the countdown
-                Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
+                handler.removeCallbacks(runnable)
+                viewModel.verifyQr(it.text)
+                viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
+                    if (isSuccess) {
+                        val action =
+                            QrisFragmentDirections.actionQrisFragmentToQrisPaymentFragment()
+                        findNavController().navigate(action)
+                    }
+                }
+                viewModel.getError().observe(viewLifecycleOwner) { error ->
+                    if (error != null) {
+                        showErrorDialog("Kode QR tidak valid")
+                    }
+                }
             }
         }
 
@@ -69,9 +95,33 @@ class QrisFragment : Fragment() {
             }
         }
 
-        binding.cardFlash.setOnClickListener {
+        binding.ivFlash.setOnClickListener(View.OnClickListener {
             codeScanner.isFlashEnabled = !codeScanner.isFlashEnabled
-        }
+            if (codeScanner.isFlashEnabled) {
+                DrawableCompat.setTint(
+                    binding.ivFlash.drawable,
+                    ContextCompat.getColor(activity, R.color.colorPrimary)
+                )
+                binding.ivFlash.contentDescription =
+                    getString(R.string.flash_off_button_description)
+                val drawable = binding.ivFlash.background
+                DrawableCompat.setTint(
+                    drawable,
+                    ContextCompat.getColor(activity, android.R.color.white)
+                )
+            } else {
+                DrawableCompat.setTint(
+                    binding.ivFlash.drawable,
+                    ContextCompat.getColor(activity, android.R.color.white)
+                )
+                val drawable = binding.ivFlash.background
+                binding.ivFlash.contentDescription = getString(R.string.flash_on_button_description)
+                DrawableCompat.setTint(
+                    drawable,
+                    ContextCompat.getColor(activity, R.color.colorPrimary)
+                )
+            }
+        })
 
         binding.cardGallery.setOnClickListener {
             pickImageFromGallery()
@@ -127,19 +177,44 @@ class QrisFragment : Fragment() {
     }
 
     private fun startCountdown() {
-        handler.removeCallbacks(runnable)  // Reset the countdown
-        handler.postDelayed(runnable, 10000)  // Start 10-second countdown
+        handler.removeCallbacks(runnable)
+        handler.postDelayed(runnable, 30000)
     }
 
     private fun showAlertDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("QR Code Not Detected")
-            .setMessage("No QR code detected in the last 10 seconds. Please try again.")
-            .setPositiveButton("OK") { dialog, _ ->
-                dialog.dismiss()
-                startCountdown()  // Restart countdown after user presses OK
-            }
-            .show()
+        val dialogBinding = LayoutCustomDialogBinding.inflate(LayoutInflater.from(requireContext()))
+        val dialog = Dialog(requireContext())
+        dialog.dismiss()
+        dialogBinding.btnRetry.setOnClickListener {
+            dialog.dismiss()
+            startCountdown()
+        }
+
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+
+    }
+
+    private fun showErrorDialog(errorText: String) {
+
+        val dialogBinding = LayoutCustomDialogBinding.inflate(LayoutInflater.from(requireContext()))
+        val dialog = Dialog(requireContext())
+        dialogBinding.tvTitle.text = errorText
+        dialogBinding.btnRetry.setOnClickListener {
+            dialog.dismiss()
+            startCountdown()
+            codeScanner.startPreview()
+        }
+
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+
     }
 
     private fun pickImageFromGallery() {
@@ -151,7 +226,7 @@ class QrisFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == Activity.RESULT_OK) {
             val imageUri = data?.data
-            // Lakukan sesuatu dengan imageUri, misalnya decode QR dari gambar
+
         }
     }
 

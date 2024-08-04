@@ -14,7 +14,6 @@ interface AccountMonthlyService {
         "Content-Type: application/json"
     )
     suspend fun getAccountMonthly(
-        @Header("Authorization") token: String,
         @Query("month") month: String = "1"
     ): AccountMonthlyResponse
 }

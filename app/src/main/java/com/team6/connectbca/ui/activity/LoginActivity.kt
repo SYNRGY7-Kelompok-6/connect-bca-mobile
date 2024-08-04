@@ -27,7 +27,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         supportActionBar?.hide()
-
+        binding.etUserId.setText("zg6kx3FFrDatGLHG")
+        binding.etPassword.setText("Password_0")
         binding.btnLogin.setOnClickListener {
             val userId = binding.etUserId.text.toString()
             val pass = binding.etPassword.text.toString()
@@ -47,8 +48,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnWallet.setOnClickListener { showQuickAccessAlertDialog() }
         binding.btnQris.setOnClickListener { showQuickAccessAlertDialog() }
-        binding.btnTransfer.setOnClickListener { showQuickAccessAlertDialog()
-        }
+        binding.btnTransfer.setOnClickListener { showQuickAccessAlertDialog() }
 
         viewModel.getUserSessionData().observe(this) { user ->
             if (user.isNullOrEmpty()) {
@@ -78,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getSuccess().observe(this) { isSuccess ->
             if (isSuccess) {
                 MainActivity.startActivity(this)
-                Snackbar.make(binding.root, "Login Berhasil!", Snackbar.LENGTH_SHORT).show()
                 finish();
             }
         }
@@ -95,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
 
-        dialog.setContentView(R.layout.forget_password_alert_layout)
+        dialog.setContentView(R.layout.item_forget_password_alert)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val closeBtn: MaterialButton = dialog.findViewById(R.id.alertCloseBtn)
@@ -110,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(true)
 
-        dialog.setContentView(R.layout.quick_access_notfound_alert_layout)
+        dialog.setContentView(R.layout.item_quick_access_notfound_alert)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val closeBtn: MaterialButton = dialog.findViewById(R.id.quickAccessAlertCloseBtn)

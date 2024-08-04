@@ -8,10 +8,14 @@
     <color name="neutral04">#404040</color>
     <color name="secondaryRed">#FF5A50</color>
     <color name="secondaryGreen">#12D79C</color>
+    <color name="neutral06">#404040</color>
 
     <!-- Primary Colors -->
     <color name="colorPrimary">#0066AE</color>
     <color name="colorPrimaryDark">#0A3967</color>
     <color name="colorPrimaryLight">#E4EDFF</color>
     <color name="colorPrimaryLightSecond">#B1C5D6</color>
+
+    <color name="stroke_color">#0066AE</color>
+    <color name="backspace_color">#1C1C1E</color>
 </resources>

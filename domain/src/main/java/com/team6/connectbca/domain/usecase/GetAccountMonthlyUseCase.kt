@@ -8,9 +8,8 @@ class GetAccountMonthlyUseCase(
     private val accountMonthlyRepository: AccountMonthlyRepository
 ) {
     suspend operator fun invoke(
-        token: String,
         month: String
     ): AccountMonthlyData? {
-        return accountMonthlyRepository.getAccountMonthly(token, month).data
+        return accountMonthlyRepository.getAccountMonthly(month).data
     }
 }

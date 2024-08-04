@@ -40,6 +40,10 @@ class HomeFragment : Fragment() {
             navigateToMutation()
         }
 
+        binding.homeTransferIcon.setOnClickListener {
+            navigateToTransfer()
+        }
+
         binding.btnIconCopy.setOnClickListener {
             copyToClipboard(accountNumber)
         }
@@ -56,6 +60,11 @@ class HomeFragment : Fragment() {
 
     private fun navigateToMutation() {
         val action = HomeFragmentDirections.actionHomeFragmentToMutationFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToTransfer() {
+        val action = HomeFragmentDirections.actionHomeFragmentToFavoritesTransferFragment()
         findNavController().navigate(action)
     }
 
