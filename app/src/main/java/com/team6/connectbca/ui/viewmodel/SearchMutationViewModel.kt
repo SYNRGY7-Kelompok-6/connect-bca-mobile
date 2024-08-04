@@ -11,8 +11,7 @@ import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
 import kotlinx.coroutines.launch
 
 class SearchMutationViewModel(
-    private val getDateRangeMutationUseCase: GetDateRangeMutationUseCase,
-    private val getSessionDataUseCase: GetSessionDataUseCase
+    private val getDateRangeMutationUseCase: GetDateRangeMutationUseCase
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
@@ -22,10 +21,7 @@ class SearchMutationViewModel(
         viewModelScope.launch {
             try {
                 _loading.value = true
-                val sessionData = getSessionDataUseCase()
-                val token = sessionData.getValue("token") as String
                 val data: List<DailyTransaction>? = getDateRangeMutationUseCase(
-                    "Bearer $token",
                     startDate,
                     endDate,
                     "0",

@@ -7,8 +7,8 @@ import com.team6.connectbca.domain.repository.AccountMonthlyRepository
 class AccountMonthlyRepositoryImpl(
     private val accountMonthlyRemoteDataSource: AccountMonthlyRemoteDataSource
 ) : AccountMonthlyRepository {
-    override suspend fun getAccountMonthly(token: String, month: String): AccountMonthly {
-        return accountMonthlyRemoteDataSource.getAccountMonthly(token, month).toEntity()
+    override suspend fun getAccountMonthly(month: String): AccountMonthly {
+        return accountMonthlyRemoteDataSource.getAccountMonthly(month).toEntity()
     }
 
 }

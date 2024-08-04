@@ -14,24 +14,22 @@ class BankStatementRepositoryImpl(
     private val remoteDataSource: BankStatementRemoteDataSource
 ) : BankStatementRepository {
     override suspend fun getBankStatement(
-        token: String,
         fromDate: String,
         toDate: String,
         page: String,
         pageSize: String
     ) : BankStatementData? {
-        return remoteDataSource.getBankStatement(token, fromDate, toDate, page, pageSize).toEntity().data
+        return remoteDataSource.getBankStatement(fromDate, toDate, page, pageSize).toEntity().data
     }
 
     override suspend fun getTransactionGroups(
-        token: String,
         fromDate: String,
         toDate: String,
         page: String,
         pageSize: String
     ): List<DailyTransaction>? {
         val allMutations = remoteDataSource.getBankStatement(
-            token, fromDate, toDate, page, pageSize).toEntity().data?.mutations
+            fromDate, toDate, page, pageSize).toEntity().data?.mutations
         val result : MutableList<DailyTransaction> = mutableListOf()
         var temp: MutableList<MutationsItem> = mutableListOf()
         var count = 0
