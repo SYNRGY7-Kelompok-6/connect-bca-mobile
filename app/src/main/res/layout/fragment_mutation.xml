@@ -151,8 +151,9 @@
                     android:id="@+id/tvRecentMonthDeposit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:text="@string/card_deposit_month"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:contentDescription="@string/month_income_description"/>
 
@@ -160,8 +161,9 @@
                     android:id="@+id/tvRecentMonthDepositAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:text="@string/month_income"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:contentDescription="@string/month_income"/>
             </LinearLayout>
@@ -204,8 +206,9 @@
                     android:id="@+id/tvRecentMonthWithdrawal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:text="@string/card_withdrawal_month"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:contentDescription="@string/month_withdrawal_description"/>
 
@@ -213,8 +216,9 @@
                     android:id="@+id/tvRecentMonthWithdrawalAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:text="@string/month_withdrawal"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:contentDescription="@string/month_withdrawal"/>
             </LinearLayout>

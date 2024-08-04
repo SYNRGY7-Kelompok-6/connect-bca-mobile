@@ -82,12 +82,14 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
             }
         }
 
-        binding.cbUseSameDate.setOnClickListener { binding.etEndDate.setText(startDate) }
+        binding.cbUseSameDate.setOnClickListener { isSameDateChecked(startDate) }
 
         binding.btnSearchMutation.setOnClickListener {
             val endDate = binding.etEndDate.text.toString()
 
-            setData(startDate, endDate, view.context)
+            if (checkDateInput(startDate, endDate)) {
+                setData(startDate, endDate, view.context)
+            }
         }
 
         binding.btnSearchAgain.setOnClickListener {
@@ -156,6 +158,30 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
                 binding.flipperSearchMutation.displayedChild = 0
                 Snackbar.make(binding.root, "Belum ada transaksi", Snackbar.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun isSameDateChecked(startDate: String) {
+        if (binding.cbUseSameDate.isChecked) {
+            binding.etEndDate.setText(startDate)
+        } else {
+            binding.etEndDate.text?.clear()
+        }
+    }
+
+    private fun checkDateInput(startDate: String, endDate: String) : Boolean {
+        if (startDate.compareTo(endDate) > 0) {
+            binding.etStartDate.error = "Tanggal mulai lebih besar dari tanggal akhir"
+            binding.etEndDate.error = "Tanggal akhir lebih kecil dari tanggal mulai"
+
+            Snackbar.make(binding.root, "Tanggal mulai harus lebih kecil dari tanggal akhir", Snackbar.LENGTH_LONG).show()
+
+            return false
+        } else {
+            binding.etStartDate.error = null
+            binding.etEndDate.error = null
+
+            return true
         }
     }
 }

@@ -101,11 +101,14 @@ class MutationFragment : Fragment() {
 
         val screenHeight = resources.displayMetrics.heightPixels
 
+        Log.i("SCREENHEIGHT", screenHeight.toString())
+
         val peekHeight = when {
             screenHeight <= 480 -> screenHeight * 0.15
             screenHeight <= 800 -> screenHeight * 0.2
             screenHeight <= 1024 -> screenHeight * 0.25
             screenHeight <= 1280 -> screenHeight * 0.3
+            screenHeight <= 1385 -> screenHeight * 0.5
             screenHeight <= 1440 -> screenHeight * 0.35
             screenHeight <= 1920 -> screenHeight * 0.4
             else -> screenHeight * 0.45

@@ -38,7 +38,10 @@ class TodayMutationViewModel(
 
                 if (!data.isNullOrEmpty()) {
                     _todayMutation.value = data
+                } else {
+                    _todayMutation.value = null
                 }
+
                 _loading.value = false
             } catch (error: Throwable) {
                 _error.value = error
