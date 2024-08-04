@@ -55,8 +55,8 @@
 
             <ImageView
                 android:id="@+id/ivChangeModeIcon"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginEnd="12dp"
                 android:src="@drawable/ic_theme_change"
                 android:scaleType="fitCenter"
@@ -69,8 +69,8 @@
 
             <ImageView
                 android:id="@+id/ivNotificationIcon"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_notification"
                 android:scaleType="fitCenter"
