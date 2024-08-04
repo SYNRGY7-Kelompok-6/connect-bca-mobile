@@ -1,6 +1,7 @@
 package com.team6.connectbca.domain.usecase
 
 import com.team6.connectbca.domain.model.AccountInfo
+import com.team6.connectbca.domain.model.BankStatementData
 import com.team6.connectbca.domain.repository.BankStatementRepository
 
 class GetBalanceInquiryUseCase(
@@ -12,7 +13,7 @@ class GetBalanceInquiryUseCase(
         toDate: String,
         page: String,
         pageSize: String
-    ): AccountInfo {
-        return bankStatementRepository.getBankStatement(token, fromDate, toDate, page, pageSize).accountInfo!!
+    ): AccountInfo? {
+        return bankStatementRepository.getBankStatement(token, fromDate, toDate, page, pageSize)?.accountInfo
     }
 }
