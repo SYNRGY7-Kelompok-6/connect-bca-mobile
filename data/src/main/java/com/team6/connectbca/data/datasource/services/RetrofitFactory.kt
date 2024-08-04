@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 private fun provideRetrofitBuilder(
     context: Context,
     baseUrl: String,
-    authLocalDataSource: AuthLocalDataSource,
+    authLocalDataSource: AuthLocalDataSource? = null,
 ): Retrofit {
     return Retrofit.Builder()
         .baseUrl(baseUrl)
@@ -28,13 +28,21 @@ private fun provideRetrofitBuilder(
 
 private fun provideOkhttpClient(
     context: Context,
-    authLocalDataSource: AuthLocalDataSource,
+    authLocalDataSource: AuthLocalDataSource? = null,
 ): OkHttpClient {
-    return OkHttpClient.Builder()
-        .addInterceptor(provideHttpLoggingInterceptor())
-        .addInterceptor(provideChuckerInterceptor(context))
-        .addInterceptor(provideHttpHeaderInterceptor(context, authLocalDataSource))
-        .build()
+    val okHttpClient = if (authLocalDataSource != null) {
+        OkHttpClient.Builder()
+            .addInterceptor(provideHttpLoggingInterceptor())
+            .addInterceptor(provideChuckerInterceptor(context))
+            .addInterceptor(provideHttpHeaderInterceptor(context, authLocalDataSource))
+            .build()
+    } else {
+        OkHttpClient.Builder()
+            .addInterceptor(provideHttpLoggingInterceptor())
+            .addInterceptor(provideChuckerInterceptor(context))
+            .build()
+    }
+    return okHttpClient
 }
 
 private fun provideHttpHeaderInterceptor(
@@ -60,14 +68,10 @@ private fun provideChuckerInterceptor(context: Context): Interceptor {
     return ChuckerInterceptor.Builder(context).build()
 }
 
-fun provideLoginService(
-    context: Context,
-    authLocalDataSource: AuthLocalDataSource,
-): LoginService {
+fun provideLoginService(context: Context): LoginService {
     return provideRetrofitBuilder(
         context,
-        BASE_URL,
-        authLocalDataSource
+        BASE_URL
     ).create(LoginService::class.java)
 }
 
