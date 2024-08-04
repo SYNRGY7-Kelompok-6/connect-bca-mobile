@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +11,12 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
-import com.team6.connectbca.databinding.CustomerBankCardBinding
 import com.team6.connectbca.databinding.FragmentMutationBinding
+import com.team6.connectbca.databinding.ItemCustomerBankCardBinding
 import com.team6.connectbca.extensions.getFormattedAccountNo
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.miliseondToDateMonth
@@ -45,7 +43,7 @@ class MutationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val customerBankcard = binding.root.findViewById<CardView>(R.id.cardCustomer)
-        val customerBankcardBinding = CustomerBankCardBinding.bind(customerBankcard)
+        val customerBankcardBinding = ItemCustomerBankCardBinding.bind(customerBankcard)
         val navController = findNavController()
 
         binding.toolbar.setupWithNavController(navController)

@@ -111,4 +111,9 @@
     <string name="back_to_menu_button_description">Tombol kembali ke menu</string>
 
 
+    <string name="logo">Logo</string>
+    <string name="new_target">Tujuan Baru</string>
+    <string name="enter_recipient_data">Masukkan Data Penerima Baru</string>
+    <string name="bank_name">Nama Bank Tujuan</string>
+    <string name="account_number_title">Nomor Rekening</string>
 </resources>
