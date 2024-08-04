@@ -133,9 +133,9 @@
             android:contentDescription="@string/card_deposit_description">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_input_add"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_deposit"
                 android:backgroundTint="@color/neutral01"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="6dp"/>
@@ -186,9 +186,9 @@
             android:contentDescription="@string/month_withdrawal_description">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/menu_frame"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_withdrawal"
                 android:backgroundTint="@color/neutral01"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="6dp"/>
