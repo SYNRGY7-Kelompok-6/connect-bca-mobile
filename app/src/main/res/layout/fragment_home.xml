@@ -55,10 +55,12 @@
 
             <ImageView
                 android:id="@+id/ivChangeModeIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginEnd="12dp"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/ic_theme_change"
+                android:scaleType="fitCenter"
+                app:layout_constraintDimensionRatio="1:1"
                 app:tint="?android:textColorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/ivNotificationIcon"
@@ -67,11 +69,13 @@
 
             <ImageView
                 android:id="@+id/ivNotificationIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/ic_notification"
+                android:scaleType="fitCenter"
                 app:tint="?android:textColorPrimary"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -160,7 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/account_balance_visibility_description"
-                app:icon="@drawable/ic_visibility_off"
+                app:icon="@drawable/ic_visibility"
                 app:iconTint="@color/neutral01"
                 app:layout_constraintBottom_toBottomOf="@id/tvCurrency"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -288,7 +292,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/eWalletText"
             app:layout_constraintBottom_toBottomOf="@id/mutationText"
-            app:srcCompat="@drawable/ic_close"
+            app:srcCompat="@drawable/ic_mutation"
             app:tint="@color/neutral01" />
 
         <TextView
@@ -318,7 +322,7 @@
             app:layout_constraintStart_toEndOf="@id/homeMutationIcon"
             app:layout_constraintTop_toBottomOf="@id/qrisText"
             app:layout_constraintBottom_toTopOf="@id/vaText"
-            app:srcCompat="@drawable/ic_close"
+            app:srcCompat="@drawable/ic_virtual_account"
             app:tint="@color/neutral01" />
 
         <TextView
@@ -349,7 +353,7 @@
             app:layout_constraintStart_toEndOf="@id/vaIcon"
             app:layout_constraintTop_toBottomOf="@id/transferText"
             app:layout_constraintBottom_toTopOf="@id/flazzText"
-            app:srcCompat="@drawable/ic_close"
+            app:srcCompat="@drawable/ic_flazz"
             app:tint="@color/neutral01" />
 
         <TextView

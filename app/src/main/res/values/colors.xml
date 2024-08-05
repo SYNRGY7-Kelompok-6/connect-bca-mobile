@@ -5,6 +5,9 @@
     <color name="neutral01">#FFFFFF</color>
     <color name="neutral02">#F5F5F5</color>
     <color name="neutral03">#B3B3B3</color>
+    <color name="neutral04">#404040</color>
+    <color name="secondaryRed">#FF5A50</color>
+    <color name="secondaryGreen">#12D79C</color>
     <color name="neutral06">#404040</color>
 
     <!-- Primary Colors -->

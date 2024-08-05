@@ -27,7 +27,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         supportActionBar?.hide()
-
+        binding.etUserId.setText("zg6kx3FFrDatGLHG")
+        binding.etPassword.setText("Password_0")
         binding.btnLogin.setOnClickListener {
             val userId = binding.etUserId.text.toString()
             val pass = binding.etPassword.text.toString()
@@ -47,8 +48,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnWallet.setOnClickListener { showQuickAccessAlertDialog() }
         binding.btnQris.setOnClickListener { showQuickAccessAlertDialog() }
-        binding.btnTransfer.setOnClickListener { showQuickAccessAlertDialog()
-        }
+        binding.btnTransfer.setOnClickListener { showQuickAccessAlertDialog() }
 
         viewModel.getUserSessionData().observe(this) { user ->
             if (user.isNullOrEmpty()) {
@@ -78,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getSuccess().observe(this) { isSuccess ->
             if (isSuccess) {
                 MainActivity.startActivity(this)
-                Snackbar.make(binding.root, "Login Berhasil!", Snackbar.LENGTH_SHORT).show()
                 finish();
             }
         }

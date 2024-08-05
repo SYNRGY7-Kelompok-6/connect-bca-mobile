@@ -5,7 +5,7 @@ import com.team6.connectbca.domain.model.MutationsItem
 
 class TodayMutationDiffUtil : DiffUtil.ItemCallback<MutationsItem>() {
     override fun areItemsTheSame(oldItem: MutationsItem, newItem: MutationsItem): Boolean {
-        return oldItem.remark == newItem.remark
+        return oldItem.transactionId == newItem.transactionId
     }
 
     override fun areContentsTheSame(

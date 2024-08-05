@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.faltenreich.skeletonlayout.applySkeleton
 import com.google.android.material.snackbar.Snackbar
-import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentTodayBinding
 import com.team6.connectbca.ui.fragment.adapter.todaymutation.TodayMutationAdapter
 import com.team6.connectbca.ui.fragment.adapter.todaymutation.TodayMutationAdapterListener
@@ -36,21 +34,16 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
         setupRecyclerView(view.context)
         setData()
 
-        viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
-            val skeleton = binding.todayMutationRecyclerView.applySkeleton(R.layout.mutation_item_row)
-
-            if (isLoading) {
-                skeleton.showSkeleton()
-            } else {
-                skeleton.showOriginal()
-            }
-        }
-
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
                 Snackbar.make(binding.root, "Gagal memuat info saldo", Snackbar.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
     }
 
     override fun onDestroyView() {
@@ -65,7 +58,7 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
     private fun setupRecyclerView(context: Context) {
         binding.todayMutationRecyclerView.layoutManager = LinearLayoutManager(
             context,
-            LinearLayoutManager.HORIZONTAL,
+            LinearLayoutManager.VERTICAL,
             false
         )
         binding.todayMutationRecyclerView.adapter = adapter
@@ -75,9 +68,10 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
     private fun setData() {
         viewModel.getTodayMutation().observe(viewLifecycleOwner) { mutations ->
             if (!mutations.isNullOrEmpty()) {
+                binding.tvNoMutationToday.visibility = View.GONE
                 adapter.submitList(mutations)
             } else {
-                Snackbar.make(binding.root, "Gagal Memuat Data Mutasi", Snackbar.LENGTH_SHORT)
+                binding.tvNoMutationToday.visibility = View.VISIBLE
             }
         }
     }

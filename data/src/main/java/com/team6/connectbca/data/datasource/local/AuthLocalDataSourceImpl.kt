@@ -39,6 +39,8 @@ class AuthLocalDataSourceImpl(
         )
     }
 
+
+
     override suspend fun checkUserId(userId: String): Boolean {
         val storedUserId: String? = getUserId()
 
@@ -81,7 +83,7 @@ class AuthLocalDataSourceImpl(
         }
     }
 
-    private suspend fun getToken() : String? {
+     override suspend fun getToken() : String? {
         return dataStore.data.map { pref ->
             pref[DATASTORE_KEY_TOKEN]
         }.firstOrNull()

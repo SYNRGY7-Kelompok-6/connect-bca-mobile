@@ -14,7 +14,6 @@ interface BankStatementService {
         "Content-Type: application/json"
     )
     suspend fun getBankStatement(
-        @Header("Authorization") token: String,
         @Query("fromDate") fromDate: String,
         @Query("toDate") toDate: String,
         @Query("page") page: String = "0",

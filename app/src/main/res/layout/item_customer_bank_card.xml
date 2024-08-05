@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_copy"
-                app:iconTint="?attr/colorSecondary"
+                app:iconTint="?iconTint"
                 android:layout_marginStart="8dp"
                 android:contentDescription="@string/account_number_copy_description"/>
 

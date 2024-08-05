@@ -31,6 +31,31 @@ fun getFirstOfMonthDate() : String {
     return "01-$month-$year"
 }
 
+fun miliseondToDateMonth(milisecond: Long) : String {
+    val date = Date(milisecond)
+    val formatter = SimpleDateFormat("MM/yy")
+    return formatter.format(date)
+}
+
+fun getNonZeroMonth() : String {
+    val date = getCurrentDate()
+    val month = date.toString("M")
+
+    return month
+}
+
+fun reformatDate(date: String, sourceFormat: String, format: String) : String {
+    val sourceFormatter = SimpleDateFormat(sourceFormat, Locale.getDefault())
+    val converted = sourceFormatter.parse(date)
+    val resultFormatter = SimpleDateFormat(format, Locale.getDefault())
+
+    return resultFormatter.format(converted)
+}
+
+fun getDateWithDay() {
+
+}
+
 private fun getEndDate() : String {
     val date = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
 

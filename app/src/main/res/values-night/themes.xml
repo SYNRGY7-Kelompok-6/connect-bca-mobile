@@ -15,9 +15,15 @@
         <!-- Customize your dark theme here. -->
         <item name="android:textColorPrimary">@color/neutral01</item>
         <item name="android:buttonTint">@color/colorPrimary</item>
+        <item name="iconTint">@color/neutral01</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
 
-
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorOnPrimary">@color/colorPrimaryDark</item>
+        <!-- Customize text field of the text input mode. -->
+        <item name="android:textColor">@color/neutral01</item>
     </style>
 
     <style name="ProgressBar">
@@ -29,6 +35,9 @@
         <item name="backgroundTint">@color/colorPrimary</item>
     </style>
 
+    <style name="CardBackground">
+        <item name="backgroundTint">@color/neutral04</item>
+    </style>
     <style name="recepient_card">
         <item name="background">@color/neutral06</item>
     </style>

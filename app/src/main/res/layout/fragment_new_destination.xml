@@ -83,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bankNameButton"
-        android:contentDescription="@string/account_number"/>
+        android:contentDescription="@string/account_number_title"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/continueButton"

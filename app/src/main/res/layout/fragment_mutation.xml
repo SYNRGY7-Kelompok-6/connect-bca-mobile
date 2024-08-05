@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:padding="0dp"
             android:background="?attr/colorPrimaryVariant"
-            app:title="Informasi Saldo"
+            app:title="Informasi Rekening"
             app:titleTextColor="?android:textColorPrimary"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,14 +32,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/info_saldo_toolbar_description"/>
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             style="@style/ProgressBar"
             android:id="@+id/mutationProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/inquiry_mutation_description"
+            android:contentDescription="@string/login_loading_description"
             android:visibility="gone"
             android:indeterminate="true"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,31 +48,62 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvBalanceText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/balance_inquiry_title"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:textColor="?android:textColorPrimary"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:contentDescription="@string/balance_inquiry_title"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvBalanceAmount"
-            android:layout_width="match_parent"
+            android:id="@+id/tvBalanceCurrency"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/balance_inquiry_value"
+            android:text="Rp"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginStart="12dp"
             android:textColor="?android:textColorPrimary"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvBalanceAmount"
             app:layout_constraintBottom_toTopOf="@id/cardCustomer"
-            app:layout_constraintTop_toBottomOf="@id/tvBalanceText"
+            app:layout_constraintTop_toBottomOf="@id/tvBalanceText" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvBalanceAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/balance_inquiry_value"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="6dp"
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintStart_toEndOf="@id/tvBalanceCurrency"
+            app:layout_constraintEnd_toStartOf="@id/btnShowBalance"
+            app:layout_constraintBottom_toBottomOf="@id/tvBalanceCurrency"
+            app:layout_constraintTop_toTopOf="@id/tvBalanceCurrency"
             android:contentDescription="@string/balance_inquiry_value"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="?attr/materialIconButtonStyle"
+            android:id="@+id/btnShowBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:contentDescription="@string/account_balance_visibility_description"
+            app:icon="@drawable/ic_visibility"
+            app:iconTint="?iconTint"
+            app:layout_constraintBottom_toBottomOf="@id/tvBalanceAmount"
+            app:layout_constraintStart_toEndOf="@id/tvBalanceAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvBalanceAmount" />
 
         <include
             android:id="@+id/cardCustomer"
@@ -80,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:elevation="14dp"
-            app:layout_constraintTop_toBottomOf="@id/tvBalanceAmount"
+            app:layout_constraintTop_toBottomOf="@id/tvBalanceCurrency"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/customer_bank_card_description"/>
@@ -100,6 +132,14 @@
             app:layout_constraintTop_toBottomOf="@id/cardCustomer"
             android:contentDescription="@string/card_deposit_description">
 
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_deposit"
+                android:backgroundTint="@color/neutral01"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"/>
+
             <LinearLayout
                 android:id="@+id/depositLayout"
                 android:layout_width="match_parent"
@@ -111,8 +151,9 @@
                     android:id="@+id/tvRecentMonthDeposit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:text="@string/card_deposit_month"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:contentDescription="@string/month_income_description"/>
 
@@ -120,8 +161,9 @@
                     android:id="@+id/tvRecentMonthDepositAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:text="@string/month_income"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:contentDescription="@string/month_income"/>
             </LinearLayout>
@@ -145,6 +187,14 @@
             app:layout_constraintTop_toBottomOf="@id/cardCustomer"
             android:contentDescription="@string/month_withdrawal_description">
 
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_withdrawal"
+                android:backgroundTint="@color/neutral01"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"/>
+
             <LinearLayout
                 android:id="@+id/withdrawalLayout"
                 android:layout_width="match_parent"
@@ -156,8 +206,9 @@
                     android:id="@+id/tvRecentMonthWithdrawal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:text="@string/card_withdrawal_month"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:contentDescription="@string/month_withdrawal_description"/>
 
@@ -165,8 +216,9 @@
                     android:id="@+id/tvRecentMonthWithdrawalAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
                     android:text="@string/month_withdrawal"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:contentDescription="@string/month_withdrawal"/>
             </LinearLayout>
@@ -186,7 +238,7 @@
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:contentDescription="@string/mutasi">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -197,12 +249,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tint="?android:textColorPrimary"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintVertical_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tabLayout"
                 android:contentDescription="@string/bottom_sheet_drag_description"/>
 
             <com.google.android.material.tabs.TabLayout
@@ -212,26 +258,18 @@
                 android:layout_height="wrap_content"
                 app:tabMode="fixed"
                 app:tabGravity="fill"
-                android:elevation="10dp"
                 app:tabBackground="@android:color/transparent"
                 app:circularflow_radiusInDP="24dp"
                 app:tabTextColor="?android:textColorPrimary"
-                app:tabIndicatorColor="?android:textColorPrimary"
-                app:layout_constraintTop_toBottomOf="@id/dragHandle"
-                app:layout_constraintBottom_toTopOf="@id/viewPager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:tabIndicatorColor="?android:textColorPrimary" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tabLayout"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                android:layout_height="match_parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

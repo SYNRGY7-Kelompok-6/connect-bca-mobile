@@ -40,6 +40,10 @@ class HomeFragment : Fragment() {
             navigateToMutation()
         }
 
+        binding.homeTransferIcon.setOnClickListener {
+            navigateToTransfer()
+        }
+
         binding.btnIconCopy.setOnClickListener {
             copyToClipboard(accountNumber)
         }
@@ -59,6 +63,11 @@ class HomeFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    private fun navigateToTransfer() {
+        val action = HomeFragmentDirections.actionHomeFragmentToFavoritesTransferFragment()
+        findNavController().navigate(action)
+    }
+
     private fun copyToClipboard(text: String) {
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Copied Text", text)
@@ -74,10 +83,10 @@ class HomeFragment : Fragment() {
         isBalanceVisible = !isBalanceVisible
         if (isBalanceVisible) {
             binding.tvBalance.text = balance
-            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility)
+            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility_off)
         } else {
             binding.tvBalance.text = "***********"
-            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility_off)
+            binding.btnIconVisible.setIconResource(R.drawable.ic_visibility)
         }
     }
 }

@@ -16,7 +16,8 @@ class TodayMutationAdapter (
                 parent,
                 false
             ),
-            todayMutationAdapterListener = todayMutationAdapterListener
+            todayMutationAdapterListener = todayMutationAdapterListener,
+            context = parent.context
         )
     }
 

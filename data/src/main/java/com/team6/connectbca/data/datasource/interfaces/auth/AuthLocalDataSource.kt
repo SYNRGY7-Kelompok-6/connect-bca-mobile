@@ -6,4 +6,5 @@ interface AuthLocalDataSource {
     suspend fun clearToken()
     suspend fun clearSessionTime()
     suspend fun checkUserId(userId: String) : Boolean
+    suspend fun getToken() : String?
 }
