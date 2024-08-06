@@ -17,7 +17,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/connect_logo_shdw"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/connect_logo_shdw"
+        android:roundIcon="@drawable/connect_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectBCA"
         tools:targetApi="31">

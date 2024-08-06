@@ -49,17 +49,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="85dp"
-        android:layout_height="80dp"
-        android:src="@drawable/connect_logo_shdw"
-        android:contentDescription="@string/logo_content_desc"
+    <LinearLayout
+        android:id="@+id/logoLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tvWelcome" />
+        app:layout_constraintBottom_toTopOf="@+id/tvWelcome" >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:src="@drawable/connect_logo_shdw"
+            android:contentDescription="@string/logo_content_desc"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Connect"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?android:textColorPrimary"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvWelcome"
@@ -69,13 +86,13 @@
         android:textSize="20sp"
         android:textColor="?android:textColorPrimary"
         android:textStyle="bold"
-        android:layout_marginVertical="12dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
         android:contentDescription="@string/welcome"
-        app:layout_constraintTop_toBottomOf="@id/ivLogo"
+        app:layout_constraintTop_toBottomOf="@id/logoLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tilUserId"
-        android:layout_marginTop="6dp"/>
+        app:layout_constraintBottom_toTopOf="@id/tilUserId"/>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -102,6 +119,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/user_id"
             android:textSize="14sp"
+            android:layout_marginBottom="10dp"
             android:paddingStart="35dp"
             android:paddingEnd="35dp"
             android:inputType="text" />
@@ -132,6 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/kata_sandi"
+            android:layout_marginBottom="10dp"
             android:textSize="14sp"
             android:paddingStart="35dp"
             android:paddingEnd="35dp"
