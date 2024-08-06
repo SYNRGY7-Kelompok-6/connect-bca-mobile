@@ -96,9 +96,7 @@ class MutationFragment : Fragment() {
 
     private fun setupBottomSheet() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-
         val screenHeight = resources.displayMetrics.heightPixels
-
         val peekHeight = when {
             screenHeight <= 480 -> screenHeight * 0.15
             screenHeight <= 800 -> screenHeight * 0.2
@@ -109,12 +107,31 @@ class MutationFragment : Fragment() {
             screenHeight <= 1920 -> screenHeight * 0.4
             else -> screenHeight * 0.45
         }
-
         bottomSheetBehavior.peekHeight = peekHeight.toInt()
-
         val maxHeight = (screenHeight * 1.0).toInt()
         bottomSheetBehavior.maxHeight = maxHeight
+
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        binding.cardCustomer.root.visibility = View.GONE
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        binding.cardCustomer.root.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        TODO()
+                    }
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                TODO()
+            }
+        })
     }
+
 
     private fun setData() {
         viewModel.getBalanceInquiry().observe(viewLifecycleOwner) { balanceInquiry ->

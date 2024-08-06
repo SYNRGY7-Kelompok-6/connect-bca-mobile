@@ -15,7 +15,7 @@ class MutationViewHolder(
     private val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
     fun render(data: MutationsItem) {
-        binding.ivMutationLogo.setImageResource(R.drawable.ic_logo)
+        binding.ivMutationLogo.setImageResource(R.drawable.connect_logo)
         binding.tvTitle.text = data.remark
         binding.tvDesc.text = data.desc
         binding.tvBeneficiaryName.text = data.beneficiaryAccount?.beneficiaryAccountName
