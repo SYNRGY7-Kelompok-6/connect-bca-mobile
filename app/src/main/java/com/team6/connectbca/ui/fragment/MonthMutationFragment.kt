@@ -1,14 +1,20 @@
 package com.team6.connectbca.ui.fragment
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentMonthBinding
 import com.team6.connectbca.domain.model.MonthMutationListItem
 import com.team6.connectbca.ui.fragment.adapter.monthmutation.MonthMutationAdapter
@@ -62,7 +68,7 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
     }
 
     override fun onClickSeeInvoice() {
-        TODO("Not yet implemented")
+        showQuickAccessAlertDialog()
     }
 
     private fun setupRecyclerView(context: Context) {
@@ -95,5 +101,20 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
                 binding.tvNoMutationMonth.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun showQuickAccessAlertDialog() {
+        val dialog = Dialog(requireContext())
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+
+        dialog.setContentView(R.layout.item_quick_access_notfound_alert)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val closeBtn: MaterialButton = dialog.findViewById(R.id.quickAccessAlertCloseBtn)
+        closeBtn.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
     }
 }
