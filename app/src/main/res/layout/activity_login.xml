@@ -51,9 +51,9 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivLogo"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:src="@drawable/connect_logo"
+        android:layout_width="85dp"
+        android:layout_height="80dp"
+        android:src="@drawable/connect_logo_shdw"
         android:contentDescription="@string/logo_content_desc"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
