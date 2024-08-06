@@ -120,14 +120,15 @@ class MutationFragment : Fragment() {
                     BottomSheetBehavior.STATE_COLLAPSED -> {
                         binding.cardCustomer.root.visibility = View.VISIBLE
                     }
-                    else -> {
-                        TODO()
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+                        bottomSheetBehavior.isFitToContents = true
                     }
                 }
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                TODO()
+                val alpha = 1 - slideOffset
+                binding.cardCustomer.root.alpha = alpha
             }
         })
     }
