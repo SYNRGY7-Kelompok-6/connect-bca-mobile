@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pin_background"
     tools:context=".ui.fragment.pin.PinFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -13,7 +14,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="12dp"
-        android:src="@drawable/ic_logo"
+        android:src="@drawable/connect_logo_shdw"
         android:contentDescription="Logo"
         app:layout_constraintBottom_toTopOf="@id/inputPinTitle"
         app:layout_constraintTop_toTopOf="parent"
@@ -104,7 +105,7 @@
 
     <GridLayout
         android:id="@+id/numeric_keypad"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:columnCount="3"
         android:rowCount="4"

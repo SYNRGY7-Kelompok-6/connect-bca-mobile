@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.transfer.FavoritesTransferFragment">
 
-    <com.google.android.material.search.SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,9 +39,14 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_marginStart="20dp"
+            android:contentDescription="Add New Recipient"
             app:iconGravity="textTop"
             app:icon="@drawable/ic_add_people"
-            android:contentDescription="Add New Recipient"/>
+            app:cornerRadius="26dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:tint="?attr/colorOnPrimary"
+            />
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/addNewRecipientText"
@@ -52,6 +57,7 @@
             android:lineSpacingExtra="4sp"
             android:textSize="16sp"
             android:text="Tambahkan Tujuan Baru"/>
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

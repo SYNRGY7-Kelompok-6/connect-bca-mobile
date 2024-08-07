@@ -39,9 +39,12 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_marginStart="20dp"
+            android:contentDescription="Add New Recipient"
             app:iconGravity="textTop"
             app:icon="@drawable/ic_add_people"
-            android:contentDescription="Add New Recipient"/>
+            app:cornerRadius="26dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:tint="?attr/colorOnPrimary"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/addNewRecipientText"
