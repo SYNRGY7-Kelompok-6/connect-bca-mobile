@@ -96,31 +96,7 @@ class QrisFragment : Fragment() {
         }
 
         binding.ivFlash.setOnClickListener(View.OnClickListener {
-            codeScanner.isFlashEnabled = !codeScanner.isFlashEnabled
-            if (codeScanner.isFlashEnabled) {
-                DrawableCompat.setTint(
-                    binding.ivFlash.drawable,
-                    ContextCompat.getColor(activity, R.color.colorPrimary)
-                )
-                binding.ivFlash.contentDescription =
-                    getString(R.string.flash_off_button_description)
-                val drawable = binding.ivFlash.background
-                DrawableCompat.setTint(
-                    drawable,
-                    ContextCompat.getColor(activity, android.R.color.white)
-                )
-            } else {
-                DrawableCompat.setTint(
-                    binding.ivFlash.drawable,
-                    ContextCompat.getColor(activity, android.R.color.white)
-                )
-                val drawable = binding.ivFlash.background
-                binding.ivFlash.contentDescription = getString(R.string.flash_on_button_description)
-                DrawableCompat.setTint(
-                    drawable,
-                    ContextCompat.getColor(activity, R.color.colorPrimary)
-                )
-            }
+            buttonFlash()
         })
 
         binding.cardGallery.setOnClickListener {
@@ -174,6 +150,34 @@ class QrisFragment : Fragment() {
         }
 
         checkCameraPermission()
+    }
+
+    private fun buttonFlash() {
+        codeScanner.isFlashEnabled = !codeScanner.isFlashEnabled
+        if (codeScanner.isFlashEnabled) {
+            DrawableCompat.setTint(
+                binding.ivFlash.drawable,
+                ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+            )
+            binding.ivFlash.contentDescription =
+                getString(R.string.flash_off_button_description)
+            val drawable = binding.ivFlash.background
+            DrawableCompat.setTint(
+                drawable,
+                ContextCompat.getColor(requireContext(), android.R.color.white)
+            )
+        } else {
+            DrawableCompat.setTint(
+                binding.ivFlash.drawable,
+                ContextCompat.getColor(requireContext(), android.R.color.white)
+            )
+            val drawable = binding.ivFlash.background
+            binding.ivFlash.contentDescription = getString(R.string.flash_on_button_description)
+            DrawableCompat.setTint(
+                drawable,
+                ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+            )
+        }
     }
 
     private fun startCountdown() {

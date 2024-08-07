@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_favoritesTransferFragment"
             app:destination="@id/favoritesTransferFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_qrisPaymentFragment"
+            app:destination="@id/qrisPaymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/mutationFragment"

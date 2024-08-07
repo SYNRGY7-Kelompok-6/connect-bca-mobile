@@ -3,6 +3,7 @@ package com.team6.connectbca.diviewmodel
 import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import com.team6.connectbca.ui.viewmodel.AuthViewModel
 import com.team6.connectbca.ui.viewmodel.MonthMutationViewModel
+import com.team6.connectbca.ui.viewmodel.QrisPaymentViewModel
 import com.team6.connectbca.ui.viewmodel.SearchMutationViewModel
 import com.team6.connectbca.ui.viewmodel.QrisViewModel
 import com.team6.connectbca.ui.viewmodel.TodayMutationViewModel
@@ -19,4 +20,5 @@ val viewModelModule = module {
     viewModel { MonthMutationViewModel(getThisMonthMutationUseCase = get()) }
     viewModel { SearchMutationViewModel(getDateRangeMutationUseCase = get()) }
     viewModel { QrisViewModel(qrisVerifyUseCase = get(), getSessionDataUseCase = get()) }
+    viewModel { QrisPaymentViewModel() }
 }
