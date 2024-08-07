@@ -59,7 +59,7 @@ val koinModule = module {
     single<DataStore<Preferences>> { androidContext().datastore }
 
     // Services
-    single<LoginService> { provideLoginService(androidContext(), get()) }
+    single<LoginService> { provideLoginService(androidContext()) }
     single<BankStatementService> { provideBankStatementService(androidContext(), get()) }
     single<AccountMonthlyService> { provideAccountMonthlyService(androidContext(), get()) }
     single<QrisService> { provideQrisService(androidContext(), get()) }
