@@ -38,21 +38,31 @@ import com.team6.connectbca.domain.usecase.GetThisMonthMutationUseCase
 import com.team6.connectbca.domain.usecase.LoginUseCase
 import com.team6.connectbca.domain.usecase.LogoutUseCase
 import com.team6.connectbca.domain.usecase.QrVerifyUseCase
+import com.team6.connectbca.domain.usecase.ShowQrUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val koinModule = module {
     // Repositories
-    single<AuthRepository> { AuthRepositoryImpl(authLocalDataSource = get(), authRemoteDataSource = get()) }
+    single<AuthRepository> {
+        AuthRepositoryImpl(
+            authLocalDataSource = get(),
+            authRemoteDataSource = get()
+        )
+    }
     single<BankStatementRepository> { BankStatementRepositoryImpl(remoteDataSource = get()) }
     single<AccountMonthlyRepository> { AccountMonthlyRepositoryImpl(accountMonthlyRemoteDataSource = get()) }
-    single<QrisRepository> { QrisRepositoryImpl(qrisRemoteDataSource = get())}
+    single<QrisRepository> { QrisRepositoryImpl(qrisRemoteDataSource = get()) }
 
     // Data Sources
     single<AuthLocalDataSource> { AuthLocalDataSourceImpl(dataStore = get()) }
     single<AuthRemoteDataSource> { AuthRemoteDataSourceImpl(loginService = get()) }
     single<BankStatementRemoteDataSource> { BankStatementRemoteDataSourceImpl(bankStatementService = get()) }
-    single<AccountMonthlyRemoteDataSource> { AccountMonthlyRemoteDataSourceImpl(accountMonthlyService = get()) }
+    single<AccountMonthlyRemoteDataSource> {
+        AccountMonthlyRemoteDataSourceImpl(
+            accountMonthlyService = get()
+        )
+    }
     single<QrisRemoteDataSource> { QrisRemoteDataSourceImpl(qrisService = get()) }
 
     // Data Store
@@ -73,5 +83,7 @@ val koinModule = module {
     single { GetThisMonthMutationUseCase(bankStatementRepository = get()) }
     single { GetAccountMonthlyUseCase(accountMonthlyRepository = get()) }
     single { GetDateRangeMutationUseCase(bankStatementRepository = get()) }
-    single { QrVerifyUseCase(qrisRepository = get())}
+    single { QrVerifyUseCase(qrisRepository = get()) }
+    single { ShowQrUseCase(qrisRepository = get()) }
+
 }

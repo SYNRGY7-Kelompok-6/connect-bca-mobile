@@ -6,6 +6,7 @@ import com.team6.connectbca.ui.viewmodel.MonthMutationViewModel
 import com.team6.connectbca.ui.viewmodel.QrisPaymentViewModel
 import com.team6.connectbca.ui.viewmodel.SearchMutationViewModel
 import com.team6.connectbca.ui.viewmodel.QrisViewModel
+import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import com.team6.connectbca.ui.viewmodel.TodayMutationViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -21,4 +22,5 @@ val viewModelModule = module {
     viewModel { SearchMutationViewModel(getDateRangeMutationUseCase = get()) }
     viewModel { QrisViewModel(qrisVerifyUseCase = get(), getSessionDataUseCase = get()) }
     viewModel { QrisPaymentViewModel() }
+    viewModel { ShowQrViewModel(showQrUseCase = get()) }
 }

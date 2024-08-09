@@ -4,9 +4,10 @@ import android.util.Log
 import com.team6.connectbca.data.datasource.interfaces.qris.QrisRemoteDataSource
 import com.team6.connectbca.data.model.body.QrVerifyBody
 import com.team6.connectbca.data.model.response.QrVerifyResponse
-import com.team6.connectbca.data.model.response.QrVerifyDataResponse
+import com.team6.connectbca.data.model.response.ShowQrResponse
 import com.team6.connectbca.domain.model.QrVerify
 import com.team6.connectbca.domain.model.QrVerifyData
+import com.team6.connectbca.domain.model.ShowQr
 import com.team6.connectbca.domain.repository.QrisRepository
 
 class QrisRepositoryImpl(private val qrisRemoteDataSource: QrisRemoteDataSource) : QrisRepository {
@@ -24,6 +25,21 @@ class QrisRepositoryImpl(private val qrisRemoteDataSource: QrisRemoteDataSource)
             status = "",
             message = "",
             data = QrVerifyData(beneficiaryAccountNumber = "", beneficiaryName = "", remark = "")
+        )
+    }
+
+    override suspend fun showQr(mode:String, option:String): ShowQr {
+        var data: ShowQrResponse? = null
+        try {
+            val response: ShowQrResponse = qrisRemoteDataSource.getShowQr(mode, option)
+            data = response
+        } catch (error: Throwable) {
+            Log.e("Failed with", error.toString())
+        }
+        return data?.toEntity() ?: ShowQr(
+            status = "",
+            message = "",
+            data = null
         )
     }
 

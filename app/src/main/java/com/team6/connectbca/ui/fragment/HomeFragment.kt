@@ -51,18 +51,10 @@ class HomeFragment : Fragment() {
         binding.btnIconVisible.setOnClickListener {
             iconBalanceVisibility()
         }
-        binding.homeFlazzIcon.setOnClickListener {
-            navigateToQrPayment()
-        }
     }
 
     private fun navigateToQRIS() {
         val action = HomeFragmentDirections.actionHomeFragmentToQrisFragment()
-        findNavController().navigate(action)
-    }
-
-    private fun navigateToQrPayment() {
-        val action = HomeFragmentDirections.actionHomeFragmentToQrisPaymentFragment()
         findNavController().navigate(action)
     }
 

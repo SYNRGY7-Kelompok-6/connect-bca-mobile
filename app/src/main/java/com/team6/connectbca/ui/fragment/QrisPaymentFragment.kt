@@ -11,6 +11,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentQrisPaymentBinding
 import com.team6.connectbca.ui.viewmodel.QrisPaymentViewModel
+import java.text.NumberFormat
+import java.util.Locale
 
 class QrisPaymentFragment : Fragment() {
 
@@ -48,7 +50,13 @@ class QrisPaymentFragment : Fragment() {
             viewModel.removeDigit()
         }
         viewModel.amount.observe(viewLifecycleOwner) {
-            binding.tvTotalAmount.text = it
+            val number = it.toDoubleOrNull() ?: 0.0
+            val numberFormat = NumberFormat.getNumberInstance(Locale("id", "ID"))
+            numberFormat.minimumFractionDigits = 0
+            numberFormat.maximumFractionDigits = 0
+            val formattedAmount = numberFormat.format(number)
+            binding.tvTotalAmount.text = formattedAmount
+            binding.tvTotalAmount.contentDescription = "$it rupiah"
         }
     }
 

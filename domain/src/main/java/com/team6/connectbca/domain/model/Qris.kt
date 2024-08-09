@@ -22,3 +22,13 @@ data class QrVerifyError(
         )
     }
 }
+
+data class ShowQr(
+    val status: String,
+    val message: String,
+    val data: ShowQrData? = null,
+)
+
+data class ShowQrData(
+    val qrImage: String
+)

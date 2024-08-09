@@ -45,6 +45,14 @@ class QrisViewModel(
         return _success
     }
 
+    fun resetSuccess() {
+        _success.value = false
+    }
+
+    fun resetError() {
+        _error.value = Throwable()
+    }
+
     fun getLoading(): LiveData<Boolean> {
         return _loading
     }

@@ -3,17 +3,22 @@ package com.team6.connectbca.ui.fragment
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -26,7 +31,6 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentQrisBinding
 import com.team6.connectbca.databinding.LayoutCustomDialogBinding
-import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import com.team6.connectbca.ui.viewmodel.QrisViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -34,6 +38,7 @@ class QrisFragment : Fragment() {
 
     private lateinit var binding: FragmentQrisBinding
     private lateinit var codeScanner: CodeScanner
+    private lateinit var vibrator: Vibrator
     private val viewModel by viewModel<QrisViewModel>()
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = Runnable {
@@ -55,15 +60,13 @@ class QrisFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val activity = requireActivity()
-        val navController = findNavController()
-        binding.toolbar.setupWithNavController(navController)
-        binding.toolbar.title = "Scan QR"
-        binding.toolbar.navigationContentDescription =
-            getString(R.string.back_to_menu_button_description)
+        vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        initiateToolbar()
         codeScanner = CodeScanner(activity, binding.scannerView)
 
         codeScanner.decodeCallback = DecodeCallback {
@@ -71,15 +74,11 @@ class QrisFragment : Fragment() {
                 handler.removeCallbacks(runnable)
                 viewModel.verifyQr(it.text)
                 viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
-                    if (isSuccess) {
-                        val action =
-                            QrisFragmentDirections.actionQrisFragmentToQrisPaymentFragment()
-                        findNavController().navigate(action)
-                    }
+                    handleScanResult(isSuccess)
                 }
                 viewModel.getError().observe(viewLifecycleOwner) { error ->
                     if (error != null) {
-                        showErrorDialog("Kode QR tidak valid")
+                        handleScanResult(false)
                     }
                 }
             }
@@ -127,26 +126,7 @@ class QrisFragment : Fragment() {
         }
 
         binding.cardShowQr.setOnClickListener {
-            binding.cardShowQr.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    activity,
-                    android.R.color.white
-                )
-            )
-            binding.tvShowQr.setTextColor(ContextCompat.getColor(activity, android.R.color.black))
-            binding.cardScanQr.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    activity,
-                    R.color.colorPrimary
-                )
-            )
-            binding.tvScanQr.setTextColor(ContextCompat.getColor(activity, android.R.color.white))
-            handler.removeCallbacks(runnable)
-            codeScanner.stopPreview()
-            binding.scannerView.visibility = View.GONE
-            binding.cardFlash.visibility = View.GONE
-            binding.cardGallery.visibility = View.GONE
-            binding.cardQrisLogo.visibility = View.GONE
+            navigateToShowQrFragment()
         }
 
         checkCameraPermission()
@@ -179,6 +159,64 @@ class QrisFragment : Fragment() {
             )
         }
     }
+    private fun initiateToolbar() {
+        val navController = findNavController()
+        binding.toolbar.setupWithNavController(navController)
+        binding.toolbar.title = "Scan QR"
+        binding.toolbar.navigationContentDescription =
+            getString(R.string.back_to_menu_button_description)
+    }
+    private fun navigateToShowQrFragment() {
+        binding.cardShowQr.setCardBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                android.R.color.white
+            )
+        )
+        binding.tvShowQr.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
+        binding.cardScanQr.setCardBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.colorPrimary
+            )
+        )
+        binding.tvScanQr.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        handler.removeCallbacks(runnable)
+        codeScanner.stopPreview()
+        binding.scannerView.visibility = View.GONE
+        binding.cardFlash.visibility = View.GONE
+        binding.cardGallery.visibility = View.GONE
+        binding.cardQrisLogo.visibility = View.GONE
+        val action = QrisFragmentDirections.actionQrisFragmentToShowQrFragment()
+        findNavController().navigate(action)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun vibrateSuccess() {
+        if (vibrator.hasVibrator()) {
+            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun vibrateFailure() {
+        if (vibrator.hasVibrator()) {
+            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun handleScanResult(success: Boolean) {
+        if (success) {
+            vibrateSuccess()
+            navigateToQrPayment()
+            viewModel.resetSuccess()
+        } else {
+            vibrateFailure()
+            showErrorDialog("Kode QR tidak valid")
+            viewModel.resetError()
+        }
+    }
 
     private fun startCountdown() {
         handler.removeCallbacks(runnable)
@@ -209,8 +247,10 @@ class QrisFragment : Fragment() {
         dialogBinding.tvTitle.text = errorText
         dialogBinding.btnRetry.setOnClickListener {
             dialog.dismiss()
-            startCountdown()
-            codeScanner.startPreview()
+            handler.postDelayed({
+                codeScanner.startPreview()
+                startCountdown()
+            }, 2000)
         }
 
         dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
@@ -224,6 +264,11 @@ class QrisFragment : Fragment() {
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
+    }
+
+    private fun navigateToQrPayment() {
+        val action = QrisFragmentDirections.actionQrisFragmentToQrisPaymentFragment()
+        findNavController().navigate(action)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
