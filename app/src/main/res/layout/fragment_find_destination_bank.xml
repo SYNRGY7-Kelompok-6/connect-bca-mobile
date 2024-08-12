@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.transfer.FindDestinationBankFragment">
 
-    <androidx.appcompat.widget.SearchView
+    <com.google.android.material.search.SearchView
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
