@@ -67,6 +67,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addNewRecipientLayout"
-        tools:listitem="@layout/item_favorite_destination" />
+        tools:listitem="@layout/item_scheduled_favorite_destination" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
