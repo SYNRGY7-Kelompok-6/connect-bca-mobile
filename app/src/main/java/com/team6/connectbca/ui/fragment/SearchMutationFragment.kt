@@ -194,19 +194,11 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
         yearNumPick?.minValue = nowYear - 5
         yearNumPick?.maxValue = nowYear
 
-        dayNumPick?.setOnValueChangedListener { numberPicker, i, i1 ->
-            day = dayNumPick.value.toString()
-        }
-
-        monthNumPick?.setOnValueChangedListener { numberPicker, i, i1 ->
-            month = monthNumPick.value.toString()
-        }
-
-        yearNumPick?.setOnValueChangedListener { numberPicker, i, i1 ->
-            year = yearNumPick.value.toString()
-        }
-
         saveBtn.setOnClickListener {
+            day = dayNumPick?.value.toString()
+            month = monthNumPick?.value.toString()
+            year = yearNumPick?.value.toString()
+
             if (isStart) {
                 startDate = "$day-$month-$year"
                 binding.etStartDate.setText(startDate)
