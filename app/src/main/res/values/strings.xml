@@ -52,7 +52,7 @@
     <string name="lihat_notifikasi_description">Tombol Lihat Notifikasi</string>
     <string name="home_main_account_number">145 267 389 5162</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
-    <string name="currency">IDR</string>
+    <string name="currency">Rp</string>
     <string name="card_balance_hidden">***********</string>
     <string name="account_balance_visibility_description">Klik tombol ini untuk lihat saldo</string>
     <string name="mutasi">Mutasi</string>
@@ -121,4 +121,5 @@
     <string name="save_button">Simpan</string>
     <string name="get_date_button_description">Tekan untuk menyimpan pilihan tanggal</string>
     <string name="custom_datepicker_description">Box untuk memilih tanggal</string>
+    <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
 </resources>

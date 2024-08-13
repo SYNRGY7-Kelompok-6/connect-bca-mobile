@@ -72,21 +72,20 @@ class HomeFragment : Fragment() {
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Copied Text", text)
         clipboardManager.setPrimaryClip(clip)
-        showToast("Text copied to clipboard")
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun iconBalanceVisibility() {
         isBalanceVisible = !isBalanceVisible
         if (isBalanceVisible) {
             binding.tvBalance.text = balance
+            binding.tvBalance.contentDescription = balance
             binding.btnIconVisible.setIconResource(R.drawable.ic_visibility_off)
+            binding.btnIconVisible.contentDescription = "Klik tombol ini untuk sembunyikan saldo"
         } else {
             binding.tvBalance.text = "***********"
+            binding.tvBalance.contentDescription = "Jumlah saldo disembunyikan"
             binding.btnIconVisible.setIconResource(R.drawable.ic_visibility)
+            binding.btnIconVisible.contentDescription = "Klik tombol ini untuk melihat saldo"
         }
     }
 }

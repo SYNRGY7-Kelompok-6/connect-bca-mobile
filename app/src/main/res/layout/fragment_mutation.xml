@@ -64,7 +64,7 @@
             android:id="@+id/tvBalanceCurrency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rp"
+            android:text="@string/currency"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginStart="12dp"
@@ -90,7 +90,7 @@
             app:layout_constraintEnd_toStartOf="@id/btnShowBalance"
             app:layout_constraintBottom_toBottomOf="@id/tvBalanceCurrency"
             app:layout_constraintTop_toTopOf="@id/tvBalanceCurrency"
-            android:contentDescription="Jumlah saldo disembunyikan"/>
+            android:contentDescription="@string/balance_inquiry_hidden_description"/>
 
         <com.google.android.material.button.MaterialButton
             style="?attr/materialIconButtonStyle"
