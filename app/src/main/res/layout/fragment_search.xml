@@ -143,7 +143,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="?android:textColorPrimary"
-                    android:contentDescription="@string/end_date_title"
+                    android:contentDescription="@string/use_same_date"
                     app:layout_constraintTop_toTopOf="@id/cbUseSameDate"
                     app:layout_constraintStart_toEndOf="@id/cbUseSameDate"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -158,7 +158,7 @@
                 android:layout_marginTop="6dp"
                 android:text="@string/search_mutation"
                 android:textColor="@color/neutral01"
-                android:contentDescription="@string/submit_btn_description"
+                android:contentDescription="@string/search_mutation_description"
                 app:cornerRadius="8dp"
                 android:backgroundTint="?android:buttonTint"
                 android:textAllCaps="false" />

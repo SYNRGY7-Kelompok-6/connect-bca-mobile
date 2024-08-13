@@ -2,11 +2,13 @@ package com.team6.connectbca.ui.fragment
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -58,12 +60,13 @@ class MutationFragment : Fragment() {
                 binding.mutationProgressBar.visibility = View.VISIBLE
             } else {
                 binding.mutationProgressBar.visibility = View.GONE
+                Snackbar.make(binding.root, "Data berhasil dimuat", Snackbar.LENGTH_LONG).show()
             }
         }
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat info saldo", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Gagal memuat info saldo", Snackbar.LENGTH_LONG).show()
             }
         }
 
@@ -86,9 +89,9 @@ class MutationFragment : Fragment() {
                 else -> null
             }
             tab.contentDescription = when (position) {
-                0 -> "Hari Ini"
-                1 -> "Bulan Ini"
-                2 -> "Cari"
+                0 -> "Mutasi Hari Ini"
+                1 -> "Mutasi Bulan Ini"
+                2 -> "Cari Mutasi Berdasarkan Rentang Tanggal"
                 else -> null
             }
         }.attach()
@@ -115,10 +118,12 @@ class MutationFragment : Fragment() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_EXPANDED -> {
-                        binding.cardCustomer.root.visibility = View.GONE
+                        hideInquiryInfo()
+                        binding.dragHandle.contentDescription = "Tarik ke bawah untuk keluar dari layar penuh mutasi"
                     }
                     BottomSheetBehavior.STATE_COLLAPSED -> {
-                        binding.cardCustomer.root.visibility = View.VISIBLE
+                        showInquiryInfo()
+                        binding.dragHandle.contentDescription = "Tarik ke atas untuk melihat mutasi dalam layar penuh"
                     }
                     BottomSheetBehavior.STATE_DRAGGING -> {
                         bottomSheetBehavior.isFitToContents = true
@@ -143,10 +148,14 @@ class MutationFragment : Fragment() {
                 val formattedExpDate = miliseondToDateMonth(balanceInquiry.accountCardExp!!.toLong())
 
                 binding.tvBalanceAmount.text = "*********"
+                binding.tvBalanceAmount.contentDescription = "Jumlah saldo disembunyikan"
                 balance = formattedAmount
                 binding.cardCustomer.tvCardNumber.text = formattedAccNo
+                binding.cardCustomer.tvCardNumber.contentDescription = formattedAccNo
                 binding.cardCustomer.tvSavingProduct.text = balanceInquiry.accountType
+                binding.cardCustomer.tvSavingProduct.contentDescription = "Tipe kartu adalah ${balanceInquiry.accountType}"
                 binding.cardCustomer.tvExpDate.text = formattedExpDate
+                binding.cardCustomer.tvExpDate.contentDescription = formattedExpDate
             }
         }
 
@@ -156,25 +165,24 @@ class MutationFragment : Fragment() {
                 val withdrawal = getFormattedBalance(monthly.monthlyOutcome?.value!!)
 
                 binding.tvRecentMonthDepositAmount.text = "Rp $deposit"
+                binding.tvRecentMonthDepositAmount.contentDescription = "$deposit rupiah"
                 binding.tvRecentMonthWithdrawalAmount.text = "Rp $withdrawal"
+                binding.tvRecentMonthWithdrawalAmount.contentDescription = "$withdrawal rupiah"
             }
         }
 
         viewModel.getMonthName().observe(viewLifecycleOwner) { month ->
             binding.tvRecentMonthDeposit.text = month
+            binding.tvRecentMonthDeposit.contentDescription = month
             binding.tvRecentMonthWithdrawal.text = month
+            binding.tvRecentMonthWithdrawal.contentDescription = month
         }
     }
 
     private fun copyToClipboard(text: String) {
-        val clipboardManager = (requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).apply {
-            setPrimaryClip(ClipData.newPlainText("Copied Text", text))
-        }
-        showSnackbar("Nomor rekening berhasil disalin")
-    }
-
-    private fun showSnackbar(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("Copied Text", text)
+        clipboardManager.setPrimaryClip(clip)
     }
 
     private fun showBalance() {
@@ -182,10 +190,34 @@ class MutationFragment : Fragment() {
 
         if (isBalanceVisible) {
             binding.tvBalanceAmount.text = balance
+            binding.tvBalanceAmount.contentDescription = balance
             binding.btnShowBalance.setIconResource(R.drawable.ic_visibility_off)
+            binding.btnShowBalance.contentDescription = "Klik tombol ini untuk sembunyikan saldo"
         } else {
             binding.tvBalanceAmount.text = "*********"
+            binding.tvBalanceAmount.contentDescription = "Jumlah saldo disembunyikan"
             binding.btnShowBalance.setIconResource(R.drawable.ic_visibility)
+            binding.btnShowBalance.contentDescription = "Klik tombol ini untuk melihat saldo"
         }
+    }
+
+    private fun hideInquiryInfo() {
+        binding.tvBalanceText.visibility = View.GONE
+        binding.tvBalanceCurrency.visibility = View.GONE
+        binding.cardCustomer.root.visibility = View.GONE
+        binding.tvBalanceAmount.visibility = View.GONE
+        binding.cvDeposit.visibility = View.GONE
+        binding.cvWithdrawal.visibility = View.GONE
+        binding.btnShowBalance.visibility = View.GONE
+    }
+
+    private fun showInquiryInfo() {
+        binding.tvBalanceText.visibility = View.VISIBLE
+        binding.tvBalanceCurrency.visibility = View.VISIBLE
+        binding.cardCustomer.root.visibility = View.VISIBLE
+        binding.tvBalanceAmount.visibility = View.VISIBLE
+        binding.cvDeposit.visibility = View.VISIBLE
+        binding.cvWithdrawal.visibility = View.VISIBLE
+        binding.btnShowBalance.visibility = View.VISIBLE
     }
 }

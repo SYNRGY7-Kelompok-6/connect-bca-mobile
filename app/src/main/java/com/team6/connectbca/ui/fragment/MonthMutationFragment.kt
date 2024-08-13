@@ -47,12 +47,13 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
                 binding.monthMutationProgressBar.visibility = View.VISIBLE
             } else {
                 binding.monthMutationProgressBar.visibility = View.GONE
+                Snackbar.make(binding.root, "Mutasi berhasil dimuat", Snackbar.LENGTH_LONG).show()
             }
         }
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat data mutasi", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Gagal memuat data mutasi", Snackbar.LENGTH_LONG).show()
             }
         }
     }

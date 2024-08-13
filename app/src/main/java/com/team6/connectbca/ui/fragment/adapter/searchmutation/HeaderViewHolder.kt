@@ -16,17 +16,19 @@ class HeaderViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun render(data: MonthTransactionDate) {
         val date = reformatDate(data.dateTime, "dd-MM-yyyy", "EEE")
+
         binding.tvMonthHeader.text = "${changeDayName(date)}, ${data.dateTime.replace("-", " ")}"
+        binding.tvMonthHeader.contentDescription = "Daftar transaksi pada hari ${binding.tvMonthHeader.text}"
     }
 
     private fun changeDayName(date: String) : String {
         when(date) {
-            "Mon" -> return "Senin"
-            "Tue" -> return "Selasa"
-            "Wed" -> return "Rabu"
-            "Thu" -> return "Kamis"
-            "Fri" -> return "Jum'at"
-            "Sat" -> return "Sabtu"
+            "Sen","Mon" -> return "Senin"
+            "Sel","Tue" -> return "Selasa"
+            "Rab","Wed" -> return "Rabu"
+            "Kam","Thu" -> return "Kamis"
+            "Jum","Fri" -> return "Jum'at"
+            "Sab","Sat" -> return "Sabtu"
             else -> return "Minggu"
         }
     }

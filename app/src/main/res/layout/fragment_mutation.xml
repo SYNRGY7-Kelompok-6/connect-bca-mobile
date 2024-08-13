@@ -37,7 +37,7 @@
             android:id="@+id/mutationProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/login_loading_description"
+            android:contentDescription="@string/data_loading_description"
             android:visibility="gone"
             android:indeterminate="true"
             app:layout_constraintVertical_bias="0.0"
@@ -69,6 +69,7 @@
             android:textStyle="bold"
             android:layout_marginStart="12dp"
             android:textColor="?android:textColorPrimary"
+            android:contentDescription="Rupiah"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +90,7 @@
             app:layout_constraintEnd_toStartOf="@id/btnShowBalance"
             app:layout_constraintBottom_toBottomOf="@id/tvBalanceCurrency"
             app:layout_constraintTop_toTopOf="@id/tvBalanceCurrency"
-            android:contentDescription="@string/balance_inquiry_value"/>
+            android:contentDescription="Jumlah saldo disembunyikan"/>
 
         <com.google.android.material.button.MaterialButton
             style="?attr/materialIconButtonStyle"

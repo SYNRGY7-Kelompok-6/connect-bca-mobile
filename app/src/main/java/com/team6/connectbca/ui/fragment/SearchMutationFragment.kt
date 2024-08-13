@@ -1,18 +1,27 @@
 package com.team6.connectbca.ui.fragment
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.NumberPicker
+import android.widget.NumberPicker.OnValueChangeListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentSearchBinding
 import com.team6.connectbca.domain.model.MonthMutationListItem
+import com.team6.connectbca.extensions.getYear
 import com.team6.connectbca.extensions.reformatDate
 import com.team6.connectbca.ui.fragment.adapter.searchmutation.SearchMutationAdapter
 import com.team6.connectbca.ui.fragment.adapter.searchmutation.SearchMutationAdapterListener
@@ -27,6 +36,9 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
     private val viewModel by viewModel<SearchMutationViewModel>()
     private val adapter = SearchMutationAdapter(this)
 
+    private var startDate: String = ""
+    private var endDate: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,56 +51,21 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView(view.context)
 
-        var startDate: String = ""
-
         binding.etStartDate.setOnClickListener {
-            val datePicker =
-                MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("Pilih tanggal")
-                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                    .setTheme(R.style.ThemeOverlay_App_DatePicker)
-                    .build()
-
-            datePicker.show(parentFragmentManager, "Show Date Picker")
-
-            datePicker.addOnPositiveButtonClickListener {
-                startDate = reformatDate(
-                    datePicker.headerText.toString(),
-                    "MMM d, yyyy",
-                    "dd-MM-yyyy"
-                )
-                binding.etStartDate.setText(startDate)
-            }
+            showCustomDatePicker(true, view.context)
         }
 
         binding.etEndDate.setOnClickListener {
-            val datePicker =
-                MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("Pilih tanggal")
-                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                    .setTheme(R.style.ThemeOverlay_App_DatePicker)
-                    .build()
-
-            datePicker.show(parentFragmentManager, "Show Date Picker")
-
-            datePicker.addOnPositiveButtonClickListener {
-                binding.etEndDate.setText(
-                    reformatDate(
-                        datePicker.headerText.toString(),
-                        "MMM d, yyyy",
-                        "dd-MM-yyyy"
-                    )
-                )
-            }
+            showCustomDatePicker(false, view.context)
         }
 
-        binding.cbUseSameDate.setOnClickListener { isSameDateChecked(startDate) }
+        binding.cbUseSameDate.setOnClickListener { isSameDateChecked() }
 
         binding.btnSearchMutation.setOnClickListener {
-            val endDate = binding.etEndDate.text.toString()
+            endDate = binding.etEndDate.text.toString()
 
-            if (checkDateInput(startDate, endDate)) {
-                setData(startDate, endDate, view.context)
+            if (checkDateInput()) {
+                setData(view.context)
             }
         }
 
@@ -123,7 +100,7 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
     }
 
     override fun onClickSeeInvoice() {
-        TODO("Not yet implemented")
+        Log.i("ANU", "ANU")
     }
 
     private fun setupRecyclerView(context: Context) {
@@ -136,7 +113,7 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
         binding.searchMutationRecyclerView.itemAnimator = DefaultItemAnimator()
     }
 
-    private fun setData(startDate: String, endDate: String, context: Context) {
+    private fun setData(context: Context) {
         viewModel.getSearchedMutation(startDate, endDate).observe(viewLifecycleOwner) { transactionGroup ->
             if (!transactionGroup.isNullOrEmpty()) {
                 val newList = mutableListOf<MonthMutationListItem>()
@@ -161,7 +138,7 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
         }
     }
 
-    private fun isSameDateChecked(startDate: String) {
+    private fun isSameDateChecked() {
         if (binding.cbUseSameDate.isChecked) {
             binding.etEndDate.setText(startDate)
         } else {
@@ -169,9 +146,7 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
         }
     }
 
-    private fun checkDateInput(startDate: String, endDate: String) : Boolean {
-        val startDay = startDate.substring(0,2)
-        val endDay = endDate.substring(0,2)
+    private fun checkDateInput() : Boolean {
         val startMonth = startDate.substring(3,5)
         val startYear = startDate.substring(6)
         val endMonth = endDate.substring(3,5)
@@ -182,8 +157,6 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
             binding.etStartDate.error = "Tanggal mulai lebih besar dari tanggal akhir"
             binding.etEndDate.error = "Tanggal akhir lebih kecil dari tanggal mulai"
 
-            Snackbar.make(binding.root, "Tanggal mulai harus lebih kecil dari tanggal akhir", Snackbar.LENGTH_LONG).show()
-
             return false
         } else {
             binding.etStartDate.error = null
@@ -191,5 +164,59 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
 
             return true
         }
+    }
+
+    private fun showCustomDatePicker(isStart: Boolean, context: Context) {
+        val dialog = Dialog(context)
+        var day = ""
+        var month = ""
+        var year = ""
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+
+        dialog.setContentView(R.layout.item_custom_datepicker)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val saveBtn: MaterialButton = dialog.findViewById(R.id.getDateBtn)
+        val dayNumPick: NumberPicker? = dialog.findViewById(R.id.dayNumPick)
+        val monthNumPick: NumberPicker? = dialog.findViewById(R.id.monthNumPick)
+        val yearNumPick: NumberPicker? = dialog.findViewById(R.id.yearNumPick)
+        val nowYear = getYear().toInt()
+        val monthVals = arrayOf<String>("Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember")
+
+        dayNumPick?.minValue = 1
+        dayNumPick?.maxValue = 31
+        monthNumPick?.minValue = 1
+        monthNumPick?.maxValue = 12
+        monthNumPick?.displayedValues = monthVals
+        yearNumPick?.minValue = nowYear - 5
+        yearNumPick?.maxValue = nowYear
+
+        dayNumPick?.setOnValueChangedListener { numberPicker, i, i1 ->
+            day = dayNumPick.value.toString()
+        }
+
+        monthNumPick?.setOnValueChangedListener { numberPicker, i, i1 ->
+            month = monthNumPick.value.toString()
+        }
+
+        yearNumPick?.setOnValueChangedListener { numberPicker, i, i1 ->
+            year = yearNumPick.value.toString()
+        }
+
+        saveBtn.setOnClickListener {
+            if (isStart) {
+                startDate = "$day-$month-$year"
+                binding.etStartDate.setText(startDate)
+            } else {
+                endDate = "$day-$month-$year"
+                binding.etEndDate.setText(endDate)
+            }
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }
