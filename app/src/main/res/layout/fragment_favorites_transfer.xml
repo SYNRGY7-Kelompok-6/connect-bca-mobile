@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.transfer.FavoritesTransferFragment">
 
-    <androidx.appcompat.widget.SearchView
+    <com.google.android.material.search.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

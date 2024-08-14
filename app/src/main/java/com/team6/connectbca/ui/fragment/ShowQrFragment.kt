@@ -82,7 +82,7 @@ class ShowQrFragment : Fragment() {
     private fun checkTheme(): Boolean {
         val typedValue = TypedValue()
         requireContext().theme.resolveAttribute(
-            androidx.appcompat.R.attr.isLightTheme,
+            android.R.attr.isLightTheme,
             typedValue,
             true
         )

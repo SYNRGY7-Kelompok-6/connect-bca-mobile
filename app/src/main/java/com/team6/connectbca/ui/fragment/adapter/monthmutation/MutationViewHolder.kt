@@ -15,27 +15,35 @@ class MutationViewHolder(
     private val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
     fun render(data: MutationsItem) {
-        binding.ivMutationLogo.setImageResource(R.drawable.ic_logo)
+        binding.ivMutationLogo.setImageResource(R.drawable.connect_logo)
         binding.tvTitle.text = data.remark
+        binding.tvTitle.contentDescription = binding.tvTitle.text
         binding.tvDesc.text = data.desc
+        binding.tvDesc.contentDescription = binding.tvDesc.text
         binding.tvBeneficiaryName.text = data.beneficiaryAccount?.beneficiaryAccountName
         binding.tvBeneficiaryNumber.text = data.beneficiaryAccount?.beneficiaryAccountNumber
+        binding.tvBeneficiaryName.contentDescription = "Nama akun ${binding.tvBeneficiaryName.text}"
+        binding.tvBeneficiaryNumber.contentDescription = "Nomor akun ${binding.tvBeneficiaryNumber.text}"
         binding.tvItemRowCurrency.text = getCurrency(data.amount?.currency!!)
         binding.tvPrice.text = getFormattedBalance(data.amount?.value!!)
+        binding.tvPrice.contentDescription = "Jumlah nominal ${binding.tvPrice.text}"
         binding.btnNote.setOnClickListener { monthMutationAdapterListener.onClickSeeInvoice() }
+        binding.btnNote.contentDescription = "Tombol melihat bukti transaksi"
         changeStyle(data.type!!)
     }
 
     private fun changeStyle(type: String) {
         when(type) {
-            "CREDIT" -> {
+            "DEBIT" -> {
                 binding.transactionType.text = "-"
+                binding.transactionType.contentDescription = "Dana keluar"
                 binding.transactionType.setTextColor(ContextCompat.getColor(context, R.color.secondaryRed))
                 binding.tvItemRowCurrency.setTextColor(ContextCompat.getColor(context, R.color.secondaryRed))
                 binding.tvPrice.setTextColor(ContextCompat.getColor(context, R.color.secondaryRed))
             }
-            "DEBIT" -> {
+            "CREDIT" -> {
                 binding.transactionType.text = "+"
+                binding.transactionType.contentDescription = "Dana masuk"
                 binding.transactionType.setTextColor(ContextCompat.getColor(context, R.color.secondaryGreen))
                 binding.tvItemRowCurrency.setTextColor(ContextCompat.getColor(context, R.color.secondaryGreen))
                 binding.tvPrice.setTextColor(ContextCompat.getColor(context, R.color.secondaryGreen))
@@ -47,7 +55,10 @@ class MutationViewHolder(
         var result: String = ""
 
         when(data) {
-            "IDR" -> return "Rp"
+            "IDR" -> {
+                binding.tvItemRowCurrency.contentDescription = "Rupiah"
+                return "Rp"
+            }
         }
 
         return result
