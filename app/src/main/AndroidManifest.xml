@@ -22,22 +22,28 @@
         android:theme="@style/Theme.ConnectBCA"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.InputTransferAmountActivity"
+            android:exported="false" >
+
+        </activity>
+        <activity
             android:name=".ui.activity.PinActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.activity.TransferActivity"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ConnectBCA">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"

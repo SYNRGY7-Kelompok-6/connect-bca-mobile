@@ -16,6 +16,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here -->
+        <item name="colorBackgroundInput">@color/colorPrimaryLight</item>
     </style>
 
     <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.Material3.MaterialCalendar">
@@ -68,6 +69,15 @@
     <style name="backspaceButton" parent="Widget.Material3.Button.TextButton">
         <item name="android:layout_width">115dp</item>
         <item name="android:layout_height">82dp</item>
+    </style>
+
+    <!-- Style for TextInputLayout -->
+    <style name="Widget.Material3.TextInputLayout.OutlinedBox"
+        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">?attr/colorBackgroundInput</item>
+        <item name="boxStrokeErrorColor">?attr/colorError</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
     </style>
 
 </resources>

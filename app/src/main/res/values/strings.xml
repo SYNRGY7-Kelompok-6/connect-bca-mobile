@@ -110,10 +110,16 @@
     <string name="qr_not_found">Kode QR tidak ditemukan. Bersihkan lensa Anda dan posisikan kamera dengan tepat.</string>
     <string name="back_to_menu_button_description">Tombol kembali ke menu</string>
 
-
     <string name="logo">Logo</string>
     <string name="new_target">Tujuan Baru</string>
     <string name="enter_recipient_data">Masukkan Data Penerima Baru</string>
     <string name="bank_name">Nama Bank Tujuan</string>
     <string name="account_number_title">Nomor Rekening</string>
+
+    <string-array name="spinner">
+        <item>Frekuensi Transfer</item>
+        <item>Satu Kali</item>
+        <item>Mingguan</item>
+        <item>Bulanan</item>
+    </string-array>
 </resources>
