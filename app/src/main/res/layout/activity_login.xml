@@ -136,6 +136,7 @@
         android:contentDescription="@string/password_description"
         app:startIconDrawable="@drawable/ic_lock"
         app:endIconMode="password_toggle"
+        app:passwordToggleContentDescription="Klik untuk melihat atau menyembunyikan sandi"
         app:boxCornerRadiusTopStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -189,8 +190,7 @@
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/quickButtons"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintBottom_toTopOf="@id/quickButtons" />
 
     <LinearLayout
         android:id="@+id/quickButtons"
@@ -210,8 +210,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/ewallet_description">
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnWallet"
@@ -223,6 +222,7 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
+                android:contentDescription="@string/ewallet_description"
                 app:icon="@drawable/ic_wallet"
                 app:iconTint="@color/neutral01"
                 app:iconGravity="textStart"
@@ -247,8 +247,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/qris_description" >
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnQris"
@@ -260,6 +259,7 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
+                android:contentDescription="@string/qris_description"
                 app:iconTint="@color/neutral01"
                 app:icon="@drawable/ic_qris"
                 app:iconGravity="textStart"
@@ -283,8 +283,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:contentDescription="@string/transfer_description" >
+            android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTransfer"
@@ -296,6 +295,7 @@
                 android:insetRight="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
+                android:contentDescription="@string/transfer_description"
                 app:iconTint="@color/neutral01"
                 app:icon="@drawable/ic_transfer"
                 app:iconGravity="textStart"

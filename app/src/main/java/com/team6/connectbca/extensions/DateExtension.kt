@@ -52,10 +52,6 @@ fun reformatDate(date: String, sourceFormat: String, format: String) : String {
     return resultFormatter.format(converted)
 }
 
-fun getDateWithDay() {
-
-}
-
 private fun getEndDate() : String {
     val date = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH)
 
@@ -69,7 +65,7 @@ private fun getMonth() : String {
     return month
 }
 
-private fun getYear() : String {
+fun getYear() : String {
     val date = getCurrentDate()
     val year = date.toString("yyyy")
 

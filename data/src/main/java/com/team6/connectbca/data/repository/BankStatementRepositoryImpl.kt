@@ -41,18 +41,20 @@ class BankStatementRepositoryImpl(
                 val date = reformatDate(mutationItem?.transactionDate!!)
 
                 count+=1
+
                 if (dateFlag != null) {
                     if ((dateFlag.equals(date)) && (count <= allMutations.size)) {
-                        temp.add(mutationItem!!)
+                        temp.add(mutationItem)
                     } else {
                         result.add(DailyTransaction(MonthTransactionDate(dateFlag), temp.toList()))
-//                        monthTransactionDates.add(MonthTransactionDate(dateFlag!!))
                         dateFlag = date
                         temp.clear()
+                        temp.add(mutationItem)
                     }
 
                     if (count == allMutations.size) {
                         result.add(DailyTransaction(MonthTransactionDate(dateFlag), temp.toList()))
+                        temp.clear()
                     }
                 } else {
                     temp.clear()

@@ -5,7 +5,6 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
@@ -25,7 +24,7 @@
     <string name="info_icon">Info Icon</string>
     <string name="title">Title</string>
     <string name="price">Price</string>
-    <string name="lihat_nota">Lihat Nota</string>
+    <string name="lihat_nota">Lihat Bukti</string>
     <string name="qris_description">Akses Cepat ke Qris</string>
     <string name="transfer_description">Akses Cepat ke Transfer</string>
     <string name="logo_content_description">Logo Connect by BCA\n</string>
@@ -51,10 +50,10 @@
     <string name="home_change_mode_description">Ubah Mode Light atau Dark</string>
     <string name="lihat_notifikasi_description">Tombol Lihat Notifikasi</string>
     <string name="home_main_account_number">145 267 389 5162</string>
-    <string name="copy_to_clipboard">Menyalin nomor rekening</string>
-    <string name="currency">IDR</string>
+    <string name="copy_to_clipboard">Nomor rekening disalin</string>
+    <string name="currency">Rp</string>
     <string name="card_balance_hidden">***********</string>
-    <string name="account_balance_visibility_description">Lihat Saldo Rekening</string>
+    <string name="account_balance_visibility_description">Klik tombol ini untuk lihat saldo</string>
     <string name="mutasi">Mutasi</string>
     <string name="virtual_account">Virtual\nAccount</string>
     <string name="tombol_mutasi">Tombol mutasi rekening</string>
@@ -63,7 +62,7 @@
     <string name="flazz">Flazz</string>
     <string name="info_saldo_toolbar_description">Informasi Saldo dan Rekening</string>
     <string name="customer_bank_card_description">Customer bank card</string>
-    <string name="card_deposit_description">Card menunjukkan deposit kartu</string>
+    <string name="card_deposit_description">Jumlah Pemasukan Bulan Ini</string>
     <string name="card_deposit_month">Bulan Juni</string>
     <string name="month_income_description">Jumlah pemasukan bulan ini</string>
     <string name="month_income">Rp 359.000</string>
@@ -73,7 +72,7 @@
     <string name="bottom_sheet_drag_description">Tarik ke atas untuk melihat mutasi dengan layar penuh</string>
     <string name="tab_layout_description">Pilih mutasi berdasarkan hari ini, bulan ini, atau tanggal</string>
     <string name="balance_inquiry_title">Jumlah Saldo</string>
-    <string name="balance_inquiry_value">28.062.003</string>
+    <string name="balance_inquiry_value">********</string>
     <string name="customer_card_description">Card berisi informasi kartu rekening</string>
     <string name="account_number">145 267 389 5162</string>
     <string name="account_number_description">Nomor rekening kartu</string>
@@ -82,7 +81,7 @@
     <string name="card_type_description">Jenis kartu tabungan</string>
     <string name="card_expiry_title">EXP</string>
     <string name="card_expiry_date">03/28</string>
-    <string name="card_expiry_date_description">Bulan dan tahun kadaluwarsa kartu</string>
+    <string name="card_expiry_date_description">Expire date</string>
     <string name="transaction_date">Kamis, 21 Juni 2024</string>
     <string name="transaction_date_description">Transaksi hari ini</string>
     <string name="no_transaction_today">Belum ada transaksi hari ini</string>
@@ -109,17 +108,21 @@
     <string name="repeat_button_description">Tombol Ulangi</string>
     <string name="qr_not_found">Kode QR tidak ditemukan. Bersihkan lensa Anda dan posisikan kamera dengan tepat.</string>
     <string name="back_to_menu_button_description">Tombol kembali ke menu</string>
-
     <string name="logo">Logo</string>
     <string name="new_target">Tujuan Baru</string>
     <string name="enter_recipient_data">Masukkan Data Penerima Baru</string>
     <string name="bank_name">Nama Bank Tujuan</string>
     <string name="account_number_title">Nomor Rekening</string>
-
     <string-array name="spinner">
         <item>Frekuensi Transfer</item>
         <item>Satu Kali</item>
         <item>Mingguan</item>
         <item>Bulanan</item>
     </string-array>
+    <string name="data_loading_description">Sedang memuat data, harap tunggu</string>
+    <string name="search_mutation_description">Tekan untuk mulai cari mutasi</string>
+    <string name="save_button">Simpan</string>
+    <string name="get_date_button_description">Tekan untuk menyimpan pilihan tanggal</string>
+    <string name="custom_datepicker_description">Box untuk memilih tanggal</string>
+    <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
 </resources>
