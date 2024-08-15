@@ -3,6 +3,7 @@ package com.team6.connectbca.ui.fragment
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentHomeBinding
+import com.team6.connectbca.ui.activity.TransferActivity
 
 class HomeFragment : Fragment() {
 
@@ -64,8 +66,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToTransfer() {
-        val action = HomeFragmentDirections.actionHomeFragmentToFavoritesTransferFragment()
-        findNavController().navigate(action)
+        val intent = Intent(requireContext(), TransferActivity::class.java)
+        startActivity(intent)
     }
 
     private fun copyToClipboard(text: String) {
