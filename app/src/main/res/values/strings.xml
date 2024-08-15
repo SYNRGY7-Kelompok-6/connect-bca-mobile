@@ -119,23 +119,6 @@
     <string name="get_date_button_description">Tekan untuk menyimpan pilihan tanggal</string>
     <string name="custom_datepicker_description">Box untuk memilih tanggal</string>
     <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
-    <string name="show_qr">Tampilkan QR</string>
-    <string name="scan_qris">Scan QRIS</string>
-    <string name="scan_qris_button_description">Tombol Scan QR</string>
-    <string name="show_qr_button_description">Tombol Tampilkan QR</string>
-    <string name="flash_on_button_description">Tombol Menyalakan Flash</string>
-    <string name="flash_off_button_description">Tombol Mematikan Flash</string>
-    <string name="gallery_button_description">Tombol upload kode qr dari galeri</string>
-    <string name="qr_logo_description">Gambar Logo QRIS</string>
-    <string name="qr_scanner_description">QR Scanner</string>
-    <string name="repeat_button_description">Tombol Ulangi</string>
-    <string name="qr_not_found">Kode QR tidak ditemukan. Bersihkan lensa Anda dan posisikan kamera dengan tepat.</string>
-    <string name="back_to_menu_button_description">Tombol kembali ke menu</string>
-    <string name="logo">Logo</string>
-    <string name="new_target">Tujuan Baru</string>
-    <string name="enter_recipient_data">Masukkan Data Penerima Baru</string>
-    <string name="bank_name">Nama Bank Tujuan</string>
-    <string name="account_number_title">Nomor Rekening</string>
     <string-array name="spinner">
         <item>Frekuensi Transfer</item>
         <item>Satu Kali</item>
