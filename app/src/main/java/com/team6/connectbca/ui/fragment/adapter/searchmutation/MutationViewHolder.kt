@@ -26,7 +26,7 @@ class MutationViewHolder(
         binding.tvItemRowCurrency.text = getCurrency(data.amount?.currency!!)
         binding.tvPrice.text = getFormattedBalance(data.amount?.value!!)
         binding.tvPrice.contentDescription = "Jumlah nominal ${binding.tvPrice.text}"
-        binding.btnNote.setOnClickListener { searchMutationAdapterListener.onClickSeeInvoice() }
+        binding.btnNote.setOnClickListener { searchMutationAdapterListener.onClickSeeInvoice(data.transactionId!!) }
         binding.btnNote.contentDescription = "Tombol melihat bukti transaksi"
         changeStyle(data.type!!)
     }

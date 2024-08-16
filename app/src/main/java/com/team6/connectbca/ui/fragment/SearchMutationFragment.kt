@@ -13,6 +13,7 @@ import android.view.Window
 import android.widget.NumberPicker
 import android.widget.NumberPicker.OnValueChangeListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.button.MaterialButton
@@ -99,8 +100,8 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
         _binding = null
     }
 
-    override fun onClickSeeInvoice() {
-        Log.i("ANU", "ANU")
+    override fun onClickSeeInvoice(transactionId: String) {
+        navigateToPaymentReceipt(transactionId)
     }
 
     private fun setupRecyclerView(context: Context) {
@@ -210,5 +211,10 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
         }
 
         dialog.show()
+    }
+
+    private fun navigateToPaymentReceipt(transactionId: String) {
+        val action = MutationFragmentDirections.actionMutationFragmentToPaymentReceiptFragment(transactionId)
+        findNavController().navigate(action)
     }
 }

@@ -1,5 +1,6 @@
 package com.team6.connectbca.extensions
 
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -31,9 +32,10 @@ fun getFirstOfMonthDate() : String {
     return "01-$month-$year"
 }
 
-fun miliseondToDateMonth(milisecond: Long) : String {
+fun milisecondToDateMonth(milisecond: Long, format: String) : String {
     val date = Date(milisecond)
-    val formatter = SimpleDateFormat("MM/yy")
+    val formatter = SimpleDateFormat(format, Locale.getDefault())
+
     return formatter.format(date)
 }
 
