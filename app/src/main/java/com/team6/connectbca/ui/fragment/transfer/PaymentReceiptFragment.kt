@@ -66,32 +66,27 @@ class PaymentReceiptFragment : Fragment() {
                     val sourceNumOld = transaction.sourceAccountNumber!!.substring(0..6)
 
                     binding.tvTitle.text = transaction.remark
+                    binding.tvTransactionDesc.text = transaction.desc
                     binding.tvDate.text = date
                     binding.tvRefNumber.text = "No. Ref: ${transaction.refNumber}"
                     binding.tvRecipientName.text = transaction.beneficiaryName
+                    binding.tvBeneficiaryBank.text = transaction.beneficiaryAccountNumber
                     binding.tvTotalTransaction.text = "Rp $amount"
                     binding.tvSourceName.text = transaction.sourceName
                     binding.tvSourceBank.text = transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
-                    binding.tvAcquirer.text = "Bank BCA"
                     binding.btnClose.setOnClickListener { parentFragmentManager.popBackStack() }
                     binding.btnShare.setOnClickListener { shareInvoice() }
 
-                    binding.tvTitle.contentDescription = transaction.remark
-                    binding.tvDate.contentDescription = date
-                    binding.tvRefNumber.contentDescription = "No. Ref: ${transaction.refNumber}"
-                    binding.tvRecipientName.contentDescription = transaction.beneficiaryName
                     binding.tvTotalTransaction.contentDescription = "$amount rupiah"
-                    binding.tvSourceName.contentDescription = transaction.sourceName
                     binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
-                    binding.tvAcquirer.contentDescription = "Bank BCA"
+                    binding.tvBeneficiaryBank.contentDescription = "Nomor rekening ${binding.tvBeneficiaryBank.text}"
 
-                    if (!transaction.remark.equals("qris")) {
-                        binding.tvQrisRefLabel.visibility = View.GONE
-                        binding.tvQrisRef.visibility = View.GONE
-                        binding.tvMerchantPanLabel.visibility = View.GONE
-                        binding.tvMerchantPan.visibility = View.GONE
-                        binding.tvCustomerPanLabel.visibility = View.GONE
-                        binding.tvCustomerPan.visibility = View.GONE
+                    if (transaction.remark.equals("QRIS Transfer")) {
+                        binding.tvStatus.text = "Pembayaran Berhasil!"
+                        hideTransferView()
+                    } else {
+                        binding.tvStatus.text = "Transfer Berhasil!"
+                        hideQrisView()
                     }
 
                     Snackbar.make(binding.root, "Bukti transaksi berhasil dimuat", Snackbar.LENGTH_LONG).show()
@@ -168,5 +163,24 @@ class PaymentReceiptFragment : Fragment() {
     private fun showButtons() {
         binding.btnShare.visibility = View.VISIBLE
         binding.btnClose.visibility = View.VISIBLE
+    }
+
+    private fun hideTransferView() {
+        binding.tvDetailTransaction.visibility = View.GONE
+        binding.tvTransferMethodLabel.visibility = View.GONE
+        binding.tvTransferMethod.visibility = View.GONE
+        binding.tvTransactionDescLabel.visibility = View.GONE
+        binding.tvTransactionDesc.visibility = View.GONE
+    }
+
+    private fun hideQrisView() {
+        binding.tvQrisRefLabel.visibility = View.GONE
+        binding.tvQrisRef.visibility = View.GONE
+        binding.tvMerchantPanLabel.visibility = View.GONE
+        binding.tvMerchantPan.visibility = View.GONE
+        binding.tvCustomerPanLabel.visibility = View.GONE
+        binding.tvCustomerPan.visibility = View.GONE
+        binding.tvAcquirerLabel.visibility = View.GONE
+        binding.tvAcquirer.visibility = View.GONE
     }
 }
