@@ -1,4 +1,4 @@
-package com.team6.connectbca.ui.fragment
+package com.team6.connectbca.ui.fragment.qris
 
 import android.Manifest
 import android.app.Activity
@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,6 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentQrisBinding
 import com.team6.connectbca.databinding.LayoutCustomDialogBinding
-import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import com.team6.connectbca.ui.viewmodel.QrisViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -73,7 +71,7 @@ class QrisFragment : Fragment() {
                 viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
                     if (isSuccess) {
                         val action =
-                            QrisFragmentDirections.actionQrisFragmentToQrisPaymentFragment()
+                            com.team6.connectbca.ui.fragment.QrisFragmentDirections.actionQrisFragmentToQrisPaymentFragment()
                         findNavController().navigate(action)
                     }
                 }

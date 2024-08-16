@@ -1,13 +1,12 @@
 package com.team6.connectbca.ui.fragment.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.team6.connectbca.ui.fragment.MonthMutationFragment
-import com.team6.connectbca.ui.fragment.SearchMutationFragment
-import com.team6.connectbca.ui.fragment.TodayMutationFragment
+import com.team6.connectbca.ui.fragment.mutation.MonthMutationFragment
+import com.team6.connectbca.ui.fragment.mutation.SearchMutationFragment
+import com.team6.connectbca.ui.fragment.mutation.TodayMutationFragment
 
 class TabPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

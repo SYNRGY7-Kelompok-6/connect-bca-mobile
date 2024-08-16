@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/mutationFragment"
-        android:name="com.team6.connectbca.ui.fragment.MutationFragment"
+        android:name="com.team6.connectbca.ui.fragment.mutation.MutationFragment"
         android:label="fragment_mutation"
         tools:layout="@layout/fragment_mutation" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/qrisFragment"
-        android:name="com.team6.connectbca.ui.fragment.QrisFragment"
+        android:name="com.team6.connectbca.ui.fragment.qris.QrisFragment"
         android:label="fragment_qris"
         tools:layout="@layout/fragment_qris" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/qrisPaymentFragment"
-        android:name="com.team6.connectbca.ui.fragment.QrisPaymentFragment"
+        android:name="com.team6.connectbca.ui.fragment.qris.QrisPaymentFragment"
         android:label="fragment_qris_payment"
         tools:layout="@layout/fragment_qris_payment" />
     <fragment
