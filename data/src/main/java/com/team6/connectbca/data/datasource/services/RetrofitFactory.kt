@@ -107,3 +107,14 @@ fun provideQrisService(
         authLocalDataSource
     ).create(QrisService::class.java)
 }
+
+fun provideTransferService(
+    context: Context,
+    authLocalDataSource: AuthLocalDataSource
+): TransferService {
+    return provideRetrofitBuilder(
+        context,
+        BASE_URL,
+        authLocalDataSource
+    ).create(TransferService::class.java)
+}

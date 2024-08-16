@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="85dp"
     android:layout_gravity="center"
     android:layout_marginBottom="4dp"
     android:elevation="14dp"
@@ -10,9 +10,11 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="4dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,13 +30,13 @@
         android:layout_marginStart="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/icon"
         app:layout_constraintStart_toEndOf="@id/icon"
         app:layout_constraintEnd_toStartOf="@id/heartIcon" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvBankInfo"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BCA - 4598721365"
         android:textColor="@android:color/darker_gray"
@@ -42,7 +44,6 @@
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintStart_toEndOf="@id/icon"
-        app:layout_constraintEnd_toStartOf="@id/heartIcon"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView

@@ -1,4 +1,47 @@
 package com.team6.connectbca.ui.viewmodel
 
-class TransferViewModel {
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.team6.connectbca.domain.model.TransactionDetailData
+import com.team6.connectbca.domain.usecase.GetTransactionDetailUseCase
+import kotlinx.coroutines.launch
+
+class TransferViewModel(
+    private val getTransactionDetailUseCase: GetTransactionDetailUseCase
+) : ViewModel() {
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
+    private val _transactionDetail = MutableLiveData<TransactionDetailData?>()
+
+    fun getTransactionDetail(transactionId: String) : LiveData<TransactionDetailData?> {
+        viewModelScope.launch {
+            try {
+                _loading.value = true
+                val data: TransactionDetailData? = getTransactionDetailUseCase(transactionId)
+
+                if (data != null) {
+                    _transactionDetail.value = data
+                } else {
+                    _transactionDetail.value = null
+                }
+
+                _loading.value = false
+            } catch (error: Throwable) {
+                _error.value = error
+                _loading.value = false
+            }
+        }
+
+        return _transactionDetail
+    }
+
+    fun getError() : LiveData<Throwable> {
+        return _error
+    }
+
+    fun getLoading() : LiveData<Boolean> {
+        return _loading
+    }
 }

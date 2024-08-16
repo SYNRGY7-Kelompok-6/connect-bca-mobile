@@ -1,4 +1,4 @@
-package com.team6.connectbca.ui.fragment
+package com.team6.connectbca.ui.fragment.qris
 
 import android.Manifest
 import android.app.Activity
@@ -13,7 +13,6 @@ import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,7 +73,7 @@ class QrisFragment : Fragment() {
                 handler.removeCallbacks(runnable)
                 viewModel.verifyQr(it.text)
                 viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
-                    handleScanResult(isSuccess)
+
                 }
                 viewModel.getError().observe(viewLifecycleOwner) { error ->
                     if (error != null) {

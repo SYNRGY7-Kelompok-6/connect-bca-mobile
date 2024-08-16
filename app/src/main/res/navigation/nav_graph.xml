@@ -9,7 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="com.team6.connectbca.ui.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_qrisFragment"
             app:destination="@id/qrisFragment" />
@@ -22,14 +22,18 @@
     </fragment>
     <fragment
         android:id="@+id/mutationFragment"
-        android:name="com.team6.connectbca.ui.fragment.MutationFragment"
+        android:name="com.team6.connectbca.ui.fragment.mutation.MutationFragment"
         android:label="fragment_mutation"
-        tools:layout="@layout/fragment_mutation" />
+        tools:layout="@layout/fragment_mutation">
+        <action
+            android:id="@+id/action_mutationFragment_to_paymentReceiptFragment"
+            app:destination="@id/paymentReceiptFragment" />
+    </fragment>
     <fragment
         android:id="@+id/qrisFragment"
-        android:name="com.team6.connectbca.ui.fragment.QrisFragment"
+        android:name="com.team6.connectbca.ui.fragment.qris.QrisFragment"
         android:label="fragment_qris"
-        tools:layout="@layout/fragment_qris" >
+        tools:layout="@layout/fragment_qris">
         <action
             android:id="@+id/action_qrisFragment_to_qrisPaymentFragment"
             app:destination="@id/qrisPaymentFragment" />
@@ -42,9 +46,9 @@
     </fragment>
     <fragment
         android:id="@+id/qrisPaymentFragment"
-        android:name="com.team6.connectbca.ui.fragment.QrisPaymentFragment"
+        android:name="com.team6.connectbca.ui.fragment.qris.QrisPaymentFragment"
         android:label="fragment_qris_payment"
-        tools:layout="@layout/fragment_qris_payment" >
+        tools:layout="@layout/fragment_qris_payment">
         <action
             android:id="@+id/action_qrisPaymentFragment_to_pinFragment"
             app:destination="@id/pinFragment" />
@@ -53,7 +57,7 @@
         android:id="@+id/findDestinationBankFragment"
         android:name="com.team6.connectbca.ui.fragment.transfer.FindDestinationBankFragment"
         android:label="fragment_find_destination_bank"
-        tools:layout="@layout/fragment_find_destination_bank" >
+        tools:layout="@layout/fragment_find_destination_bank">
         <action
             android:id="@+id/action_findDestinationBankFragment_to_recepientDetailFragment"
             app:destination="@id/recepientDetailFragment" />
@@ -62,7 +66,7 @@
         android:id="@+id/favoritesTransferFragment"
         android:name="com.team6.connectbca.ui.fragment.transfer.FavoritesTransferFragment"
         android:label="fragment_favorites_transfer"
-        tools:layout="@layout/fragment_favorites_transfer" >
+        tools:layout="@layout/fragment_favorites_transfer">
         <action
             android:id="@+id/action_favoritesTransferFragment2_to_newDestinationFragment"
             app:destination="@id/newDestinationFragment" />
@@ -71,7 +75,7 @@
         android:id="@+id/newDestinationFragment"
         android:name="com.team6.connectbca.ui.fragment.transfer.NewDestinationFragment"
         android:label="fragment_new_destination"
-        tools:layout="@layout/fragment_new_destination" >
+        tools:layout="@layout/fragment_new_destination">
         <action
             android:id="@+id/action_newDestinationFragment_to_findDestinationBankFragment"
             app:destination="@id/findDestinationBankFragment" />
@@ -80,7 +84,7 @@
         android:id="@+id/recepientDetailFragment"
         android:name="com.team6.connectbca.ui.fragment.transfer.RecepientDetailFragment"
         android:label="fragment_recepient_detail"
-        tools:layout="@layout/fragment_recepient_detail" >
+        tools:layout="@layout/fragment_recepient_detail">
         <action
             android:id="@+id/action_recepientDetailFragment_to_inputTransferAmountFragment"
             app:destination="@id/inputTransferAmountFragment" />
@@ -89,7 +93,7 @@
         android:id="@+id/inputTransferAmountFragment"
         android:name="com.team6.connectbca.ui.fragment.transfer.InputTransferAmountFragment"
         android:label="fragment_input_transfer_amount"
-        tools:layout="@layout/fragment_input_transfer_amount" >
+        tools:layout="@layout/fragment_input_transfer_amount">
         <action
             android:id="@+id/action_inputTransferAmountFragment_to_pinFragment2"
             app:destination="@id/pinFragment" />
@@ -99,6 +103,20 @@
         android:name="com.team6.connectbca.ui.fragment.pin.PinFragment"
         android:label="fragment_pin"
         tools:layout="@layout/fragment_pin" />
+    <fragment
+
+        android:id="@+id/paymentReceiptFragment"
+        android:name="com.team6.connectbca.ui.fragment.transfer.PaymentReceiptFragment"
+        android:label="fragment_payment_receipt"
+        tools:layout="@layout/fragment_payment_receipt">
+        <argument
+            android:name="transactionId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_paymentReceiptFragment_to_mutationFragment"
+            app:destination="@id/mutationFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/showQrFragment"
         android:name="com.team6.connectbca.ui.fragment.ShowQrFragment"

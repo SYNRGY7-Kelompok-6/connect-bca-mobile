@@ -1,14 +1,12 @@
-package com.team6.connectbca.ui.fragment
+package com.team6.connectbca.ui.fragment.mutation
 
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -21,7 +19,7 @@ import com.team6.connectbca.databinding.FragmentMutationBinding
 import com.team6.connectbca.databinding.ItemCustomerBankCardBinding
 import com.team6.connectbca.extensions.getFormattedAccountNo
 import com.team6.connectbca.extensions.getFormattedBalance
-import com.team6.connectbca.extensions.miliseondToDateMonth
+import com.team6.connectbca.extensions.milisecondToDateMonth
 import com.team6.connectbca.ui.fragment.adapter.TabPagerAdapter
 import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,7 +47,7 @@ class MutationFragment : Fragment() {
         val navController = findNavController()
 
         binding.toolbar.setupWithNavController(navController)
-        binding.toolbar.setTitle("Informasi Saldo")
+        binding.toolbar.setTitle("Informasi Rekening")
 
         setupTabLayout()
         setupBottomSheet()
@@ -58,9 +56,9 @@ class MutationFragment : Fragment() {
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.mutationProgressBar.visibility = View.VISIBLE
+                binding.mutationProgressBar.contentDescription = "Sedang memuat data, harap tunggu"
             } else {
                 binding.mutationProgressBar.visibility = View.GONE
-                Snackbar.make(binding.root, "Data berhasil dimuat", Snackbar.LENGTH_LONG).show()
             }
         }
 
@@ -145,7 +143,7 @@ class MutationFragment : Fragment() {
                 val amount = balanceInquiry.balance?.availableBalance?.value
                 val formattedAmount = getFormattedBalance(amount!!)
                 val formattedAccNo = getFormattedAccountNo(balanceInquiry.accountNo!!.toDouble())
-                val formattedExpDate = miliseondToDateMonth(balanceInquiry.accountCardExp!!.toLong())
+                val formattedExpDate = milisecondToDateMonth(balanceInquiry.accountCardExp!!.toLong(), "MM/yy")
 
                 binding.tvBalanceAmount.text = "*********"
                 binding.tvBalanceAmount.contentDescription = "Jumlah saldo disembunyikan"
@@ -156,6 +154,8 @@ class MutationFragment : Fragment() {
                 binding.cardCustomer.tvSavingProduct.contentDescription = "Tipe kartu adalah ${balanceInquiry.accountType}"
                 binding.cardCustomer.tvExpDate.text = formattedExpDate
                 binding.cardCustomer.tvExpDate.contentDescription = formattedExpDate
+
+                Snackbar.make(binding.root, "Data berhasil dimuat", Snackbar.LENGTH_LONG).show()
             }
         }
 

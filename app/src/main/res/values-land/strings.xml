@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Connect BCA</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="by_bca">by BCA</string>
+    <string name="e_wallet">E-Wallet</string>
+    <string name="lupa_kata_sandi">Lupa Kata Sandi?</string>
+    <string name="masuk">Masuk</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="qris">QRIS</string>
+    <string name="transfer">Transfer</string>
     <string name="welcome">Selamat Datang</string>
-    <string name="logo_content_desc">Connect by BCA</string>
+    <string name="logo_content_desc">Logo Connect by BCA</string>
     <string name="tombol_qris">Tombol Qris</string>
     <string name="tombol_wallet">Tombol Wallet</string>
     <string name="tombol_transfer">Tombol Transfer</string>
@@ -9,6 +26,9 @@
     <string name="title">Title</string>
     <string name="price">Price</string>
     <string name="lihat_nota">Lihat Bukti</string>
+    <string name="qris_description">Akses Cepat ke Qris</string>
+    <string name="transfer_description">Akses Cepat ke Transfer</string>
+    <string name="logo_content_description">Logo Connect by BCA\n</string>
     <string name="back">Back</string>
     <string name="ewallet_description">Akses cepat ke E-Wallet</string>
     <string name="user_id">User ID</string>
@@ -20,6 +40,8 @@
     <string name="forget_password_alert_message">Segera perbarui kata sandi melalui layanan bank terdekat atau hubungi Customer Service kami melalui email :</string>
     <string name="close_button_text">Tutup</string>
     <string name="cs_email">haloconnect@connect.ac.id</string>
+    <string name="close">Tutup</string>
+    <string name="share">Bagikan</string>
     <string name="inquiry_mutation_description">Sedang memuat data</string>
     <string name="transaction_name">Name</string>
     <string name="beneficiary_account_name">Beneficiary Name</string>
@@ -29,7 +51,7 @@
     <string name="home_change_mode_description">Ubah Mode Light atau Dark</string>
     <string name="lihat_notifikasi_description">Tombol Lihat Notifikasi</string>
     <string name="home_main_account_number">145 267 389 5162</string>
-    <string name="copy_to_clipboard">Copy to clipboard</string>
+    <string name="copy_to_clipboard">Nomor rekening disalin</string>
     <string name="currency">Rp</string>
     <string name="card_balance_hidden">***********</string>
     <string name="account_balance_visibility_description">Klik tombol ini untuk lihat saldo</string>
@@ -81,4 +103,27 @@
     <string name="get_date_button_description">Tekan untuk menyimpan pilihan tanggal</string>
     <string name="custom_datepicker_description">Box untuk memilih tanggal</string>
     <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
+    <string name="show_qr">Tampilkan QR</string>
+    <string name="scan_qris">Scan QRIS</string>
+    <string name="scan_qris_button_description">Tombol Scan QR</string>
+    <string name="show_qr_button_description">Tombol Tampilkan QR</string>
+    <string name="flash_on_button_description">Tombol Menyalakan Flash</string>
+    <string name="flash_off_button_description">Tombol Mematikan Flash</string>
+    <string name="gallery_button_description">Tombol upload kode qr dari galeri</string>
+    <string name="qr_logo_description">Gambar Logo QRIS</string>
+    <string name="qr_scanner_description">QR Scanner</string>
+    <string name="repeat_button_description">Tombol Ulangi</string>
+    <string name="qr_not_found">Kode QR tidak ditemukan. Bersihkan lensa Anda dan posisikan kamera dengan tepat.</string>
+    <string name="back_to_menu_button_description">Tombol kembali ke menu</string>
+    <string name="logo">Logo</string>
+    <string name="new_target">Tujuan Baru</string>
+    <string name="enter_recipient_data">Masukkan Data Penerima Baru</string>
+    <string name="bank_name">Nama Bank Tujuan</string>
+    <string name="account_number_title">Nomor Rekening</string>
+    <string-array name="spinner">
+        <item>Frekuensi Transfer</item>
+        <item>Satu Kali</item>
+        <item>Mingguan</item>
+        <item>Bulanan</item>
+    </string-array>
 </resources>

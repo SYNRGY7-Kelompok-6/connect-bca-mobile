@@ -7,15 +7,18 @@ import com.team6.connectbca.data.datasource.interfaces.auth.AuthLocalDataSource
 import com.team6.connectbca.data.datasource.interfaces.auth.AuthRemoteDataSource
 import com.team6.connectbca.data.datasource.interfaces.bankstatement.BankStatementRemoteDataSource
 import com.team6.connectbca.data.datasource.interfaces.qris.QrisRemoteDataSource
+import com.team6.connectbca.data.datasource.interfaces.transfer.TransferRemoteDataSource
 import com.team6.connectbca.data.datasource.local.AuthLocalDataSourceImpl
 import com.team6.connectbca.data.datasource.remote.AccountMonthlyRemoteDataSourceImpl
 import com.team6.connectbca.data.datasource.remote.AuthRemoteDataSourceImpl
 import com.team6.connectbca.data.datasource.remote.BankStatementRemoteDataSourceImpl
 import com.team6.connectbca.data.datasource.services.AccountMonthlyService
 import com.team6.connectbca.data.datasource.remote.QrisRemoteDataSourceImpl
+import com.team6.connectbca.data.datasource.remote.TransferRemoteDataSourceImpl
 import com.team6.connectbca.data.datasource.services.BankStatementService
 import com.team6.connectbca.data.datasource.services.LoginService
 import com.team6.connectbca.data.datasource.services.QrisService
+import com.team6.connectbca.data.datasource.services.TransferService
 import com.team6.connectbca.data.datasource.services.datastore
 import com.team6.connectbca.data.datasource.services.provideAccountMonthlyService
 import com.team6.connectbca.data.datasource.services.provideBankStatementService
@@ -28,13 +31,17 @@ import com.team6.connectbca.domain.repository.AuthRepository
 import com.team6.connectbca.domain.repository.BankStatementRepository
 import com.team6.connectbca.domain.usecase.GetAccountMonthlyUseCase
 import com.team6.connectbca.data.datasource.services.provideQrisService
+import com.team6.connectbca.data.datasource.services.provideTransferService
 import com.team6.connectbca.data.repository.QrisRepositoryImpl
+import com.team6.connectbca.data.repository.TransferRepositoryImpl
 import com.team6.connectbca.domain.repository.QrisRepository
+import com.team6.connectbca.domain.repository.TransferRepository
 import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
 import com.team6.connectbca.domain.usecase.GetDateRangeMutationUseCase
 import com.team6.connectbca.domain.usecase.GetMutationUseCase
 import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
 import com.team6.connectbca.domain.usecase.GetThisMonthMutationUseCase
+import com.team6.connectbca.domain.usecase.GetTransactionDetailUseCase
 import com.team6.connectbca.domain.usecase.LoginUseCase
 import com.team6.connectbca.domain.usecase.LogoutUseCase
 import com.team6.connectbca.domain.usecase.QrVerifyUseCase
@@ -52,7 +59,8 @@ val koinModule = module {
     }
     single<BankStatementRepository> { BankStatementRepositoryImpl(remoteDataSource = get()) }
     single<AccountMonthlyRepository> { AccountMonthlyRepositoryImpl(accountMonthlyRemoteDataSource = get()) }
-    single<QrisRepository> { QrisRepositoryImpl(qrisRemoteDataSource = get()) }
+    single<QrisRepository> { QrisRepositoryImpl(qrisRemoteDataSource = get())}
+    single<TransferRepository> { TransferRepositoryImpl(transferRemoteDataSource = get()) }
 
     // Data Sources
     single<AuthLocalDataSource> { AuthLocalDataSourceImpl(dataStore = get()) }
@@ -64,6 +72,7 @@ val koinModule = module {
         )
     }
     single<QrisRemoteDataSource> { QrisRemoteDataSourceImpl(qrisService = get()) }
+    single<TransferRemoteDataSource> { TransferRemoteDataSourceImpl(transferService = get()) }
 
     // Data Store
     single<DataStore<Preferences>> { androidContext().datastore }
@@ -73,6 +82,7 @@ val koinModule = module {
     single<BankStatementService> { provideBankStatementService(androidContext(), get()) }
     single<AccountMonthlyService> { provideAccountMonthlyService(androidContext(), get()) }
     single<QrisService> { provideQrisService(androidContext(), get()) }
+    single<TransferService> { provideTransferService(androidContext(), get()) }
 
     // Use Cases
     single { LoginUseCase(authRepository = get()) }
@@ -85,5 +95,6 @@ val koinModule = module {
     single { GetDateRangeMutationUseCase(bankStatementRepository = get()) }
     single { QrVerifyUseCase(qrisRepository = get()) }
     single { ShowQrUseCase(qrisRepository = get()) }
+    single { GetTransactionDetailUseCase(transferRepository = get()) }
 
 }

@@ -35,7 +35,6 @@ class MonthMutationViewModel(
 
                 if (data != null) {
                     _monthMutation.value = data
-                    Log.i("HASIL DATA", data.toString())
                 } else {
                     _monthMutation.value = null
                 }

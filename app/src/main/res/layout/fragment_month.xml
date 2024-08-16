@@ -6,7 +6,7 @@
     android:id="@+id/dailyMutationList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.MonthMutationFragment">
+    tools:context=".ui.fragment.mutation.MonthMutationFragment">
 
     <TextView
         android:id="@+id/tvNoMutationMonth"

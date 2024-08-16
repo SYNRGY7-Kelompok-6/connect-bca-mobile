@@ -18,6 +18,7 @@
         <item name="iconTint">@color/neutral01</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="isLightTheme">false</item>
+        <item name="colorBackgroundInput">@color/neutral04</item>
     </style>
 
     <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.Material3.MaterialCalendar">
@@ -73,4 +74,12 @@
         <item name="android:layout_height">82dp</item>
     </style>
 
+    <!-- Style for TextInputLayout -->
+    <style name="Widget.Material3.TextInputLayout.OutlinedBox"
+        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">?attr/colorBackgroundInput</item>
+        <item name="boxStrokeErrorColor">?attr/colorError</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+    </style>
 </resources>
