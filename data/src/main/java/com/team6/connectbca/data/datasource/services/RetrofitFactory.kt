@@ -6,7 +6,6 @@ import com.google.gson.Gson
 import com.team6.connectbca.data.BASE_JS_URL
 import com.team6.connectbca.data.BASE_URL
 import com.team6.connectbca.data.datasource.interfaces.auth.AuthLocalDataSource
-import com.team6.connectbca.domain.repository.AuthRepository
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -106,4 +105,15 @@ fun provideQrisService(
         BASE_JS_URL,
         authLocalDataSource
     ).create(QrisService::class.java)
+}
+
+fun provideTransferService(
+    context: Context,
+    authLocalDataSource: AuthLocalDataSource
+) : TransferService {
+    return provideRetrofitBuilder(
+        context,
+        BASE_URL,
+        authLocalDataSource
+    ). create(TransferService::class.java)
 }

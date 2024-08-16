@@ -2,6 +2,8 @@ package com.team6.connectbca.data.model.response
 
 import com.google.gson.annotations.SerializedName
 import com.team6.connectbca.domain.model.Transfer
+import com.team6.connectbca.domain.model.TransferData
+import com.team6.connectbca.domain.model.TransactionAmount
 
 data class TransferIntrabankResponse(
     @SerializedName("status")
@@ -13,8 +15,12 @@ data class TransferIntrabankResponse(
     @SerializedName("data")
     val data: TransferIntrabankData
 ) {
-    fun toEntity() : Transfer {
-        return Transfer()
+    fun toEntity(): Transfer {
+        return Transfer(
+            status = this.status,
+            message = this.message,
+            data = this.data.toEntity()
+        )
     }
 }
 
@@ -48,7 +54,22 @@ data class TransferIntrabankData(
 
     @SerializedName("sourceName")
     val sourceName: String
-)
+) {
+    fun toEntity(): TransferData {
+        return TransferData(
+            refNumber = this.refNumber,
+            transactionId = this.transactionId,
+            amount = this.amount.toTransactionAmount(),
+            transactionDate = this.transactionDate,
+            remark = this.remark,
+            desc = this.desc,
+            beneficiaryAccountNumber = this.beneficiaryAccountNumber,
+            beneficiaryName = this.beneficiaryName,
+            sourceAccountNumber = this.sourceAccountNumber,
+            sourceName = this.sourceName
+        )
+    }
+}
 
 data class Amount(
     @SerializedName("value")
@@ -56,4 +77,11 @@ data class Amount(
 
     @SerializedName("currency")
     val currency: String
-)
+) {
+    fun toTransactionAmount(): TransactionAmount {
+        return TransactionAmount(
+            value = this.value,
+            currency = this.currency
+        )
+    }
+}
