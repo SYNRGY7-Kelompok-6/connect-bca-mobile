@@ -70,8 +70,7 @@ class QrisFragment : Fragment() {
                 viewModel.verifyQr(it.text)
                 viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
                     if (isSuccess) {
-                        val action =
-                            com.team6.connectbca.ui.fragment.QrisFragmentDirections.actionQrisFragmentToQrisPaymentFragment()
+                        val action = QrisFragmentDirections.actionQrisFragmentToQrisPaymentFragment()
                         findNavController().navigate(action)
                     }
                 }

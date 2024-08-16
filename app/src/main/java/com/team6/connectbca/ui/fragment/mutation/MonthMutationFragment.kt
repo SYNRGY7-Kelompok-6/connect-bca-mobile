@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.databinding.FragmentMonthBinding
 import com.team6.connectbca.domain.model.MonthMutationListItem
-import com.team6.connectbca.ui.fragment.MutationFragmentDirections
 import com.team6.connectbca.ui.fragment.adapter.monthmutation.MonthMutationAdapter
 import com.team6.connectbca.ui.fragment.adapter.monthmutation.MonthMutationAdapterListener
 import com.team6.connectbca.ui.viewmodel.MonthMutationViewModel

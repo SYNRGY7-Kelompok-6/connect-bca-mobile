@@ -47,46 +47,48 @@ class PaymentReceiptFragment : Fragment() {
     }
 
     private fun setData() {
-        val transactionId = arguments?.getString("transactionId")!!
+        val transactionId = arguments?.getString("transactionId")
 
-        viewModel.getTransactionDetail(transactionId).observe(viewLifecycleOwner) {transaction ->
-            if (transaction != null) {
-                val date = milisecondToDateMonth(transaction.transactionDate!!, "dd MMM yyyy • HH:mm:ss zzz")
-                val amount = getFormattedBalance(transaction.amount!!)
-                val sourceNumOld = transaction.sourceAccountNumber!!.substring(0..6)
+        if (transactionId != null) {
+            viewModel.getTransactionDetail(transactionId).observe(viewLifecycleOwner) {transaction ->
+                if (transaction != null) {
+                    val date = milisecondToDateMonth(transaction.transactionDate!!, "dd MMM yyyy • HH:mm:ss zzz")
+                    val amount = getFormattedBalance(transaction.amount!!)
+                    val sourceNumOld = transaction.sourceAccountNumber!!.substring(0..6)
 
-                binding.tvTitle.text = transaction.remark
-                binding.tvDate.text = date
-                binding.tvRefNumber.text = "No. Ref: ${transaction.refNumber}"
-                binding.tvRecipientName.text = transaction.beneficiaryName
-                binding.tvTotalTransaction.text = "Rp $amount"
-                binding.tvSourceName.text = transaction.sourceName
-                binding.tvSourceBank.text = transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
-                binding.tvAcquirer.text = "Bank BCA"
-                binding.btnClose.setOnClickListener { parentFragmentManager.popBackStack() }
-                binding.btnShare.setOnClickListener { shareInvoice() }
+                    binding.tvTitle.text = transaction.remark
+                    binding.tvDate.text = date
+                    binding.tvRefNumber.text = "No. Ref: ${transaction.refNumber}"
+                    binding.tvRecipientName.text = transaction.beneficiaryName
+                    binding.tvTotalTransaction.text = "Rp $amount"
+                    binding.tvSourceName.text = transaction.sourceName
+                    binding.tvSourceBank.text = transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
+                    binding.tvAcquirer.text = "Bank BCA"
+                    binding.btnClose.setOnClickListener { parentFragmentManager.popBackStack() }
+                    binding.btnShare.setOnClickListener { shareInvoice() }
 
-                binding.tvTitle.contentDescription = transaction.remark
-                binding.tvDate.contentDescription = date
-                binding.tvRefNumber.contentDescription = "No. Ref: ${transaction.refNumber}"
-                binding.tvRecipientName.contentDescription = transaction.beneficiaryName
-                binding.tvTotalTransaction.contentDescription = "$amount rupiah"
-                binding.tvSourceName.contentDescription = transaction.sourceName
-                binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
-                binding.tvAcquirer.contentDescription = "Bank BCA"
-                binding.btnClose.setOnClickListener { parentFragmentManager.popBackStack() }
-                binding.btnShare.setOnClickListener { shareInvoice() }
+                    binding.tvTitle.contentDescription = transaction.remark
+                    binding.tvDate.contentDescription = date
+                    binding.tvRefNumber.contentDescription = "No. Ref: ${transaction.refNumber}"
+                    binding.tvRecipientName.contentDescription = transaction.beneficiaryName
+                    binding.tvTotalTransaction.contentDescription = "$amount rupiah"
+                    binding.tvSourceName.contentDescription = transaction.sourceName
+                    binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
+                    binding.tvAcquirer.contentDescription = "Bank BCA"
+                    binding.btnClose.setOnClickListener { parentFragmentManager.popBackStack() }
+                    binding.btnShare.setOnClickListener { shareInvoice() }
 
-                if (!transaction.remark.equals("qris")) {
-                    binding.tvQrisRefLabel.visibility = View.GONE
-                    binding.tvQrisRef.visibility = View.GONE
-                    binding.tvMerchantPanLabel.visibility = View.GONE
-                    binding.tvMerchantPan.visibility = View.GONE
-                    binding.tvCustomerPanLabel.visibility = View.GONE
-                    binding.tvCustomerPan.visibility = View.GONE
+                    if (!transaction.remark.equals("qris")) {
+                        binding.tvQrisRefLabel.visibility = View.GONE
+                        binding.tvQrisRef.visibility = View.GONE
+                        binding.tvMerchantPanLabel.visibility = View.GONE
+                        binding.tvMerchantPan.visibility = View.GONE
+                        binding.tvCustomerPanLabel.visibility = View.GONE
+                        binding.tvCustomerPan.visibility = View.GONE
+                    }
+
+                    Snackbar.make(binding.root, "Bukti transaksi berhasil dimuat", Snackbar.LENGTH_LONG).show()
                 }
-
-                Snackbar.make(binding.root, "Bukti transaksi berhasil dimuat", Snackbar.LENGTH_LONG).show()
             }
         }
     }
