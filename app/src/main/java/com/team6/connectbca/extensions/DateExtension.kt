@@ -34,7 +34,7 @@ fun getFirstOfMonthDate() : String {
 
 fun milisecondToDateMonth(milisecond: Long, format: String) : String {
     val date = Date(milisecond)
-    val formatter = SimpleDateFormat(format, Locale.getDefault())
+    val formatter = SimpleDateFormat(format, Locale("id", "ID"))
 
     return formatter.format(date)
 }
@@ -47,9 +47,9 @@ fun getNonZeroMonth() : String {
 }
 
 fun reformatDate(date: String, sourceFormat: String, format: String) : String {
-    val sourceFormatter = SimpleDateFormat(sourceFormat, Locale.getDefault())
+    val sourceFormatter = SimpleDateFormat(sourceFormat, Locale("id", "ID"))
     val converted = sourceFormatter.parse(date)
-    val resultFormatter = SimpleDateFormat(format, Locale.getDefault())
+    val resultFormatter = SimpleDateFormat(format, Locale("id", "ID"))
 
     return resultFormatter.format(converted)
 }

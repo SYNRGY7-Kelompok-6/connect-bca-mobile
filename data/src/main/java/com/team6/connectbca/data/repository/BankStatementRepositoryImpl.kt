@@ -67,9 +67,9 @@ class BankStatementRepositoryImpl(
     }
 
     private fun reformatDate(date: String) : String {
-        val sourceFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val sourceFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("id", "ID"))
         val converted = sourceFormatter.parse(date)
-        val resultFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val resultFormatter = SimpleDateFormat("dd-MM-yyyy", Locale("id", "ID"))
 
         return resultFormatter.format(converted)
     }
