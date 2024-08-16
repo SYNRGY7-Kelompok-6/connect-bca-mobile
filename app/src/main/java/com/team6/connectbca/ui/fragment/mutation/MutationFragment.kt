@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,7 +77,7 @@ class MutationFragment : Fragment() {
     }
 
     private fun setupTabLayout() {
-        val adapter = TabPagerAdapter(parentFragmentManager, lifecycle)
+        val adapter = TabPagerAdapter(childFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -135,7 +136,6 @@ class MutationFragment : Fragment() {
             }
         })
     }
-
 
     private fun setData() {
         viewModel.getBalanceInquiry().observe(viewLifecycleOwner) { balanceInquiry ->

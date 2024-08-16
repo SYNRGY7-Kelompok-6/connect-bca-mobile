@@ -20,5 +20,5 @@ val viewModelModule = module {
     viewModel { MonthMutationViewModel(getThisMonthMutationUseCase = get()) }
     viewModel { SearchMutationViewModel(getDateRangeMutationUseCase = get()) }
     viewModel { QrisViewModel(qrisVerifyUseCase = get(), getSessionDataUseCase = get()) }
-    viewModel { TransferViewModel(getTransactionDetailUseCase = get()) }
+    viewModel { TransferViewModel(getTransactionDetailUseCase = get(), transferUseCase = get()) }
 }

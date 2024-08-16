@@ -78,7 +78,7 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
     }
 
     private fun navigateToPaymentReceipt(transactionId: String) {
-        val action = MutationFragmentDirections.actionMutationFragmentToPaymentReceiptFragment(transactionId)
+        val action = MutationFragmentDirections.actionMutationFragmentToPaymentReceiptFragment(transactionId, true)
         findNavController().navigate(action)
     }
 }

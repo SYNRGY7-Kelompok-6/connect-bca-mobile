@@ -11,10 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.databinding.FragmentPaymentReceiptBinding
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.milisecondToDateMonth
+import com.team6.connectbca.ui.fragment.mutation.MutationFragmentDirections
 import com.team6.connectbca.ui.viewmodel.TransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -57,6 +59,7 @@ class PaymentReceiptFragment : Fragment() {
 
     private fun setData() {
         val transactionId = arguments?.getString("transactionId")
+        val isFromMutation = arguments?.getBoolean("isFromMutation")!!
 
         if (transactionId != null) {
             viewModel.getTransactionDetail(transactionId).observe(viewLifecycleOwner) {transaction ->
@@ -66,7 +69,6 @@ class PaymentReceiptFragment : Fragment() {
                     val sourceNumOld = transaction.sourceAccountNumber!!.substring(0..6)
 
                     binding.tvTitle.text = transaction.remark
-                    binding.tvTransactionDesc.text = transaction.desc
                     binding.tvDate.text = date
                     binding.tvRefNumber.text = "No. Ref: ${transaction.refNumber}"
                     binding.tvRecipientName.text = transaction.beneficiaryName
@@ -74,8 +76,14 @@ class PaymentReceiptFragment : Fragment() {
                     binding.tvTotalTransaction.text = "Rp $amount"
                     binding.tvSourceName.text = transaction.sourceName
                     binding.tvSourceBank.text = transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
-                    binding.btnClose.setOnClickListener { parentFragmentManager.popBackStack() }
                     binding.btnShare.setOnClickListener { shareInvoice() }
+                    binding.btnClose.setOnClickListener {
+                        if (isFromMutation) {
+                            navigateToMutation()
+                        } else {
+                            navigateToHome()
+                        }
+                    }
 
                     binding.tvTotalTransaction.contentDescription = "$amount rupiah"
                     binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
@@ -86,6 +94,7 @@ class PaymentReceiptFragment : Fragment() {
                         hideTransferView()
                     } else {
                         binding.tvStatus.text = "Transfer Berhasil!"
+                        binding.tvTransactionDesc.text = transaction.desc
                         hideQrisView()
                     }
 
@@ -182,5 +191,16 @@ class PaymentReceiptFragment : Fragment() {
         binding.tvCustomerPan.visibility = View.GONE
         binding.tvAcquirerLabel.visibility = View.GONE
         binding.tvAcquirer.visibility = View.GONE
+    }
+
+    private fun navigateToHome() {
+        val action =
+            PaymentReceiptFragmentDirections.actionPaymentReceiptFragmentToHomeFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToMutation() {
+        val action = PaymentReceiptFragmentDirections.actionPaymentReceiptFragmentToMutationFragment()
+        findNavController().navigate(action)
     }
 }
