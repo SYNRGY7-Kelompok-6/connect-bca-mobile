@@ -31,11 +31,11 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <TextView
-        android:id="@+id/transaction_name"
+        android:id="@+id/beneficiary_account_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/transaction_name"
+        android:text="@string/beneficiary_account_name"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,13 +43,13 @@
         app:layout_constraintTop_toBottomOf="@id/qris_logo" />
 
     <TextView
-        android:id="@+id/beneficiary_account_name"
+        android:id="@+id/remark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/beneficiary_account_name"
+        android:text="@string/remark"
         app:layout_constraintEnd_toStartOf="@id/dot_icon"
 
-        app:layout_constraintTop_toBottomOf="@id/transaction_name" />
+        app:layout_constraintTop_toBottomOf="@id/beneficiary_account_name" />
 
     <ImageView
         android:id="@+id/dot_icon"
@@ -59,7 +59,7 @@
         android:src="@drawable/ic_dot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transaction_name" />
+        app:layout_constraintTop_toBottomOf="@id/beneficiary_account_name" />
 
 
     <TextView
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:text="@string/beneficiary_account_number"
         app:layout_constraintStart_toEndOf="@id/dot_icon"
-        app:layout_constraintTop_toTopOf="@id/beneficiary_account_name" />
+        app:layout_constraintTop_toTopOf="@id/remark" />
 
     <TextView
         android:id="@+id/tv_transaction_nominal"

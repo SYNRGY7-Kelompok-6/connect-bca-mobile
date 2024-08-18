@@ -65,9 +65,26 @@
                 android:layout_height="wrap_content"
                 android:text="BINAR ACADEMY"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@id/icDot"
+                app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+            <ImageView
+                android:id="@+id/icDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dot"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+            <TextView
+                android:id="@+id/tvAccountNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/account_number"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/icDot"
+                app:layout_constraintTop_toTopOf="@+id/tvBank" />
 
             <ImageView
                 android:id="@+id/ivQrCode"
@@ -101,35 +118,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivQrCode" />
 
-            <TextView
-                android:id="@+id/tvExpired"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Berlaku hingga 03:06 WIB"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvNote" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardRefresh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:contentDescription="Tombol refresh"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvExpired">
+            <!--            <androidx.cardview.widget.CardView-->
+            <!--                android:id="@+id/cardRefresh"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:contentDescription="Tombol refresh"-->
+            <!--                app:cardBackgroundColor="@android:color/transparent"-->
+            <!--                app:cardElevation="0dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tvNote">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_item"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_refresh" />
-            </androidx.cardview.widget.CardView>
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:background="@drawable/button_item"-->
+            <!--                    android:padding="15dp"-->
+            <!--                    android:src="@drawable/ic_refresh" />-->
+            <!--            </androidx.cardview.widget.CardView>-->
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardShare"
@@ -141,7 +149,7 @@
                 app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvExpired">
+                app:layout_constraintTop_toBottomOf="@id/tvNote">
 
                 <ImageView
                     android:layout_width="wrap_content"

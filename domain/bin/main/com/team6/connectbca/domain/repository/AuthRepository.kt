@@ -6,4 +6,5 @@ interface AuthRepository {
     suspend fun getSessionData() : Map<String, Any>
     suspend fun clearToken()
     suspend fun clearSessionTime()
+    suspend fun pinValidation(pin: String): Pin
 }

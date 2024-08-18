@@ -9,7 +9,7 @@ data class Transfer(
 data class TransferData(
     val refNumber: String? = null,
     val transactionId: String? = null,
-    val amount: Amount? = null,
+    val amount: TransferAmount? = null,
     val transactionDate: String? = null,
     val remark: String? = null,
     val desc: String? = null,

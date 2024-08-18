@@ -118,3 +118,11 @@ fun provideTransferService(
         authLocalDataSource
     ).create(TransferService::class.java)
 }
+
+fun providePinService(context: Context,authLocalDataSource: AuthLocalDataSource): PinService {
+    return provideRetrofitBuilder(
+        context,
+        BASE_URL,
+        authLocalDataSource
+    ).create(PinService::class.java)
+}

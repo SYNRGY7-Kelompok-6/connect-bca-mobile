@@ -108,6 +108,8 @@
     <string name="repeat_button_description">Tombol Ulangi</string>
     <string name="qr_not_found">Kode QR tidak ditemukan. Bersihkan lensa Anda dan posisikan kamera dengan tepat.</string>
     <string name="back_to_menu_button_description">Tombol kembali ke menu</string>
+    <string name="remark">Remark</string>
+
     <string name="logo">Logo</string>
     <string name="new_target">Tujuan Baru</string>
     <string name="enter_recipient_data">Masukkan Data Penerima Baru</string>

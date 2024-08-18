@@ -25,11 +25,14 @@ data class ShowQrResponse(
 
 data class ShowQrDataResponse(
     @field:SerializedName("qrImage")
-    val qrImage: String
+    val qrImage: String,
+    @field:SerializedName("expiresAt")
+    val expiresAt: Long? = null,
 ) {
     fun toEntity(): ShowQrData {
         return ShowQrData(
-            qrImage = this.qrImage
+            qrImage = this.qrImage,
+            expiresAt = this.expiresAt
         )
     }
 }
