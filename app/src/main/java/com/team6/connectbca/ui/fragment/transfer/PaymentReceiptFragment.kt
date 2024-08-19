@@ -28,6 +28,7 @@ class PaymentReceiptFragment : Fragment() {
     private var _binding: FragmentPaymentReceiptBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<TransferViewModel>()
+    private val isFromMutation = arguments?.getBoolean("isFromMutation")!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,9 +58,17 @@ class PaymentReceiptFragment : Fragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isFromMutation) {
+            navigateToMutation()
+        } else {
+            navigateToHome()
+        }
+    }
+
     private fun setData() {
         val transactionId = arguments?.getString("transactionId")
-        val isFromMutation = arguments?.getBoolean("isFromMutation")!!
 
         if (transactionId != null) {
             viewModel.getTransactionDetail(transactionId).observe(viewLifecycleOwner) {transaction ->
@@ -89,7 +98,7 @@ class PaymentReceiptFragment : Fragment() {
                     binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
                     binding.tvBeneficiaryBank.contentDescription = "Nomor rekening ${binding.tvBeneficiaryBank.text}"
 
-                    if (transaction.remark.equals("QRIS Transfer")) {
+                    if (transaction.remark.equals("Qris Transfer")) {
                         binding.tvStatus.text = "Pembayaran Berhasil!"
                         hideTransferView()
                     } else {

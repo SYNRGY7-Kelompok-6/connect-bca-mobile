@@ -17,8 +17,8 @@
             android:id="@+id/action_homeFragment_to_mutationFragment"
             app:destination="@id/mutationFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_favoritesTransferFragment"
-            app:destination="@id/favoritesTransferFragment" />
+            android:id="@+id/action_homeFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
     </fragment>
     <fragment
         android:id="@+id/mutationFragment"
@@ -44,11 +44,6 @@
         android:label="fragment_qris_payment"
         tools:layout="@layout/fragment_qris_payment" />
     <fragment
-        android:id="@+id/favoritesTransferFragment"
-        android:name="com.team6.connectbca.ui.fragment.transfer.FavoritesTransferFragment"
-        android:label="fragment_favorites_transfer"
-        tools:layout="@layout/fragment_favorites_transfer" />
-    <fragment
         android:id="@+id/paymentReceiptFragment"
         android:name="com.team6.connectbca.ui.fragment.transfer.PaymentReceiptFragment"
         android:label="fragment_payment_receipt"
@@ -66,4 +61,56 @@
             android:id="@+id/action_paymentReceiptFragment_to_mutationFragment"
             app:destination="@id/mutationFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="com.team6.connectbca.ui.fragment.transfer.TransferFragment"
+        android:label="TransferFragment" >
+        <action
+            android:id="@+id/action_transferFragment_to_newDestinationFragment"
+            app:destination="@id/newDestinationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newDestinationFragment"
+        android:name="com.team6.connectbca.ui.fragment.transfer.NewDestinationFragment"
+        android:label="fragment_new_destination"
+        tools:layout="@layout/fragment_new_destination" >
+        <argument
+            android:name="selectedBankName"
+            app:argType="string" />
+        <argument
+            android:name="accountNumber"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_newDestinationFragment_to_findDestinationBankFragment"
+            app:destination="@id/findDestinationBankFragment" />
+        <action
+            android:id="@+id/action_newDestinationFragment_to_recepientDetailFragment"
+            app:destination="@id/recepientDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/findDestinationBankFragment"
+        android:name="com.team6.connectbca.ui.fragment.transfer.FindDestinationBankFragment"
+        android:label="fragment_find_destination_bank"
+        tools:layout="@layout/fragment_find_destination_bank" >
+        <argument
+            android:name="selectedBank"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_findDestinationBankFragment_to_newDestinationFragment"
+            app:destination="@id/newDestinationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recepientDetailFragment"
+        android:name="com.team6.connectbca.ui.fragment.transfer.RecepientDetailFragment"
+        android:label="fragment_recepient_detail"
+        tools:layout="@layout/fragment_recepient_detail" >
+        <action
+            android:id="@+id/action_recepientDetailFragment_to_inputTransferAmountFragment2"
+            app:destination="@id/inputTransferAmountFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputTransferAmountFragment2"
+        android:name="com.team6.connectbca.ui.fragment.transfer.InputTransferAmountFragment"
+        android:label="fragment_input_transfer_amount"
+        tools:layout="@layout/fragment_input_transfer_amount" />
 </navigation>

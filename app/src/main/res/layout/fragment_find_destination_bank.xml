@@ -28,9 +28,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Batal"
-        android:background="?attr/colorPrimary"
-        android:layout_margin="4dp"
-        app:cornerRadius="20dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:layout_marginEnd="20dp"
+        app:cornerRadius="8dp"
         app:layout_constraintTop_toTopOf="@id/searchView"
         app:layout_constraintBottom_toBottomOf="@id/searchView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="18dp"
-            android:text="Bank Utama"/>
+            android:text="Bank Utama"
+            android:textColor="?android:textColorPrimary"/>
 
         <include
             android:id="@+id/itemBCA"
@@ -78,7 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="18dp"
-            android:text="Bank Tujuan Lain"/>
+            android:text="Bank Tujuan Lain"
+            android:textColor="?android:textColorPrimary"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAnotherDestinationBank"

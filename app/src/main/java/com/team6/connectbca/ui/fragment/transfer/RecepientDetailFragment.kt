@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.team6.connectbca.databinding.FragmentRecepientDetailBinding
-import com.team6.connectbca.ui.activity.InputTransferAmountActivity
+import com.team6.connectbca.ui.fragment.HomeFragmentDirections
 
 class RecepientDetailFragment : Fragment() {
 
@@ -37,9 +37,9 @@ class RecepientDetailFragment : Fragment() {
     }
 
     private fun setupContinueButtonBinding() {
+        val action = HomeFragmentDirections.actionHomeFragmentToMutationFragment()
         binding.continueButton.setOnClickListener {
-            val intent = Intent(requireContext(), InputTransferAmountActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(action)
         }
     }
 }

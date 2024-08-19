@@ -56,8 +56,7 @@ class FindDestinationBankFragment : Fragment() {
         destinationBankAdapter = DestinationBankAdapter(emptyList()) { selectedBank ->
             val action = FindDestinationBankFragmentDirections
                 .actionFindDestinationBankFragmentToNewDestinationFragment(
-                    selectedBank.beneficiaryAccountName ?: "BCA"
-                )
+                    selectedBank.beneficiaryAccountName ?: "BCA", "")
             findNavController().navigate(action)
         }
 

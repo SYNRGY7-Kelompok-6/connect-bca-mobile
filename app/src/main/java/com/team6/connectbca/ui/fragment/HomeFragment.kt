@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentHomeBinding
-import com.team6.connectbca.ui.activity.TransferActivity
 
 class HomeFragment : Fragment() {
 
@@ -65,8 +64,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToTransfer() {
-        val intent = Intent(requireContext(), TransferActivity::class.java)
-        startActivity(intent)
+        val action = HomeFragmentDirections.actionHomeFragmentToTransferFragment()
+        findNavController().navigate(action)
     }
 
     private fun copyToClipboard(text: String) {
