@@ -52,7 +52,8 @@ class PaymentReceiptFragment : Fragment() {
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat data transfer", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Gagal memuat data transfer", Snackbar.LENGTH_LONG)
+                    .show()
             }
         }
     }
@@ -62,45 +63,49 @@ class PaymentReceiptFragment : Fragment() {
         val isFromMutation = arguments?.getBoolean("isFromMutation")!!
 
         if (transactionId != null) {
-            viewModel.getTransactionDetail(transactionId).observe(viewLifecycleOwner) {transaction ->
-                if (transaction != null) {
-                    val date = milisecondToDateMonth(transaction.transactionDate!!, "dd MMM yyyy • HH:mm:ss zzz")
-                    val amount = getFormattedBalance(transaction.amount!!)
-                    val sourceNumOld = transaction.sourceAccountNumber!!.substring(0..6)
+            viewModel.getTransactionDetail(transactionId)
+                .observe(viewLifecycleOwner) { transaction ->
+                    if (transaction != null) {
+                        val date = milisecondToDateMonth(
+                            transaction.transactionDate!!,
+                            "dd MMM yyyy • HH:mm:ss zzz"
+                        )
+                        val amount = getFormattedBalance(transaction.amount!!)
+                        val sourceNumOld = transaction.sourceAccountNumber!!.substring(0..6)
 
-                    binding.tvTitle.text = transaction.remark
-                    binding.tvDate.text = date
-                    binding.tvRefNumber.text = "No. Ref: ${transaction.refNumber}"
-                    binding.tvRecipientName.text = transaction.beneficiaryName
-                    binding.tvBeneficiaryBank.text = transaction.beneficiaryAccountNumber
-                    binding.tvTotalTransaction.text = "Rp $amount"
-                    binding.tvSourceName.text = transaction.sourceName
-                    binding.tvSourceBank.text = transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
-                    binding.btnShare.setOnClickListener { shareInvoice() }
-                    binding.btnClose.setOnClickListener {
-                        if (isFromMutation) {
-                            navigateToMutation()
-                        } else {
-                            navigateToHome()
+                        binding.tvTitle.text = transaction.remark
+                        binding.tvDate.text = date
+                        binding.tvRefNumber.text = "No. Ref: ${transaction.refNumber}"
+                        binding.tvRecipientName.text = transaction.beneficiaryName
+                        binding.tvBeneficiaryBank.text = transaction.beneficiaryAccountNumber
+                        binding.tvTotalTransaction.text = "Rp $amount"
+                        binding.tvSourceName.text = transaction.sourceName
+                        binding.tvSourceBank.text = transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
+                        binding.btnShare.setOnClickListener { shareInvoice() }
+                        binding.btnClose.setOnClickListener {
+                            if (isFromMutation) {
+                                navigateToMutation()
+                            } else {
+                                navigateToHome()
+                            }
                         }
+
+                        binding.tvTotalTransaction.contentDescription = "$amount rupiah"
+                        binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
+                        binding.tvBeneficiaryBank.contentDescription = "Nomor rekening ${binding.tvBeneficiaryBank.text}"
+
+                        if (transaction.remark.equals("QRIS Transfer")) {
+                            binding.tvStatus.text = "Pembayaran Berhasil!"
+                            hideTransferView()
+                        } else {
+                            binding.tvStatus.text = "Transfer Berhasil!"
+                            binding.tvTransactionDesc.text = transaction.desc
+                            hideQrisView()
+                        }
+
+                        Snackbar.make(binding.root, "Bukti transaksi berhasil dimuat", Snackbar.LENGTH_LONG).show()
                     }
-
-                    binding.tvTotalTransaction.contentDescription = "$amount rupiah"
-                    binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
-                    binding.tvBeneficiaryBank.contentDescription = "Nomor rekening ${binding.tvBeneficiaryBank.text}"
-
-                    if (transaction.remark.equals("QRIS Transfer")) {
-                        binding.tvStatus.text = "Pembayaran Berhasil!"
-                        hideTransferView()
-                    } else {
-                        binding.tvStatus.text = "Transfer Berhasil!"
-                        binding.tvTransactionDesc.text = transaction.desc
-                        hideQrisView()
-                    }
-
-                    Snackbar.make(binding.root, "Bukti transaksi berhasil dimuat", Snackbar.LENGTH_LONG).show()
                 }
-            }
         }
     }
 

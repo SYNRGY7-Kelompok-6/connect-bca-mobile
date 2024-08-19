@@ -16,6 +16,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here -->
+        <item name="isLightTheme">true</item>
         <item name="colorBackgroundInput">@color/colorPrimaryLight</item>
     </style>
 

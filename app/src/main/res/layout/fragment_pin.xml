@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pin_background"
+    android:background="@drawable/background"
     tools:context=".ui.fragment.pin.PinFragment">
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pinProgressBar"
+        style="@style/ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/pin_loading_description"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivLogo"
@@ -14,51 +27,51 @@
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="12dp"
-        android:src="@drawable/connect_logo_shdw"
         android:contentDescription="Logo"
+        android:src="@drawable/connect_logo_shdw"
         app:layout_constraintBottom_toTopOf="@id/inputPinTitle"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/inputPinTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Masukkan PIN"
-        android:textStyle="bold"
         android:lineSpacingExtra="-6sp"
+        android:text="Masukkan PIN"
         android:textAlignment="center"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/inputPinSubtitle"
-        app:layout_constraintTop_toBottomOf="@id/ivLogo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/inputPinSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Masukkan PIN ATM Anda"
-        android:textStyle="normal"
         android:lineSpacingExtra="-6sp"
+        android:text="Masukkan PIN ATM Anda"
         android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/inputPinTitle"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/inputPinTitle" />
 
     <LinearLayout
         android:id="@+id/pin_circles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginVertical="52dp"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/numeric_keypad"
-        app:layout_constraintTop_toTopOf="@id/inputPinSubtitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="@id/inputPinSubtitle">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/circle1"
@@ -95,13 +108,13 @@
         android:id="@+id/errorMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="PIN yang Anda Masukkan Salah"
         android:textColor="@android:color/holo_red_dark"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/pin_circles"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pin_circles" />
 
     <GridLayout
         android:id="@+id/numeric_keypad"
@@ -111,62 +124,62 @@
         android:rowCount="4"
         android:useDefaultMargins="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_1"
             style="@style/KeypadButton"
-            android:text="1"
-            android:contentDescription="Satu" />
+            android:contentDescription="Satu"
+            android:text="1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_2"
             style="@style/KeypadButton"
-            android:text="2"
-            android:contentDescription="Dua" />
+            android:contentDescription="Dua"
+            android:text="2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_3"
             style="@style/KeypadButton"
-            android:text="3"
-            android:contentDescription="Tiga" />
+            android:contentDescription="Tiga"
+            android:text="3" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_4"
             style="@style/KeypadButton"
-            android:text="4"
-            android:contentDescription="Empat" />
+            android:contentDescription="Empat"
+            android:text="4" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_5"
             style="@style/KeypadButton"
-            android:text="5"
-            android:contentDescription="Lima" />
+            android:contentDescription="Lima"
+            android:text="5" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_6"
             style="@style/KeypadButton"
-            android:text="6"
-            android:contentDescription="Enam" />
+            android:contentDescription="Enam"
+            android:text="6" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_7"
             style="@style/KeypadButton"
-            android:text="7"
-            android:contentDescription="Tujuh" />
+            android:contentDescription="Tujuh"
+            android:text="7" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_8"
             style="@style/KeypadButton"
-            android:text="8"
-            android:contentDescription="Delapan" />
+            android:contentDescription="Delapan"
+            android:text="8" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_9"
             style="@style/KeypadButton"
-            android:text="9"
-            android:contentDescription="Sembilan" />
+            android:contentDescription="Sembilan"
+            android:text="9" />
 
         <View
             android:layout_width="0dp"
@@ -175,18 +188,18 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_0"
             style="@style/KeypadButton"
-            android:text="0"
-            android:contentDescription="Nol" />
+            android:contentDescription="Nol"
+            android:text="0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_delete"
             style="@style/backspaceButton"
-            android:contentDescription="Hapus"
             android:layout_gravity="center"
-            app:iconGravity="textTop"
+            android:contentDescription="Hapus"
             app:icon="@drawable/ic_backspace"
+            app:iconGravity="textTop"
             app:iconSize="38dp"
-            app:iconTint="@color/backspace_color"/>
+            app:iconTint="@color/backspace_color" />
     </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

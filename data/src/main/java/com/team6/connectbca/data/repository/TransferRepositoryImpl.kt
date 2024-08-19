@@ -1,9 +1,9 @@
 package com.team6.connectbca.data.repository
 
 import com.team6.connectbca.data.datasource.interfaces.transfer.TransferRemoteDataSource
-import com.team6.connectbca.data.model.body.TransferIntrabankRequest
-import com.team6.connectbca.data.model.response.Amount
-import com.team6.connectbca.domain.model.TransactionAmount
+import com.team6.connectbca.data.model.body.TransferAmountBody
+import com.team6.connectbca.data.model.body.TransferBody
+import com.team6.connectbca.data.model.response.TransferIntrabankResponse
 import com.team6.connectbca.domain.model.TransactionDetail
 import com.team6.connectbca.domain.model.Transfer
 import com.team6.connectbca.domain.repository.TransferRepository
@@ -15,23 +15,20 @@ class TransferRepositoryImpl(
         return transferRemoteDataSource.getTransactionDetail(transactionId).toEntity()
     }
 
-    override suspend fun makeTransfer(
-        token: String,
+    override suspend fun transfer(
+        pinToken: String,
         beneficiaryAccountNumber: String,
         remark: String,
         desc: String,
-        amount: TransactionAmount
+        amountValue: Double,
+        currency: String
     ): Transfer {
-        val request = TransferIntrabankRequest(
+        val transferBody = TransferBody(
             beneficiaryAccountNumber = beneficiaryAccountNumber,
             remark = remark,
             desc = desc,
-            amount = Amount(
-                value = amount.value ?: 0,
-                currency = amount.currency ?: "IDR"
-            )
+            amount = TransferAmountBody(value = amountValue, currency = currency)
         )
-        val response = transferRemoteDataSource.makeTransfer(token, request)
-        return response.toEntity()
+        return transferRemoteDataSource.transfer(pinToken, transferBody).toEntity()
     }
 }
