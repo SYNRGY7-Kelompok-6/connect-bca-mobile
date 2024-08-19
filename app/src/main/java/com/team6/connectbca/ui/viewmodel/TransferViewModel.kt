@@ -4,16 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.team6.connectbca.domain.model.TransactionAmount
 import com.team6.connectbca.domain.model.TransactionDetailData
 import com.team6.connectbca.domain.usecase.GetTransactionDetailUseCase
+import com.team6.connectbca.domain.usecase.TransferUseCase
 import kotlinx.coroutines.launch
 
 class TransferViewModel(
-    private val getTransactionDetailUseCase: GetTransactionDetailUseCase
+    private val getTransactionDetailUseCase: GetTransactionDetailUseCase,
+    private val transferUseCase: TransferUseCase
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
     private val _transactionDetail = MutableLiveData<TransactionDetailData?>()
+    private val _transferResult = MutableLiveData<TransferUseCase.TransferInfo>()
 
     fun getTransactionDetail(transactionId: String) : LiveData<TransactionDetailData?> {
         viewModelScope.launch {
@@ -35,6 +39,21 @@ class TransferViewModel(
         }
 
         return _transactionDetail
+    }
+
+    fun initiateTransfer(
+        token: String,
+        beneficiaryAccountNumber: String,
+        remark: String,
+        desc: String,
+        amount: TransactionAmount
+    ) : LiveData<TransferUseCase.TransferInfo> {
+        viewModelScope.launch {
+            val result = transferUseCase(token, beneficiaryAccountNumber, remark, desc, amount)
+            _transferResult.postValue(result)
+        }
+
+        return _transferResult
     }
 
     fun getError() : LiveData<Throwable> {

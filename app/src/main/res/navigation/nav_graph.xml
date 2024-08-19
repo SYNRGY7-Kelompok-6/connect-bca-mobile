@@ -101,6 +101,12 @@
         <argument
             android:name="transactionId"
             app:argType="string" />
+        <argument
+            android:name="isFromMutation"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_paymentReceiptFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_paymentReceiptFragment_to_mutationFragment"
             app:destination="@id/mutationFragment" />

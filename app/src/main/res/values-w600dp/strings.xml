@@ -97,12 +97,6 @@
     <string name="search_mutation">Cari Mutasi</string>
     <string name="loading_data_description">Sedang memuat data</string>
     <string name="search_again">Cari Lagi</string>
-    <string name="data_loading_description">Sedang memuat data, harap tunggu</string>
-    <string name="search_mutation_description">Tekan untuk mulai cari mutasi</string>
-    <string name="save_button">Simpan</string>
-    <string name="get_date_button_description">Tekan untuk menyimpan pilihan tanggal</string>
-    <string name="custom_datepicker_description">Box untuk memilih tanggal</string>
-    <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
     <string name="show_qr">Tampilkan QR</string>
     <string name="scan_qris">Scan QRIS</string>
     <string name="scan_qris_button_description">Tombol Scan QR</string>
@@ -120,6 +114,12 @@
     <string name="enter_recipient_data">Masukkan Data Penerima Baru</string>
     <string name="bank_name">Nama Bank Tujuan</string>
     <string name="account_number_title">Nomor Rekening</string>
+    <string name="data_loading_description">Sedang memuat data, harap tunggu</string>
+    <string name="search_mutation_description">Tekan untuk mulai cari mutasi</string>
+    <string name="save_button">Simpan</string>
+    <string name="get_date_button_description">Tekan untuk menyimpan pilihan tanggal</string>
+    <string name="custom_datepicker_description">Box untuk memilih tanggal</string>
+    <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
     <string-array name="spinner">
         <item>Frekuensi Transfer</item>
         <item>Satu Kali</item>

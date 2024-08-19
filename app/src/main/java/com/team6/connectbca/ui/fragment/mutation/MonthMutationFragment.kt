@@ -101,7 +101,7 @@ class MonthMutationFragment : Fragment(), MonthMutationAdapterListener {
 
     private fun navigateToPaymentReceipt(transactionId: String) {
         val action =
-            MutationFragmentDirections.actionMutationFragmentToPaymentReceiptFragment(transactionId)
+            MutationFragmentDirections.actionMutationFragmentToPaymentReceiptFragment(transactionId, true)
         findNavController().navigate(action)
     }
 }

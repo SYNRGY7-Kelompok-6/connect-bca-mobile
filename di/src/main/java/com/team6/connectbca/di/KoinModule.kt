@@ -45,6 +45,7 @@ import com.team6.connectbca.domain.usecase.GetTransactionDetailUseCase
 import com.team6.connectbca.domain.usecase.LoginUseCase
 import com.team6.connectbca.domain.usecase.LogoutUseCase
 import com.team6.connectbca.domain.usecase.QrVerifyUseCase
+import com.team6.connectbca.domain.usecase.TransferUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -85,4 +86,5 @@ val koinModule = module {
     single { GetDateRangeMutationUseCase(bankStatementRepository = get()) }
     single { GetTransactionDetailUseCase(transferRepository = get()) }
     single { QrVerifyUseCase(qrisRepository = get())}
+    single { TransferUseCase(transferRepository = get()) }
 }
