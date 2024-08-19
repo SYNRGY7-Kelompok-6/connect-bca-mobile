@@ -1,5 +1,6 @@
 package com.team6.connectbca.ui.fragment.transfer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.team6.connectbca.databinding.FragmentRecepientDetailBinding
+import com.team6.connectbca.ui.activity.InputTransferAmountActivity
 
 class RecepientDetailFragment : Fragment() {
 
@@ -30,5 +32,14 @@ class RecepientDetailFragment : Fragment() {
 
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.title = "Cek Detail Penerima"
+
+        setupContinueButtonBinding()
+    }
+
+    private fun setupContinueButtonBinding() {
+        binding.continueButton.setOnClickListener {
+            val intent = Intent(requireContext(), InputTransferAmountActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

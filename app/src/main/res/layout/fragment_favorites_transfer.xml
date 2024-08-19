@@ -44,9 +44,7 @@
             app:icon="@drawable/ic_add_people"
             app:cornerRadius="26dp"
             android:backgroundTint="?attr/colorPrimary"
-            android:tint="?attr/colorOnPrimary"
-            />
-
+            android:tint="?attr/colorOnPrimary" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/addNewRecipientText"

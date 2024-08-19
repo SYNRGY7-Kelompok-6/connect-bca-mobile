@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.team6.connectbca.ui.fragment.transfer.InputScheduledTransferAmountFragment
 import com.team6.connectbca.ui.fragment.transfer.InputTransferAmountFragment
-import com.team6.connectbca.ui.fragment.transfer.ScheduledTransfersFragment
 
 class InputTransferAmountTabPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
 

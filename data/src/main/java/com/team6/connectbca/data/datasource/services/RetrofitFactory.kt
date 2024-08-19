@@ -117,3 +117,14 @@ fun provideTransferService(
         authLocalDataSource
     ).create(TransferService::class.java)
 }
+
+fun provideSavedAccountService(
+    context: Context,
+    authLocalDataSource: AuthLocalDataSource
+): SavedAccountService {
+    return provideRetrofitBuilder(
+        context,
+        BASE_URL,
+        authLocalDataSource
+    ).create(SavedAccountService::class.java)
+}

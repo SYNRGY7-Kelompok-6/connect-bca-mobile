@@ -1,10 +1,8 @@
 package com.team6.connectbca.ui.activity
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
-import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityTransferBinding
 import com.team6.connectbca.ui.fragment.adapter.TransferTabPagerAdapter
 

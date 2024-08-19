@@ -9,7 +9,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
 
@@ -25,16 +26,18 @@
         android:theme="@style/Theme.ConnectBCA"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.NewDestinationActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".ui.activity.InputTransferAmountActivity"
-            android:exported="false" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.activity.PinActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.TransferActivity"
-            android:exported="false">
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
