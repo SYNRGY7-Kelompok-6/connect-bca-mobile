@@ -18,7 +18,8 @@ class PinViewModel(
 
     private val _pinLength = MutableLiveData<Int>()
     val pinLength: LiveData<Int> get() = _pinLength
-
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
     private val _pinError = MutableLiveData<Boolean>()
     val pinError: LiveData<Boolean> get() = _pinError
 
@@ -54,6 +55,7 @@ class PinViewModel(
     private suspend fun validatePin() {
         Log.d("PinViewModel", "$_enteredPin")
         try {
+            _loading.value = true
             val response = withContext(Dispatchers.IO) {
                 pinValidationUseCase(_enteredPin.toString())
             }
@@ -74,5 +76,8 @@ class PinViewModel(
             _enteredPin.clear()
             _pinLength.value = _enteredPin.length
         }
+        _loading.value = false
     }
+
+
 }

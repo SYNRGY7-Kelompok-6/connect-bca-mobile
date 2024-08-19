@@ -103,6 +103,7 @@ class QrisPaymentViewModel(
             "Beneficiary account number: $beneficiaryAccountNumber, remark: $remark, desc: $desc, amount: $amountValue, currency: $currency"
         )
         viewModelScope.launch {
+            _loading.value = true
             try {
                 Log.d("QrisPaymentViewModel", "Transfer initiated")
                 var response = qrisTransferUseCase(
@@ -132,6 +133,7 @@ class QrisPaymentViewModel(
                 _transferError.value = e
                 _transferSuccess.value = false
             }
+            _loading.value = false
         }
     }
 
@@ -140,6 +142,7 @@ class QrisPaymentViewModel(
         currency: String
     ) {
         viewModelScope.launch {
+            _loading.value = true
             try {
                 var response = showQrUseCase(amountValue, currency)
                 Log.d("QrisPaymentViewModel", "Show QR response: $response")
@@ -153,6 +156,11 @@ class QrisPaymentViewModel(
             } catch (e: Exception) {
                 Log.e("QrisPaymentViewModel", "Exception during showQr: ${e.message}", e)
             }
+            _loading.value = false
         }
+    }
+
+    fun getLoading(): LiveData<Boolean> {
+        return _loading
     }
 }

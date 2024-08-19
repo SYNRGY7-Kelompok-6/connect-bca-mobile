@@ -117,27 +117,35 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivQrCode" />
+            <TextView
+                android:id="@+id/tvExpired"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Berlaku hingga 03:06 WIB"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvNote" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:contentDescription="Tombol refresh"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvExpired">
 
-            <!--            <androidx.cardview.widget.CardView-->
-            <!--                android:id="@+id/cardRefresh"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="20dp"-->
-            <!--                android:contentDescription="Tombol refresh"-->
-            <!--                app:cardBackgroundColor="@android:color/transparent"-->
-            <!--                app:cardElevation="0dp"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@id/tvNote">-->
-
-            <!--                <ImageView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:background="@drawable/button_item"-->
-            <!--                    android:padding="15dp"-->
-            <!--                    android:src="@drawable/ic_refresh" />-->
-            <!--            </androidx.cardview.widget.CardView>-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_item"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_refresh" />
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardShare"
@@ -149,11 +157,11 @@
                 app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvNote">
+                app:layout_constraintTop_toBottomOf="@id/tvExpired">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/button_item"
                     android:padding="15dp"
                     android:src="@drawable/ic_share" />

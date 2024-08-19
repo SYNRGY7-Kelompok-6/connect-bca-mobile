@@ -28,7 +28,10 @@ import com.team6.connectbca.domain.model.ShowQrData
 import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 
 class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
     private lateinit var binding: FragmentShowQrBinding
@@ -36,6 +39,8 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
     private var args: JSONObject? = null
     private var qrImage = ""
     private var expiresAt: Long = 0
+    private var amount: Double = 0.0
+    private var currency: String = ""
     private val viewModel by viewModel<ShowQrViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +55,11 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         arguments?.let {
             qrImage = arguments?.getString("qrImage") ?: ""
             expiresAt = arguments?.getLong("expiresAt") ?: 0
+            amount = arguments?.getFloat("amount")?.toDouble() ?: 0.0
+            currency = arguments?.getString("currency") ?: ""
         }
+        val formattedExpirationTime = getFormattedExpirationTime(expiresAt)
+        binding.tvExpired.text = formattedExpirationTime
         loadImage(qrImage)
         getDetailAccount()
         viewModel.qrImage.observe(viewLifecycleOwner) {
@@ -59,12 +68,32 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         binding.ivQrCode.setOnClickListener {
             showQrCodeInDialog()
         }
+
+        binding.cardRefresh.setOnClickListener(View.OnClickListener {
+            refreshQrCode()
+        })
+
+        viewModel.qrData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                qrImage = it.qrImage
+                expiresAt = it.expiresAt ?: 0
+                val formattedExpirationTime = getFormattedExpirationTime(expiresAt)
+                binding.tvExpired.text = formattedExpirationTime
+                loadImage(qrImage)
+            }
+        }
+
         initiateToolbar()
 
         backAndroidButton()
 
         return binding.root
     }
+
+    private fun refreshQrCode() {
+        viewModel.showQrTransfer(amount, currency)
+    }
+
 
     private fun showQrCodeInDialog() {
         val dialog = Dialog(requireContext())
@@ -181,13 +210,34 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
     }
 
     private fun backAndroidButton() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().popBackStack()
-                findNavController().popBackStack()
-                findNavController().popBackStack()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().popBackStack()
+                    findNavController().popBackStack()
+                    findNavController().popBackStack()
+                }
+            })
     }
+
+    private fun getFormattedExpirationTime(expiresAt: Long): String {
+        // Ubah expiresAt menjadi objek Date
+        val date = Date(expiresAt)
+
+        // Tentukan format yang diinginkan, misalnya "HH:mm"
+        val dateFormat = SimpleDateFormat("HH:mm", Locale("id", "ID"))
+
+        // Set timezone ke WIB (GMT+7)
+        dateFormat.timeZone = TimeZone.getTimeZone("Asia/Jakarta")
+
+        // Format tanggal menjadi string
+        val timeString = dateFormat.format(date)
+
+        // Gabungkan dengan string "Berlaku hingga"
+        return "Berlaku hingga $timeString WIB"
+    }
+
+
 
 }

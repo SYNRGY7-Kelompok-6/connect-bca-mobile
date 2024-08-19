@@ -123,6 +123,8 @@
     <string name="custom_datepicker_description">Box untuk memilih tanggal</string>
     <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
 
+    <string name="pin_loading_description">Sedang Memproses, Harap Tunggu</string>
+
     <string-array name="spinner">
         <item>Frekuensi Transfer</item>
         <item>Satu Kali</item>

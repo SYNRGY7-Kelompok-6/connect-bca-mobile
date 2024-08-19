@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team6.connectbca.domain.model.AccountInfo
+import com.team6.connectbca.domain.model.ShowQrData
 import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
 import com.team6.connectbca.domain.usecase.ShowQrUseCase
 import com.team6.connectbca.extensions.getCurrentDateString
@@ -13,13 +14,15 @@ import kotlinx.coroutines.launch
 import java.lang.UnsupportedOperationException
 
 class ShowQrViewModel(
-    private val getBalanceInquiryUseCase: GetBalanceInquiryUseCase
+    private val getBalanceInquiryUseCase: GetBalanceInquiryUseCase,
+    private val showQrUseCase: ShowQrUseCase,
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
     private val _success: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val qrImage: MutableLiveData<String> = MutableLiveData()
     private val _balanceInquiry = MutableLiveData<AccountInfo?>()
+    val qrData = MutableLiveData<ShowQrData?>()
 
     fun getBalanceInquiry(): LiveData<AccountInfo?> {
         val currentDate = getCurrentDateString()
@@ -47,6 +50,29 @@ class ShowQrViewModel(
         }
 
         return _balanceInquiry
+    }
+
+    fun showQrTransfer(
+        amountValue: Double,
+        currency: String
+    ) {
+        viewModelScope.launch {
+            _loading.value = true
+            try {
+                var response = showQrUseCase(amountValue, currency)
+                Log.d("QrisPaymentViewModel", "Show QR response: $response")
+                if (response?.status == "Success") {
+                    qrData.value = response.data
+                    _success.value = true
+                } else {
+                    Log.e("QrisPaymentViewModel", "Show QR failed: ${response?.message}")
+                    _success.value = false
+                }
+            } catch (e: Exception) {
+                Log.e("QrisPaymentViewModel", "Exception during showQr: ${e.message}", e)
+            }
+            _loading.value = false
+        }
     }
 
 

@@ -134,6 +134,12 @@
         <argument
             android:name="expiresAt"
             app:argType="long" />
+        <argument
+            android:name="amount"
+            app:argType="float" />
+        <argument
+            android:name="currency"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/qrisPaymentFragment"
