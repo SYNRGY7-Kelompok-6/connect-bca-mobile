@@ -15,10 +15,6 @@ import com.team6.connectbca.databinding.ActivityLoginBinding
 import com.team6.connectbca.ui.viewmodel.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// USE THIS TO LOGIN
-// userID: "user001",
-// password: "Password_0"
-
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<AuthViewModel>()
@@ -27,8 +23,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         supportActionBar?.hide()
-        binding.etUserId.setText("user001")
-        binding.etPassword.setText("Password_0")
+
         binding.btnLogin.setOnClickListener {
             val userId = binding.etUserId.text.toString()
             val pass = binding.etPassword.text.toString()
