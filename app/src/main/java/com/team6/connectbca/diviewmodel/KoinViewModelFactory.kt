@@ -7,6 +7,7 @@ import com.team6.connectbca.ui.viewmodel.PinViewModel
 import com.team6.connectbca.ui.viewmodel.QrisPaymentViewModel
 import com.team6.connectbca.ui.viewmodel.SearchMutationViewModel
 import com.team6.connectbca.ui.viewmodel.QrisViewModel
+import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
 import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import com.team6.connectbca.ui.viewmodel.TodayMutationViewModel
 import com.team6.connectbca.ui.viewmodel.TransferViewModel
@@ -32,11 +33,11 @@ val viewModelModule = module {
     viewModel { SearchMutationViewModel(getDateRangeMutationUseCase = get()) }
     viewModel { QrisViewModel(qrisVerifyUseCase = get(), getSessionDataUseCase = get()) }
     viewModel { TransferViewModel(getTransactionDetailUseCase = get(), transferUseCase = get()) }
+    viewModel { SavedAccountViewModel(get(),get(),get(),get() ) }
     viewModel {
         QrisPaymentViewModel(
             getBalanceInquiryUseCase = get(),
-            qrisTransferUseCase = get(),
-            showQrUseCase = get()
+            qrisTransferUseCase = get()
         )
     }
     viewModel { ShowQrViewModel(getBalanceInquiryUseCase = get(), showQrUseCase = get()) }

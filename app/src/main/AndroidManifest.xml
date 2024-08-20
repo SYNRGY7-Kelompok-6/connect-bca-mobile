@@ -23,17 +23,8 @@
         android:theme="@style/Theme.ConnectBCA"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.InputTransferAmountActivity"
-            android:exported="false" >
-
-        </activity>
-        <activity
             android:name=".ui.activity.PinActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.activity.TransferActivity"
-            android:exported="false">
-        </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
             android:exported="true"

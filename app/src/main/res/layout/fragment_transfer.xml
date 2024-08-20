@@ -7,7 +7,7 @@
     android:background="?android:attr/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.TransferActivity">
+    tools:context=".ui.fragment.transfer.TransferFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -24,7 +24,13 @@
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:contentDescription="Tabs Layout"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabBackground="@android:color/transparent"
+        app:circularflow_radiusInDP="24dp"
+        app:tabTextColor="?android:textColorPrimary"
+        app:tabIndicatorColor="?android:textColorPrimary"
+        app:tabSelectedTextColor="?android:textColorPrimary"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
