@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentInputTransferAmountBinding
@@ -29,6 +31,12 @@ class InputTransferAmountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTabLayout()
+        val navController = findNavController()
+
+        binding.toolbar.setupWithNavController(navController)
+        binding.toolbar.title = "Masukan Nominal"
+
+        binding.logoText.text = getAcronym("Pengguna")
     }
 
     private fun setupTabLayout() {
@@ -41,5 +49,14 @@ class InputTransferAmountFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = if (position == 0) "Sekarang" else "Atur Tanggal"
         }.attach()
+    }
+
+    private fun getAcronym(word: String) : String {
+        return if (word.length >= 2) {
+            val trimmedString = word.substring(2,word.length)
+            word.replace(trimmedString, "").uppercase()
+        } else {
+            word.uppercase()
+        }
     }
 }

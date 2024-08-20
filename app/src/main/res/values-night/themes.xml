@@ -18,7 +18,7 @@
         <item name="iconTint">@color/neutral01</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="colorBackgroundInput">@color/neutral04</item>
-
+        <item name="strokeColor">@color/neutral04</item>
     </style>
 
     <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.Material3.MaterialCalendar">

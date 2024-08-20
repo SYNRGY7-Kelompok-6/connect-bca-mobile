@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="8dp"
+    android:padding="10dp"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:elevation="12dp"
@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:textSize="16sp"
-        android:text="Connect"
+        android:text="BCA"
         android:textColor="?android:textColorPrimary"
         android:lineSpacingExtra="4sp"
         android:gravity="center_vertical"/>

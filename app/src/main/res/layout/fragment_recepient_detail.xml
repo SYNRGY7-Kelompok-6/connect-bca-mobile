@@ -21,17 +21,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="Cek Detail Penerima"/>
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <RelativeLayout
         android:id="@+id/ivLogo"
-        android:layout_width="112dp"
-        android:layout_height="112dp"
-        android:layout_margin="12dp"
-        android:src="@drawable/ic_launcher_background"
-        android:contentDescription="Recipient Logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/logoBackground"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginVertical="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_background"
+            android:contentDescription="Logo"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/logoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/logoBackground"
+            android:layout_alignTop="@+id/logoBackground"
+            android:layout_alignEnd="@+id/logoBackground"
+            android:layout_alignBottom="@+id/logoBackground"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:gravity="center"
+            android:text="AB"
+            android:textAllCaps="true"
+            android:textColor="@color/neutral01"
+            android:textSize="32sp" />
+
+    </RelativeLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/recipientInfoCard"
@@ -55,16 +82,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
                 android:text="Penerima"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:contentDescription="Penerima"/>
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:contentDescription="Nama Penerima"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recipientName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:text="Nabila Mazaya"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:contentDescription="Nama Penerima"/>
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="?android:textColorPrimary"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/destinationBankText"
@@ -72,33 +101,35 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="4dp"
                 android:text="Bank Tujuan"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:contentDescription="Bank Tujuan"/>
+                android:textAppearance="?attr/textAppearanceBody2" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/destinationBank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:text="BCA"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:contentDescription="Nama Bank Tujuan"/>
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="?android:textColorPrimary"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recipientAccountNumberText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nomor Rekening"
-                android:textAppearance="?attr/textAppearanceBody1"
-                android:contentDescription="Nomor Rekening"/>
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:contentDescription="Nomor Rekening Penerima"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/recipientAccountNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
+                android:layout_marginBottom="10dp"
                 android:text="45769802731"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:contentDescription="Nomor Rekening Penerima"/>
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="?android:textColorPrimary"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/heartIcon"
@@ -126,7 +157,7 @@
             android:layout_width="281dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/neutral01"
             android:text="Pastikan Tujuan yang Anda Masukkan Sudah Benar"
             android:lineSpacingExtra="4sp"/>
@@ -136,12 +167,12 @@
         android:id="@+id/continueButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="Lanjutkan"
         app:cornerRadius="8dp"
         android:textColor="@color/neutral01"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:layout_margin="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

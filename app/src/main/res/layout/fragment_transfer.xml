@@ -24,6 +24,13 @@
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabBackground="@android:color/transparent"
+        app:circularflow_radiusInDP="24dp"
+        app:tabTextColor="?android:textColorPrimary"
+        app:tabIndicatorColor="?android:textColorPrimary"
+        app:tabSelectedTextColor="?android:textColorPrimary"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

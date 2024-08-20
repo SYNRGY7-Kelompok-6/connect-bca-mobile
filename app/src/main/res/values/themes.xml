@@ -17,6 +17,7 @@
         <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here -->
         <item name="colorBackgroundInput">@color/colorPrimaryLight</item>
+        <item name="strokeColor">@color/neutral01</item>
     </style>
 
     <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.Material3.MaterialCalendar">

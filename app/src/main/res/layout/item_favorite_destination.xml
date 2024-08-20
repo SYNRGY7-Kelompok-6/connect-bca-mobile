@@ -3,23 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="85dp"
-    android:layout_gravity="center"
     android:layout_marginBottom="4dp"
     android:elevation="14dp"
     android:padding="8dp">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <RelativeLayout
         android:id="@+id/icon"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginVertical="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Material3.Chip"
-        android:src="@drawable/ic_launcher_background" />
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/logoBackground"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginVertical="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_background"
+            android:contentDescription="Logo"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/logoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/logoBackground"
+            android:layout_alignTop="@+id/logoBackground"
+            android:layout_alignEnd="@+id/logoBackground"
+            android:layout_alignBottom="@+id/logoBackground"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="AB"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            android:textColor="@color/neutral01"/>
+
+    </RelativeLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvName"

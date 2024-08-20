@@ -1,5 +1,6 @@
 package com.team6.connectbca.ui.fragment.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -35,15 +36,25 @@ class FavoritesDestinationAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(favorite: SavedAccountData) {
+            val nickname = getAcronym(favorite.beneficiaryAccountName!!)
+
             binding.apply {
                 tvName.text = favorite.beneficiaryAccountName
                 tvBankInfo.text = "BCA"
                 tvAccountNumber.text = favorite.beneficiaryAccountNumber
-
-                // bankLogo.setImageResource(R.drawable.bca_logo)
+                logoText.text = nickname
 
                 root.setOnClickListener { onItemClick(favorite) }
             }
+        }
+    }
+
+    private fun getAcronym(word: String) : String {
+        return if (word.length >= 2) {
+            val trimmedString = word.substring(2,word.length)
+            word.replace(trimmedString, "").uppercase()
+        } else {
+            word.uppercase()
         }
     }
 }

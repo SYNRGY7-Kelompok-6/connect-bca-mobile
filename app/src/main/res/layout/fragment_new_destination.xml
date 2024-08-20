@@ -61,41 +61,46 @@
         android:contentDescription="@string/enter_recipient_data"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bankNameButton"
+        android:id="@+id/bankNameBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
+        android:layout_marginTop="24dp"
+        android:paddingVertical="16dp"
         android:text="Nama Bank Tujuan"
-        android:textAlignment="textStart"
-        android:textColor="?android:textColorPrimary"
+        android:textSize="14sp"
+        android:textAlignment="viewStart"
         app:cornerRadius="18dp"
+        android:textColor="?android:textColorPrimary"
+        android:backgroundTint="?attr/colorBackgroundInput"
+        android:layout_margin="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/accountNumberTextInputLayout"
         app:layout_constraintTop_toBottomOf="@id/subtitleTextView"
-        android:contentDescription="@string/bank_name"/>
+        android:contentDescription="Nama Bank Tujuan"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.Dense"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:id="@+id/accountNumberTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="20dp"
-        app:boxCornerRadiusTopEnd="18dp"
-        app:boxCornerRadiusTopStart="18dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/account_number_title"
+        android:textColorHint="?android:textColorPrimary"
+        app:hintTextColor="?android:textColorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bankNameButton">
+        app:layout_constraintTop_toBottomOf="@id/bankNameBtn">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/accountNumberEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/account_number_title"
             android:inputType="number"
-            android:backgroundTint="?attr/colorBackgroundInput"
+            android:background="@drawable/background_desc"
             android:textColor="?android:textColorPrimary"
-            android:textSize="16sp"  />
+            android:textSize="14sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
