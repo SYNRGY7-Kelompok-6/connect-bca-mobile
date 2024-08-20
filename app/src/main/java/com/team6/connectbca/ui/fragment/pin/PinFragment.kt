@@ -129,18 +129,6 @@ class PinFragment : Fragment() {
                         amountValue = amountValue,
                         currency = amountObject?.get("currency") as String
                     )
-                } else if (transactionType == "show_qris") {
-                    qrisPaymentViewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
-                        if (isLoading) {
-                            binding.pinProgressBar.visibility = View.VISIBLE
-                        } else {
-                            binding.pinProgressBar.visibility = View.GONE
-                        }
-                    }
-                    qrisPaymentViewModel.showQrTransfer(
-                        amountValue,
-                        amountObject?.get("currency") as String
-                    )
                 }
             }
         }

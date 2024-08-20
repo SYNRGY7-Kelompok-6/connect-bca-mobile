@@ -134,18 +134,6 @@
         android:name="com.team6.connectbca.ui.fragment.ShowQrFragment"
         android:label="fragment_show_qr"
         tools:layout="@layout/fragment_show_qr" >
-        <argument
-            android:name="qrImage"
-            app:argType="string" />
-        <argument
-            android:name="expiresAt"
-            app:argType="long" />
-        <argument
-            android:name="amount"
-            app:argType="float" />
-        <argument
-            android:name="currency"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/qrisPaymentFragment"

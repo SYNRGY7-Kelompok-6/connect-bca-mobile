@@ -1,6 +1,5 @@
 package com.team6.connectbca.ui.fragment
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -23,8 +22,6 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentShowQrBinding
-import com.team6.connectbca.domain.model.ShowQr
-import com.team6.connectbca.domain.model.ShowQrData
 import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,11 +33,9 @@ import java.util.TimeZone
 class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
     private lateinit var binding: FragmentShowQrBinding
     private lateinit var tts: TextToSpeech
-    private var args: JSONObject? = null
     private var qrImage = ""
     private var expiresAt: Long = 0
-    private var amount: Double = 0.0
-    private var currency: String = ""
+
     private val viewModel by viewModel<ShowQrViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,27 +47,19 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentShowQrBinding.inflate(inflater, container, false)
-        arguments?.let {
-            qrImage = arguments?.getString("qrImage") ?: ""
-            expiresAt = arguments?.getLong("expiresAt") ?: 0
-            amount = arguments?.getFloat("amount")?.toDouble() ?: 0.0
-            currency = arguments?.getString("currency") ?: ""
-        }
-        val formattedExpirationTime = getFormattedExpirationTime(expiresAt)
-        binding.tvExpired.text = formattedExpirationTime
-        loadImage(qrImage)
-        getDetailAccount()
-        viewModel.qrImage.observe(viewLifecycleOwner) {
-            loadImage(it)
-        }
-        binding.ivQrCode.setOnClickListener {
-            showQrCodeInDialog()
-        }
+        viewModel.generateQrCode()
+        viewModel.getBalanceInquiry()
+        viewModel.getBalanceInquiry().observe(viewLifecycleOwner) {
+            if (it != null) {
+                val amount = it.balance?.availableBalance?.value
+                val name = it.name
+                val accountNumber = it.accountNo
 
-        binding.cardRefresh.setOnClickListener(View.OnClickListener {
-            refreshQrCode()
-        })
-
+                binding.tvName.text = name
+                binding.tvAccountNumber.text = accountNumber
+                binding.tvBank.text = "Bank Connect"
+            }
+        }
         viewModel.qrData.observe(viewLifecycleOwner) {
             if (it != null) {
                 qrImage = it.qrImage
@@ -82,16 +69,24 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
                 loadImage(qrImage)
             }
         }
+        val formattedExpirationTime = getFormattedExpirationTime(expiresAt)
+        binding.tvExpired.text = formattedExpirationTime
+        binding.ivQrCode.setOnClickListener {
+            showQrCodeInDialog()
+        }
+
+        binding.cardRefresh.setOnClickListener(View.OnClickListener {
+            refreshQrCode()
+        })
 
         initiateToolbar()
 
-        backAndroidButton()
 
         return binding.root
     }
 
     private fun refreshQrCode() {
-        viewModel.showQrTransfer(amount, currency)
+        viewModel.generateQrCode()
     }
 
 
@@ -173,11 +168,6 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         binding.toolbar.title = "Tampilkan QR"
         binding.toolbar.navigationContentDescription =
             getString(R.string.back_to_menu_button_description)
-        binding.toolbar.setNavigationOnClickListener(View.OnClickListener {
-            findNavController().popBackStack()
-            findNavController().popBackStack()
-            findNavController().popBackStack()
-        })
     }
 
 
@@ -209,18 +199,6 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         }
     }
 
-    private fun backAndroidButton() {
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().popBackStack()
-                    findNavController().popBackStack()
-                    findNavController().popBackStack()
-                }
-            })
-    }
-
     private fun getFormattedExpirationTime(expiresAt: Long): String {
         // Ubah expiresAt menjadi objek Date
         val date = Date(expiresAt)
@@ -237,7 +215,6 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         // Gabungkan dengan string "Berlaku hingga"
         return "Berlaku hingga $timeString WIB"
     }
-
 
 
 }

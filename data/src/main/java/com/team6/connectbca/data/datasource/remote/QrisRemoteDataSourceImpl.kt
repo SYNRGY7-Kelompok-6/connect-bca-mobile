@@ -3,7 +3,6 @@ package com.team6.connectbca.data.datasource.remote
 import com.team6.connectbca.data.datasource.interfaces.qris.QrisRemoteDataSource
 import com.team6.connectbca.data.datasource.services.QrisService
 import com.team6.connectbca.data.model.body.QrVerifyBody
-import com.team6.connectbca.data.model.body.ShowQrBody
 import com.team6.connectbca.data.model.body.TransferAmountBody
 import com.team6.connectbca.data.model.body.TransferBody
 import com.team6.connectbca.data.model.response.QrVerifyResponse
@@ -16,8 +15,8 @@ class QrisRemoteDataSourceImpl(private val qrisService: QrisService) : QrisRemot
         return qrisService.verifyQr(qrVerifyBody);
     }
 
-    override suspend fun getShowQr(showQrBody: ShowQrBody): ShowQrResponse {
-        return qrisService.showQr(showQrBody)
+    override suspend fun getShowQr(): ShowQrResponse {
+        return qrisService.showQr()
     }
 
     override suspend fun postQrisTransfer(pinToken: String, transferBody: TransferBody): QrisTransferResponse {

@@ -5,7 +5,6 @@ import com.team6.connectbca.data.TRASNFER_INTRABANK_URL
 import retrofit2.http.POST
 import com.team6.connectbca.data.VERIFY_QR_URL
 import com.team6.connectbca.data.model.body.QrVerifyBody
-import com.team6.connectbca.data.model.body.ShowQrBody
 import com.team6.connectbca.data.model.body.TransferAmountBody
 import com.team6.connectbca.data.model.body.TransferBody
 import com.team6.connectbca.data.model.response.QrVerifyResponse
@@ -27,13 +26,12 @@ interface QrisService {
         @Body qrVerifyBody: QrVerifyBody
     ): QrVerifyResponse
 
-    @POST(GENERATE_QR_URL)
+    @GET(GENERATE_QR_URL)
     @Headers(
         "Accept: application/json",
         "Content-Type: application/json"
     )
     suspend fun showQr(
-        @Body showQrBody: ShowQrBody
     ): ShowQrResponse
 
     @POST(TRASNFER_INTRABANK_URL)

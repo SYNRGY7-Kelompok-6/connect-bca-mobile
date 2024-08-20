@@ -7,7 +7,7 @@ import com.team6.connectbca.domain.model.ShowQr
 interface QrisRepository {
     suspend fun verifyQr(token: String, payload: String): QrVerify
 
-    suspend fun showQr(amountValue: Double, currency: String): ShowQr
+    suspend fun showQr(): ShowQr
 
     suspend fun qrisTransfer(
         pinToken: String,
