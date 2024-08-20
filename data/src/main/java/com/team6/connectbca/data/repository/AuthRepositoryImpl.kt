@@ -4,8 +4,11 @@ import android.util.Log
 import com.team6.connectbca.data.datasource.interfaces.auth.AuthLocalDataSource
 import com.team6.connectbca.data.datasource.interfaces.auth.AuthRemoteDataSource
 import com.team6.connectbca.data.model.body.LoginBody
+import com.team6.connectbca.data.model.body.PinBody
 import com.team6.connectbca.data.model.response.LoginResponse
 import com.team6.connectbca.data.model.response.LoginResponseData
+import com.team6.connectbca.data.model.response.PinResponse
+import com.team6.connectbca.domain.model.Pin
 import com.team6.connectbca.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
@@ -46,6 +49,13 @@ class AuthRepositoryImpl(
         return authLocalDataSource.clearSessionTime()
     }
 
+    override suspend fun pinValidation(pin: String): Pin {
+        val pinBody = PinBody(pin = pin)
+        var response = authRemoteDataSource.pinToken(pinBody)
+        return response.toEntity()
+
+    }
+
     private fun checkUserData(userId: String, password: String): Int {
         if (userId.isNullOrEmpty()) {
             return 1
@@ -54,4 +64,6 @@ class AuthRepositoryImpl(
         }
         return 0
     }
+
+
 }

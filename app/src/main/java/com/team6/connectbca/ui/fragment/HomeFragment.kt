@@ -69,7 +69,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun copyToClipboard(text: String) {
-        val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboardManager =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Copied Text", text)
         clipboardManager.setPrimaryClip(clip)
     }

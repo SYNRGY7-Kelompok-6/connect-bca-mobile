@@ -1,9 +1,11 @@
 package com.team6.connectbca.data.model.response
 
 import com.google.gson.annotations.SerializedName
+import com.team6.connectbca.domain.model.QrisAmount
 import com.team6.connectbca.domain.model.Transfer
 import com.team6.connectbca.domain.model.TransferData
 import com.team6.connectbca.domain.model.TransactionAmount
+import com.team6.connectbca.domain.model.TransferAmount
 
 data class TransferIntrabankResponse(
     @SerializedName("status")
@@ -13,18 +15,18 @@ data class TransferIntrabankResponse(
     val message: String,
 
     @SerializedName("data")
-    val data: TransferIntrabankData
+    val data: TransferIntrabankDataResponse? = null
 ) {
     fun toEntity(): Transfer {
         return Transfer(
             status = this.status,
             message = this.message,
-            data = this.data.toEntity()
+            data = this.data?.toEntity()
         )
     }
 }
 
-data class TransferIntrabankData(
+data class TransferIntrabankDataResponse(
     @SerializedName("refNumber")
     val refNumber: String,
 
@@ -32,7 +34,7 @@ data class TransferIntrabankData(
     val transactionId: String,
 
     @SerializedName("amount")
-    val amount: Amount,
+    val amount: TransferAmountResponse,
 
     @SerializedName("transactionDate")
     val transactionDate: String,
@@ -55,11 +57,11 @@ data class TransferIntrabankData(
     @SerializedName("sourceName")
     val sourceName: String
 ) {
-    fun toEntity(): TransferData {
+    fun toEntity() : TransferData{
         return TransferData(
             refNumber = this.refNumber,
             transactionId = this.transactionId,
-            amount = this.amount.toTransactionAmount(),
+            amount = this.amount.toEntity(),
             transactionDate = this.transactionDate,
             remark = this.remark,
             desc = this.desc,
@@ -71,15 +73,15 @@ data class TransferIntrabankData(
     }
 }
 
-data class Amount(
+data class TransferAmountResponse(
     @SerializedName("value")
-    val value: Int,
+    val value: Double,
 
     @SerializedName("currency")
     val currency: String
 ) {
-    fun toTransactionAmount(): TransactionAmount {
-        return TransactionAmount(
+    fun toEntity() : TransferAmount {
+        return TransferAmount(
             value = this.value,
             currency = this.currency
         )
