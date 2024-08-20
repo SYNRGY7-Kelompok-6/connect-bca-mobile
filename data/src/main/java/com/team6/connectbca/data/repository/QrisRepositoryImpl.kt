@@ -3,7 +3,6 @@ package com.team6.connectbca.data.repository
 import android.util.Log
 import com.team6.connectbca.data.datasource.interfaces.qris.QrisRemoteDataSource
 import com.team6.connectbca.data.model.body.QrVerifyBody
-import com.team6.connectbca.data.model.body.ShowQrBody
 import com.team6.connectbca.data.model.body.TransferBody
 import com.team6.connectbca.data.model.body.TransferAmountBody
 import com.team6.connectbca.data.model.response.QrVerifyResponse
@@ -34,11 +33,10 @@ class QrisRepositoryImpl(private val qrisRemoteDataSource: QrisRemoteDataSource)
         )
     }
 
-    override suspend fun showQr(amountValue: Double, currency: String): ShowQr {
-        val amount = ShowQrBody(amount = TransferAmountBody(value = amountValue, currency = currency))
+    override suspend fun showQr(): ShowQr {
         var data: ShowQrResponse? = null
         try {
-            val response: ShowQrResponse = qrisRemoteDataSource.getShowQr(amount)
+            val response: ShowQrResponse = qrisRemoteDataSource.getShowQr()
             data = response
         } catch (error: Throwable) {
             Log.e("Failed with", error.toString())

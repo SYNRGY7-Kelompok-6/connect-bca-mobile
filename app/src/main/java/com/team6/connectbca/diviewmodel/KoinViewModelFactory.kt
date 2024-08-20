@@ -37,8 +37,7 @@ val viewModelModule = module {
     viewModel {
         QrisPaymentViewModel(
             getBalanceInquiryUseCase = get(),
-            qrisTransferUseCase = get(),
-            showQrUseCase = get()
+            qrisTransferUseCase = get()
         )
     }
     viewModel { ShowQrViewModel(getBalanceInquiryUseCase = get(), showQrUseCase = get()) }

@@ -21,7 +21,6 @@ import java.lang.UnsupportedOperationException
 class QrisPaymentViewModel(
     private val getBalanceInquiryUseCase: GetBalanceInquiryUseCase,
     private val qrisTransferUseCase: QrisTransferUseCase,
-    private val showQrUseCase: ShowQrUseCase,
 ) : ViewModel() {
     private val _amount = MutableLiveData<String>()
     val amount: LiveData<String> get() = _amount
@@ -121,7 +120,6 @@ class QrisPaymentViewModel(
                     transfer.value = response
                     _transferSuccess.value = true
                 } else {
-                    Log.e("QrisPaymentViewModel", "ERROR BAJINGANNNNN")
                     // Log the response message and set error state
                     Log.e("QrisPaymentViewModel", "Transfer failed: ${response?.message}")
                     _transferError.value = response?.message?.let { Throwable(it) }
@@ -132,29 +130,6 @@ class QrisPaymentViewModel(
                 Log.e("QrisPaymentViewModel", "Exception during transfer: ${e.message}", e)
                 _transferError.value = e
                 _transferSuccess.value = false
-            }
-            _loading.value = false
-        }
-    }
-
-    fun showQrTransfer(
-        amountValue: Double,
-        currency: String
-    ) {
-        viewModelScope.launch {
-            _loading.value = true
-            try {
-                var response = showQrUseCase(amountValue, currency)
-                Log.d("QrisPaymentViewModel", "Show QR response: $response")
-                if (response?.status == "Success") {
-                    qrData.value = response.data
-                    _showQrSuccess.value = true
-                } else {
-                    Log.e("QrisPaymentViewModel", "Show QR failed: ${response?.message}")
-                    _showQrSuccess.value = false
-                }
-            } catch (e: Exception) {
-                Log.e("QrisPaymentViewModel", "Exception during showQr: ${e.message}", e)
             }
             _loading.value = false
         }

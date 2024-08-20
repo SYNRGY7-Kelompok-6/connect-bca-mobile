@@ -21,7 +21,7 @@ class ShowQrViewModel(
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
     private val _success: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val qrImage: MutableLiveData<String> = MutableLiveData()
-    private val _balanceInquiry = MutableLiveData<AccountInfo?>()
+    private val _balanceInquiry: MutableLiveData<AccountInfo?> = MutableLiveData<AccountInfo?>()
     val qrData = MutableLiveData<ShowQrData?>()
 
     fun getBalanceInquiry(): LiveData<AccountInfo?> {
@@ -52,14 +52,11 @@ class ShowQrViewModel(
         return _balanceInquiry
     }
 
-    fun showQrTransfer(
-        amountValue: Double,
-        currency: String
-    ) {
+    fun generateQrCode() {
         viewModelScope.launch {
             _loading.value = true
             try {
-                var response = showQrUseCase(amountValue, currency)
+                var response = showQrUseCase()
                 Log.d("QrisPaymentViewModel", "Show QR response: $response")
                 if (response?.status == "Success") {
                     qrData.value = response.data
@@ -74,8 +71,6 @@ class ShowQrViewModel(
             _loading.value = false
         }
     }
-
-
 
 
 }

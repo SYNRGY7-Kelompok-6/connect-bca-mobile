@@ -238,8 +238,8 @@ class QrisFragment : Fragment(), TextToSpeech.OnInitListener {
         binding.cardFlash.visibility = View.GONE
         binding.cardGallery.visibility = View.GONE
         binding.cardQrisLogo.visibility = View.GONE
-        var data = JSONObject()
-        navigateToQrPayment(data, false)
+        val action = QrisFragmentDirections.actionQrisFragmentToShowQrFragment()
+        findNavController().navigate(action)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
