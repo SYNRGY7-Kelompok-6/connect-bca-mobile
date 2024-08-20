@@ -124,6 +124,8 @@
     <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
 
     <string name="pin_loading_description">Sedang Memproses, Harap Tunggu</string>
+    <string name="bills">Tagihan</string>
+    <string name="investation">Investasi</string>
 
     <string-array name="spinner">
         <item>Frekuensi Transfer</item>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/wrapper"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/newsItemCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_alignBottom="@id/ivNews"
+        app:cardCornerRadius="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newsDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvNewsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7 Tips Berinvestasi bagi Pemula"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/neutral01"
+                android:maxLines="2"
+                android:maxEms="8"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btnSeeNews"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSeeNews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:text="Baca Sekarang"
+                android:backgroundTint="@color/colorPrimaryLight"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@id/tvNewsTitle"
+                app:layout_constraintStart_toStartOf="@id/tvNewsTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/ivNews"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignEnd="@id/newsItemCard"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="-24dp"
+        android:contentDescription="Gambar Berita"
+        android:src="@mipmap/news_image_1" />
+
+</RelativeLayout>
+
