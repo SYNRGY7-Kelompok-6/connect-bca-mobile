@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "194142943991",
+    "project_id": "finalproject-4970f",
+    "storage_bucket": "finalproject-4970f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194142943991:android:7e7bb8a021ad66d08ab1f2",
+        "android_client_info": {
+          "package_name": "com.team6.connectbca"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADxV614ii6WGEBmVaXkvU3lALH6mhhOCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
