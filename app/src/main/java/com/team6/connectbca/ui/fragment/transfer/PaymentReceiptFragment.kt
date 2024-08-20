@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,7 @@ class PaymentReceiptFragment : Fragment() {
     private var _binding: FragmentPaymentReceiptBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<TransferViewModel>()
-    private val isFromMutation = arguments?.getBoolean("isFromMutation")!!
+    private var isFromMutation: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +43,9 @@ class PaymentReceiptFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setData()
+        isFromMutation = arguments?.getBoolean("isFromMutation")!!
+
+        Log.i("isFromMutation", isFromMutation.toString())
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
@@ -56,15 +60,6 @@ class PaymentReceiptFragment : Fragment() {
                 Snackbar.make(binding.root, "Gagal memuat data transfer", Snackbar.LENGTH_LONG)
                     .show()
             }
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (isFromMutation) {
-            navigateToMutation()
-        } else {
-            navigateToHome()
         }
     }
 
@@ -92,7 +87,7 @@ class PaymentReceiptFragment : Fragment() {
                         binding.tvSourceBank.text = transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
                         binding.btnShare.setOnClickListener { shareInvoice() }
                         binding.btnClose.setOnClickListener {
-                            if (isFromMutation) {
+                            if (isFromMutation!!) {
                                 navigateToMutation()
                             } else {
                                 navigateToHome()
