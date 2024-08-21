@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupNavigationComponent()
         setupBottomNav()
+        showBottomNav()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -43,14 +44,14 @@ class MainActivity : AppCompatActivity() {
         navController = host.navController
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            Log.i("CURRENT FRAGMENT", destination.id.toString())
+            Log.i("CURRENT FRAGMENT", host.childFragmentManager.fragments[0].id.toString())
+            Log.i("DESTINATION ID FRAGMENTt", destination.id.toString())
             Log.i("HOME FRAGMENT", R.id.homeFragmentRoot.toString())
             when (destination.id) {
                 R.id.homeFragmentRoot -> showBottomNav()
                 R.id.notificationFragment -> showBottomNav()
                 R.id.promoFragment -> showBottomNav()
                 R.id.profileFragment -> showBottomNav()
-                2131296618 -> showBottomNav()
                 else -> hideBottomNav()
             }
         }

@@ -21,6 +21,7 @@ import com.team6.connectbca.databinding.ItemCustomerBankCardBinding
 import com.team6.connectbca.extensions.getFormattedAccountNo
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.milisecondToDateMonth
+import com.team6.connectbca.ui.activity.MainActivity
 import com.team6.connectbca.ui.fragment.adapter.TabPagerAdapter
 import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -223,7 +224,6 @@ class MutationFragment : Fragment() {
     }
 
     private fun navigateBack() {
-        val action = MutationFragmentDirections.actionMutationFragmentToHomeFragment()
-        findNavController().navigate(action)
+        MainActivity.startActivity(requireContext())
     }
 }

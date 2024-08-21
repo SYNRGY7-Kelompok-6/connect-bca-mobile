@@ -126,6 +126,8 @@
     <string name="pin_loading_description">Sedang Memproses, Harap Tunggu</string>
     <string name="bills">Tagihan</string>
     <string name="investation">Investasi</string>
+    <string name="feature_not_found">Mohon maaf, fitur ini belum tersedia. Nantikan update fitur terbaru dari kami.</string>
+    <string name="feature_disabled_description">Fitur belum tersedia</string>
 
     <string-array name="spinner">
         <item>Frekuensi Transfer</item>

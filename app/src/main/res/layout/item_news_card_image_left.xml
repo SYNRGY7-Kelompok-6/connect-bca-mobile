@@ -11,7 +11,6 @@
         android:id="@+id/newsItemCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/colorPrimary"
         android:layout_alignBottom="@id/ivNews"
         app:cardCornerRadius="16dp">
@@ -60,11 +59,11 @@
 
     <ImageView
         android:id="@+id/ivNews"
-        android:layout_width="160dp"
-        android:layout_height="165dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignStart="@id/newsItemCard"
-        android:scaleType="centerCrop"
-        android:layout_marginStart="-20dp"
+        android:scaleType="fitCenter"
+        android:layout_marginStart="-8dp"
         android:contentDescription="Gambar Berita"
         android:src="@mipmap/news_image_2"
         android:clipChildren="false"/>

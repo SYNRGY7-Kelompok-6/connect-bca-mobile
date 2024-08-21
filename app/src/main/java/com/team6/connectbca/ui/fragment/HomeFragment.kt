@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -93,6 +94,9 @@ class HomeFragment : Fragment() {
         binding.btnIconVisible.setOnClickListener {
             iconBalanceVisibility()
         }
+
+        binding.newsItem1.btnSeeNews.setOnClickListener { showAlertDialog() }
+        binding.newsItem2.btnSeeNews.setOnClickListener { showAlertDialog() }
     }
 
     private fun setupCustomerInfo() {
@@ -163,6 +167,24 @@ class HomeFragment : Fragment() {
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(requireContext(), R.color.dialogButtonColor))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(requireContext(), R.color.dialogButtonColor))
+    }
+
+    private fun showAlertDialog() {
+        val dialog = Dialog(requireContext())
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+
+        dialog.setContentView(R.layout.item_quick_access_notfound_alert)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val closeBtn: MaterialButton = dialog.findViewById(R.id.quickAccessAlertCloseBtn)
+        val alertMessage: TextView = dialog.findViewById(R.id.quickAccessAlertMessage)
+
+        closeBtn.setOnClickListener { dialog.dismiss() }
+        alertMessage.setText(R.string.feature_not_found)
+
+        dialog.show()
     }
 
     private fun navigateToLogin() {

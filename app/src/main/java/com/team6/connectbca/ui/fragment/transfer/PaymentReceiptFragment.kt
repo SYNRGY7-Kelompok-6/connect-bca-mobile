@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.databinding.FragmentPaymentReceiptBinding
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.milisecondToDateMonth
+import com.team6.connectbca.ui.activity.MainActivity
 import com.team6.connectbca.ui.fragment.mutation.MutationFragmentDirections
 import com.team6.connectbca.ui.viewmodel.TransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -44,8 +45,6 @@ class PaymentReceiptFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setData()
         isFromMutation = arguments?.getBoolean("isFromMutation")!!
-
-        Log.i("isFromMutation", isFromMutation.toString())
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
@@ -98,13 +97,13 @@ class PaymentReceiptFragment : Fragment() {
                         binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
                         binding.tvBeneficiaryBank.contentDescription = "Nomor rekening ${binding.tvBeneficiaryBank.text}"
 
-                        if (transaction.remark.equals("Qris Transfer")) {
-                            binding.tvStatus.text = "Pembayaran Berhasil!"
-                            hideTransferView()
-                        } else {
+                        if (transaction.remark.equals("Transfer")) {
                             binding.tvStatus.text = "Transfer Berhasil!"
                             binding.tvTransactionDesc.text = transaction.desc
                             hideQrisView()
+                        } else {
+                            binding.tvStatus.text = "Pembayaran Berhasil!"
+                            hideTransferView()
                         }
 
                         Snackbar.make(binding.root, "Bukti transaksi berhasil dimuat", Snackbar.LENGTH_LONG).show()
@@ -203,9 +202,7 @@ class PaymentReceiptFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        val action =
-            PaymentReceiptFragmentDirections.actionPaymentReceiptFragmentToHomeFragment()
-        findNavController().navigate(action)
+        MainActivity.startActivity(requireContext())
     }
 
     private fun navigateToMutation() {
