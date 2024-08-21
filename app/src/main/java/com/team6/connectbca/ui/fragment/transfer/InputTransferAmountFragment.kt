@@ -1,6 +1,7 @@
 package com.team6.connectbca.ui.fragment.transfer
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,20 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentInputTransferAmountBinding
+import com.team6.connectbca.databinding.FragmentInputTransferNowAmountBinding
 import com.team6.connectbca.databinding.FragmentTransferBinding
+import com.team6.connectbca.domain.model.SavedAccountData
 import com.team6.connectbca.ui.fragment.adapter.InputTransferAmountTabPagerAdapter
+import com.team6.connectbca.ui.listener.TransferDataListener
+import com.team6.connectbca.ui.viewmodel.InputTransferAmountViewModel
+import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class InputTransferAmountFragment : Fragment() {
+class InputTransferAmountFragment : Fragment(), TransferDataListener {
+    private var beneficiaryId: String? = null
+    private var beneficiaryAccountNumber: String? = null
+    private var beneficiaryAccountName: String? = null
+    private val viewModel by viewModel<InputTransferAmountViewModel>()
     private lateinit var binding: FragmentInputTransferAmountBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +34,21 @@ class InputTransferAmountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentInputTransferAmountBinding.inflate(inflater, container, false).also {
-            binding = it
-        }.root
+        binding = FragmentInputTransferAmountBinding.inflate(layoutInflater, container, false)
+        arguments?.let {
+            beneficiaryId = it.getString("beneficiaryId")
+            beneficiaryAccountNumber = it.getString("beneficiaryAccountNumber")
+            beneficiaryAccountName = it.getString("beneficiaryAccountName")
+        }
+
+        viewModel.getLoading().observe(viewLifecycleOwner) {
+            if (it) {
+                binding.transferProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.transferProgressBar.visibility = View.GONE
+            }
+        }
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,9 +57,16 @@ class InputTransferAmountFragment : Fragment() {
         val navController = findNavController()
 
         binding.toolbar.setupWithNavController(navController)
+        binding.toolbar.background = resources.getDrawable(android.R.color.transparent)
         binding.toolbar.title = "Masukan Nominal"
 
-        binding.logoText.text = getAcronym("Pengguna")
+        setData()
+    }
+
+    private fun setData() {
+        binding.logoText.text = getAcronym(beneficiaryAccountName ?: "Pengguna")
+        binding.recipientName.text = beneficiaryAccountName
+        binding.recipientBankId.text = beneficiaryAccountNumber
     }
 
     private fun setupTabLayout() {
@@ -51,12 +81,20 @@ class InputTransferAmountFragment : Fragment() {
         }.attach()
     }
 
-    private fun getAcronym(word: String) : String {
+    private fun getAcronym(word: String): String {
         return if (word.length >= 2) {
-            val trimmedString = word.substring(2,word.length)
+            val trimmedString = word.substring(2, word.length)
             word.replace(trimmedString, "").uppercase()
         } else {
             word.uppercase()
         }
+    }
+
+    override fun getBeneficiaryData(): SavedAccountData {
+        return SavedAccountData(
+            savedBeneficiaryId = beneficiaryId,
+            beneficiaryAccountNumber = beneficiaryAccountNumber,
+            beneficiaryAccountName = beneficiaryAccountName
+        )
     }
 }

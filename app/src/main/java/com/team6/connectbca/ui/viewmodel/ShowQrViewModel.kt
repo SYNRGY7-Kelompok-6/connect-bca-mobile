@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team6.connectbca.domain.model.AccountInfo
 import com.team6.connectbca.domain.model.ShowQrData
+import com.team6.connectbca.domain.model.Transaction
 import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
 import com.team6.connectbca.domain.usecase.ShowQrUseCase
+import com.team6.connectbca.domain.usecase.GetLatestTransactionUseCase
 import com.team6.connectbca.extensions.getCurrentDateString
 import kotlinx.coroutines.launch
 import java.lang.UnsupportedOperationException
@@ -16,12 +18,16 @@ import java.lang.UnsupportedOperationException
 class ShowQrViewModel(
     private val getBalanceInquiryUseCase: GetBalanceInquiryUseCase,
     private val showQrUseCase: ShowQrUseCase,
+    private val latestTransactionUseCase: GetLatestTransactionUseCase,
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
     private val _success: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val qrImage: MutableLiveData<String> = MutableLiveData()
     private val _balanceInquiry: MutableLiveData<AccountInfo?> = MutableLiveData<AccountInfo?>()
+    private val _transaction = MutableLiveData<Transaction?>()
+    val transaction: LiveData<Transaction?> get() = _transaction
+
     val qrData = MutableLiveData<ShowQrData?>()
 
     fun getBalanceInquiry(): LiveData<AccountInfo?> {
@@ -72,5 +78,14 @@ class ShowQrViewModel(
         }
     }
 
+    fun getLatestTransaction(): LiveData<Transaction?> {
+        viewModelScope.launch {
+            var response = latestTransactionUseCase()
+            if (response != null) {
+                _transaction.value = response
+            }
+        }
+        return _transaction
+    }
 
 }

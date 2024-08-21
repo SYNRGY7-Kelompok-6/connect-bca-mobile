@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ItemFavoriteDestinationBinding
 import com.team6.connectbca.domain.model.SavedAccountData
 
@@ -43,7 +44,11 @@ class FavoritesDestinationAdapter(
                 tvBankInfo.text = "BCA"
                 tvAccountNumber.text = favorite.beneficiaryAccountNumber
                 logoText.text = nickname
-
+                if (favorite.favorite == true) {
+                    heartIcon.setImageResource(R.drawable.ic_heart)
+                } else {
+                    heartIcon.setImageResource(R.drawable.ic_heart_outline)
+                }
                 root.setOnClickListener { onItemClick(favorite) }
             }
         }
