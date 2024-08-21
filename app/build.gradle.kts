@@ -5,7 +5,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id("com.google.gms.google-services")
-
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -80,7 +80,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.2.0-alpha03")
     implementation("androidx.activity:activity:1.9.1")
 
-    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics")
 
