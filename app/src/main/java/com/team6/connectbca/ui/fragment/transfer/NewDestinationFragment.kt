@@ -17,7 +17,6 @@ import com.team6.connectbca.domain.usecase.SaveAccountUseCase
 import com.team6.connectbca.ui.fragment.adapter.DestinationBankAdapter
 import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
 import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
-import com.team6.connectbca.ui.viewmodel.TransferNewDestinationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewDestinationFragment : Fragment() {
@@ -27,7 +26,6 @@ class NewDestinationFragment : Fragment() {
     private var selectedBankName: String? = null
     private var accountNumber: String? = null
     private val savedAccountViewModel by viewModel<SavedAccountViewModel>()
-    private val newDestinationViewModel by viewModel<TransferNewDestinationViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

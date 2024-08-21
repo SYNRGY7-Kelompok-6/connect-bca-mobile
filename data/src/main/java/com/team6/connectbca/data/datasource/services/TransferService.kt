@@ -1,6 +1,5 @@
 package com.team6.connectbca.data.datasource.services
 
-import com.team6.connectbca.data.FIND_ACCOUNT
 import com.team6.connectbca.data.TRANSFER_DETAIL
 import com.team6.connectbca.data.TRASNFER_INTRABANK_URL
 import com.team6.connectbca.data.model.body.TransferBody

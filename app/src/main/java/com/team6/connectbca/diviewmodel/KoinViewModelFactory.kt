@@ -11,7 +11,6 @@ import com.team6.connectbca.ui.viewmodel.QrisViewModel
 import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
 import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import com.team6.connectbca.ui.viewmodel.TodayMutationViewModel
-import com.team6.connectbca.ui.viewmodel.TransferNewDestinationViewModel
 import com.team6.connectbca.ui.viewmodel.TransferViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -45,5 +44,4 @@ val viewModelModule = module {
     viewModel { ShowQrViewModel(getBalanceInquiryUseCase = get(), showQrUseCase = get()) }
     viewModel { PinViewModel(pinValidationUseCase = get()) }
     viewModel { InputTransferAmountViewModel(getBalanceInquiryUseCase = get()) }
-    viewModel { TransferNewDestinationViewModel(transferNewDestinationUseCase = get()) }
 }
