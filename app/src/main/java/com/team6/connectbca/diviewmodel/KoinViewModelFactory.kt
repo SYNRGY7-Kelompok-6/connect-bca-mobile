@@ -41,7 +41,7 @@ val viewModelModule = module {
             qrisTransferUseCase = get()
         )
     }
-    viewModel { ShowQrViewModel(getBalanceInquiryUseCase = get(), showQrUseCase = get()) }
+    viewModel { ShowQrViewModel(getBalanceInquiryUseCase = get(), showQrUseCase = get(), latestTransactionUseCase = get()) }
     viewModel { PinViewModel(pinValidationUseCase = get()) }
     viewModel { InputTransferAmountViewModel(getBalanceInquiryUseCase = get()) }
 }
