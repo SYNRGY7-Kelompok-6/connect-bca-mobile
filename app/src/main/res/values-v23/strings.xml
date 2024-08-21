@@ -120,6 +120,10 @@
     <string name="get_date_button_description">Tekan untuk menyimpan pilihan tanggal</string>
     <string name="custom_datepicker_description">Box untuk memilih tanggal</string>
     <string name="balance_inquiry_hidden_description">Jumlah saldo disembunyikan</string>
+    <string name="bills">Tagihan</string>
+    <string name="investation">Investasi</string>
+    <string name="feature_not_found">Mohon maaf, fitur ini belum tersedia. Nantikan update fitur terbaru dari kami.</string>
+    <string name="feature_disabled_description">Fitur belum tersedia</string>
     <string-array name="spinner">
         <item>Frekuensi Transfer</item>
         <item>Satu Kali</item>

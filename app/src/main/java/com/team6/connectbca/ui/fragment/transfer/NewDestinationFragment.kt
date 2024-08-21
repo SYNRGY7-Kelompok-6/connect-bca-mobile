@@ -16,6 +16,7 @@ import com.team6.connectbca.databinding.FragmentNewDestinationBinding
 import com.team6.connectbca.domain.usecase.SaveAccountUseCase
 import com.team6.connectbca.ui.fragment.adapter.DestinationBankAdapter
 import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
+import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewDestinationFragment : Fragment() {
@@ -25,7 +26,6 @@ class NewDestinationFragment : Fragment() {
     private var selectedBankName: String? = null
     private var accountNumber: String? = null
     private val savedAccountViewModel by viewModel<SavedAccountViewModel>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,22 +36,28 @@ class NewDestinationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val action = NewDestinationFragmentDirections.actionNewDestinationFragmentToTransferFragment()
-        val navController = findNavController()
+        parentFragmentManager.setFragmentResultListener(
+            "requestKey",
+            viewLifecycleOwner
+        ) { _, bundle ->
+            selectedBankName = bundle.getString("selectedBankName")
+            binding.bankNameBtn.text = selectedBankName ?: "Nama Bank Tujuan"
+        }
 
+        setupUI()
+    }
+
+
+    private fun setupUI() {
+        val navController = findNavController()
         binding.toolbar.setupWithNavController(navController)
-        binding.toolbar.setNavigationOnClickListener { findNavController().navigate(action) }
+        binding.toolbar.setNavigationOnClickListener { navController.popBackStack() }
         binding.toolbar.title = "Transfer ke Tujuan Baru"
 
         setupBankNameButtonBinding()
         setupContinueButtonBinding()
 
-        arguments?.let {
-            selectedBankName = it.getString("selectedBankName")
-            accountNumber = it.getString("accountNumber")
-        }
-
-        binding.bankNameBtn.text = selectedBankName ?: "Nama Bank Tujuan"
+        accountNumber = arguments?.getString("accountNumber")
         binding.accountNumberEditText.setText(accountNumber ?: "")
     }
 
@@ -70,7 +76,8 @@ class NewDestinationFragment : Fragment() {
             if (selectedBankName.isNullOrEmpty()) {
                 Toast.makeText(context, "Silakan pilih bank tujuan", Toast.LENGTH_SHORT).show()
             } else if (accountNumber.isEmpty()) {
-                Toast.makeText(context, "Nomor rekening tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Nomor rekening tidak boleh kosong", Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 validateAccountNumber(accountNumber)
             }
@@ -79,15 +86,21 @@ class NewDestinationFragment : Fragment() {
 
     private fun validateAccountNumber(accountNumber: String) {
         savedAccountViewModel.saveAccount(accountNumber).observe(viewLifecycleOwner) { result ->
+            Log.d("NewDestinationFragment", "Result: $result")
             when (result) {
                 is SaveAccountUseCase.SaveAccountInfo.Success -> {
                     val action = NewDestinationFragmentDirections
                         .actionNewDestinationFragmentToRecepientDetailFragment(
-                            null, accountNumber, selectedBankName)
+                            result.savedAccount.data?.savedBeneficiaryId,
+                            result.savedAccount.data?.beneficiaryAccountNumber,
+                            result.savedAccount.data?.beneficiaryAccountName,
+                            false
+                        )
                     findNavController().navigate(action)
                 }
 
                 is SaveAccountUseCase.SaveAccountInfo.Failure -> {
+                    Log.e("NewDestinationFragment", "Error: ${result.errorMessage}")
                     Toast.makeText(
                         context,
                         "Nomor rekening tidak valid: ${result.errorMessage}",

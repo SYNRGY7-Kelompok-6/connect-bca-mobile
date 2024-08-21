@@ -18,4 +18,5 @@
 
     <color name="stroke_color">#0066AE</color>
     <color name="backspace_color">#1C1C1E</color>
+    <color name="dialogButtonColor">#0A3967</color>
 </resources>

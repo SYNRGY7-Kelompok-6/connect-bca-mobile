@@ -6,6 +6,7 @@ import com.team6.connectbca.domain.model.BankStatementData
 import com.team6.connectbca.domain.model.DailyTransaction
 import com.team6.connectbca.domain.model.MonthTransactionDate
 import com.team6.connectbca.domain.model.MutationsItem
+import com.team6.connectbca.domain.model.Transaction
 import com.team6.connectbca.domain.repository.BankStatementRepository
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -64,6 +65,10 @@ class BankStatementRepositoryImpl(
         } else {
             return null
         }
+    }
+
+    override suspend fun getLatestIncomeTransaction(): Transaction? {
+        return remoteDataSource.getLatestIncomeTransaction()?.toEntity()
     }
 
     private fun reformatDate(date: String) : String {

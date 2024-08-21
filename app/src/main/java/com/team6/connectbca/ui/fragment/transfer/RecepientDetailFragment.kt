@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentRecepientDetailBinding
-import com.team6.connectbca.ui.fragment.HomeFragmentDirections
 
 class RecepientDetailFragment : Fragment() {
 
@@ -19,6 +19,7 @@ class RecepientDetailFragment : Fragment() {
     private var savedAccountId: String? = null
     private var beneficiaryAccountNo: String? = null
     private var beneficiaryBank: String? = null
+    private var isFavorite: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,15 +34,18 @@ class RecepientDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
-
+        Log.d("RecepientDetailFragment", "${arguments}")
         arguments?.let {
-            savedAccountId = it.getString("savedAccountId")
+            savedAccountId = it.getString("savedBeneficiaryId")
             beneficiaryBank = it.getString("beneficiaryBank")
             beneficiaryAccountNo = it.getString("beneficiaryAccountNo")
+            isFavorite = it.getBoolean("isFavorite")
+            Log.d("RecepientDetailFragment", "savedAccountId: $savedAccountId, beneficiaryBank: $beneficiaryBank, beneficiaryAccountNo: $beneficiaryAccountNo")
         }
 
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.title = "Cek Detail Penerima"
+        binding.toolbar.background = resources.getDrawable(android.R.color.transparent)
 
         setData()
         setupContinueButtonBinding()
@@ -51,12 +55,20 @@ class RecepientDetailFragment : Fragment() {
         binding.logoText.text = if (savedAccountId.isNullOrEmpty()) {
             getAcronym("Pengguna")
         } else {
-            getAcronym("ini kudu get account by id dulu")
+            getAcronym(beneficiaryBank!!)
+
         }
+        binding.recipientName.text = beneficiaryBank
+        binding.recipientAccountNumber.text = beneficiaryAccountNo
+        if (isFavorite) binding.heartIcon.setImageResource(R.drawable.ic_heart) else binding.heartIcon.setImageResource(R.drawable.ic_heart_outline)
     }
 
     private fun setupContinueButtonBinding() {
-        val action = RecepientDetailFragmentDirections.actionRecepientDetailFragmentToInputTransferAmountFragment()
+        val action = RecepientDetailFragmentDirections.actionRecepientDetailFragmentToInputTransferAmountFragment(
+            savedAccountId,
+            beneficiaryAccountNo,
+            beneficiaryBank
+        )
         binding.continueButton.setOnClickListener {
             findNavController().navigate(action)
         }

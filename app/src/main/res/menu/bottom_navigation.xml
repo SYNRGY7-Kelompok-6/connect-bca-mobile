@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Beranda"
+        android:icon="@drawable/ic_home"
+        android:iconTint="?android:textColorPrimary"
+        android:contentDescription="Halaman Beranda"
+        />
+    <item
+        android:id="@+id/promo"
+        android:title="Promo"
+        android:icon="@drawable/ic_promo"
+        android:iconTint="?android:textColorPrimary"
+        android:contentDescription="Halaman Promo"/>
+    <item
+        android:id="@+id/notification"
+        android:title="Notifikasi"
+        android:icon="@drawable/ic_notification"
+        android:iconTint="?android:textColorPrimary"
+        android:contentDescription="Halaman Notifikasi"/>
+    <item
+        android:id="@+id/profile"
+        android:title="Profil"
+        android:icon="@drawable/ic_user"
+        android:iconTint="?android:textColorPrimary"
+        android:contentDescription="Halaman Profil"/>
+</menu>

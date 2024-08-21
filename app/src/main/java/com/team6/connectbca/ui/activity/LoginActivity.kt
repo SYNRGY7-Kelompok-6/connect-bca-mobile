@@ -1,6 +1,8 @@
 package com.team6.connectbca.ui.activity
 
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -16,6 +18,12 @@ import com.team6.connectbca.ui.viewmodel.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(Intent(context, LoginActivity::class.java))
+        }
+    }
+
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<AuthViewModel>()
 

@@ -41,7 +41,7 @@ class QrisPaymentViewModel(
     fun addDigit(digit: String) {
         _enteredAmount.append(digit)
         val enteredAmountInt = _enteredAmount.toString().toIntOrNull() ?: 0
-        if (enteredAmountInt > totalBalance) {
+        if (enteredAmountInt > _balanceInquiry.value?.balance?.availableBalance?.value ?: 0) {
             Log.d("QrisPaymentViewModel", "Balance is insufficient")
             _amount.value = _enteredAmount.toString()
         } else {

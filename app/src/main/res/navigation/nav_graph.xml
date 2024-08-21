@@ -147,16 +147,35 @@
             android:name="beneficiaryBank"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="isFavorite"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/inputTransferAmountFragment"
         android:name="com.team6.connectbca.ui.fragment.transfer.InputTransferAmountFragment"
         android:label="fragment_input_transfer_amount"
-        tools:layout="@layout/fragment_input_transfer_amount" />
+        tools:layout="@layout/fragment_input_transfer_amount" >
+        <argument
+            android:name="beneficiaryId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="beneficiaryAccountNumber"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="beneficiaryAccountName"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_inputTransferAmountFragment_to_transactionConfirmationFragment"
+            app:destination="@id/transactionConfirmationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/showQrFragment"
-        android:name="com.team6.connectbca.ui.fragment.ShowQrFragment"
+        android:name="com.team6.connectbca.ui.fragment.qris.ShowQrFragment"
         android:label="fragment_show_qr"
         tools:layout="@layout/fragment_show_qr" >
     </fragment>
@@ -174,5 +193,45 @@
         <argument
             android:name="isScan"
             app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionConfirmationFragment"
+        android:name="com.team6.connectbca.ui.fragment.transfer.TransactionConfirmationFragment"
+        android:label="TransactionConfirmationFragment" >
+        <argument
+            android:name="beneficiaryId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="beneficiaryAccountNumber"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="beneficiaryAccountName"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="nominalTransactionAmount"
+            app:argType="integer" />
+        <argument
+            android:name="accountNumber"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="accountBalance"
+            app:argType="integer" />
+        <argument
+            android:name="beneficiaryBank"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="desc"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_transactionConfirmationFragment_to_pinFragment"
+            app:destination="@id/pinFragment" />
+
     </fragment>
 </navigation>

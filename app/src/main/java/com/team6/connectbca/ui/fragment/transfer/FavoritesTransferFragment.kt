@@ -38,7 +38,7 @@ class FavoritesTransferFragment : Fragment() {
         setupSearchView()
         setupAddNewRecipientButton()
 
-        savedAccountViewModel.getLoading().observe(viewLifecycleOwner) {isLoading ->
+        savedAccountViewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.transferProgressBar.visibility = View.VISIBLE
             } else {
@@ -55,7 +55,10 @@ class FavoritesTransferFragment : Fragment() {
     private fun setupRecyclerView() {
         favoritesAdapter = FavoritesDestinationAdapter(emptyList()) { selectedAccount ->
             val action = TransferFragmentDirections.actionTransferFragmentToRecepientDetailFragment(
-                selectedAccount.savedBeneficiaryId!!, null, null
+                selectedAccount.savedBeneficiaryId!!,
+                selectedAccount.beneficiaryAccountNumber,
+                selectedAccount.beneficiaryAccountName,
+                selectedAccount.favorite ?: false
             )
             findNavController().navigate(action)
         }
@@ -68,7 +71,8 @@ class FavoritesTransferFragment : Fragment() {
     }
 
     private fun setupSearchView() {
-        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let { savedAccountViewModel.getSavedAccounts(it, true) }
                 return true
@@ -95,10 +99,11 @@ class FavoritesTransferFragment : Fragment() {
     }
 
     private fun observeSavedAccounts() {
-        savedAccountViewModel.getSavedAccounts("", false).observe(viewLifecycleOwner) { savedAccounts ->
-            savedAccounts.data?.let { accounts ->
-                favoritesAdapter.updateFavorites(accounts)
+        savedAccountViewModel.getSavedAccounts("", false)
+            .observe(viewLifecycleOwner) { savedAccounts ->
+                savedAccounts.data?.let { accounts ->
+                    favoritesAdapter.updateFavorites(accounts)
+                }
             }
-        }
     }
 }
