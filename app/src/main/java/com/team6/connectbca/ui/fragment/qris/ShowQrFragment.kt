@@ -55,10 +55,12 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentShowQrBinding.inflate(inflater, container, false)
+
         setupRecyclerView()
         observeViewModel()
-        val formattedExpirationTime = getFormattedExpirationTime(expiresAt)
-        binding.tvExpired.text = formattedExpirationTime
+
+        binding.tvExpired.text = getFormattedExpirationTime(expiresAt)
+
         binding.ivQrCode.setOnClickListener {
             showQrCodeInDialog()
         }
