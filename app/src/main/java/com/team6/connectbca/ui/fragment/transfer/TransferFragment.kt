@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.databinding.FragmentTransferBinding
+import com.team6.connectbca.ui.activity.MainActivity
 import com.team6.connectbca.ui.fragment.adapter.TransferTabPagerAdapter
 
 class TransferFragment : Fragment() {
@@ -31,6 +32,7 @@ class TransferFragment : Fragment() {
 
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.title = "Transfer"
+        binding.toolbar.setNavigationOnClickListener { navigateBack() }
     }
 
     private fun setUpTabLayout() {
@@ -43,5 +45,9 @@ class TransferFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = if (position == 0) "Daftar Favorit" else "Transfer Terjadwal"
         }.attach()
+    }
+
+    private fun navigateBack() {
+        MainActivity.startActivity(requireContext())
     }
 }

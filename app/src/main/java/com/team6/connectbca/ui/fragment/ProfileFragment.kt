@@ -2,6 +2,7 @@ package com.team6.connectbca.ui.fragment
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,23 @@ class ProfileFragment : Fragment() {
     private fun setupEditButtonsListener() {
         binding.btnNameEdit.setOnClickListener {
             binding.etName.focusable = View.FOCUSABLE
+            binding.etName.isFocusableInTouchMode = true
+        }
+        binding.btnEmailEdit.setOnClickListener {
+            binding.etEmail.focusable = View.FOCUSABLE
+            binding.etEmail.isFocusableInTouchMode = true
+        }
+        binding.btnPhoneEdit.setOnClickListener {
+            binding.etPhone.focusable = View.FOCUSABLE
+            binding.etPhone.isFocusableInTouchMode = true
+        }
+        binding.btnBirthDateEdit.setOnClickListener {
+            binding.etBirthDate.focusable = View.FOCUSABLE
+            binding.etBirthDate.isFocusableInTouchMode = true
+        }
+        binding.btnAddressEdit.setOnClickListener {
+            binding.etAddress.focusable = View.FOCUSABLE
+            binding.etAddress.isFocusableInTouchMode = true
         }
     }
 
@@ -43,6 +61,31 @@ class ProfileFragment : Fragment() {
         binding.etName.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 binding.etName.focusable = View.NOT_FOCUSABLE
+                binding.etName.isFocusableInTouchMode = false
+            }
+        }
+        binding.etEmail.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                binding.etEmail.focusable = View.NOT_FOCUSABLE
+                binding.etEmail.isFocusableInTouchMode = false
+            }
+        }
+        binding.etPhone.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                binding.etPhone.focusable = View.NOT_FOCUSABLE
+                binding.etPhone.isFocusableInTouchMode = false
+            }
+        }
+        binding.etBirthDate.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                binding.etBirthDate.focusable = View.NOT_FOCUSABLE
+                binding.etBirthDate.isFocusableInTouchMode = false
+            }
+        }
+        binding.etAddress.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                binding.etAddress.focusable = View.NOT_FOCUSABLE
+                binding.etAddress.isFocusableInTouchMode = false
             }
         }
     }

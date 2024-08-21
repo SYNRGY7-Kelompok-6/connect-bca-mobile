@@ -95,6 +95,9 @@ class HomeFragment : Fragment() {
             iconBalanceVisibility()
         }
 
+        binding.homeEwalletIcon.setOnClickListener { showAlertDialog() }
+        binding.homeBillsIcon.setOnClickListener { showAlertDialog() }
+        binding.homeInvestationIcon.setOnClickListener { showAlertDialog() }
         binding.newsItem1.btnSeeNews.setOnClickListener { showAlertDialog() }
         binding.newsItem2.btnSeeNews.setOnClickListener { showAlertDialog() }
     }

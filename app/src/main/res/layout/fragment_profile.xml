@@ -11,9 +11,11 @@
         android:id="@+id/profileFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:paddingTop="20dp"
         android:paddingHorizontal="20dp"
-        android:paddingBottom="80dp">
+        android:paddingBottom="85dp">
 
         <RelativeLayout
             android:id="@+id/profileWrapper"
@@ -28,9 +30,12 @@
                 android:id="@+id/avatar"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/ic_default_user"
+                android:background="@color/neutral02"
                 android:scaleType="centerCrop"
                 android:contentDescription="Gambar profil"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/neutral03"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:shapeAppearanceOverlay="@style/Circular"
                 app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +53,7 @@
                 android:contentDescription="Ganti gambar profil"
                 app:icon="@drawable/ic_camera"
                 app:iconTint="@color/neutral01"
-                app:iconSize="30dp"/>
+                app:iconSize="24dp"/>
 
         </RelativeLayout>
 
@@ -116,6 +121,7 @@
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold"
             android:background="@null"
+            android:focusable="false"
             app:layout_constraintTop_toBottomOf="@id/tvEmail"
             app:layout_constraintStart_toStartOf="@id/tvEmail"
             app:layout_constraintEnd_toStartOf="@id/btnEmailEdit"/>
@@ -153,6 +159,7 @@
             android:paddingVertical="8dp"
             android:textSize="16sp"
             android:text="085426561778"
+            android:focusable="false"
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold"
             android:background="@null"
@@ -193,6 +200,7 @@
             android:paddingVertical="8dp"
             android:textSize="16sp"
             android:text="2001/12/16"
+            android:focusable="false"
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold"
             android:background="@null"
@@ -233,6 +241,7 @@
             android:paddingVertical="8dp"
             android:paddingEnd="24dp"
             android:textSize="16sp"
+            android:focusable="false"
             android:text="Jalan Nangka No.1, Desa Baru, Kab. Merindu, Prov. Sana Dikit"
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold"

@@ -40,6 +40,7 @@ import com.google.zxing.common.HybridBinarizer
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentQrisBinding
 import com.team6.connectbca.databinding.LayoutCustomDialogBinding
+import com.team6.connectbca.ui.activity.MainActivity
 import com.team6.connectbca.ui.viewmodel.QrisViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -205,6 +206,11 @@ class QrisFragment : Fragment(), TextToSpeech.OnInitListener {
         binding.toolbar.title = "Scan QR"
         binding.toolbar.navigationContentDescription =
             getString(R.string.back_to_menu_button_description)
+        binding.toolbar.setNavigationOnClickListener { navigateBack() }
+    }
+
+    private fun navigateBack() {
+        MainActivity.startActivity(requireContext())
     }
 
     private fun navigateToShowQrFragment() {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="20dp"
     android:paddingHorizontal="20dp"
-    android:paddingBottom="80dp"
+    android:paddingBottom="85dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.NotificationFragment">
 
