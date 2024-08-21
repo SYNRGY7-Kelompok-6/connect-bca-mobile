@@ -1,9 +1,12 @@
 package com.team6.connectbca.data.repository
 
+import android.util.Log
 import com.team6.connectbca.data.datasource.interfaces.transfer.TransferRemoteDataSource
 import com.team6.connectbca.data.model.body.TransferAmountBody
 import com.team6.connectbca.data.model.body.TransferBody
+import com.team6.connectbca.data.model.response.QrisTransferResponse
 import com.team6.connectbca.data.model.response.TransferIntrabankResponse
+import com.team6.connectbca.domain.model.QrisTransfer
 import com.team6.connectbca.domain.model.TransactionDetail
 import com.team6.connectbca.domain.model.Transfer
 import com.team6.connectbca.domain.repository.TransferRepository
@@ -29,6 +32,18 @@ class TransferRepositoryImpl(
             desc = desc,
             amount = TransferAmountBody(value = amountValue, currency = currency)
         )
-        return transferRemoteDataSource.transfer(pinToken, transferBody).toEntity()
+        var dataResponse: TransferIntrabankResponse? = null
+        try {
+            val response: TransferIntrabankResponse =
+                transferRemoteDataSource.transfer(pinToken, transferBody)
+            dataResponse = response
+        } catch (error: Throwable) {
+            Log.e("Failed with", error.toString())
+        }
+        return dataResponse?.toEntity() ?: Transfer(
+            status = "",
+            message = "",
+            data = null
+        )
     }
 }

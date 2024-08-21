@@ -20,7 +20,7 @@ class QrisTransferUseCase(private val transferRepository: TransferRepository) {
         return transferRepository.transfer(
             pinToken,
             beneficiaryAccountNumber = beneficiaryAccountNumber,
-            remark = "Qris Transfer",
+            remark = remark,
             desc = desc,
             amountValue = amountValue,
             currency = currency
