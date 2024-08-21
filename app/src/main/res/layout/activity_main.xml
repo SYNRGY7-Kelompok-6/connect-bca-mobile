@@ -11,7 +11,6 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingBottom="90dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,6 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:labelVisibilityMode="labeled"
         app:itemTextColor="?android:textColorPrimary"
+        app:itemIconTint="?android:textColorPrimary"
         app:itemRippleColor="?android:buttonTint"
         app:menu="@menu/bottom_navigation">
 

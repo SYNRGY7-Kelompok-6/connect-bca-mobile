@@ -2,4 +2,5 @@
 <resources>
     <color name="stroke_color">#FFFFFF</color>
     <color name="backspace_color">#FFFFFF</color>
+    <color name="dialogButtonColor">#FFFF</color>
 </resources>

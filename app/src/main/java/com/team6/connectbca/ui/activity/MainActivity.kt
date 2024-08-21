@@ -3,6 +3,8 @@ package com.team6.connectbca.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -28,7 +30,39 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupNavigationComponent()
+        setupBottomNav()
+    }
 
+    override fun onSupportNavigateUp(): Boolean {
+        val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
+        return host.navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    private fun setupNavigationComponent() {
+        val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
+        navController = host.navController
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            Log.i("CURRENT FRAGMENT", destination.id.toString())
+            Log.i("HOME FRAGMENT", R.id.homeFragmentRoot.toString())
+            when (destination.id) {
+                R.id.homeFragmentRoot -> showBottomNav()
+                R.id.notificationFragment -> showBottomNav()
+                R.id.promoFragment -> showBottomNav()
+                R.id.profileFragment -> showBottomNav()
+                2131296618 -> showBottomNav()
+                else -> hideBottomNav()
+            }
+        }
+    }
+
+    private  fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(binding.navGraph.id, fragment)
+        transaction.commit()
+    }
+
+    private fun setupBottomNav() {
         binding.homeBottomNav.setOnItemSelectedListener {menuItem ->
             when(menuItem.itemId) {
                 R.id.home -> {
@@ -54,19 +88,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
-        return host.navController.navigateUp() || super.onSupportNavigateUp()
+    private fun showBottomNav() {
+        binding.homeBottomNav.visibility = View.VISIBLE
     }
 
-    private fun setupNavigationComponent() {
-        val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
-        navController = host.navController
-    }
-
-    private  fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.navGraph.id, fragment)
-        transaction.commit()
+    private fun hideBottomNav() {
+        binding.homeBottomNav.visibility = View.GONE
     }
 }

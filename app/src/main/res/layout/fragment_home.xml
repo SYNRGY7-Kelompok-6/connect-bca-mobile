@@ -6,12 +6,26 @@
     android:id="@+id/homeFragmentRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="80dp"
     tools:context=".ui.fragment.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            style="@style/ProgressBar"
+            android:id="@+id/homeProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:indeterminate="true"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/homeToolbar"
@@ -70,7 +84,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/lihat_notifikasi_description" />
+                    android:contentDescription="Tombol untuk keluar aplikasi" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -114,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginHorizontal="8dp"
-                    android:contentDescription="@string/copy_to_clipboard"
+                    android:contentDescription="Salin nomor rekening"
                     app:icon="@drawable/ic_copy"
                     app:iconTint="@color/neutral01"
                     app:layout_constraintHorizontal_bias="0.0"
