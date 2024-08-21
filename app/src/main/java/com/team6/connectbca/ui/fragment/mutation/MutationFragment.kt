@@ -30,6 +30,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MutationFragment : Fragment() {
     private lateinit var binding: FragmentMutationBinding
     private lateinit var balance: String
+    private lateinit var balanceDesc: String
     private val viewModel by viewModel<BalanceInquiryViewModel>()
     private var isBalanceVisible: Boolean = false
 
@@ -150,8 +151,9 @@ class MutationFragment : Fragment() {
                 binding.tvBalanceAmount.text = "*********"
                 binding.tvBalanceAmount.contentDescription = "Jumlah saldo disembunyikan"
                 balance = formattedAmount
+                balanceDesc = amount.toString()
                 binding.cardCustomer.tvCardNumber.text = formattedAccNo
-                binding.cardCustomer.tvCardNumber.contentDescription = formattedAccNo
+                binding.cardCustomer.tvCardNumber.contentDescription = balanceInquiry.accountNo!!.split("").joinToString(" ")
                 binding.cardCustomer.tvSavingProduct.text = balanceInquiry.accountType
                 binding.cardCustomer.tvSavingProduct.contentDescription = "Tipe kartu adalah ${balanceInquiry.accountType}"
                 binding.cardCustomer.tvExpDate.text = formattedExpDate
@@ -167,9 +169,9 @@ class MutationFragment : Fragment() {
                 val withdrawal = getFormattedBalance(monthly.monthlyOutcome?.value!!)
 
                 binding.tvRecentMonthDepositAmount.text = "Rp $deposit"
-                binding.tvRecentMonthDepositAmount.contentDescription = "$deposit rupiah"
+                binding.tvRecentMonthDepositAmount.contentDescription = "${monthly.monthlyIncome?.value!!} rupiah"
                 binding.tvRecentMonthWithdrawalAmount.text = "Rp $withdrawal"
-                binding.tvRecentMonthWithdrawalAmount.contentDescription = "$withdrawal rupiah"
+                binding.tvRecentMonthWithdrawalAmount.contentDescription = "${monthly.monthlyOutcome?.value!!} rupiah"
             }
         }
 
@@ -192,7 +194,7 @@ class MutationFragment : Fragment() {
 
         if (isBalanceVisible) {
             binding.tvBalanceAmount.text = balance
-            binding.tvBalanceAmount.contentDescription = balance
+            binding.tvBalanceAmount.contentDescription = balanceDesc
             binding.btnShowBalance.setIconResource(R.drawable.ic_visibility_off)
             binding.btnShowBalance.contentDescription = "Klik tombol ini untuk sembunyikan saldo"
         } else {
