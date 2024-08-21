@@ -153,7 +153,7 @@ class MutationFragment : Fragment() {
                 balance = formattedAmount
                 balanceDesc = amount.toString()
                 binding.cardCustomer.tvCardNumber.text = formattedAccNo
-                binding.cardCustomer.tvCardNumber.contentDescription = balanceInquiry.accountNo!!.split("").joinToString(" ")
+                binding.cardCustomer.tvCardNumber.contentDescription = "Nommor rekening Anda ${balanceInquiry.accountNo!!.split("").joinToString(" ")}"
                 binding.cardCustomer.tvSavingProduct.text = balanceInquiry.accountType
                 binding.cardCustomer.tvSavingProduct.contentDescription = "Tipe kartu adalah ${balanceInquiry.accountType}"
                 binding.cardCustomer.tvExpDate.text = formattedExpDate

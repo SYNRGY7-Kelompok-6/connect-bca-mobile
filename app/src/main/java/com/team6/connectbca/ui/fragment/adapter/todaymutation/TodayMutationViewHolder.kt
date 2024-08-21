@@ -20,7 +20,7 @@ class TodayMutationViewHolder(
         binding.tvDesc.text = data.desc
         binding.tvDesc.contentDescription = binding.tvDesc.text
         binding.tvBeneficiaryName.text = data.beneficiaryAccount?.beneficiaryAccountName
-        binding.tvBeneficiaryNumber.text = data.beneficiaryAccount?.beneficiaryAccountNumber!!.split("").joinToString(" ")
+        binding.tvBeneficiaryNumber.text = data.beneficiaryAccount?.beneficiaryAccountNumber
         binding.tvBeneficiaryName.contentDescription = "Nama akun ${binding.tvBeneficiaryName.text}"
         binding.tvBeneficiaryNumber.contentDescription = "Nomor akun ${binding.tvBeneficiaryNumber.text.split("").joinToString(" ")}"
         binding.tvItemRowCurrency.text = getCurrency(data.amount?.currency!!)
