@@ -1,6 +1,7 @@
 package com.team6.connectbca.data.datasource.interfaces.bankstatement
 
 import com.team6.connectbca.data.model.response.BankStatementResponse
+import com.team6.connectbca.data.model.response.TransactionResponse
 
 
 interface BankStatementRemoteDataSource {
@@ -10,4 +11,6 @@ interface BankStatementRemoteDataSource {
         page: String,
         pageSize: String
     ): BankStatementResponse
+
+    suspend fun getLatestIncomeTransaction(): TransactionResponse?
 }

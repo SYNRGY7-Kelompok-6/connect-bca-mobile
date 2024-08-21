@@ -46,6 +46,7 @@ import com.team6.connectbca.domain.repository.SavedAccountRepository
 import com.team6.connectbca.domain.repository.TransferRepository
 import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
 import com.team6.connectbca.domain.usecase.GetDateRangeMutationUseCase
+import com.team6.connectbca.domain.usecase.GetLatestTransactionUseCase
 import com.team6.connectbca.domain.usecase.GetMutationUseCase
 import com.team6.connectbca.domain.usecase.GetSavedAccountDetailUseCase
 import com.team6.connectbca.domain.usecase.GetSavedAccountsUseCase
@@ -119,6 +120,7 @@ val koinModule = module {
     single { GetDateRangeMutationUseCase(bankStatementRepository = get()) }
     single { QrVerifyUseCase(qrisRepository = get()) }
     single { ShowQrUseCase(qrisRepository = get()) }
+    single { GetLatestTransactionUseCase(bankStatementRepository = get()) }
     single { GetTransactionDetailUseCase(transferRepository = get()) }
     single { TransferUseCase(transferRepository = get()) }
     single { SaveAccountUseCase(get()) }
@@ -127,4 +129,5 @@ val koinModule = module {
     single { UpdateFavoriteUseCase(savedAccountRepository = get()) }
     single { PinValidationUseCase(authRepository = get()) }
     single { QrisTransferUseCase(transferRepository = get()) }
+
 }

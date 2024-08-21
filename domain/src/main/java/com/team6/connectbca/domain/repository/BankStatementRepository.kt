@@ -2,6 +2,7 @@ package com.team6.connectbca.domain.repository
 
 import com.team6.connectbca.domain.model.BankStatementData
 import com.team6.connectbca.domain.model.DailyTransaction
+import com.team6.connectbca.domain.model.Transaction
 
 interface BankStatementRepository {
     suspend fun getBankStatement(
@@ -9,12 +10,14 @@ interface BankStatementRepository {
         toDate: String,
         page: String,
         pageSize: String
-    ) : BankStatementData?
+    ): BankStatementData?
 
     suspend fun getTransactionGroups(
         fromDate: String,
         toDate: String,
         page: String,
         pageSize: String
-    ) : List<DailyTransaction>?
+    ): List<DailyTransaction>?
+
+    suspend fun getLatestIncomeTransaction() : Transaction?
 }
