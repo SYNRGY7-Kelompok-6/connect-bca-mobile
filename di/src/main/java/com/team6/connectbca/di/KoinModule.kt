@@ -127,4 +127,5 @@ val koinModule = module {
     single { UpdateFavoriteUseCase(savedAccountRepository = get()) }
     single { PinValidationUseCase(authRepository = get()) }
     single { QrisTransferUseCase(transferRepository = get()) }
+    single { TransferNewDestinationUseCase(transferRepository = get()) }
 }

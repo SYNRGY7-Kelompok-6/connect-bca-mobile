@@ -1,4 +1,4 @@
-package com.team6.connectbca.ui.fragment
+package com.team6.connectbca.ui.fragment.qris
 
 import android.app.Dialog
 import android.graphics.drawable.Drawable
@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
@@ -23,7 +22,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentShowQrBinding
 import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
-import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Date

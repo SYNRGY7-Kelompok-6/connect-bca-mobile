@@ -42,6 +42,10 @@ class SavedAccountViewModel(
         return _saveAccountResult
     }
 
+//    fun saveAccount(beneficiaryAccountNumber: String){
+//
+//    }
+
     fun getSavedAccountDetail(savedBeneficiaryId: String): LiveData<SavedAccount> {
         performTaskWithLoading {
             val account = getSavedAccountDetailUseCase(savedBeneficiaryId)

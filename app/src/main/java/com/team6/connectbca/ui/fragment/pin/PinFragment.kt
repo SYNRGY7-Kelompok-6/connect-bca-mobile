@@ -19,6 +19,7 @@ import com.team6.connectbca.databinding.FragmentPinBinding
 import com.team6.connectbca.databinding.LayoutCustomDialogBinding
 import com.team6.connectbca.ui.viewmodel.PinViewModel
 import com.team6.connectbca.ui.viewmodel.QrisPaymentViewModel
+import com.team6.connectbca.ui.viewmodel.TransferViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,6 +32,8 @@ class PinFragment : Fragment() {
     private lateinit var pinDigits: MutableList<MaterialTextView>
     private val pinViewModel by viewModel<PinViewModel>()
     private val qrisPaymentViewModel by viewModel<QrisPaymentViewModel>()
+    private val transferViewModel by viewModel<TransferViewModel>()
+
     private var jsonData: JSONObject? = null
     private var transactionType: String? = null
     override fun onCreateView(
@@ -43,6 +46,7 @@ class PinFragment : Fragment() {
             jsonData = JSONObject(jsonString)
             Log.d("PinFragment", "Data: $jsonData")
             transactionType = PinFragmentArgs.fromBundle(it).transactionType
+            Log.d("PinFragment", "Transaction Type: $transactionType")
         }
         _binding = FragmentPinBinding.inflate(inflater, container, false)
         return binding.root
@@ -129,32 +133,24 @@ class PinFragment : Fragment() {
                         amountValue = amountValue,
                         currency = amountObject?.get("currency") as String
                     )
+                } else if (transactionType == "transfer") {
+                    transferViewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
+                        if (isLoading) {
+                            binding.pinProgressBar.visibility = View.VISIBLE
+                        } else {
+                            binding.pinProgressBar.visibility = View.GONE
+                        }
+                    }
+                    transferViewModel.transferInitiate(
+                        token,
+                        beneficiaryAccountNumber = jsonData?.get("beneficiaryAccountNumber") as String,
+                        remark = jsonData?.get("remark") as String,
+                        desc = jsonData?.get("desc") as String,
+                        amountValue = amountValue,
+                        currency = amountObject?.get("currency") as String
+                    )
+                    Log.d("PinFragment", "Data 3")
                 }
-            }
-        }
-
-        qrisPaymentViewModel.showQrSuccess.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                var amountObject = jsonData?.getJSONObject("amount")
-                val amountValue = when (val value = amountObject?.get("value")) {
-                    is Int -> value.toDouble()
-                    is Double -> value
-                    else -> 0.0
-                }
-                val bundle = Bundle().apply {
-                    putString("qrImage", qrisPaymentViewModel.qrData.value?.qrImage)
-                    putLong("expiresAt", qrisPaymentViewModel.qrData.value?.expiresAt ?: 0)
-                    putFloat("amount", amountValue.toFloat())
-                    putString("currency", amountObject?.get("currency") as String)
-
-                }
-
-                findNavController().navigate(
-                    R.id.action_pinFragment_to_showQrFragment,
-                    bundle
-                )
-            } else {
-                Log.d("PinFragment", "Show QR failed")
             }
         }
 
@@ -166,6 +162,20 @@ class PinFragment : Fragment() {
                     "Transaction ID: ${qrisPaymentViewModel.transfer.value?.data?.transactionId}"
                 )
                 successAlertDialog(qrisPaymentViewModel.transfer.value?.data?.transactionId ?: "")
+            } else {
+                failedAlertDialog()
+            }
+        }
+        transferViewModel.transferSuccess.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                Log.d("PinFragment", "Transfer success")
+                Log.d(
+                    "PinFragment",
+                    "Transaction ID: ${transferViewModel.transferResult.value?.data?.transactionId}"
+                )
+                successAlertDialog(
+                    transferViewModel.transferResult.value?.data?.transactionId ?: ""
+                )
             } else {
                 failedAlertDialog()
             }
@@ -214,6 +224,13 @@ class PinFragment : Fragment() {
         val dialogBinding = LayoutCustomDialogBinding.inflate(LayoutInflater.from(requireContext()))
         val dialog = Dialog(requireContext())
         dialog.dismiss()
+        dialogBinding.ivAlert.setBackgroundResource(R.drawable.ic_alert)
+        dialogBinding.ivAlert.setImageResource(R.drawable.ic_alert)
+        dialogBinding.btnRetry.text = "Ulangi"
+        dialogBinding.btnRetry.contentDescription = "Tombol Ulangi"
+        dialogBinding.tvTitle.text = "Transaksi Anda Gagal"
+        dialogBinding.tvTitle.marginStart.plus(60)
+        dialogBinding.tvTitle.marginEnd.plus(60)
         dialogBinding.btnRetry.setOnClickListener {
             dialog.dismiss()
             navigateToHome()
@@ -228,7 +245,8 @@ class PinFragment : Fragment() {
     }
 
     private fun navigateToPaymentReceipt(transactionId: String) {
-        val action = PinFragmentDirections.actionPinFragmentToPaymentReceiptFragment(transactionId, false)
+        val action =
+            PinFragmentDirections.actionPinFragmentToPaymentReceiptFragment(transactionId, false)
         findNavController().navigate(action)
     }
 

@@ -36,7 +36,7 @@ class FindDestinationBankFragment : Fragment() {
 
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.title = "Pilih Bank Tujuan"
-        binding.toolbar.setNavigationOnClickListener{ navigateBack() }
+        binding.toolbar.setNavigationOnClickListener { navigateBack() }
     }
 
     private fun setupMainBankItem() {
@@ -44,9 +44,15 @@ class FindDestinationBankFragment : Fragment() {
 
         mainBankItem.root.setOnClickListener {
             val selectedBankName = mainBankItem.tvDestinationBankName.text.toString()
-            val action = FindDestinationBankFragmentDirections.actionFindDestinationBankFragmentToNewDestinationFragment(selectedBankName, null)
 
-            findNavController().navigate(action)
+            // Mengirim data kembali ke NewDestinationFragment
+            val result = Bundle().apply {
+                putString("selectedBankName", selectedBankName)
+            }
+            parentFragmentManager.setFragmentResult("requestKey", result)
+
+            // Pop fragment ini dari back stack
+            findNavController().popBackStack()
         }
     }
 
@@ -58,7 +64,6 @@ class FindDestinationBankFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-//                    destinationBankAdapter.filter.filter(newText)
                     return true
                 }
             })
