@@ -10,15 +10,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentPaymentReceiptBinding
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.milisecondToDateMonth
 import com.team6.connectbca.ui.activity.MainActivity
-import com.team6.connectbca.ui.fragment.mutation.MutationFragmentDirections
 import com.team6.connectbca.ui.viewmodel.TransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -83,7 +84,8 @@ class PaymentReceiptFragment : Fragment() {
                         binding.tvBeneficiaryBank.text = transaction.beneficiaryAccountNumber
                         binding.tvTotalTransaction.text = "Rp $amount"
                         binding.tvSourceName.text = transaction.sourceName
-                        binding.tvSourceBank.text = transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
+                        binding.tvSourceBank.text =
+                            transaction.sourceAccountNumber!!.replace(sourceNumOld, "******")
                         binding.btnShare.setOnClickListener { shareInvoice() }
                         binding.btnClose.setOnClickListener {
                             if (isFromMutation!!) {
@@ -92,10 +94,13 @@ class PaymentReceiptFragment : Fragment() {
                                 navigateToHome()
                             }
                         }
+                        backAndroidButton(isFromMutation)
 
                         binding.tvTotalTransaction.contentDescription = "$amount rupiah"
-                        binding.tvSourceBank.contentDescription = "Nomor rekening ${binding.tvSourceBank.text}"
-                        binding.tvBeneficiaryBank.contentDescription = "Nomor rekening ${binding.tvBeneficiaryBank.text}"
+                        binding.tvSourceBank.contentDescription =
+                            "Nomor rekening ${binding.tvSourceBank.text}"
+                        binding.tvBeneficiaryBank.contentDescription =
+                            "Nomor rekening ${binding.tvBeneficiaryBank.text}"
 
                         if (transaction.remark.equals("Transfer")) {
                             binding.tvStatus.text = "Transfer Berhasil!"
@@ -106,7 +111,11 @@ class PaymentReceiptFragment : Fragment() {
                             hideTransferView()
                         }
 
-                        Snackbar.make(binding.root, "Bukti transaksi berhasil dimuat", Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(
+                            binding.root,
+                            "Bukti transaksi berhasil dimuat",
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                 }
         }
@@ -123,10 +132,11 @@ class PaymentReceiptFragment : Fragment() {
         startActivity(Intent.createChooser(shareIntent, null))
     }
 
-    private fun convertLayoutToImage() : Bitmap {
+    private fun convertLayoutToImage(): Bitmap {
         hideButtons()
 
-        val bitmap: Bitmap = Bitmap.createBitmap(binding.root.width, binding.root.height, Bitmap.Config.RGB_565)
+        val bitmap: Bitmap =
+            Bitmap.createBitmap(binding.root.width, binding.root.height, Bitmap.Config.RGB_565)
         val canvas = Canvas(bitmap)
 
         binding.root.draw(canvas)
@@ -135,7 +145,7 @@ class PaymentReceiptFragment : Fragment() {
         return bitmap
     }
 
-    private fun getImageUri(bitmap: Bitmap) : Uri? {
+    private fun getImageUri(bitmap: Bitmap): Uri? {
         var file: File? = null
         var fos1: FileOutputStream? = null
         var imageUri: Uri? = null
@@ -202,11 +212,25 @@ class PaymentReceiptFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        MainActivity.startActivity(requireContext())
+        findNavController().popBackStack(R.id.homeFragment, false)
     }
 
     private fun navigateToMutation() {
-        val action = PaymentReceiptFragmentDirections.actionPaymentReceiptFragmentToMutationFragment()
-        findNavController().navigate(action)
+        findNavController().popBackStack()
     }
+
+    private fun backAndroidButton(isFromMutation: Boolean) {
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (isFromMutation) {
+                        navigateToMutation()
+                    } else {
+                        navigateToHome()
+                    }
+                }
+            })
+    }
+
 }
