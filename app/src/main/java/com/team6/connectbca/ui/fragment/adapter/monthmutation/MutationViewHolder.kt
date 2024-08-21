@@ -23,10 +23,10 @@ class MutationViewHolder(
         binding.tvBeneficiaryName.text = data.beneficiaryAccount?.beneficiaryAccountName
         binding.tvBeneficiaryNumber.text = data.beneficiaryAccount?.beneficiaryAccountNumber
         binding.tvBeneficiaryName.contentDescription = "Nama akun ${binding.tvBeneficiaryName.text}"
-        binding.tvBeneficiaryNumber.contentDescription = "Nomor akun ${binding.tvBeneficiaryNumber.text}"
+        binding.tvBeneficiaryNumber.contentDescription = "Nomor akun ${binding.tvBeneficiaryNumber.text.split("").joinToString(" ")}"
         binding.tvItemRowCurrency.text = getCurrency(data.amount?.currency!!)
         binding.tvPrice.text = getFormattedBalance(data.amount?.value!!)
-        binding.tvPrice.contentDescription = "Jumlah nominal ${binding.tvPrice.text}"
+        binding.tvPrice.contentDescription = "Jumlah nominal ${data.amount?.value!!}"
         binding.btnNote.setOnClickListener { monthMutationAdapterListener.onClickSeeInvoice(data.transactionId!!) }
         binding.btnNote.contentDescription = "Tombol melihat bukti transaksi"
         changeStyle(data.type!!)

@@ -14,7 +14,7 @@ class TodayMutationViewHolder(
     private val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
     fun render(data: MutationsItem) {
-        binding.ivMutationLogo.setImageResource(R.drawable.ic_logo)
+        binding.ivMutationLogo.setImageResource(R.drawable.connect_logo)
         binding.tvTitle.text = data.remark
         binding.tvTitle.contentDescription = binding.tvTitle.text
         binding.tvDesc.text = data.desc
@@ -22,10 +22,10 @@ class TodayMutationViewHolder(
         binding.tvBeneficiaryName.text = data.beneficiaryAccount?.beneficiaryAccountName
         binding.tvBeneficiaryNumber.text = data.beneficiaryAccount?.beneficiaryAccountNumber
         binding.tvBeneficiaryName.contentDescription = "Nama akun ${binding.tvBeneficiaryName.text}"
-        binding.tvBeneficiaryNumber.contentDescription = "Nomor akun ${binding.tvBeneficiaryNumber.text}"
+        binding.tvBeneficiaryNumber.contentDescription = "Nomor akun ${binding.tvBeneficiaryNumber.text.split("").joinToString(" ")}"
         binding.tvItemRowCurrency.text = getCurrency(data.amount?.currency!!)
         binding.tvPrice.text = getFormattedBalance(data.amount?.value!!)
-        binding.tvPrice.contentDescription = "Jumlah nominal ${binding.tvPrice.text}"
+        binding.tvPrice.contentDescription = "Jumlah nominal ${data.amount?.value!!}"
         binding.btnNote.setOnClickListener { todayMutationAdapterListener.onClickSeeInvoice(data.transactionId!!) }
         binding.btnNote.contentDescription = "Tombol melihat bukti transaksi"
         changeStyle(data.type!!)
