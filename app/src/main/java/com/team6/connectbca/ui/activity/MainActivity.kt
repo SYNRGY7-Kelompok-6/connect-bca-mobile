@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -15,10 +14,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityMainBinding
+import com.team6.connectbca.ui.fragment.HomeFragment
 import com.team6.connectbca.ui.fragment.NotificationFragment
 import com.team6.connectbca.ui.fragment.ProfileFragment
 import com.team6.connectbca.ui.fragment.PromoFragment
-
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -27,9 +26,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private lateinit var navController: NavController
+
+    // Fragments are initialized once and reused
+    private val homeFragment = HomeFragment()
+    private val promoFragment = PromoFragment()
+    private val notificationFragment = NotificationFragment()
+    private val profileFragment = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         setupNavigationComponent()
         setupBottomNav()
         showBottomNav()
+
+        // Load the home fragment by default
+        if (savedInstanceState == null) {
+            loadFragment(homeFragment)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -53,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
                     v.clearFocus()
                     val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
+                    imm.hideSoftInputFromWindow(v.windowToken, 0)
                 }
             }
         }
@@ -62,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavigationComponent() {
         val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
-        navController = host.navController
+        val navController = host.navController
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -75,34 +83,42 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private  fun loadFragment(fragment: Fragment){
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(binding.navGraph.id, fragment)
+
+        // Hide all fragments first
+        supportFragmentManager.fragments.forEach { transaction.hide(it) }
+
+        // Show the selected fragment
+        if (fragment.isAdded) {
+            transaction.show(fragment)
+        } else {
+            transaction.add(binding.navGraph.id, fragment)
+        }
+
         transaction.commit()
     }
 
     private fun setupBottomNav() {
-        binding.homeBottomNav.setOnItemSelectedListener {menuItem ->
-            when(menuItem.itemId) {
+        binding.homeBottomNav.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
                 R.id.home -> {
-                    startActivity(this)
+                    loadFragment(homeFragment)
                     true
                 }
                 R.id.promo -> {
-                    loadFragment(PromoFragment())
+                    loadFragment(promoFragment)
                     true
                 }
                 R.id.notification -> {
-                    loadFragment(NotificationFragment())
+                    loadFragment(notificationFragment)
                     true
                 }
                 R.id.profile -> {
-                    loadFragment(ProfileFragment())
+                    loadFragment(profileFragment)
                     true
                 }
-                else -> {
-                    false
-                }
+                else -> false
             }
         }
     }
