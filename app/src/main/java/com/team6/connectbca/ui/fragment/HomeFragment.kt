@@ -16,6 +16,7 @@ import android.view.Window
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
@@ -52,7 +53,7 @@ class HomeFragment : Fragment() {
         val accountNumber = binding.tvAccountNumber.text.toString()
         setupCustomerInfo()
 
-        viewModel.getLoading().observe(viewLifecycleOwner) {isLoading ->
+        viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.homeProgressBar.visibility = View.VISIBLE
             } else {
@@ -60,7 +61,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModel.getSuccess().observe(viewLifecycleOwner) {isSuccess ->
+        viewModel.getSuccess().observe(viewLifecycleOwner) { isSuccess ->
             if (isSuccess != null) {
                 navigateToLogin()
             }
@@ -68,7 +69,8 @@ class HomeFragment : Fragment() {
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat data rekening", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Gagal memuat data rekening", Snackbar.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -111,7 +113,8 @@ class HomeFragment : Fragment() {
 
                 binding.salutationText.setText("Hi, ${account.name}")
                 binding.tvAccountNumber.text = formattedAccNo
-                binding.tvAccountNumber.contentDescription = account.accountNo?.split("")!!.joinToString(" ")
+                binding.tvAccountNumber.contentDescription =
+                    account.accountNo?.split("")!!.joinToString(" ")
                 balance = formattedAmount
                 balanceDesc = amount.toString()
             }
@@ -168,8 +171,10 @@ class HomeFragment : Fragment() {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(requireContext(), R.color.dialogButtonColor))
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(requireContext(), R.color.dialogButtonColor))
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(ContextCompat.getColor(requireContext(), R.color.dialogButtonColor))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+            .setTextColor(ContextCompat.getColor(requireContext(), R.color.dialogButtonColor))
     }
 
     private fun showAlertDialog() {
