@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -15,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityMainBinding
+import com.team6.connectbca.ui.fragment.HomeFragment
 import com.team6.connectbca.ui.fragment.NotificationFragment
 import com.team6.connectbca.ui.fragment.ProfileFragment
 import com.team6.connectbca.ui.fragment.PromoFragment
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.homeFragmentRoot -> showBottomNav()
+                R.id.homeFragment -> showBottomNav()
                 R.id.notificationFragment -> showBottomNav()
                 R.id.promoFragment -> showBottomNav()
                 R.id.profileFragment -> showBottomNav()
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         binding.homeBottomNav.setOnItemSelectedListener {menuItem ->
             when(menuItem.itemId) {
                 R.id.home -> {
-                    startActivity(this)
+                    loadFragment(HomeFragment())
                     true
                 }
                 R.id.promo -> {

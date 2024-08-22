@@ -136,3 +136,14 @@ fun providePinService(context: Context,authLocalDataSource: AuthLocalDataSource)
         authLocalDataSource
     ).create(PinService::class.java)
 }
+
+fun provideUserService(
+    context: Context,
+    authLocalDataSource: AuthLocalDataSource
+): UserService {
+    return provideRetrofitBuilder(
+        context,
+        BASE_URL,
+        authLocalDataSource
+    ).create(UserService::class.java)
+}

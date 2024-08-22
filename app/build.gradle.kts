@@ -67,6 +67,8 @@ dependencies {
     implementation(platform("io.insert-koin:koin-bom:3.5.6"))
     implementation("io.insert-koin:koin-android")
 
+    implementation("io.coil-kt:coil:2.7.0")
+
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
     implementation("com.google.android.material:material:1.12.0")

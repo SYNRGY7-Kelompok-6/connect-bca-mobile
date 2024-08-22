@@ -234,4 +234,9 @@
             app:destination="@id/pinFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.team6.connectbca.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
