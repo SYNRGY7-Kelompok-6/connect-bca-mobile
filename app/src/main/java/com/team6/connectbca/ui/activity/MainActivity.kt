@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityMainBinding
 import com.team6.connectbca.ui.fragment.HomeFragment
@@ -20,6 +22,7 @@ import com.team6.connectbca.ui.fragment.ProfileFragment
 import com.team6.connectbca.ui.fragment.PromoFragment
 
 class MainActivity : AppCompatActivity() {
+
     companion object {
         fun startActivity(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))
@@ -27,95 +30,41 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
-    // Fragments are initialized once and reused
-    private val homeFragment = HomeFragment()
-    private val promoFragment = PromoFragment()
-    private val notificationFragment = NotificationFragment()
-    private val profileFragment = ProfileFragment()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupNavigationComponent()
-        setupBottomNav()
-        showBottomNav()
 
-        // Load the home fragment by default
-        if (savedInstanceState == null) {
-            loadFragment(homeFragment)
-        }
-    }
+        // Setup Navigation Component
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_graph) as NavHostFragment
+        navController = navHostFragment.navController
+        NavigationUI.setupWithNavController(binding.homeBottomNav, navController)
 
-    override fun onSupportNavigateUp(): Boolean {
-        val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
-        return host.navController.navigateUp() || super.onSupportNavigateUp()
-    }
-
-    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_DOWN) {
-            val v = currentFocus
-            if (v is EditText) {
-                val outRect = Rect()
-                v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    v.clearFocus()
-                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(v.windowToken, 0)
-                }
-            }
-        }
-        return super.dispatchTouchEvent(event)
-    }
-
-    private fun setupNavigationComponent() {
-        val host: NavHostFragment = supportFragmentManager.findFragmentById(binding.navGraph.id) as NavHostFragment
-        val navController = host.navController
-
+        // Optional: Hide/Show BottomNavigationView based on destination
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            Log.d("Navigation", "Current Destination: ${destination}")
             when (destination.id) {
-                R.id.homeFragmentRoot -> showBottomNav()
-                R.id.notificationFragment -> showBottomNav()
-                R.id.promoFragment -> showBottomNav()
-                R.id.profileFragment -> showBottomNav()
+                R.id.homeFragment, R.id.notificationFragment, R.id.promoFragment, R.id.profileFragment -> showBottomNav()
                 else -> hideBottomNav()
             }
         }
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-
-        // Hide all fragments first
-        supportFragmentManager.fragments.forEach { transaction.hide(it) }
-
-        // Show the selected fragment
-        if (fragment.isAdded) {
-            transaction.show(fragment)
-        } else {
-            transaction.add(binding.navGraph.id, fragment)
-        }
-
-        transaction.commit()
-    }
-
-    private fun setupBottomNav() {
-        binding.homeBottomNav.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
+        binding.homeBottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
                 R.id.home -> {
-                    loadFragment(homeFragment)
-                    true
-                }
-                R.id.promo -> {
-                    loadFragment(promoFragment)
+                    navController.navigate(R.id.homeFragment)
                     true
                 }
                 R.id.notification -> {
-                    loadFragment(notificationFragment)
+                    navController.navigate(R.id.notificationFragment)
+                    true
+                }
+                R.id.promo -> {
+                    navController.navigate(R.id.promoFragment)
                     true
                 }
                 R.id.profile -> {
-                    loadFragment(profileFragment)
+                    navController.navigate(R.id.profileFragment)
                     true
                 }
                 else -> false

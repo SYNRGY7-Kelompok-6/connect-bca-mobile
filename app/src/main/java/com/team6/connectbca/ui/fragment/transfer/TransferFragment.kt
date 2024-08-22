@@ -32,7 +32,6 @@ class TransferFragment : Fragment() {
 
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.title = "Transfer"
-        binding.toolbar.setNavigationOnClickListener { navigateBack() }
     }
 
     private fun setUpTabLayout() {
@@ -47,7 +46,4 @@ class TransferFragment : Fragment() {
         }.attach()
     }
 
-    private fun navigateBack() {
-        MainActivity.startActivity(requireContext())
-    }
 }

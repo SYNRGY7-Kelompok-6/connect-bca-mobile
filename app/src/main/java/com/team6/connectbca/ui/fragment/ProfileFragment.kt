@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentHomeBinding
@@ -30,6 +31,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupEditButtonsListener()
         setupEditTextOnFocusChangedListener()
+        androidBackButton()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -88,5 +90,16 @@ class ProfileFragment : Fragment() {
                 binding.etAddress.isFocusableInTouchMode = false
             }
         }
+    }
+    private fun androidBackButton(){
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Exit the application
+                    requireActivity().finishAffinity()
+                }
+            }
+        )
     }
 }

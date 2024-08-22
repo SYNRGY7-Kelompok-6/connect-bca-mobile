@@ -51,7 +51,6 @@ class MutationFragment : Fragment() {
 
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.setTitle("Informasi Rekening")
-        binding.toolbar.setNavigationOnClickListener { navigateBack() }
 
         setupTabLayout()
         setupBottomSheet()
@@ -225,7 +224,4 @@ class MutationFragment : Fragment() {
         binding.btnShowBalance.visibility = View.VISIBLE
     }
 
-    private fun navigateBack() {
-        MainActivity.startActivity(requireContext())
-    }
 }

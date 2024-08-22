@@ -20,6 +20,7 @@ import com.team6.connectbca.databinding.FragmentPaymentReceiptBinding
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.milisecondToDateMonth
 import com.team6.connectbca.ui.activity.MainActivity
+import com.team6.connectbca.ui.fragment.HomeFragment
 import com.team6.connectbca.ui.viewmodel.TransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -45,6 +46,7 @@ class PaymentReceiptFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setData()
+        setupListeners()
         isFromMutation = arguments?.getBoolean("isFromMutation")!!
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
@@ -211,16 +213,46 @@ class PaymentReceiptFragment : Fragment() {
         binding.tvAcquirer.visibility = View.GONE
     }
 
+    private fun restartFragment() {
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        val currentFragment = fragmentManager.findFragmentById(R.id.nav_graph)
+        currentFragment?.let {
+            fragmentTransaction.remove(it)
+        }
+
+        // Menambahkan fragment baru
+        fragmentTransaction.add(R.id.nav_graph, HomeFragment())
+        fragmentTransaction.commit()
+    }
+
     private fun navigateToHome() {
         findNavController().popBackStack(R.id.homeFragment, false)
+//        val intent = Intent(requireContext(), MainActivity::class.java)
+//        startActivity(intent)
     }
 
     private fun navigateToMutation() {
         findNavController().popBackStack()
     }
 
+    private fun setupListeners() {
+        binding.btnClose.setOnClickListener {
+            navigateToHome()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    navigateToHome()
+                }
+            }
+        )
+    }
     private fun backAndroidButton(isFromMutation: Boolean) {
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(
+        requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
