@@ -59,13 +59,13 @@
 
     <ImageView
         android:id="@+id/ivNews"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="145dp"
+        android:layout_height="145dp"
         android:layout_alignStart="@id/newsItemCard"
         android:scaleType="fitCenter"
         android:layout_marginStart="-8dp"
         android:contentDescription="Gambar Berita"
-        android:src="@mipmap/news_image_2"
+        android:src="@drawable/news_image2"
         android:clipChildren="false"/>
 
 </RelativeLayout>

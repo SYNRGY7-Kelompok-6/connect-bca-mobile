@@ -229,8 +229,6 @@ class PaymentReceiptFragment : Fragment() {
 
     private fun navigateToHome() {
         findNavController().popBackStack(R.id.homeFragment, false)
-//        val intent = Intent(requireContext(), MainActivity::class.java)
-//        startActivity(intent)
     }
 
     private fun navigateToMutation() {

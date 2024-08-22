@@ -54,6 +54,7 @@ class HomeFragment : Fragment() {
         val accountNumber = binding.tvAccountNumber.text.toString()
         setupCustomerInfo()
         androidBackButton()
+        
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.homeProgressBar.visibility = View.VISIBLE

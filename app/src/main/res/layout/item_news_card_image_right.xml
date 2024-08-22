@@ -64,7 +64,7 @@
         android:scaleType="fitCenter"
         android:layout_marginEnd="-12dp"
         android:contentDescription="Gambar Berita"
-        android:src="@mipmap/news_image_1" />
+        android:src="@drawable/news_image1" />
 
 </RelativeLayout>
 

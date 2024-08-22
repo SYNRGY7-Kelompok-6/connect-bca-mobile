@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -46,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("Navigation", "Current Destination: ${destination}")
             when (destination.id) {
                 R.id.homeFragment, R.id.notificationFragment, R.id.promoFragment, R.id.profileFragment -> showBottomNav()
+
                 else -> hideBottomNav()
             }
         }

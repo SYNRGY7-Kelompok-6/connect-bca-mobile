@@ -250,5 +250,4 @@
             app:destination="@id/pinFragment" />
 
     </fragment>
-
 </navigation>
