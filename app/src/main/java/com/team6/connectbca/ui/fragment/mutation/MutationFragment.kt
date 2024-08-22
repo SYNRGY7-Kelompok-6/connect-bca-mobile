@@ -49,7 +49,6 @@ class MutationFragment : Fragment() {
 
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.setTitle("Informasi Rekening")
-        binding.toolbar.setNavigationOnClickListener { navigateBack() }
 
         setupTabLayout()
         setupBottomSheet()
@@ -221,9 +220,5 @@ class MutationFragment : Fragment() {
         binding.cvDeposit.visibility = View.VISIBLE
         binding.cvWithdrawal.visibility = View.VISIBLE
         binding.btnShowBalance.visibility = View.VISIBLE
-    }
-
-    private fun navigateBack() {
-        findNavController().popBackStack(R.id.homeFragment, false)
     }
 }

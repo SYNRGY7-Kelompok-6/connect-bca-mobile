@@ -18,6 +18,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
@@ -61,6 +62,8 @@ class ProfileFragment : Fragment() {
         setData()
         setupEditButtonsListener()
         setupEditTextOnFocusChangedListener()
+        androidBackButton()
+
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
@@ -305,5 +308,16 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+    }
+    private fun androidBackButton(){
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Exit the application
+                    requireActivity().finishAffinity()
+                }
+            }
+        )
     }
 }
