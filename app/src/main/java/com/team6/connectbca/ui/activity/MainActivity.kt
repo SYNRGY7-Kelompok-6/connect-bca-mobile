@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
 
         // Optional: Hide/Show BottomNavigationView based on destination
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            Log.d("Navigation", "Current Destination: ${destination}")
             when (destination.id) {
                 R.id.homeFragment, R.id.notificationFragment, R.id.promoFragment, R.id.profileFragment -> showBottomNav()
 
