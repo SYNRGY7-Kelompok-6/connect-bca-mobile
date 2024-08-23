@@ -37,7 +37,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentProfileBinding
-import com.team6.connectbca.extensions.checkPermissionLogic
 import com.team6.connectbca.extensions.getTimeStamp
 import com.team6.connectbca.extensions.getYear
 import com.team6.connectbca.ui.viewmodel.ProfileViewModel
@@ -127,7 +126,7 @@ class ProfileFragment : Fragment() {
             if (requestCode == REQUEST_CODE_GALLERY) {
                 if (data != null) {
                     Log.i("ISI DATA", data.data.toString())
-                    loadImage("", data.data)
+//                    loadImage("", data.data)
                     imageUri = data.data!!
                     Log.i("ISI IMAGE URI", imageUri.toString())
                 }
@@ -145,7 +144,7 @@ class ProfileFragment : Fragment() {
         viewModel.getUserProfile().observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 Log.i("ISI IMAGE URL", user.imageUrl ?: "gak ada")
-//                loadImage(user.imageUrl!!)
+                loadImage(user.imageUrl!!)
                 binding.etName.setText(user.name)
                 binding.etEmail.setText(user.email)
                 binding.etPhone.setText(user.phone)
@@ -206,15 +205,15 @@ class ProfileFragment : Fragment() {
             binding.etAddress.focusable = View.FOCUSABLE
             binding.etAddress.isFocusableInTouchMode = true
         }
-        binding.btnChangeAvatar.setOnClickListener {
-            permissionCheckLogic = checkPermissionLogic(requireContext())
-
-            if (permissionCheckLogic) {
-                showImageDialog()
-            } else {
-                askForPermission()
-            }
-        }
+//        binding.btnChangeAvatar.setOnClickListener {
+//            permissionCheckLogic = checkPermissionLogic(requireContext())
+//
+//            if (permissionCheckLogic) {
+//                showImageDialog()
+//            } else {
+//                askForPermission()
+//            }
+//        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -426,9 +425,10 @@ class ProfileFragment : Fragment() {
                     binding.etBirthDate.setText(updatedUser.birth)
                 } else if (!address.isNullOrEmpty()) {
                     binding.etAddress.setText(updatedUser.address)
-                } else {
-//                    loadImage(updatedUser.imageUrl!!)
                 }
+//                else {
+//                    loadImage(updatedUser.imageUrl!!)
+//                }
             }
         }
     }
