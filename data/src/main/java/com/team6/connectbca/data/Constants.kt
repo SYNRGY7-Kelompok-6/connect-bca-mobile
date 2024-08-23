@@ -1,7 +1,6 @@
 package com.team6.connectbca.data
 
-const val BASE_URL = "https://banking-apps-d159984f6ed7.herokuapp.com/api/v1.0/"
-const val BASE_JS_URL = "https://connect-bca.fly.dev/api/v1.0/"
+const val BASE_URL = "https://be-java-production-f674.up.railway.app/api/v1.0/"
 const val LOGIN_URL = "auth/login"
 const val BANK_STATEMENT_URL = "bank-statement"
 const val ACCOUNT_MONTHLY_URL = "bank-statement/monthly"
@@ -13,3 +12,4 @@ const val SAVED_ACCOUNTS_URL = "saved-accounts"
 const val SAVED_ACCOUNTS_DETAIL = "saved-accounts/{savedBeneficiaryId}"
 const val PIN_VALIDATE = "auth/validate-pin"
 const val LATEST_INCOME = "bank-statement/latest-income"
+const val USER_PROFILE = "users/profile"

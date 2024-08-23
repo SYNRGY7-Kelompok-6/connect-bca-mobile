@@ -10,6 +10,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
     <application
         android:name=".MyApp"
@@ -21,7 +28,12 @@
         android:roundIcon="@drawable/connect_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConnectBCA"
+        android:usesCleartextTraffic="true"
+        android:largeHeap="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activity.ProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.PinActivity"
             android:exported="false" />
@@ -39,7 +51,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

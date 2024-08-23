@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ import com.team6.connectbca.databinding.ItemCustomerBankCardBinding
 import com.team6.connectbca.extensions.getFormattedAccountNo
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.milisecondToDateMonth
-import com.team6.connectbca.ui.activity.MainActivity
 import com.team6.connectbca.ui.fragment.adapter.TabPagerAdapter
 import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -51,7 +49,6 @@ class MutationFragment : Fragment() {
 
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.setTitle("Informasi Rekening")
-        binding.toolbar.setNavigationOnClickListener { navigateBack() }
 
         setupTabLayout()
         setupBottomSheet()
@@ -223,9 +220,5 @@ class MutationFragment : Fragment() {
         binding.cvDeposit.visibility = View.VISIBLE
         binding.cvWithdrawal.visibility = View.VISIBLE
         binding.btnShowBalance.visibility = View.VISIBLE
-    }
-
-    private fun navigateBack() {
-        MainActivity.startActivity(requireContext())
     }
 }
