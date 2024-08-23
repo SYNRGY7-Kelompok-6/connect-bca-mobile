@@ -28,6 +28,7 @@ class MutationViewHolder(
         binding.btnNote.setOnClickListener { monthMutationAdapterListener.onClickSeeInvoice(data.transactionId!!) }
         binding.btnNote.contentDescription = "Tombol melihat bukti transaksi"
         changeStyle(data.type!!)
+        setLogo()
     }
 
     private fun changeStyle(type: String) {
