@@ -1,6 +1,5 @@
 package com.team6.connectbca.extensions
 
-import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -9,6 +8,13 @@ import java.util.Locale
 fun getCurrentDateString() : String {
     val date = getCurrentDate()
     val dateString = date.toString("dd-MM-yyyy")
+
+    return dateString
+}
+
+fun getTimeStamp() : String {
+    val date = getCurrentDate()
+    val dateString = date.toString("dd-MM-yyyy HH:mm:ss")
 
     return dateString
 }

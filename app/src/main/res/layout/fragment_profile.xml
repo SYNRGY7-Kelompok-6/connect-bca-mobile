@@ -54,19 +54,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                style="?attr/materialIconButtonFilledStyle"
-                android:id="@+id/btnChangeAvatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="?android:buttonTint"
-                android:layout_alignEnd="@id/avatar"
-                android:layout_alignBottom="@id/avatar"
-                android:contentDescription="Ganti gambar profil"
-                app:icon="@drawable/ic_camera"
-                app:iconTint="@color/neutral01"
-                app:iconSize="24dp"/>
-
         </RelativeLayout>
 
         <TextView
@@ -219,7 +206,10 @@
             android:paddingVertical="8dp"
             android:textSize="16sp"
             android:text="2001/12/16"
+            android:clickable="false"
+            android:cursorVisible="false"
             android:focusable="false"
+            android:focusableInTouchMode="false"
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold"
             android:background="@null"

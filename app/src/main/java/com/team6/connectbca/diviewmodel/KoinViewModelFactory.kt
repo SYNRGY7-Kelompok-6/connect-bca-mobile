@@ -1,15 +1,16 @@
 package com.team6.connectbca.diviewmodel
 
-import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import com.team6.connectbca.ui.viewmodel.AuthViewModel
+import com.team6.connectbca.ui.viewmodel.BalanceInquiryViewModel
 import com.team6.connectbca.ui.viewmodel.HomeViewModel
 import com.team6.connectbca.ui.viewmodel.InputTransferAmountViewModel
 import com.team6.connectbca.ui.viewmodel.MonthMutationViewModel
 import com.team6.connectbca.ui.viewmodel.PinViewModel
+import com.team6.connectbca.ui.viewmodel.ProfileViewModel
 import com.team6.connectbca.ui.viewmodel.QrisPaymentViewModel
-import com.team6.connectbca.ui.viewmodel.SearchMutationViewModel
 import com.team6.connectbca.ui.viewmodel.QrisViewModel
 import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
+import com.team6.connectbca.ui.viewmodel.SearchMutationViewModel
 import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import com.team6.connectbca.ui.viewmodel.TodayMutationViewModel
 import com.team6.connectbca.ui.viewmodel.TransferViewModel
@@ -46,4 +47,5 @@ val viewModelModule = module {
     viewModel { PinViewModel(pinValidationUseCase = get()) }
     viewModel { HomeViewModel(getBalanceInquiryUseCase = get(), logoutUseCase = get()) }
     viewModel { InputTransferAmountViewModel(getBalanceInquiryUseCase = get()) }
+    viewModel { ProfileViewModel(getUserProfileUseCase = get(), updateUserProfileUseCase = get()) }
 }
