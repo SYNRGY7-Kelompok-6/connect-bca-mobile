@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -206,12 +207,8 @@ class QrisFragment : Fragment(), TextToSpeech.OnInitListener {
         binding.toolbar.title = "Scan QR"
         binding.toolbar.navigationContentDescription =
             getString(R.string.back_to_menu_button_description)
-        binding.toolbar.setNavigationOnClickListener { navigateBack() }
     }
 
-    private fun navigateBack() {
-        MainActivity.startActivity(requireContext())
-    }
 
     private fun navigateToShowQrFragment() {
         binding.cardShowQr.setCardBackgroundColor(

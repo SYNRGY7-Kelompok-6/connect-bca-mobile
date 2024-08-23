@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -52,7 +53,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val accountNumber = binding.tvAccountNumber.text.toString()
         setupCustomerInfo()
-
+        androidBackButton()
+        
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.homeProgressBar.visibility = View.VISIBLE
@@ -197,5 +199,16 @@ class HomeFragment : Fragment() {
 
     private fun navigateToLogin() {
         LoginActivity.startActivity(requireContext())
+    }
+    private fun androidBackButton(){
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Exit the application
+                    requireActivity().finishAffinity()
+                }
+            }
+        )
     }
 }

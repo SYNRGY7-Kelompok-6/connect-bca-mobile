@@ -21,6 +21,22 @@
             app:destination="@id/transferFragment" />
     </fragment>
     <fragment
+        android:id="@+id/promoFragment"
+        android:name="com.team6.connectbca.ui.fragment.PromoFragment"
+        android:label="PromoFragment"
+        tools:layout="@layout/fragment_promo"/>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.team6.connectbca.ui.fragment.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.team6.connectbca.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
         android:id="@+id/mutationFragment"
         android:name="com.team6.connectbca.ui.fragment.mutation.MutationFragment"
         android:label="fragment_mutation"

@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.NumberPicker
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -70,6 +71,8 @@ class ProfileFragment : Fragment() {
         setData()
         setupEditButtonsListener()
         setupEditTextOnFocusChangedListener()
+        androidBackButton()
+
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
@@ -393,5 +396,16 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+    }
+    private fun androidBackButton(){
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Exit the application
+                    requireActivity().finishAffinity()
+                }
+            }
+        )
     }
 }
