@@ -12,6 +12,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -27,13 +28,17 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentProfileBinding
 import com.team6.connectbca.extensions.checkPermissionLogic
-import com.team6.connectbca.extensions.getCurrentDateString
+import com.team6.connectbca.extensions.getTimeStamp
 import com.team6.connectbca.extensions.getYear
 import com.team6.connectbca.ui.viewmodel.ProfileViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -117,21 +122,20 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.i("MASUK GAK", "MASUK")
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_GALLERY) {
                 if (data != null) {
-                    binding.avatar.setImageURI(data.data!!)
+                    Log.i("ISI DATA", data.data.toString())
+                    loadImage("", data.data)
                     imageUri = data.data!!
+                    Log.i("ISI IMAGE URI", imageUri.toString())
                 }
             }
 
             imageFile = convertToFile()
-
-            if (imageFile != null) {
-                updateData(image = imageFile)
-            } else {
-                Log.e("ERROR GETTING FILE", "hadeh")
-            }
+            Log.i("ISI FILE", imageFile.toString())
+            updateData(image = imageFile)
         } else {
             Log.e("ERROR GETTING FILE", "hadeh")
         }
@@ -140,7 +144,8 @@ class ProfileFragment : Fragment() {
     private fun setData() {
         viewModel.getUserProfile().observe(viewLifecycleOwner) { user ->
             if (user != null) {
-                binding.avatar.load(user.imageUrl)
+                Log.i("ISI IMAGE URL", user.imageUrl ?: "gak ada")
+//                loadImage(user.imageUrl!!)
                 binding.etName.setText(user.name)
                 binding.etEmail.setText(user.email)
                 binding.etPhone.setText(user.phone)
@@ -148,6 +153,36 @@ class ProfileFragment : Fragment() {
                 binding.etAddress.setText(user.address)
             }
         }
+    }
+
+    private fun loadImage(image: String, uri: Uri? = null) {
+        Log.i("PASS URI", uri?.toString() ?: "gak masuk uri ne null")
+        Glide.with(this)
+            .load(uri ?: image)
+            .override(1600, 1600)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    binding.profileProgressBar.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable,
+                    model: Any,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    binding.profileProgressBar.visibility = View.GONE
+                    return false
+                }
+            })
+            .into(binding.avatar)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -361,7 +396,7 @@ class ProfileFragment : Fragment() {
 
     private fun createCustomTempFile(): File {
         val filesDir = requireContext().externalCacheDir
-        return File.createTempFile(getCurrentDateString(), ".jpg", filesDir)
+        return File.createTempFile(getTimeStamp(), ".jpg", filesDir)
     }
 
     private fun updateData(
@@ -392,7 +427,7 @@ class ProfileFragment : Fragment() {
                 } else if (!address.isNullOrEmpty()) {
                     binding.etAddress.setText(updatedUser.address)
                 } else {
-                    binding.avatar.load(updatedUser.imageUrl)
+//                    loadImage(updatedUser.imageUrl!!)
                 }
             }
         }

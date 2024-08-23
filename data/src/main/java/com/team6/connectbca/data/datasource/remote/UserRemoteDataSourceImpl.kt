@@ -1,5 +1,6 @@
 package com.team6.connectbca.data.datasource.remote
 
+import android.util.Log
 import com.team6.connectbca.data.datasource.interfaces.user.UserRemoteDataSource
 import com.team6.connectbca.data.datasource.services.UserService
 import com.team6.connectbca.data.model.body.UpdateProfileBody
@@ -18,16 +19,23 @@ class UserRemoteDataSourceImpl(
 
     override suspend fun updateUserProfile(updateProfileBody: UpdateProfileBody): UserProfileResponse {
         val file = updateProfileBody.image
+        var imageReq: MultipartBody.Part? = null
+        Log.i("REMOTE: ISI FILE", file?.absolutePath ?: "null dia")
 
-        val imageReq = if (file != null) {
-            MultipartBody.Part.createFormData(
+        if (file != null) {
+            val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+
+            Log.i("REMOTE: REQUEST FILE", requestFile.toString())
+
+            imageReq = MultipartBody.Part.createFormData(
                 "image",
                 file.name,
-                file.asRequestBody("image/*".toMediaTypeOrNull())
+                requestFile
             )
-        } else {
-            null
         }
+
+        Log.i("REMOTE: CONTENT TYPE", imageReq?.body?.contentType().toString())
+        Log.i("REMOTE: CONTENT SIZE", imageReq?.body?.contentLength().toString())
 
         return userService.updateUserProfile(
             updateProfileBody.name.orEmpty().toRequestBody("text/plain".toMediaTypeOrNull()),
