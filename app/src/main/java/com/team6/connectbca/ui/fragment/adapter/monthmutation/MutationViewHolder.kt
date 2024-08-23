@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.team6.connectbca.R
-import com.team6.connectbca.databinding.MonthMutationItemCardBinding
 import com.team6.connectbca.databinding.MutationItemRowBinding
 import com.team6.connectbca.domain.model.MutationsItem
 import com.team6.connectbca.extensions.getFormattedBalance
@@ -15,7 +14,6 @@ class MutationViewHolder(
     private val context: Context
 ) : RecyclerView.ViewHolder(binding.root) {
     fun render(data: MutationsItem) {
-        binding.ivMutationLogo.setImageResource(R.drawable.connect_logo)
         binding.tvTitle.text = data.remark
         binding.tvTitle.contentDescription = binding.tvTitle.text
         binding.tvDesc.text = data.desc
@@ -48,6 +46,14 @@ class MutationViewHolder(
                 binding.tvItemRowCurrency.setTextColor(ContextCompat.getColor(context, R.color.secondaryGreen))
                 binding.tvPrice.setTextColor(ContextCompat.getColor(context, R.color.secondaryGreen))
             }
+        }
+    }
+
+    private fun setLogo() {
+        if (binding.tvTitle.text.equals("Transfer")) {
+            binding.ivMutationLogo.setImageResource(R.drawable.ic_transfer)
+        } else {
+            binding.ivMutationLogo.setImageResource(R.drawable.ic_qris)
         }
     }
 

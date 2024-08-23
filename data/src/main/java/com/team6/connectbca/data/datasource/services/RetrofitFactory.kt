@@ -3,6 +3,7 @@ package com.team6.connectbca.data.datasource.services
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
+import com.team6.connectbca.data.BASE_JS_URL
 import com.team6.connectbca.data.BASE_URL
 import com.team6.connectbca.data.datasource.interfaces.auth.AuthLocalDataSource
 import kotlinx.coroutines.runBlocking
@@ -101,7 +102,7 @@ fun provideQrisService(
 ): QrisService {
     return provideRetrofitBuilder(
         context,
-        BASE_URL,
+        BASE_JS_URL,
         authLocalDataSource
     ).create(QrisService::class.java)
 }

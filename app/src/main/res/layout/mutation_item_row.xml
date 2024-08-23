@@ -20,7 +20,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/connect_logo_shdw"
+            android:background="?android:buttonTint"
             android:contentDescription="Logo"
+            app:shapeAppearanceOverlay="@style/Circular"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvTitle"
@@ -63,33 +65,29 @@
             android:id="@+id/tvBeneficiaryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="2dp"
             android:textColor="?android:textColorPrimary"
             android:textSize="14sp"
             android:text="@string/beneficiary_account_name"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toBottomOf="@id/tvDesc"
-            app:layout_constraintStart_toEndOf="@id/ivMutationLogo"
-            app:layout_constraintEnd_toStartOf="@id/tvBeneficiaryNumber"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/tvDesc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvBeneficiaryNumber"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvBeneficiaryNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:textColor="?android:textColorPrimary"
             android:textSize="14sp"
             android:text="@string/beneficiary_account_number"
-            android:scrollHorizontally="true"
-            android:ellipsize="end"
-            android:maxEms="7"
-            android:maxLines="1"
             app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintTop_toTopOf="@id/tvBeneficiaryName"
-            app:layout_constraintStart_toEndOf="@id/tvBeneficiaryName"
-            app:layout_constraintEnd_toEndOf="@id/tvBeneficiaryName"
-            app:layout_constraintBottom_toBottomOf="@id/tvBeneficiaryName"/>
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryName"
+            app:layout_constraintStart_toStartOf="@id/tvBeneficiaryName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/transactionType"
