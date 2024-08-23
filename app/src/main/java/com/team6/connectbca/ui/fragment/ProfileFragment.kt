@@ -5,10 +5,13 @@ import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.READ_MEDIA_IMAGES
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
-import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -18,14 +21,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.NumberPicker
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import coil.load
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentProfileBinding
 import com.team6.connectbca.extensions.checkPermissionLogic
+import com.team6.connectbca.extensions.getCurrentDateString
+import com.team6.connectbca.extensions.getYear
 import com.team6.connectbca.ui.viewmodel.ProfileViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -38,13 +46,12 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private val viewModel by viewModel<ProfileViewModel>()
     private lateinit var imageUri: Uri
-    private lateinit var imageCurrentPath: String
+    private var storageDir: File? = null
     private var imageFile: File? = null
     private var permissionCheckLogic: Boolean = false
-    private val REQUEST_CODE_IMAGE_PICKER = 100
+    private val REQUEST_CODE_PERMISSION = 100
     private val REQUEST_CODE_GALLERY = 200
-
-    private val storageDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    private val REQUEST_CODE_CAMERA = 300
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +65,8 @@ class ProfileFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        storageDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
         setData()
         setupEditButtonsListener()
         setupEditTextOnFocusChangedListener()
@@ -77,21 +86,52 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSION) {
+            if (grantResults.isNotEmpty()) {
+                var flag = true
+
+                grantResults.forEach { result ->
+                    if (result != PackageManager.PERMISSION_GRANTED) {
+                        flag = false
+                    }
+                }
+
+                if (flag) {
+                    showImageDialog()
+                } else {
+                    Snackbar.make(binding.root, "Permission is denied", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            } else {
+                Snackbar.make(binding.root, "Permission is denied", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_GALLERY) {
                 if (data != null) {
+                    binding.avatar.setImageURI(data.data!!)
                     imageUri = data.data!!
                 }
             }
 
             imageFile = convertToFile()
+
+            if (imageFile != null) {
+                updateData(image = imageFile)
+            } else {
+                Log.e("ERROR GETTING FILE", "hadeh")
+            }
         } else {
             Log.e("ERROR GETTING FILE", "hadeh")
         }
-
-        convertToFile()
     }
 
     private fun setData() {
@@ -122,8 +162,7 @@ class ProfileFragment : Fragment() {
             binding.etPhone.isFocusableInTouchMode = true
         }
         binding.btnBirthDateEdit.setOnClickListener {
-            binding.etBirthDate.focusable = View.FOCUSABLE
-            binding.etBirthDate.isFocusableInTouchMode = true
+            showCustomDatePicker()
         }
         binding.btnAddressEdit.setOnClickListener {
             binding.etAddress.focusable = View.FOCUSABLE
@@ -163,75 +202,125 @@ class ProfileFragment : Fragment() {
                 updateData(phone = binding.etPhone.text.toString())
             }
         }
-        binding.etBirthDate.setOnFocusChangeListener { view, hasFocus ->
-            if (!hasFocus) {
-                binding.etBirthDate.focusable = View.NOT_FOCUSABLE
-                binding.etBirthDate.isFocusableInTouchMode = false
-                updateData(birth = binding.etBirthDate.text.toString())
-            }
-        }
         binding.etAddress.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 binding.etAddress.focusable = View.NOT_FOCUSABLE
                 binding.etAddress.isFocusableInTouchMode = false
 
-                updateData(image = imageFile)
+                updateData(address = binding.etAddress.text.toString())
             }
         }
     }
 
+    private fun showCustomDatePicker() {
+        val dialog = Dialog(requireContext())
+        var day = ""
+        var month = ""
+        var year = ""
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+
+        dialog.setContentView(R.layout.item_custom_datepicker)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val saveBtn: MaterialButton = dialog.findViewById(R.id.getDateBtn)
+        val dayNumPick: NumberPicker? = dialog.findViewById(R.id.dayNumPick)
+        val monthNumPick: NumberPicker? = dialog.findViewById(R.id.monthNumPick)
+        val yearNumPick: NumberPicker? = dialog.findViewById(R.id.yearNumPick)
+        val nowYear = getYear().toInt()
+        val monthVals = arrayOf<String>("Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember")
+
+        dayNumPick?.minValue = 1
+        dayNumPick?.maxValue = 31
+        monthNumPick?.minValue = 1
+        monthNumPick?.maxValue = 12
+        monthNumPick?.displayedValues = monthVals
+        yearNumPick?.minValue = nowYear - 100
+        yearNumPick?.maxValue = nowYear
+
+        saveBtn.setOnClickListener {
+            day = dayNumPick?.value.toString()
+            month = monthNumPick?.value.toString()
+            year = yearNumPick?.value.toString()
+
+            binding.etBirthDate.setText("$day-$month-$year")
+
+            dialog.dismiss()
+
+            updateData(birth = binding.etBirthDate.text.toString())
+        }
+
+        dialog.show()
+    }
+
     private fun showImageDialog() {
-        AlertDialog.Builder(requireContext())
-            .setMessage("Choose One")
-            .setPositiveButton("Galeri") { _,_ -> openGallery() }
-            .setNegativeButton("Kamera") { _,_ -> openCamera() }
-            .show()
+        val dialog = Dialog(requireContext())
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+
+        dialog.setContentView(R.layout.item_image_picker_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val cameraBtn: MaterialButton = dialog.findViewById(R.id.btnCamera)
+        val galleryBtn: MaterialButton = dialog.findViewById(R.id.btnGallery)
+
+        cameraBtn.setOnClickListener {
+            openCamera(dialog)
+        }
+        galleryBtn.setOnClickListener {
+            openGallery(dialog)
+        }
+
+        dialog.show()
     }
 
     private fun askForPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
+            requestPermissions(
                 arrayOf(
                     CAMERA,
                     READ_MEDIA_IMAGES
                 ),
-                REQUEST_CODE_IMAGE_PICKER
+                REQUEST_CODE_PERMISSION
             )
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
+            requestPermissions(
                 arrayOf(
                     CAMERA,
                     READ_EXTERNAL_STORAGE
                 ),
-                REQUEST_CODE_IMAGE_PICKER
+                REQUEST_CODE_PERMISSION
             )
         } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
+            requestPermissions(
                 arrayOf(
                     CAMERA,
                     WRITE_EXTERNAL_STORAGE
                 ),
-                REQUEST_CODE_IMAGE_PICKER
+                REQUEST_CODE_PERMISSION
             )
         }
     }
 
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+    private fun openGallery(dialog: Dialog) {
+        dialog.dismiss()
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.setType("image/*")
         startActivityForResult(intent, REQUEST_CODE_GALLERY)
     }
 
-    private fun openCamera() {
+    private fun openCamera(dialog: Dialog) {
+        dialog.dismiss()
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
         if (intent.resolveActivity(requireActivity().packageManager) != null) {
             var photoFile: File? = null
 
             try {
-                photoFile = createImageFile()
+                photoFile = createCustomTempFile()
             } catch (e: IOException) {
                 e.printStackTrace()
                 Log.e("CREATE IMAGE FILE ERROR", e.toString())
@@ -244,33 +333,32 @@ class ProfileFragment : Fragment() {
                     photoFile
                 )
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-                startActivityForResult(intent, REQUEST_CODE_IMAGE_PICKER)
+                startActivityForResult(intent, REQUEST_CODE_CAMERA)
             }
         }
     }
 
-    private fun createImageFile() : File {
-        val image = File.createTempFile("profile_pict", ".jpg", storageDir)
-
-        imageCurrentPath = image.absolutePath
-
-        return image
-    }
-
     private fun convertToFile() : File {
-        val file = File(storageDir, "userProfile")
+        val myFile = createCustomTempFile()
 
-        val outputStream = FileOutputStream(file)
+        val outputStream = FileOutputStream(myFile)
         val inputStream = requireContext().getContentResolver().openInputStream(imageUri)
 
         if (inputStream != null) {
             val bitmap = BitmapFactory.decodeStream(inputStream)
             inputStream.close()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
         }
-        outputStream.flush();
+        outputStream.flush()
 
-        return file
+        binding.avatar.setImageURI(imageUri)
+
+        return myFile
+    }
+
+    private fun createCustomTempFile(): File {
+        val filesDir = requireContext().externalCacheDir
+        return File.createTempFile(getCurrentDateString(), ".jpg", filesDir)
     }
 
     private fun updateData(

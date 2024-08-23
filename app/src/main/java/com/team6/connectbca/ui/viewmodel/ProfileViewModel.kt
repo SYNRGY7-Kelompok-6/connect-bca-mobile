@@ -1,5 +1,6 @@
 package com.team6.connectbca.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -63,6 +64,7 @@ class ProfileViewModel(
 
                 _loading.value = false
             } catch (error: Throwable) {
+                Log.e("ERROR NYA DISINI", error.toString())
                 _error.value = error
                 _loading.value = false
             }

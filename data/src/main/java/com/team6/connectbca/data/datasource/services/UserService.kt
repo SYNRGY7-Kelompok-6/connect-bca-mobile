@@ -20,10 +20,6 @@ interface UserService {
 
     @Multipart
     @PUT(USER_PROFILE)
-    @Headers(
-        "Accept: application/json",
-        "Content-Type: application/json"
-    )
     suspend fun updateUserProfile(
         @Part("name") name: RequestBody?,
         @Part("email") email: RequestBody?,
