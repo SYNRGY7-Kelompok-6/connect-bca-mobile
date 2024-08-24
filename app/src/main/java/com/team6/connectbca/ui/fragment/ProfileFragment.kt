@@ -88,7 +88,7 @@ class ProfileFragment : Fragment() {
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat data profile", Snackbar.LENGTH_SHORT).show()
+                showSnackbar("Gagal memuat data profile")
             }
         }
     }
@@ -114,7 +114,7 @@ class ProfileFragment : Fragment() {
                         .show()
                 }
             } else {
-                Snackbar.make(binding.root, "Permission is denied", Snackbar.LENGTH_SHORT).show()
+                showSnackbar("Permission is denied")
             }
         }
     }
@@ -206,7 +206,7 @@ class ProfileFragment : Fragment() {
             binding.etAddress.isFocusableInTouchMode = true
         }
 //        binding.btnChangeAvatar.setOnClickListener {
-//            permissionCheckLogic = checkPermissionLogic(requireContext())
+//            permissionCheckLogic = checkMediaFilePermission(requireContext())
 //
 //            if (permissionCheckLogic) {
 //                showImageDialog()
@@ -442,5 +442,9 @@ class ProfileFragment : Fragment() {
                 }
             }
         )
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

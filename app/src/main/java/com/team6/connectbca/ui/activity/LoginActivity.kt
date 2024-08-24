@@ -10,11 +10,13 @@ import android.view.View
 import android.view.Window
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityLoginBinding
 import com.team6.connectbca.ui.viewmodel.AuthViewModel
+import com.team6.connectbca.ui.viewmodel.ConnectivityStatusLiveData
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -26,33 +28,34 @@ class LoginActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<AuthViewModel>()
+    private lateinit var networkStatusLiveData: ConnectivityStatusLiveData
+    private var isDisconnected: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        binding.btnLogin.setOnClickListener {
-            val userId = binding.etUserId.text.toString()
-            val pass = binding.etPassword.text.toString()
-            val checkResult = checkUserInput(userId, pass)
+        networkStatusLiveData = ConnectivityStatusLiveData(applicationContext)
 
-            if (userId.isNullOrEmpty()) { binding.etUserId.error = "User Id tidak boleh kosong" }
-            if (pass.isNullOrEmpty()) { binding.etPassword.error = "Password tidak boleh kosong" }
-            if (checkResult) {
-                binding.etUserId.error = null
-                binding.etPassword.error = null
+        checkConnectivity()
+        observeViewModel()
+        setButtonsOnClickListener()
+    }
 
-                viewModel.userLogin(userId, pass)
+    private fun checkConnectivity() {
+        networkStatusLiveData.observe(this, Observer { isConnected ->
+            if (isConnected && isDisconnected) {
+                isDisconnected = false
+                showSnackbar("Koneksi Internet Tersambung Kembali")
+            } else if (!isConnected) {
+                isDisconnected = true
+                showSnackbar("Maaf, Koneksi Internet Anda Terputus")
             }
-        }
+        })
+    }
 
-        binding.tvForgotPassword.setOnClickListener { showForgetPasswordAlertDialog() }
-
-        binding.btnWallet.setOnClickListener { showQuickAccessAlertDialog() }
-        binding.btnQris.setOnClickListener { showQuickAccessAlertDialog() }
-        binding.btnTransfer.setOnClickListener { showQuickAccessAlertDialog() }
-
+    private fun observeViewModel() {
         viewModel.getUserSessionData().observe(this) { user ->
             if (user.isNullOrEmpty()) {
                 binding.tilUserId.visibility = View.VISIBLE
@@ -85,7 +88,29 @@ class LoginActivity : AppCompatActivity() {
                 finish();
             }
         }
+    }
 
+    private fun setButtonsOnClickListener() {
+        binding.btnLogin.setOnClickListener {
+            val userId = binding.etUserId.text.toString()
+            val pass = binding.etPassword.text.toString()
+            val checkResult = checkUserInput(userId, pass)
+
+            if (userId.isNullOrEmpty()) { binding.etUserId.error = "User Id tidak boleh kosong" }
+            if (pass.isNullOrEmpty()) { binding.etPassword.error = "Password tidak boleh kosong" }
+            if (checkResult) {
+                binding.etUserId.error = null
+                binding.etPassword.error = null
+
+                viewModel.userLogin(userId, pass)
+            }
+        }
+
+        binding.tvForgotPassword.setOnClickListener { showForgetPasswordAlertDialog() }
+
+        binding.btnWallet.setOnClickListener { showQuickAccessAlertDialog() }
+        binding.btnQris.setOnClickListener { showQuickAccessAlertDialog() }
+        binding.btnTransfer.setOnClickListener { showQuickAccessAlertDialog() }
     }
 
     private fun checkUserInput(userId: String, pass: String) : Boolean {
@@ -120,5 +145,9 @@ class LoginActivity : AppCompatActivity() {
         closeBtn.setOnClickListener { dialog.dismiss() }
 
         dialog.show()
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

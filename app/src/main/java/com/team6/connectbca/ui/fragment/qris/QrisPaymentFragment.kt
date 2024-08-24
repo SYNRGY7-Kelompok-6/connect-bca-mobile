@@ -111,7 +111,7 @@ class QrisPaymentFragment : Fragment(), TextToSpeech.OnInitListener {
                         navigateToPinConfirmation(dataString, "show_qris")
                     }
                 }else{
-                    Snackbar.make(binding.root, "Jumlah Transaksi minimal Rp 10.000", Snackbar.LENGTH_LONG).show()
+                    showSnackbar("Jumlah Transaksi minimal Rp 10.000")
                 }
             }
         }
@@ -126,7 +126,7 @@ class QrisPaymentFragment : Fragment(), TextToSpeech.OnInitListener {
                 binding.tvAccountNumber.text = accountNumber
                 binding.tvBalanceInquiry.text = balanceInquiry.toString()
 
-                Snackbar.make(binding.root, "Data berhasil dimuat", Snackbar.LENGTH_LONG).show()
+                showSnackbar("Data berhasil dimuat")
             }
         }
     }
@@ -155,5 +155,7 @@ class QrisPaymentFragment : Fragment(), TextToSpeech.OnInitListener {
         }
     }
 
-
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
 }

@@ -3,19 +3,18 @@ package com.team6.connectbca.ui.fragment.qris
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.util.TypedValue
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,7 +52,7 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentShowQrBinding.inflate(inflater, container, false)
 
         setupRecyclerView()
@@ -212,7 +211,7 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
                 binding.tvAccountNumber.text = accountNumber
                 binding.tvBank.text = "Bank Connect"
 
-                Snackbar.make(binding.root, "Data berhasil dimuat", Snackbar.LENGTH_LONG).show()
+                showSnackbar("Data berhasil dimuat")
             }
         }
     }
@@ -301,4 +300,7 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         return imageUri
     }
 
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
 }

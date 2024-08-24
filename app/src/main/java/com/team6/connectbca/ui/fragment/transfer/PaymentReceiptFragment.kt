@@ -1,12 +1,10 @@
 package com.team6.connectbca.ui.fragment.transfer
 
-import android.R.attr
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +17,6 @@ import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentPaymentReceiptBinding
 import com.team6.connectbca.extensions.getFormattedBalance
 import com.team6.connectbca.extensions.milisecondToDateMonth
-import com.team6.connectbca.ui.activity.MainActivity
 import com.team6.connectbca.ui.fragment.HomeFragment
 import com.team6.connectbca.ui.viewmodel.TransferViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,8 +56,7 @@ class PaymentReceiptFragment : Fragment() {
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat data transfer", Snackbar.LENGTH_LONG)
-                    .show()
+                showSnackbar("Gagal memuat data transfer")
             }
         }
     }
@@ -113,11 +109,7 @@ class PaymentReceiptFragment : Fragment() {
                             hideTransferView()
                         }
 
-                        Snackbar.make(
-                            binding.root,
-                            "Bukti transaksi berhasil dimuat",
-                            Snackbar.LENGTH_LONG
-                        ).show()
+                        showSnackbar("Bukti transaksi berhasil dimuat")
                     }
                 }
         }
@@ -232,7 +224,7 @@ class PaymentReceiptFragment : Fragment() {
     }
 
     private fun navigateToMutation() {
-        findNavController().popBackStack()
+        findNavController().popBackStack(R.id.mutationFragment, false)
     }
 
     private fun setupListeners() {
@@ -261,6 +253,10 @@ class PaymentReceiptFragment : Fragment() {
                     }
                 }
             })
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
 }
