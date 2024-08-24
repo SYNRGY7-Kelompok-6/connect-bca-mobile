@@ -21,7 +21,7 @@ android {
             buildConfigField("String", "LOGIN_URL", "\"api/v1.0/auth/login\"")
         }
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
