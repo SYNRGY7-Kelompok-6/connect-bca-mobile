@@ -12,7 +12,8 @@
   <a href="#-problem-statement">Problem</a> •
   <a href="#-objective">Objective</a> •
   <a href="#-features">Features</a> •
-  <a href="#-tech-stack">Tech Stack</a>
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-getting-started">Getting Started</a> •
   <br>
   <a href="#-getting-started">Getting Started</a> •
   <a href="#-usage">Usage</a> •
@@ -114,7 +115,7 @@ The application has been designed with accessibility as a priority, featuring:
 </p>
 
 ## 📞 Contact
-For more information or support, please contact the contributors or the **SYNRGY Academy team**.
+*For more information or support, please contact the contributors or the **SYNRGY Academy team**.*
 ---
 
 <div align="center"> Made with ❤️ by SYNRGY7 Kelompok 6 </div>
