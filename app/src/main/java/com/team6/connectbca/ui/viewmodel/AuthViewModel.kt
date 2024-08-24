@@ -8,12 +8,11 @@ import com.team6.connectbca.domain.usecase.GetSessionDataUseCase
 import com.team6.connectbca.domain.usecase.LoginUseCase
 import com.team6.connectbca.domain.usecase.LogoutUseCase
 import kotlinx.coroutines.launch
-import java.lang.UnsupportedOperationException
 
 class AuthViewModel(
     private val loginUseCase: LoginUseCase,
     private val logoutUseCase: LogoutUseCase,
-    private val getSessionDataUseCase: GetSessionDataUseCase
+    private val getSessionDataUseCase: GetSessionDataUseCase,
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
@@ -30,11 +29,10 @@ class AuthViewModel(
                 } else {
                     _error.value = UnsupportedOperationException("Terdapat kesalahan saat login")
                 }
-                _loading.value = false
             } catch (error: Throwable) {
                 _error.value = error
-                _loading.value = false
             }
+            _loading.value = false
         }
     }
 

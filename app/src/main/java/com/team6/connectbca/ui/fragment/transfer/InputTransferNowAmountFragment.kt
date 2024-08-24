@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.team6.connectbca.databinding.FragmentInputTransferAmountBinding
 import com.team6.connectbca.databinding.FragmentInputTransferNowAmountBinding
 import com.team6.connectbca.domain.model.AccountInfo
 import com.team6.connectbca.ui.listener.TransferDataListener
@@ -51,12 +50,7 @@ class InputTransferNowAmountFragment : Fragment() {
             beneficiaryAccountNameFromArgument = it
             Log.d("InputTransferNowAmountFragment", "Beneficiary ID: $beneficiaryAccountNameFromArgument")
         }
-//        viewModel.getBeneficiaryAccountNumberFromArgument().observe(viewLifecycleOwner) {
-//            beneficiaryAccountNumberFromArgument = it
-//        }
-//        viewModel.getBeneficiaryNameFromArgument().observe(viewLifecycleOwner) {
-//            beneficiaryAccountNameFromArgument = it
-//        }
+
         binding.continueButton.setOnClickListener {
             navigateToConfirmation(
                 beneficiaryId = beneficiaryIdFromArgument ?: "",

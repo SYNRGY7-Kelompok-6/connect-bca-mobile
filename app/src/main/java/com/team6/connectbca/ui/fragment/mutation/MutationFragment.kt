@@ -65,7 +65,7 @@ class MutationFragment : Fragment() {
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat info saldo", Snackbar.LENGTH_LONG).show()
+                showSnackbar("Gagal memuat info saldo")
             }
         }
 
@@ -220,5 +220,9 @@ class MutationFragment : Fragment() {
         binding.cvDeposit.visibility = View.VISIBLE
         binding.cvWithdrawal.visibility = View.VISIBLE
         binding.btnShowBalance.visibility = View.VISIBLE
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

@@ -10,7 +10,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 
-fun checkPermissionLogic(context: Context) : Boolean {
+fun checkMediaFilePermission(context: Context) : Boolean {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         (isMediaImagePermissionGranted(context) &&
                 isCameraPermissionGranted(context))

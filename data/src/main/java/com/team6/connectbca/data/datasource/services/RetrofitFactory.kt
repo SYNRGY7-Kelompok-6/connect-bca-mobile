@@ -12,6 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 private fun provideRetrofitBuilder(
     context: Context,
@@ -34,13 +35,20 @@ private fun provideOkhttpClient(
             .addInterceptor(provideHttpLoggingInterceptor())
             .addInterceptor(provideChuckerInterceptor(context))
             .addInterceptor(provideHttpHeaderInterceptor(context, authLocalDataSource))
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)  // Timeout for sending the request
+            .readTimeout(30, TimeUnit.SECONDS)
             .build()
     } else {
         OkHttpClient.Builder()
             .addInterceptor(provideHttpLoggingInterceptor())
             .addInterceptor(provideChuckerInterceptor(context))
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)  // Timeout for sending the request
+            .readTimeout(30, TimeUnit.SECONDS)
             .build()
     }
+
     return okHttpClient
 }
 

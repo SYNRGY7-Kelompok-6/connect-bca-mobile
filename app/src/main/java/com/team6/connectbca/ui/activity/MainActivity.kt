@@ -9,11 +9,14 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ActivityMainBinding
+import com.team6.connectbca.ui.viewmodel.ConnectivityStatusLiveData
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,10 +29,16 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var navController: NavController
+    private lateinit var networkStatusLiveData: ConnectivityStatusLiveData
+    private var isDisconnected: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        networkStatusLiveData = ConnectivityStatusLiveData(applicationContext)
+
+        checkConnectivity()
 
         // Setup Navigation Component
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_graph) as NavHostFragment
@@ -81,6 +90,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.dispatchTouchEvent(event)
+    }
+
+    private fun checkConnectivity() {
+        networkStatusLiveData.observe(this, Observer { isConnected ->
+            if (isConnected && isDisconnected) {
+                isDisconnected = false
+                Snackbar.make(binding.root, "Koneksi Internet Tersambung Kembali", Snackbar.LENGTH_SHORT).show()
+            } else if (!isConnected) {
+                isDisconnected = true
+                Snackbar.make(binding.root, "Maaf, Koneksi Internet Anda Terputus", Snackbar.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun showBottomNav() {

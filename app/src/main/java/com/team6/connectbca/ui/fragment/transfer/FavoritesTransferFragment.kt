@@ -1,6 +1,5 @@
 package com.team6.connectbca.ui.fragment.transfer
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.team6.connectbca.databinding.FragmentFavoritesTransferBinding
-import com.team6.connectbca.ui.fragment.HomeFragmentDirections
-import com.team6.connectbca.ui.fragment.adapter.DestinationBankAdapter
 import com.team6.connectbca.ui.fragment.adapter.FavoritesDestinationAdapter
 import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

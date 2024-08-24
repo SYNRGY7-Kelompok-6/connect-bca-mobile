@@ -7,16 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.team6.connectbca.R
+import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.databinding.FragmentNewDestinationBinding
 import com.team6.connectbca.domain.usecase.SaveAccountUseCase
-import com.team6.connectbca.ui.fragment.adapter.DestinationBankAdapter
 import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
-import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewDestinationFragment : Fragment() {
@@ -101,11 +97,7 @@ class NewDestinationFragment : Fragment() {
 
                 is SaveAccountUseCase.SaveAccountInfo.Failure -> {
                     Log.e("NewDestinationFragment", "Error: ${result.errorMessage}")
-                    Toast.makeText(
-                        context,
-                        "Nomor rekening tidak valid: ${result.errorMessage}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showSnackbar("Nomor rekening tidak valid")
                 }
             }
         }
@@ -114,5 +106,9 @@ class NewDestinationFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

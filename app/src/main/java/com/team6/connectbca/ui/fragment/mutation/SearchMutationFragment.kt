@@ -81,7 +81,7 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat data mutasi", Snackbar.LENGTH_SHORT).show()
+                showSnackbar("Gagal memuat data mutasi")
             }
         }
     }
@@ -127,10 +127,10 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
                 adapter.submitList(newList)
 
                 binding.flipperSearchMutation.displayedChild = 1
-                Snackbar.make(binding.root, "Berhasil mendapatkan transaksi", Snackbar.LENGTH_SHORT).show()
+                showSnackbar("Berhasil mendapatkan transaksi")
             } else {
                 binding.flipperSearchMutation.displayedChild = 0
-                Snackbar.make(binding.root, "Belum ada transaksi", Snackbar.LENGTH_SHORT).show()
+                showSnackbar("Belum ada transaksi")
             }
         }
     }
@@ -212,5 +212,9 @@ class SearchMutationFragment : Fragment(), SearchMutationAdapterListener {
     private fun navigateToPaymentReceipt(transactionId: String) {
         val action = MutationFragmentDirections.actionMutationFragmentToPaymentReceiptFragment(transactionId, true)
         findNavController().navigate(action)
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

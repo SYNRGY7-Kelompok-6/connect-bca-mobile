@@ -37,7 +37,7 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
 
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
-                Snackbar.make(binding.root, "Gagal memuat info saldo", Snackbar.LENGTH_SHORT).show()
+                showSnackbar("Gagal memuat info saldo")
             }
         }
     }
@@ -80,5 +80,9 @@ class TodayMutationFragment : Fragment(), TodayMutationAdapterListener {
     private fun navigateToPaymentReceipt(transactionId: String) {
         val action = MutationFragmentDirections.actionMutationFragmentToPaymentReceiptFragment(transactionId, true)
         findNavController().navigate(action)
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

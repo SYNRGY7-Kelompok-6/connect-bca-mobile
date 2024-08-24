@@ -1,23 +1,18 @@
 package com.team6.connectbca.ui.fragment.transfer
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
-import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentInputTransferAmountBinding
-import com.team6.connectbca.databinding.FragmentInputTransferNowAmountBinding
-import com.team6.connectbca.databinding.FragmentTransferBinding
 import com.team6.connectbca.domain.model.SavedAccountData
 import com.team6.connectbca.ui.fragment.adapter.InputTransferAmountTabPagerAdapter
 import com.team6.connectbca.ui.listener.TransferDataListener
 import com.team6.connectbca.ui.viewmodel.InputTransferAmountViewModel
-import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InputTransferAmountFragment : Fragment(), TransferDataListener {
@@ -33,7 +28,7 @@ class InputTransferAmountFragment : Fragment(), TransferDataListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentInputTransferAmountBinding.inflate(layoutInflater, container, false)
         arguments?.let {
             beneficiaryId = it.getString("beneficiaryId")
@@ -48,6 +43,7 @@ class InputTransferAmountFragment : Fragment(), TransferDataListener {
                 binding.transferProgressBar.visibility = View.GONE
             }
         }
+
         return binding.root
     }
 
