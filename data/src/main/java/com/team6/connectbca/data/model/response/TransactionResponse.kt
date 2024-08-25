@@ -24,6 +24,7 @@ data class TransactionResponse(
     }
 }
 
+@Keep
 data class TransactionDataResponse(
     @field:SerializedName("sourceName")
     val sourceName: String? = null,

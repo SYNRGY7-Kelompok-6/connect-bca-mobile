@@ -1,11 +1,13 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.team6.connectbca.domain.model.AccountMonthly
 import com.team6.connectbca.domain.model.AccountMonthlyData
 import com.team6.connectbca.domain.model.MonthlyIncome
 import com.team6.connectbca.domain.model.MonthlyOutcome
 
+@Keep
 data class AccountMonthlyResponse(
 
 	@field:SerializedName("data")
@@ -26,6 +28,7 @@ data class AccountMonthlyResponse(
 	}
 }
 
+@Keep
 data class MonthlyIncomeResponse(
 
 	@field:SerializedName("currency")
@@ -42,6 +45,7 @@ data class MonthlyIncomeResponse(
 	}
 }
 
+@Keep
 data class AccountMonthlyDataResponse(
 
 	@field:SerializedName("monthlyOutcome")
@@ -58,6 +62,7 @@ data class AccountMonthlyDataResponse(
 	}
 }
 
+@Keep
 data class MonthlyOutcomeResponse(
 
 	@field:SerializedName("currency")

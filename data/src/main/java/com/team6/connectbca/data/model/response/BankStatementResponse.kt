@@ -1,5 +1,6 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.team6.connectbca.domain.model.AccountBalance
 import com.team6.connectbca.domain.model.AccountInfo
@@ -15,6 +16,7 @@ import com.team6.connectbca.domain.model.MutationsItem
 import com.team6.connectbca.domain.model.SourceAccount
 import com.team6.connectbca.domain.model.StartingBalance
 
+@Keep
 data class BankStatementResponse(
 
 	@field:SerializedName("data")
@@ -35,6 +37,7 @@ data class BankStatementResponse(
 	}
 }
 
+@Keep
 data class BankStatementDataResponse(
 	@field:SerializedName("accountInfo")
 	val accountInfo: AccountInfoResponse? = null,
@@ -54,6 +57,7 @@ data class BankStatementDataResponse(
 	}
 }
 
+@Keep
 data class SourceAccountResponse(
 
 	@field:SerializedName("sourceAccountName")
@@ -70,6 +74,7 @@ data class SourceAccountResponse(
 	}
 }
 
+@Keep
 data class BalanceResponse(
 
 	@field:SerializedName("holdAmount")
@@ -86,6 +91,7 @@ data class BalanceResponse(
 	}
 }
 
+@Keep
 data class AccountBalanceResponse(
 	@field:SerializedName("endingBalance")
 	val endingBalance: EndingBalanceResponse? = null,
@@ -101,6 +107,7 @@ data class AccountBalanceResponse(
 	}
 }
 
+@Keep
 data class BeneficiaryAccountResponse(
 
 	@field:SerializedName("beneficiaryAccountName")
@@ -117,6 +124,7 @@ data class BeneficiaryAccountResponse(
 	}
 }
 
+@Keep
 data class AmountResponse(
 
 	@field:SerializedName("remainingBalance")
@@ -137,6 +145,7 @@ data class AmountResponse(
 	}
 }
 
+@Keep
 data class AvailableBalanceResponse(
 
 	@field:SerializedName("currency")
@@ -153,6 +162,7 @@ data class AvailableBalanceResponse(
 	}
 }
 
+@Keep
 data class MutationsItemResponse(
 
 	@field:SerializedName("amount")
@@ -193,6 +203,7 @@ data class MutationsItemResponse(
 	}
 }
 
+@Keep
 data class HoldAmountResponse(
 
 	@field:SerializedName("currency")
@@ -209,6 +220,7 @@ data class HoldAmountResponse(
 	}
 }
 
+@Keep
 data class EndingBalanceResponse(
 
 	@field:SerializedName("dateTime")
@@ -229,6 +241,7 @@ data class EndingBalanceResponse(
 	}
 }
 
+@Keep
 data class AccountInfoResponse(
 
 	@field:SerializedName("pinExpiredTimeLeft")
@@ -265,6 +278,7 @@ data class AccountInfoResponse(
 	}
 }
 
+@Keep
 data class StartingBalanceResponse(
 
 	@field:SerializedName("dateTime")

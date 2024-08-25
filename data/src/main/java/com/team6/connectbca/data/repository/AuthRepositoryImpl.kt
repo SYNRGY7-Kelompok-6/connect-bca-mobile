@@ -7,7 +7,6 @@ import com.team6.connectbca.data.model.body.LoginBody
 import com.team6.connectbca.data.model.body.PinBody
 import com.team6.connectbca.data.model.response.LoginResponse
 import com.team6.connectbca.data.model.response.LoginResponseData
-import com.team6.connectbca.data.model.response.PinResponse
 import com.team6.connectbca.domain.model.Pin
 import com.team6.connectbca.domain.repository.AuthRepository
 
@@ -28,6 +27,7 @@ class AuthRepositoryImpl(
             }
         } catch (error: Throwable) {
             Log.e("Failed with", error.toString())
+            error.printStackTrace()
         }
 
         return data != null

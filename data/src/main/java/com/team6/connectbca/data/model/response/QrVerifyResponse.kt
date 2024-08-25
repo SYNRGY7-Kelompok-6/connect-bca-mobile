@@ -1,10 +1,12 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.team6.connectbca.domain.model.QrVerify
 import com.team6.connectbca.domain.model.QrVerifyData
 import com.team6.connectbca.domain.model.QrisAmount
 
+@Keep
 data class QrVerifyResponse(
     @field:SerializedName("status")
     val status: String,
@@ -30,6 +32,7 @@ data class QrVerifyResponse(
     }
 }
 
+@Keep
 data class QrVerifyDataResponse(
     @field:SerializedName("beneficiaryAccountNumber")
     val beneficiaryAccountNumber: String,
@@ -57,6 +60,7 @@ data class QrVerifyDataResponse(
     }
 }
 
+@Keep
 data class QrisAmountResponse(
     @field:SerializedName("value")
     val value: Double,

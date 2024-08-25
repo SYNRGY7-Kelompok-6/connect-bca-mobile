@@ -16,6 +16,7 @@ data class LoginResponse(
 
 )
 
+@Keep
 data class LoginResponseData(
 
 	@field:SerializedName("accessToken") val accessToken: String

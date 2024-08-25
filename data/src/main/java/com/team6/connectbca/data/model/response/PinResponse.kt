@@ -1,9 +1,11 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.team6.connectbca.domain.model.Pin
 import com.team6.connectbca.domain.model.PinData
 
+@Keep
 data class PinResponse(
     @field:SerializedName("status")
     var status: String? = null,
@@ -27,6 +29,7 @@ data class PinResponse(
     }
 }
 
+@Keep
 class PinDataResponse(
     @field:SerializedName("pinToken")
     var pinToken: String? = null,
@@ -38,19 +41,3 @@ class PinDataResponse(
         )
     }
 }
-
-//data class QrVerifyResponse(
-//    @field:SerializedName("status")
-//    val status: String,
-//
-//    @field:SerializedName("message")
-//    val message: String,
-//
-//    @field:SerializedName("data")
-//    val data: QrVerifyDataResponse? = null,
-//
-//    @field:SerializedName("error")
-//    val error: QrVerifyDataResponse? = null
-//
-//
-//)

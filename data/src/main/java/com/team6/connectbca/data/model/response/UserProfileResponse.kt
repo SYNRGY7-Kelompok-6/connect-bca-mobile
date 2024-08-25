@@ -1,9 +1,11 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.team6.connectbca.domain.model.UserProfile
 import com.team6.connectbca.domain.model.UserProfileData
 
+@Keep
 data class UserProfileResponse(
 
     @field:SerializedName("data")
@@ -24,6 +26,7 @@ data class UserProfileResponse(
 	}
 }
 
+@Keep
 data class UserProfileDataResponse(
 
 	@field:SerializedName("address")

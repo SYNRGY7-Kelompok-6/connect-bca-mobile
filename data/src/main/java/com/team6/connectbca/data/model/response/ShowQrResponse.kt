@@ -1,9 +1,11 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.team6.connectbca.domain.model.ShowQr
 import com.team6.connectbca.domain.model.ShowQrData
 
+@Keep
 data class ShowQrResponse(
     @field:SerializedName("status")
     val status: String,
@@ -23,6 +25,7 @@ data class ShowQrResponse(
     }
 }
 
+@Keep
 data class ShowQrDataResponse(
     @field:SerializedName("qrImage")
     val qrImage: String,
