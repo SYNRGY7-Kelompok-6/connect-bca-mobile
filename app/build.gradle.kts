@@ -29,9 +29,6 @@ android {
         debug {
             isMinifyEnabled = false
             isDebuggable = true
-            firebaseCrashlytics {
-                mappingFileUploadEnabled = true
-            }
         }
         release {
             isMinifyEnabled = true
@@ -40,9 +37,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            firebaseCrashlytics {
-                mappingFileUploadEnabled = true
-            }
         }
     }
     compileOptions {
@@ -100,6 +94,5 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
-    implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-analytics")
 }
