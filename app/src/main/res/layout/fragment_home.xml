@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/logo_content_desc"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/connect_logo_shdw"
+                    android:src="@drawable/ic_logo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toStartOf="@id/salutationText"

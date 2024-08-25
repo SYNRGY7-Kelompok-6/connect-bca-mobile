@@ -32,7 +32,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="20dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/connect_logo_shdw"
+            android:src="@drawable/ic_logo"
             android:contentDescription="Logo aplikasi"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintTop_toTopOf="parent"

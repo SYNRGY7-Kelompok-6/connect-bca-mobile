@@ -1,7 +1,6 @@
 package com.team6.connectbca.data.model.body
 
 import com.google.gson.annotations.SerializedName
-import java.io.File
 
 data class UpdateProfileBody(
     @field:SerializedName("name")
@@ -18,7 +17,4 @@ data class UpdateProfileBody(
 
     @field:SerializedName("address")
     val address: String? = null,
-
-    @field:SerializedName("image")
-    val image: File? = null,
 )

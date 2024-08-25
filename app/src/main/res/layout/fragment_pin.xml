@@ -29,7 +29,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="12dp"
         android:contentDescription="Logo"
-        android:src="@drawable/connect_logo_shdw"
+        android:src="@drawable/ic_logo"
         app:layout_constraintBottom_toTopOf="@id/inputPinTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
