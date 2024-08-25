@@ -45,6 +45,8 @@ class PinFragment : Fragment() {
             val jsonString = PinFragmentArgs.fromBundle(it).data
             jsonData = JSONObject(jsonString)
             Log.d("PinFragment", "Data: $jsonData")
+            Log.d("PinFragment", "Data: ${jsonData?.get("desc") as String}")
+
             transactionType = PinFragmentArgs.fromBundle(it).transactionType
             Log.d("PinFragment", "Transaction Type: $transactionType")
         }
@@ -134,6 +136,7 @@ class PinFragment : Fragment() {
                         currency = amountObject?.get("currency") as String
                     )
                 } else if (transactionType == "transfer") {
+                    Log.d("PinFragment", jsonData?.get("desc") as String)
                     transferViewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
                         if (isLoading) {
                             binding.pinProgressBar.visibility = View.VISIBLE
