@@ -73,13 +73,14 @@ class TransferViewModel(
                     _transferSuccess.value = true
                 } else {
                     // Log the response message and set error state
-                    Log.e("QrisPaymentViewModel", "Transfer failed: ${response?.message}")
+                    Log.e("QrisPaymentViewModel", "Transfer failed: ${response}")
                     _transferError.value = response?.message?.let { Throwable(it) }
                     _transferSuccess.value = false
                 }
             } catch (e: Exception) {
                 // Log the exception for debugging
                 Log.e("QrisPaymentViewModel", "Exception during transfer: ${e.message}", e)
+                e.printStackTrace()
                 _transferError.value = e
                 _transferSuccess.value = false
             }

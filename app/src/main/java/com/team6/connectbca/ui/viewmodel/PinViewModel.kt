@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.team6.connectbca.domain.usecase.PinValidationUseCase
-import com.team6.connectbca.domain.usecase.QrisTransferUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -61,19 +60,25 @@ class PinViewModel(
             }
             if (response.status == "success") {
                 pinToken.value = response.data?.pinToken
+                Log.e("PIN VALIDATION", response.toString())
                 _pinError.value = false
             } else {
                 _pinError.value = true
+                Log.e("PIN VALIDATION ERROR", response.toString())
                 _enteredPin.clear()
                 _pinLength.value = _enteredPin.length
             }
         } catch (e: HttpException) {
             _pinError.value = true
+            Log.e("PIN VALIDATION ERROR 2", e.toString())
+            e.printStackTrace()
             _enteredPin.clear()
             _pinLength.value = _enteredPin.length
         } catch (e: Exception) {
             _pinError.value = true
             _enteredPin.clear()
+            Log.e("PIN VALIDATION ERROR 3", e.toString())
+            e.printStackTrace()
             _pinLength.value = _enteredPin.length
         }
         _loading.value = false

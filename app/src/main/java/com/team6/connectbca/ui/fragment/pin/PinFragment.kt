@@ -152,7 +152,7 @@ class PinFragment : Fragment() {
                         amountValue = amountValue,
                         currency = amountObject?.get("currency") as String
                     )
-                    Log.d("PinFragment", "Data 3")
+                    Log.e("PIN VALIDATION 4", token)
                 }
             }
         }
