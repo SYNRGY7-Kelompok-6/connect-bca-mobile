@@ -20,7 +20,9 @@ class LatestTransactionAdapter(private var items: List<TransactionData>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: TransactionData) {
             binding.apply {
-                sourceName.text = data.sourceName
+                if (data.sourceName?.length!! > 20) {
+                    sourceName.text = data.sourceName?.substring(0, 20) + "..."
+                }
                 amount.text = "+ Rp ${numberFormat(data.amount ?: 0.0)}"
                 transactionDate.text = formatDate(data.transactionDate ?: "")
             }

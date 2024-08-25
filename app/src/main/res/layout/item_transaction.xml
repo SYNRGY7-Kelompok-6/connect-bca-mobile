@@ -11,9 +11,15 @@
         android:layout_height="wrap_content"
         android:text="Source Name"
         android:textFontWeight="700"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:singleLine="false"
         android:textSize="18sp"
+        app:chainUseRtl="true"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/amount"/>
 
     <TextView
         android:id="@+id/amount"

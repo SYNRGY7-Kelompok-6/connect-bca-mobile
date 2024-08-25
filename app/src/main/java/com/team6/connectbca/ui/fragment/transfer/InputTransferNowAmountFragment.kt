@@ -52,19 +52,22 @@ class InputTransferNowAmountFragment : Fragment() {
         }
 
         binding.continueButton.setOnClickListener {
-            navigateToConfirmation(
-                beneficiaryId = beneficiaryIdFromArgument ?: "",
-                beneficiaryBank = "BCA",
-                beneficiaryAccountNumber = beneficiaryAccountNumberFromArgument ?: "",
-                beneficiaryName = beneficiaryAccountNameFromArgument ?: "",
-                accountNumber = accountNumber ?: "",
-                accountBalance = accountBalance,
-                nominalTransactionAmount = binding.inputNominal.text.toString().replace(".", "")
-                    .toIntOrNull() ?: 0,
-                description = binding.inputDescription.text.toString().ifEmpty {
-                    ""
-                }
-            )
+            if (binding.inputNominal.text.toString().isEmpty() || binding.inputNominal.text.toString() == "0") {
+                binding.inputNominal.error = "Nominal tidak boleh kosong"
+            }else if(binding.inputNominal.text.toString().replace(".", "").toInt() <= 100) {
+                binding.inputNominal.error = "Nominal tidak boleh kurang dari 100"
+            } else {
+                navigateToConfirmation(
+                    beneficiaryIdFromArgument ?: "",
+                    "BCA",
+                    beneficiaryAccountNumberFromArgument ?: "",
+                    beneficiaryAccountNameFromArgument ?: "",
+                    accountNumber ?: "",
+                    accountBalance,
+                    binding.inputNominal.text.toString().replace(".", "").toInt(),
+                    binding.inputDescription.text.toString()
+                )
+            }
         }
         setupTextInputWatcher()
         return binding.root

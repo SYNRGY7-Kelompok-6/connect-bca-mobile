@@ -62,7 +62,7 @@ class TransactionConfirmationFragment : Fragment() {
             nominalTransactionAmount = it.getInt("nominalTransactionAmount")
             accountNumber = it.getString("accountNumber")
             accountBalance = it.getInt("accountBalance")
-            description = it.getString("description")
+            description = it.getString("desc")
         }
         setData()
         initiateToolbar()
@@ -116,7 +116,7 @@ class TransactionConfirmationFragment : Fragment() {
     private fun initiateToolbar() {
         val navController = findNavController()
         binding.toolbar.setupWithNavController(navController)
-        binding.toolbar.title = "Tampilkan QR"
+        binding.toolbar.title = "Cek Detail Penerima"
         binding.toolbar.navigationContentDescription =
             getString(R.string.back_to_menu_button_description)
     }
