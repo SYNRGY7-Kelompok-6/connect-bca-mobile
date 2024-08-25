@@ -36,21 +36,6 @@ class AuthViewModel(
         }
     }
 
-    fun userLogout() {
-        viewModelScope.launch {
-            try {
-                _loading.value = true
-                logoutUseCase()
-                _loading.value = false
-                _success.value = true
-            } catch (error: Throwable) {
-                _error.value = error
-                _success.value = false
-                _loading.value = false
-            }
-        }
-    }
-
     fun getUserSessionData() : LiveData<Map<String, Any>> {
         viewModelScope.launch {
             try {
