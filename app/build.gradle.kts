@@ -29,6 +29,9 @@ android {
         debug {
             isMinifyEnabled = false
             isDebuggable = true
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = true
+            }
         }
         release {
             isMinifyEnabled = true
@@ -37,6 +40,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = true
+            }
         }
     }
     compileOptions {

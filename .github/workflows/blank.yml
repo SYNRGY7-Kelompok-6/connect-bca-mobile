@@ -3,7 +3,7 @@ name: Build & Deploy on Workflow Dispatch
 on:
   push:
     branches:
-      - main
+      - cicd-test
   pull_request:
     branches:
       - main
@@ -33,6 +33,9 @@ jobs:
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $GOOGLE_SERVICES_JSON > app/google-services.json
+
+      - name: Run Unit Tests
+        run: ./gradlew test
 
       - name: Build Release APK
         run: ./gradlew assembleRelease
