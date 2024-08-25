@@ -2,7 +2,6 @@ package com.team6.connectbca.domain.usecase
 
 import com.team6.connectbca.domain.model.UserProfileData
 import com.team6.connectbca.domain.repository.UserRepository
-import java.io.File
 
 class UpdateUserProfileUseCase(
     private val userRepository: UserRepository
@@ -12,9 +11,8 @@ class UpdateUserProfileUseCase(
         email: String?,
         phone: String?,
         birth: String?,
-        address: String?,
-        image: File?
+        address: String?
     ) : UserProfileData? {
-        return userRepository.updateUserProfile(name, email, phone, birth, address, image).data
+        return userRepository.updateUserProfile(name, email, phone, birth, address).data
     }
 }

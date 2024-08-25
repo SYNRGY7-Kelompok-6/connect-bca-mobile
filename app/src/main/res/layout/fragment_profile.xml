@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:paddingBottom="85dp">
+        android:paddingBottom="12dp">
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             style="@style/ProgressBar"

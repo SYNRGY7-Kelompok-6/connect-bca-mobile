@@ -4,7 +4,6 @@ import com.team6.connectbca.data.datasource.interfaces.user.UserRemoteDataSource
 import com.team6.connectbca.data.model.body.UpdateProfileBody
 import com.team6.connectbca.domain.model.UserProfile
 import com.team6.connectbca.domain.repository.UserRepository
-import java.io.File
 
 class UserRepositoryImpl(
     private val userRemoteDataSource: UserRemoteDataSource
@@ -18,10 +17,9 @@ class UserRepositoryImpl(
         email: String?,
         phone: String?,
         birth: String?,
-        address: String?,
-        image: File?
+        address: String?
     ): UserProfile {
-        val updateProfileBody = UpdateProfileBody(name, email, phone, birth, address, image)
+        val updateProfileBody = UpdateProfileBody(name, email, phone, birth, address)
 
         return userRemoteDataSource.updateUserProfile(updateProfileBody).toEntity()
     }

@@ -1,6 +1,5 @@
 package com.team6.connectbca.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,13 +8,13 @@ import com.team6.connectbca.domain.model.UserProfileData
 import com.team6.connectbca.domain.usecase.GetUserProfileUseCase
 import com.team6.connectbca.domain.usecase.UpdateUserProfileUseCase
 import kotlinx.coroutines.launch
-import java.io.File
 
 class ProfileViewModel(
     private val getUserProfileUseCase: GetUserProfileUseCase,
     private val updateUserProfileUseCase: UpdateUserProfileUseCase
 ) : ViewModel() {
     private val _loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    private val _success: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Throwable> = MutableLiveData<Throwable>()
     private val _userProfile = MutableLiveData<UserProfileData?>()
 
@@ -46,25 +45,26 @@ class ProfileViewModel(
         email: String? = null,
         phone: String? = null,
         birth: String? = null,
-        address: String? = null,
-        image: File? = null
+        address: String? = null
     ) : LiveData<UserProfileData?> {
         viewModelScope.launch {
             try {
                 _loading.value = true
                 val data: UserProfileData? = updateUserProfileUseCase(
-                    name, email, phone, birth, address, image
+                    name, email, phone, birth, address
                 )
 
                 if (data != null) {
                     _userProfile.value = data
+                    _success.value = true
                 } else {
+                    _success.value = false
                     _userProfile.value = null
                 }
 
                 _loading.value = false
             } catch (error: Throwable) {
-                Log.e("ERROR NYA DISINI", error.toString())
+                _success.value = false
                 _error.value = error
                 _loading.value = false
             }
@@ -79,5 +79,9 @@ class ProfileViewModel(
 
     fun getLoading() : LiveData<Boolean> {
         return _loading
+    }
+
+    fun getSuccess() : LiveData<Boolean> {
+        return _success
     }
 }

@@ -62,16 +62,17 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivLogo"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:src="@drawable/connect_logo_shdw"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/ic_logo"
             android:contentDescription="@string/logo_content_desc"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:text="Connect"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="?android:textColorPrimary"
             android:textAlignment="center"/>
@@ -83,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="?android:textColorPrimary"
         android:textStyle="bold"
         android:layout_marginTop="40dp"
