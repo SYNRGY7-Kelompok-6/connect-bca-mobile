@@ -1,9 +1,11 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.team6.connectbca.domain.model.SavedAccounts
 import com.team6.connectbca.domain.model.SavedAccount
+import com.team6.connectbca.domain.model.SavedAccounts
 
+@Keep
 data class SavedAccountsResponse(
     @SerializedName("status")
     val status: String,
@@ -23,6 +25,7 @@ data class SavedAccountsResponse(
     }
 }
 
+@Keep
 data class SavedAccountResponse(
     @SerializedName("status")
     val status: String,
@@ -42,6 +45,7 @@ data class SavedAccountResponse(
     }
 }
 
+@Keep
 data class SavedAccountData(
     @SerializedName("savedBeneficiaryId")
     val savedBeneficiaryId: String,

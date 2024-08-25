@@ -1,12 +1,12 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.team6.connectbca.domain.model.QrisAmount
 import com.team6.connectbca.domain.model.Transfer
-import com.team6.connectbca.domain.model.TransferData
-import com.team6.connectbca.domain.model.TransactionAmount
 import com.team6.connectbca.domain.model.TransferAmount
+import com.team6.connectbca.domain.model.TransferData
 
+@Keep
 data class TransferIntrabankResponse(
     @SerializedName("status")
     val status: String,
@@ -26,6 +26,7 @@ data class TransferIntrabankResponse(
     }
 }
 
+@Keep
 data class TransferIntrabankDataResponse(
     @SerializedName("refNumber")
     val refNumber: String,
@@ -73,6 +74,7 @@ data class TransferIntrabankDataResponse(
     }
 }
 
+@Keep
 data class TransferAmountResponse(
     @SerializedName("value")
     val value: Double,

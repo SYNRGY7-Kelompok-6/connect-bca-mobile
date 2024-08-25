@@ -1,10 +1,12 @@
 package com.team6.connectbca.data.model.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.team6.connectbca.domain.model.QrisTransfer
 import com.team6.connectbca.domain.model.QrisTransferData
 import com.team6.connectbca.domain.model.TransferAmount
 
+@Keep
 data class QrisTransferResponse (
     @field:SerializedName("status")
     val status: String,
@@ -44,6 +46,7 @@ data class QrisTransferResponse (
     }
 }
 
+@Keep
 data class QrTransferData (
     @field:SerializedName("refNumber")
     val refNumber: String,
@@ -82,6 +85,7 @@ data class QrTransferData (
     }
 }
 
+@Keep
 data class QrisTransferAmountResponse (
     val value: Double,
     val currency: String

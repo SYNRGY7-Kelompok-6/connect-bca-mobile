@@ -15,6 +15,7 @@ data class TransferBody(
     val amount: TransferAmountBody,
 )
 
+@Keep
 data class TransferAmountBody(
     @field:SerializedName("value")
     val value: Double,
