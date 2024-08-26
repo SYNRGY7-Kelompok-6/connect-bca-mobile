@@ -1,10 +1,16 @@
 #!/bin/bash
 
-# Get the number of changed files in the latest commit
-changed_files=$(git diff --name-only HEAD~1 HEAD | wc -l)
+# Check if there are enough commits to perform the diff
+if git rev-parse HEAD~1 >/dev/null 2>&1; then
+  changed_files=$(git diff --name-only HEAD~1 HEAD | wc -l)
+else
+  echo "Not enough commits to perform diff, defaulting to 0 changed files."
+  changed_files=0
+fi
 
-# Get the current versionName from build.gradle.kts
+# Get the current versionName and versionCode from build.gradle.kts
 current_version=$(grep "versionName =" app/build.gradle.kts | awk '{ print $3 }' | tr -d '"')
+current_version_code=$(grep "versionCode =" app/build.gradle.kts | awk '{ print $3 }')
 
 # Split the current versionName into its components
 IFS='.' read -r -a version_parts <<< "$current_version"
@@ -24,10 +30,14 @@ else
   PATCH=0
 fi
 
+# Increment the versionCode by 1
+new_version_code=$((current_version_code + 1))
+
 # Construct the new versionName
 new_version="$MAJOR.$MINOR.$PATCH"
 
-# Update the build.gradle.kts file with the new versionName
+# Update the build.gradle.kts file with the new versionName and versionCode
 sed -i "s/versionName = \"$current_version\"/versionName = \"$new_version\"/" app/build.gradle.kts
+sed -i "s/versionCode = $current_version_code/versionCode = $new_version_code/" app/build.gradle.kts
 
-echo "Updated versionName to $new_version"
+echo "Updated versionName to $new_version and versionCode to $new_version_code"
