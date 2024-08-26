@@ -55,7 +55,7 @@ jobs:
         run: |
           ./gradlew clean assembleRelease --stacktrace
           mkdir -p results/release
-          cp app/build/outputs/apk/release/app-release.apk results/release/
+          cp app/release/app-release.apk results/release/
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
 
@@ -113,13 +113,17 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-release
-          path: results/release/app-release.apk
+          path: ./results/release/app-release.apk
 
       - name: Copy Test Results
         if: always()
         run: |
-          mkdir -p ./results/test-results
-          cp -R app/build/test-results/* results/test-results/
+          if [ ! -d "./results/test-results" ]; then
+            mkdir -p ./results/test-results
+          fi
+          if [ -d "app/build/test-results" ]; then
+            cp -R app/build/test-results/* results/test-results/
+          fi
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v3
@@ -131,8 +135,12 @@ jobs:
       - name: Copy Build Outputs
         if: failure()
         run: |
-          mkdir -p ./results/outputs
-          cp -R app/build/outputs/* results/outputs/
+          if [ ! -d "./results/outputs" ]; then
+            mkdir -p ./results/outputs
+          fi
+          if [ -d "app/build/outputs" ]; then
+            cp -R app/build/outputs/* results/outputs/
+          fi
 
       - name: Upload build outputs
         uses: actions/upload-artifact@v3
