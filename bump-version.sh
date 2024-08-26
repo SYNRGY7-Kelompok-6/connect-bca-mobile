@@ -8,9 +8,9 @@ else
   changed_files=0
 fi
 
-# Get the current versionName and versionCode from build.gradle.kts
-current_version=$(grep "versionName =" app/build.gradle.kts | awk '{ print $3 }' | tr -d '"')
-current_version_code=$(grep "versionCode =" app/build.gradle.kts | awk '{ print $3 }')
+# Get the current versionName and versionCode from the root build.gradle.kts
+current_version=$(grep "versionName =" build.gradle.kts | awk '{ print $3 }' | tr -d '"')
+current_version_code=$(grep "versionCode =" build.gradle.kts | awk '{ print $3 }')
 
 # Split the current versionName into its components
 IFS='.' read -r -a version_parts <<< "$current_version"
@@ -36,8 +36,8 @@ new_version_code=$((current_version_code + 1))
 # Construct the new versionName
 new_version="$MAJOR.$MINOR.$PATCH"
 
-# Update the build.gradle.kts file with the new versionName and versionCode
-sed -i "s/versionName = \"$current_version\"/versionName = \"$new_version\"/" app/build.gradle.kts
-sed -i "s/versionCode = $current_version_code/versionCode = $new_version_code/" app/build.gradle.kts
+# Update the root build.gradle.kts file with the new versionName and versionCode
+sed -i "s/versionName = \"$current_version\"/versionName = \"$new_version\"/" build.gradle.kts
+sed -i "s/versionCode = $current_version_code/versionCode = $new_version_code/" build.gradle.kts
 
 echo "Updated versionName to $new_version and versionCode to $new_version_code"
