@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.team6.connectbca.domain.usecase.PinValidationUseCase
-import com.team6.connectbca.domain.usecase.QrisTransferUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -69,11 +68,13 @@ class PinViewModel(
             }
         } catch (e: HttpException) {
             _pinError.value = true
+            e.printStackTrace()
             _enteredPin.clear()
             _pinLength.value = _enteredPin.length
         } catch (e: Exception) {
             _pinError.value = true
             _enteredPin.clear()
+            e.printStackTrace()
             _pinLength.value = _enteredPin.length
         }
         _loading.value = false

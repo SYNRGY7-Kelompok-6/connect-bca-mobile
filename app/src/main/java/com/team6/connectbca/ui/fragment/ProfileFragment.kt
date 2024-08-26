@@ -3,8 +3,6 @@ package com.team6.connectbca.ui.fragment
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,11 +13,6 @@ import android.widget.NumberPicker
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
@@ -76,7 +69,6 @@ class ProfileFragment : Fragment() {
     private fun setData() {
         viewModel.getUserProfile().observe(viewLifecycleOwner) { user ->
             if (user != null) {
-                loadImage(user.imageUrl!!)
                 binding.etName.setText(user.name)
                 binding.etEmail.setText(user.email)
                 binding.etPhone.setText(user.phone)
@@ -84,35 +76,6 @@ class ProfileFragment : Fragment() {
                 binding.etAddress.setText(user.address)
             }
         }
-    }
-
-    private fun loadImage(image: String, uri: Uri? = null) {
-        Glide.with(this)
-            .load(uri ?: image)
-            .override(1600, 1600)
-            .listener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    binding.profileProgressBar.visibility = View.GONE
-                    return false
-                }
-
-                override fun onResourceReady(
-                    resource: Drawable,
-                    model: Any,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    binding.profileProgressBar.visibility = View.GONE
-                    return false
-                }
-            })
-            .into(binding.avatar)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

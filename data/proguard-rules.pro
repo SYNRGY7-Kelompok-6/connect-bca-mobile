@@ -25,7 +25,16 @@
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
--keep class com.team6.connectbca.data.model** { *; }
+-keep class com.team6.connectbca.data.model.** { *; }
+-keep class retrofit2.** { *; }
+-keep class okhttp3.** { *; }
+-keep class com.google.gson.** { *; }
+
+# Keep Retrofit interfaces
+-keep class com.team6.connectbca.data.datasource.services.** { *; }
+
+# Keep annotations (if using)
+-keepattributes *Annotation*
 # Prevent R8 from leaving Data object members always null
 -keepclasseswithmembers class * {
     <init>(...);
@@ -80,3 +89,14 @@
 
 # With R8 full mode generic signatures are stripped for classes that are not kept.
 -keep,allowobfuscation,allowshrinking class retrofit2.Response
+
+# Keep fields with any other Gson annotation
+# Also allow obfuscation, assuming that users will additionally use @SerializedName or
+# other means to preserve the field names
+-keepclassmembers,allowobfuscation class * {
+  @com.google.gson.annotations.Expose <fields>;
+  @com.google.gson.annotations.JsonAdapter <fields>;
+  @com.google.gson.annotations.Since <fields>;
+  @com.google.gson.annotations.Until <fields>;
+}
+

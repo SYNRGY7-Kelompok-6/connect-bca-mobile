@@ -39,8 +39,6 @@ class AuthLocalDataSourceImpl(
         )
     }
 
-
-
     override suspend fun checkUserId(userId: String): Boolean {
         val storedUserId: String? = getUserId()
 

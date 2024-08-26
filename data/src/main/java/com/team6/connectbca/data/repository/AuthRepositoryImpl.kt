@@ -53,17 +53,6 @@ class AuthRepositoryImpl(
         val pinBody = PinBody(pin = pin)
         var response = authRemoteDataSource.pinToken(pinBody)
         return response.toEntity()
-
     }
-
-    private fun checkUserData(userId: String, password: String): Int {
-        if (userId.isNullOrEmpty()) {
-            return 1
-        } else if (password.isNullOrEmpty()) {
-            return 2
-        }
-        return 0
-    }
-
 
 }

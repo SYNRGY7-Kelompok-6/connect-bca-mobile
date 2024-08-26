@@ -1,6 +1,5 @@
 package com.team6.connectbca.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +9,6 @@ import com.team6.connectbca.domain.usecase.GetBalanceInquiryUseCase
 import com.team6.connectbca.domain.usecase.LogoutUseCase
 import com.team6.connectbca.extensions.getCurrentDateString
 import kotlinx.coroutines.launch
-import java.lang.UnsupportedOperationException
 
 class HomeViewModel(
     private val getBalanceInquiryUseCase: GetBalanceInquiryUseCase,
@@ -57,7 +55,6 @@ class HomeViewModel(
                 _success.value = true
                 _loading.value = false
             } catch (error: Throwable) {
-                Log.e("ERROR LOGOUT NIH", error.toString())
                 _error.value = error
                 _loading.value = false
             }

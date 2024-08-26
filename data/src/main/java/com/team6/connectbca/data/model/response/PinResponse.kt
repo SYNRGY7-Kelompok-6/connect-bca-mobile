@@ -14,7 +14,7 @@ data class PinResponse(
     var message: String? = null,
 
     @field:SerializedName("data")
-    var data: PinData? = null
+    var data: PinDataResponse? = null
 
 
 ){
@@ -22,9 +22,7 @@ data class PinResponse(
         return Pin(
             status = this.status ?: "",
             message = this.message ?: "",
-            data = PinData(
-                pinToken = this.data?.pinToken ?: ""
-            )
+            data = this.data?.toEntity()
         )
     }
 }
