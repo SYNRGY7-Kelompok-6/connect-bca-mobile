@@ -11,4 +11,3 @@ data class TransactionData(
     val amount: Double? = null,
     val transactionDate : String? = null,
 )
-
