@@ -194,6 +194,7 @@ class HomeFragment : Fragment() {
 
     private fun navigateToLogin() {
         LoginActivity.startActivity(requireContext())
+        requireActivity().finish()
     }
     private fun androidBackButton(){
         requireActivity().onBackPressedDispatcher.addCallback(
