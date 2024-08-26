@@ -118,7 +118,7 @@ jobs:
       - name: Copy Test Results
         if: always()
         run: |
-          mkdir -p results/test-results
+          mkdir -p ./results/test-results
           cp -R app/build/test-results/* results/test-results/
 
       - name: Upload Test Results
@@ -126,12 +126,12 @@ jobs:
         if: always()
         with:
           name: test-results
-          path: results/test-results
+          path: ./results/test-results
 
       - name: Copy Build Outputs
         if: failure()
         run: |
-          mkdir -p results/outputs
+          mkdir -p ./results/outputs
           cp -R app/build/outputs/* results/outputs/
 
       - name: Upload build outputs
@@ -139,4 +139,4 @@ jobs:
         if: failure()
         with:
           name: build-outputs
-          path: results/outputs
+          path: ./results/outputs
