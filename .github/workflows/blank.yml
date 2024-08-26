@@ -29,10 +29,16 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
+      - name: Ensure bump-version.sh is executable
+        run: chmod +x ./bump-version.sh
+
       - name: Decode Google Services JSON
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $GOOGLE_SERVICES_JSON > app/google-services.json
+
+      - name: Increment Version Name
+        run: ./bump-version.sh
 
       - name: Run Unit Tests
         run: ./gradlew test
@@ -52,7 +58,7 @@ jobs:
 
       - name: Verify APK file
         run: |
-          if [ -f app/release/app-release.apk ]; then
+          if [ -f app/build/outputs/apk/release/app-release.apk ]; then
             echo "APK file exists"
           else
             echo "APK file does not exist"
@@ -65,7 +71,7 @@ jobs:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: tester
-          file: app/release/app-release.apk
+          file: app/build/outputs/apk/release/app-release.apk
           releaseNotes: |
             Changes in this build:
             - ${{ github.event.head_commit.message }}
