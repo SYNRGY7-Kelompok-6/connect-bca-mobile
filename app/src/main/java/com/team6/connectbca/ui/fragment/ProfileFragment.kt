@@ -189,11 +189,26 @@ class ProfileFragment : Fragment() {
     private fun checkInputData(input: String, former: String, type: String) {
         if (input.isNullOrEmpty() || input == "") {
             when(type) {
-                "name" -> showSnackbar("Nama tidak boleh kosong")
-                "email" -> showSnackbar("Email tidak boleh kosong")
-                "phone" -> showSnackbar("Nomor telepon tidak boleh kosong")
-                "birth" -> showSnackbar("Tanggal lahir tidak boleh kosong")
-                "address" -> showSnackbar("Alamat tidak boleh kosong")
+                "name" -> {
+                    binding.etName.setText(former)
+                    showSnackbar("Nama tidak boleh kosong")
+                }
+                "email" -> {
+                    binding.etEmail.setText(former)
+                    showSnackbar("Email tidak boleh kosong")
+                }
+                "phone" -> {
+                    binding.etPhone.setText(former)
+                    showSnackbar("Nomor telepon tidak boleh kosong")
+                }
+                "birth" -> {
+                    binding.etBirthDate.setText(former)
+                    showSnackbar("Tanggal lahir tidak boleh kosong")
+                }
+                "address" -> {
+                    binding.etAddress.setText(former)
+                    showSnackbar("Alamat tidak boleh kosong")
+                }
             }
         } else {
             validateInput(input, former, type)
