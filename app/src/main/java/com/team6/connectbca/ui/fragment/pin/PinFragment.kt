@@ -188,8 +188,7 @@ class PinFragment : Fragment() {
     private fun updatePinCircles(length: Int) {
         for (i in 0 until 6) {
             if (i < length) {
-                pinDigits[i].text = "*"
-                pinDigits[i].gravity = Gravity.CENTER
+                pinDigits[i].text = ""
                 pinDigits[i].setBackgroundResource(R.drawable.filled_circle_background)
             } else {
                 pinDigits[i].text = ""

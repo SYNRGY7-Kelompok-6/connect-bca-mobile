@@ -22,6 +22,8 @@ class LatestTransactionAdapter(private var items: List<TransactionData>) :
             binding.apply {
                 if (data.sourceName?.length!! > 20) {
                     sourceName.text = data.sourceName?.substring(0, 20) + "..."
+                }else{
+                    sourceName.text = data.sourceName
                 }
                 amount.text = "+ Rp ${numberFormat(data.amount ?: 0.0)}"
                 transactionDate.text = formatDate(data.transactionDate ?: "")
