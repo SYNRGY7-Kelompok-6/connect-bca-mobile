@@ -101,7 +101,7 @@ The application has been designed with accessibility as a priority, featuring:
 
 <table align="center">
   <tr>
-    <td align="center"><a href="https://github.com/Puay12"><img src="https://github.com/Puay12.png" width="100px;" alt=""/><br /><sub><b>Putri Ayu Nisa Az-Zahra</b></sub></a><br />PIC Android</td>
+    <td align="center"><a href="https://github.com/Puay12"><img src="https://github.com/Puay12.png" width="100px;" alt=""/><br /><sub><b>Putri Ayu Nisa Az-Zahra</b></sub></a><br />Android Developer and Lead</td>
     <td align="center"><a href="https://github.com/alfredsn"><img src="https://github.com/alfredsn.png" width="100px;" alt=""/><br /><sub><b>Alfred Sahala Nainggolan</b></sub></a><br />Android Developer</td>
     <td align="center"><a href="https://github.com/MZannn"><img src="https://github.com/MZannn.png" width="100px;" alt=""/><br /><sub><b>Muhammad Fauzan</b></sub></a><br />Android Developer</td>
     <td align="center"><a href="https://github.com/Hen2721"><img src="https://github.com/Hen2721.png" width="100px;" alt=""/><br /><sub><b>Hendardi Yoga Pratama</b></sub></a><br />Android Developer</td>
