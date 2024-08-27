@@ -9,6 +9,10 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-test-and-deploy:
     runs-on: ubuntu-latest
@@ -34,19 +38,47 @@ jobs:
       - name: Ensure bump-version.sh is executable
         run: chmod +x ./bump-version.sh
 
+      - name: Create results directory structure
+        run: mkdir -p results/release results/test-results results/outputs
+
       - name: Decode Google Services JSON
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $GOOGLE_SERVICES_JSON > app/google-services.json
 
-      - name: Increment Version Name
-        run: ./bump-version.sh
-
-      - name: Get version name
-        id: get_version
+      - name: Get latest release version
+        id: get_latest_release
         run: |
-          version_name=$(grep "versionName =" app/build.gradle.kts | awk '{ print $3 }' | tr -d '"')
-          echo "version_name=$version_name" >> $GITHUB_OUTPUT
+          latest_release=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r .tag_name | sed 's/v//')
+          if [ -z "$latest_release" ]; then
+            latest_release="0.0.0"
+          fi
+          echo "latest_release=$latest_release" >> $GITHUB_OUTPUT
+
+      - name: Increment version
+        id: increment_version
+        run: |
+          IFS='.' read -ra VERSION_PARTS <<< "${{ steps.get_latest_release.outputs.latest_release }}"
+          MAJOR=${VERSION_PARTS[0]}
+          MINOR=${VERSION_PARTS[1]}
+          PATCH=${VERSION_PARTS[2]}
+          PATCH=$((PATCH + 1))
+          new_version="$MAJOR.$MINOR.$PATCH"
+          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+
+      - name: Update build.gradle.kts
+        run: |
+          sed -i "s/versionName = \".*\"/versionName = \"${{ steps.increment_version.outputs.new_version }}\"/" build.gradle.kts
+          new_version_code=$(($(grep "versionCode =" build.gradle.kts | awk '{ print $3 }') + 1))
+          sed -i "s/versionCode = .*/versionCode = $new_version_code/" build.gradle.kts
+
+      - name: Commit version bump
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add build.gradle.kts
+          git commit -m "Bump version to ${{ steps.increment_version.outputs.new_version }}"
+          git push
 
       - name: Run Unit Tests
         run: ./gradlew test
@@ -86,7 +118,7 @@ jobs:
           releaseNotes: |
             Changes in this build:
             - ${{ github.event.head_commit.message }}
-          versionName: ${{ steps.get_version.outputs.version_name }}
+          versionName: ${{ steps.increment_version.outputs.new_version }}
 
       - name: Create GitHub Release
         id: create_release
@@ -94,8 +126,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.get_version.outputs.version_name }}
-          release_name: Release ${{ steps.get_version.outputs.version_name }}
+          tag_name: v${{ steps.increment_version.outputs.new_version }}
+          release_name: Release ${{ steps.increment_version.outputs.new_version }}
           draft: false
           prerelease: false
 
@@ -106,7 +138,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./results/release/app-release.apk
-          asset_name: app-release-${{ steps.get_version.outputs.version_name }}.apk
+          asset_name: app-release-${{ steps.increment_version.outputs.new_version }}.apk
           asset_content_type: application/vnd.android.package-archive
 
       - name: Upload APK as artifact
@@ -122,7 +154,7 @@ jobs:
             mkdir -p ./results/test-results
           fi
           if [ -d "app/build/test-results" ]; then
-            cp -R app/build/test-results/* results/test-results/
+            cp -R app/build/test-results/* ./results/test-results/
           fi
 
       - name: Upload Test Results
@@ -139,7 +171,7 @@ jobs:
             mkdir -p ./results/outputs
           fi
           if [ -d "app/build/outputs" ]; then
-            cp -R app/build/outputs/* results/outputs/
+            cp -R app/build/outputs/* ./results/outputs/
           fi
 
       - name: Upload build outputs
