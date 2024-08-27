@@ -73,14 +73,23 @@ jobs:
           sed -i "s/versionCode = .*/versionCode = $new_version_code/" build.gradle.kts
 
       - name: Stage changes
-        run: git add .
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git add .
+          fi
 
       - name: Commit version bump
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Bump version to ${{ steps.increment_version.outputs.new_version }}"
-          git push
+          if git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git commit -m "Bump version to ${{ steps.increment_version.outputs.new_version }}"
+            git push
+          fi
 
       - name: Run Unit Tests
         run: ./gradlew test
@@ -158,13 +167,6 @@ jobs:
           if [ -d "app/build/test-results" ]; then
             cp -R app/build/test-results/* ./results/test-results/
           fi
-
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: test-results
-          path: ./results/test-results
 
       - name: Copy Build Outputs
         if: failure()
