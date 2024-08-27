@@ -5,7 +5,7 @@ latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/nul
 
 # Check if latest_tag is empty or null
 if [ -z "$latest_tag" ]; then
-  echo "No tags found. Setting default version 0.0.0."
+  echo "No tags found. Setting default version to 0.0.0."
   latest_tag="v0.0.0"
 fi
 
@@ -17,7 +17,7 @@ current_version_code=$(grep "versionCode =" build.gradle.kts | awk '{ print $3 }
 
 # Check if current_version_code is empty or null
 if [ -z "$current_version_code" ]; then
-  echo "Error: current_version_code is empty or null. Setting default versionCode 1."
+  echo "Error: current_version_code is empty or null. Setting default versionCode to 1."
   current_version_code=1
 fi
 
@@ -53,7 +53,7 @@ new_version_code=$((current_version_code + 1))
 # Construct the new versionName
 new_version="$MAJOR.$MINOR.$PATCH"
 
-# Check if new_version is valid
+# Validate the new versionName
 if [ -z "$new_version" ]; then
   echo "Error: new_version is empty."
   exit 1
