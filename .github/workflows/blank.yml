@@ -72,11 +72,13 @@ jobs:
           new_version_code=$(($(grep "versionCode =" build.gradle.kts | awk '{ print $3 }') + 1))
           sed -i "s/versionCode = .*/versionCode = $new_version_code/" build.gradle.kts
 
+      - name: Stage changes
+        run: git add .
+
       - name: Commit version bump
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add build.gradle.kts
           git commit -m "Bump version to ${{ steps.increment_version.outputs.new_version }}"
           git push
 
