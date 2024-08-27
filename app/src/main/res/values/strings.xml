@@ -18,9 +18,9 @@
     <string name="transfer">Transfer</string>
     <string name="welcome">Selamat Datang</string>
     <string name="logo_content_desc">Logo Connect by BCA</string>
-    <string name="tombol_qris">Tombol Qris</string>
+    <string name="tombol_qris">Tombol Fitur Qris</string>
     <string name="tombol_wallet">Tombol Wallet</string>
-    <string name="tombol_transfer">Tombol Transfer</string>
+    <string name="tombol_transfer">Tombol Fitur Transfer</string>
     <string name="info_icon">Info Icon</string>
     <string name="title">Title</string>
     <string name="price">Price</string>
@@ -56,7 +56,7 @@
     <string name="account_balance_visibility_description">Klik tombol ini untuk lihat saldo</string>
     <string name="mutasi">Mutasi</string>
     <string name="virtual_account">Virtual\nAccount</string>
-    <string name="tombol_mutasi">Tombol mutasi rekening</string>
+    <string name="tombol_mutasi">Tombol Fitur Mutasi</string>
     <string name="tombol_virtual_account">Tombol virtual account</string>
     <string name="tombol_flazz">Tombol flazz</string>
     <string name="flazz">Flazz</string>

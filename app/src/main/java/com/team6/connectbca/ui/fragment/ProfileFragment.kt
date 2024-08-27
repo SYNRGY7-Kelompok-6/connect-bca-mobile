@@ -42,7 +42,6 @@ class ProfileFragment : Fragment() {
 
         setData()
         setupEditButtonsListener()
-        setupEditTextOnFocusChangedListener()
         androidBackButton()
 
         viewModel.getLoading().observe(viewLifecycleOwner) { isLoading ->
@@ -66,6 +65,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setData() {
         viewModel.getUserProfile().observe(viewLifecycleOwner) { user ->
             if (user != null) {
@@ -74,6 +74,16 @@ class ProfileFragment : Fragment() {
                 binding.etPhone.setText(user.phone)
                 binding.etBirthDate.setText(user.birth)
                 binding.etAddress.setText(user.address)
+
+                setupEditTextOnFocusChangedListener(
+                    mapOf(
+                        "name" to user.name!!,
+                        "email" to user.email!!,
+                        "phone" to user.phone!!,
+                        "birth" to user.birth!!,
+                        "address" to user.address!!
+                    )
+                )
             }
         }
     }
@@ -102,34 +112,33 @@ class ProfileFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun setupEditTextOnFocusChangedListener() {
+    private fun setupEditTextOnFocusChangedListener(former: Map<String, String>) {
         binding.etName.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 binding.etName.focusable = View.NOT_FOCUSABLE
                 binding.etName.isFocusableInTouchMode = false
-                updateData(name = binding.etName.text.toString())
+                checkInputData(binding.etName.text.toString(), former.getValue("name"), "name")
             }
         }
         binding.etEmail.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 binding.etEmail.focusable = View.NOT_FOCUSABLE
                 binding.etEmail.isFocusableInTouchMode = false
-                updateData(email = binding.etEmail.text.toString())
+                checkInputData(binding.etEmail.text.toString(), former.getValue("email"), "email")
             }
         }
         binding.etPhone.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 binding.etPhone.focusable = View.NOT_FOCUSABLE
                 binding.etPhone.isFocusableInTouchMode = false
-                updateData(phone = binding.etPhone.text.toString())
+                checkInputData(binding.etPhone.text.toString(), former.getValue("phone"), "phone")
             }
         }
         binding.etAddress.setOnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 binding.etAddress.focusable = View.NOT_FOCUSABLE
                 binding.etAddress.isFocusableInTouchMode = false
-
-                updateData(address = binding.etAddress.text.toString())
+                checkInputData(binding.etAddress.text.toString(), former.getValue("address"), "address")
             }
         }
     }
@@ -160,7 +169,7 @@ class ProfileFragment : Fragment() {
         monthNumPick?.maxValue = 12
         monthNumPick?.displayedValues = monthVals
         yearNumPick?.minValue = nowYear - 100
-        yearNumPick?.maxValue = nowYear
+        yearNumPick?.maxValue = nowYear - 17
 
         saveBtn.setOnClickListener {
             day = dayNumPick?.value.toString()
@@ -171,10 +180,75 @@ class ProfileFragment : Fragment() {
 
             dialog.dismiss()
 
-            updateData(birth = binding.etBirthDate.text.toString())
+            checkInputData(binding.etBirthDate.text.toString(), "", "birth")
         }
 
         dialog.show()
+    }
+
+    private fun checkInputData(input: String, former: String, type: String) {
+        if (input.isNullOrEmpty() || input == "") {
+            when(type) {
+                "name" -> showSnackbar("Nama tidak boleh kosong")
+                "email" -> showSnackbar("Email tidak boleh kosong")
+                "phone" -> showSnackbar("Nomor telepon tidak boleh kosong")
+                "birth" -> showSnackbar("Tanggal lahir tidak boleh kosong")
+                "address" -> showSnackbar("Alamat tidak boleh kosong")
+            }
+        } else {
+            validateInput(input, former, type)
+        }
+    }
+
+    private fun validateInput(input: String, former: String, type: String) {
+        when(type) {
+            "name" -> {
+                if (isAlpha(input)) {
+                    updateData(name = input)
+                } else {
+                    binding.etName.setText(former)
+                    showSnackbar("Nama tidak boleh mengandung angka/karakter")
+                }
+            }
+            "email" -> {
+                if (isEmail(input)) {
+                    updateData(email = input)
+                } else {
+                    binding.etEmail.setText(former)
+                    showSnackbar("Data harus berupa email")
+                }
+            }
+            "phone" -> {
+                if (isDigit(input)) {
+                    updateData(phone = input)
+                } else {
+                    binding.etPhone.setText(former)
+                    showSnackbar("Nomor telepon harus berupa angka")
+                }
+            }
+            "birth" -> {
+                updateData(birth = input)
+            }
+            "address" -> {
+                updateData(address = input)
+            }
+        }
+    }
+
+    private fun isAlpha(text: String) : Boolean {
+        var trimmed = text.replace(".", "")
+        trimmed = trimmed.replace("-", "")
+        trimmed = trimmed.replace(" ", "")
+
+        return trimmed.all { it.isLetter() }
+    }
+
+    private fun isEmail(text: String) : Boolean {
+        return text.contains("@")
+    }
+
+    private fun isDigit(text: String) : Boolean {
+        return text.all { it.isDigit() }
     }
 
     private fun updateData(

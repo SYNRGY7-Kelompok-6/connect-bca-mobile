@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -187,8 +188,7 @@ class PinFragment : Fragment() {
     private fun updatePinCircles(length: Int) {
         for (i in 0 until 6) {
             if (i < length) {
-                pinDigits[i].text = "*"
-                pinDigits[i].gravity = View.TEXT_ALIGNMENT_CENTER
+                pinDigits[i].text = ""
                 pinDigits[i].setBackgroundResource(R.drawable.filled_circle_background)
             } else {
                 pinDigits[i].text = ""
