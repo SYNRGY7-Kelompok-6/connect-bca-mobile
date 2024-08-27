@@ -46,15 +46,15 @@ jobs:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $GOOGLE_SERVICES_JSON > app/google-services.json
 
-      - name: Get latest release version
-        id: get_latest_release
+      - name: Get all tags
+        id: get_tags
         run: |
-          latest_release=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r .tag_name | sed 's/v//')
-          if [ -z "$latest_release" ] || [ "$latest_release" == "null" ]; then
-            latest_release="0.0.0"
+          tags=$(git tag -l)
+          latest_tag=$(echo "$tags" | sort -V | tail -n 1)
+          if [ -z "$latest_tag" ]; then
+            latest_tag="v0.0.0"
           fi
-          echo "LATEST_RELEASE=$latest_release" >> $GITHUB_ENV
-          echo "latest_release=$latest_release" >> $GITHUB_OUTPUT
+          echo "LATEST_TAG=$latest_tag" >> $GITHUB_ENV
 
       - name: Count changed files
         id: count_changes
@@ -65,12 +65,14 @@ jobs:
             changed_files=0
           fi
           echo "CHANGED_FILES=$changed_files" >> $GITHUB_ENV
-          echo "changed_files=$changed_files" >> $GITHUB_OUTPUT
 
       - name: Increment version
         id: increment_version
         run: |
-          IFS='.' read -ra VERSION_PARTS <<< "${{ env.LATEST_RELEASE }}"
+          latest_tag=${{ env.LATEST_TAG }}
+          current_version=${latest_tag#v}
+          
+          IFS='.' read -ra VERSION_PARTS <<< "$current_version"
           MAJOR=${VERSION_PARTS[0]:-0}
           MINOR=${VERSION_PARTS[1]:-0}
           PATCH=${VERSION_PARTS[2]:-0}
@@ -88,11 +90,10 @@ jobs:
           
           new_version="$MAJOR.$MINOR.$PATCH"
           echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
-          echo "new_version=$new_version" >> $GITHUB_OUTPUT
 
       - name: Debug version
         run: |
-          echo "Latest release version is ${{ env.LATEST_RELEASE }}"
+          echo "Latest tag is ${{ env.LATEST_TAG }}"
           echo "Number of changed files: ${{ env.CHANGED_FILES }}"
           echo "New version is ${{ env.NEW_VERSION }}"
 
@@ -114,7 +115,7 @@ jobs:
           else
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action"
-            git commit -m "Bump version to ${{ env.new_version }}"
+            git commit -m "Bump version to ${{ env.NEW_VERSION }}"
             git push
           fi
 
@@ -156,7 +157,7 @@ jobs:
           releaseNotes: |
             Changes in this build:
             - ${{ github.event.head_commit.message }}
-          versionName: ${{ env.new_version }}
+          versionName: ${{ env.NEW_VERSION }}
 
       - name: Create GitHub Release
         id: create_release
@@ -176,7 +177,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./results/release/app-release.apk
-          asset_name: app-release-${{ env.new_version }}.apk
+          asset_name: app-release-${{ env.NEW_VERSION }}.apk
           asset_content_type: application/vnd.android.package-archive
 
       - name: Upload APK as artifact
