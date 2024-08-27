@@ -184,6 +184,7 @@ class MutationFragment : Fragment() {
         val clipboardManager = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Copied Text", text)
         clipboardManager.setPrimaryClip(clip)
+        showSnackbar("Nomor rekening disalin")
     }
 
     private fun showBalance() {

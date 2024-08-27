@@ -34,6 +34,7 @@ class HomeFragment : Fragment() {
     private var isBalanceVisible = false
     private var balance = "1234567890"
     private var balanceDesc = "balance"
+    private var accountNumber = "234"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +48,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val accountNumber = binding.tvAccountNumber.text.toString()
         setupCustomerInfo()
         androidBackButton()
         
@@ -107,11 +107,12 @@ class HomeFragment : Fragment() {
                 val amount = account.balance?.availableBalance?.value
                 val formattedAmount = getFormattedBalance(amount!!)
                 val formattedAccNo = getFormattedAccountNo(account.accountNo!!.toDouble())
+                accountNumber = formattedAccNo
 
                 binding.salutationText.setText("Hi, ${account.name}")
                 binding.tvAccountNumber.text = formattedAccNo
                 binding.tvAccountNumber.contentDescription =
-                    account.accountNo?.split("")!!.joinToString(" ")
+                    "Nomor rekening Anda adalah ${ account.accountNo?.split("")!!.joinToString(" ") }"
                 balance = formattedAmount
                 balanceDesc = amount.toString()
             }
@@ -138,6 +139,7 @@ class HomeFragment : Fragment() {
             requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Copied Text", text)
         clipboardManager.setPrimaryClip(clip)
+        showSnackbar("Nomor rekening disalin")
     }
 
     private fun iconBalanceVisibility() {
