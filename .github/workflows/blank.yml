@@ -3,10 +3,10 @@ name: Build, Test, & Deploy
 on:
   push:
     branches:
-      - main
+      - cicd-test
   pull_request:
     branches:
-      - main
+      - cicd-test
   workflow_dispatch:
 
 concurrency:
