@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fetch the latest tag from GitHub
-latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null)
 
 # Check if latest_tag is empty or null
 if [ -z "$latest_tag" ]; then
@@ -53,8 +53,14 @@ new_version_code=$((current_version_code + 1))
 # Construct the new versionName
 new_version="$MAJOR.$MINOR.$PATCH"
 
+# Check if new_version is valid
+if [ -z "$new_version" ]; then
+  echo "Error: new_version is empty."
+  exit 1
+fi
+
 # Update the root build.gradle.kts file with the new versionName and versionCode
-sed -i "s/versionName = \"$current_version\"/versionName = \"$new_version\"/" build.gradle.kts
-sed -i "s/versionCode = $current_version_code/versionCode = $new_version_code/" build.gradle.kts
+sed -i "s/versionName = \".*\"/versionName = \"$new_version\"/" build.gradle.kts
+sed -i "s/versionCode = .*/versionCode = $new_version_code/" build.gradle.kts
 
 echo "Updated versionName to $new_version and versionCode to $new_version_code"
