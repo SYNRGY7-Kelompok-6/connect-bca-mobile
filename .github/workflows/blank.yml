@@ -66,6 +66,11 @@ jobs:
           new_version="$MAJOR.$MINOR.$PATCH"
           echo "new_version=$new_version" >> $GITHUB_OUTPUT
 
+      - name: Debug version
+        run: |
+          echo "Latest release version is ${{ steps.get_latest_release.outputs.latest_release }}"
+          echo "New version is ${{ steps.increment_version.outputs.new_version }}"
+
       - name: Update build.gradle.kts
         run: |
           sed -i "s/versionName = \".*\"/versionName = \"${{ steps.increment_version.outputs.new_version }}\"/" build.gradle.kts
@@ -167,6 +172,13 @@ jobs:
           if [ -d "app/build/test-results" ]; then
             cp -R app/build/test-results/* ./results/test-results/
           fi
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results
+          path: ./results/test-results
 
       - name: Copy Build Outputs
         if: failure()
