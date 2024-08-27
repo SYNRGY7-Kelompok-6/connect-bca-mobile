@@ -1,12 +1,14 @@
 #!/bin/bash
 
-# Fetch the latest tag from GitHub
-latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null)
+# Fetch all tags and find the latest tag
+latest_tag=$(git tag -l | sort -V | tail -n 1)
 
 # Check if latest_tag is empty or null
 if [ -z "$latest_tag" ]; then
   echo "No tags found. Setting default version to 0.0.0."
   latest_tag="v0.0.0"
+else
+  echo "Found latest tag: $latest_tag"
 fi
 
 # Remove the 'v' prefix if it exists
