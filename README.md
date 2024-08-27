@@ -14,8 +14,6 @@
   <a href="#-features">Features</a> •
   <a href="#-tech-stack">Tech Stack</a> •
   <a href="#-getting-started">Getting Started</a> •
-  <br>
-  <a href="#-getting-started">Getting Started</a> •
   <a href="#-usage">Usage</a> •
   <a href="#-accessibility">Accessibility</a> •
   <a href="#-android-team">Team</a>
@@ -84,6 +82,14 @@ These instructions will guide you through setting up and running the Android pro
 2. **Navigate:** Use the accessible navigation bar to move through different sections.
 3. **Check Balance:** View your real-time account balance on the home screen.
 4. **Make Payments:** Use the QRIS feature for quick payments or transfer funds directly.
+
+## 🔄 Application Distribution
+
+You can access the latest builds of the Connect application through the following platforms:
+
+- **GitHub Releases:** The latest version of the app is available on the [GitHub Releases](https://github.com/SYNRGY7-Kelompok-6/connect-bca-mobile/releases) page. Each release corresponds to a specific version, following semantic versioning (MAJOR.MINOR.PATCH).
+
+- **Firebase App Distribution:** To access beta versions and receive updates, use the following [invite link](https://appdistribution.firebase.dev/i/d6a5c47fde5eca61). This link will grant you access to the app distribution where you can download and install the app directly on your Android device.
 
 ## 🔍 Accessibility
 The application has been designed with accessibility as a priority, featuring:
