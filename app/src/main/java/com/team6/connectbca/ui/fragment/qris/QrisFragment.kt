@@ -57,6 +57,7 @@ class QrisFragment : Fragment(), TextToSpeech.OnInitListener {
     private val viewModel by viewModel<QrisViewModel>()
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = Runnable {
+        vibrateFailure()
         showAlertDialog()
     }
 
@@ -125,15 +126,6 @@ class QrisFragment : Fragment(), TextToSpeech.OnInitListener {
             }
         }
 
-        codeScanner.errorCallback = ErrorCallback {
-            activity.runOnUiThread {
-                Toast.makeText(
-                    activity,
-                    "Camera initialization error: ${it.message}",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
 
         binding.ivFlash.setOnClickListener(View.OnClickListener {
             buttonFlash()
@@ -245,17 +237,23 @@ class QrisFragment : Fragment(), TextToSpeech.OnInitListener {
         findNavController().navigate(action)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun vibrateSuccess() {
         if (vibrator.hasVibrator()) {
-            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(200)
+            }
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun vibrateFailure() {
         if (vibrator.hasVibrator()) {
-            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(500)
+            }
         }
     }
 
@@ -361,7 +359,6 @@ class QrisFragment : Fragment(), TextToSpeech.OnInitListener {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun scanQRFromBitmap(bitmap: Bitmap) {
         val intArray = IntArray(bitmap.width * bitmap.height)
         bitmap.getPixels(intArray, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)

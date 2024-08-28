@@ -22,6 +22,7 @@ class LatestTransactionAdapter(private var items: List<TransactionData>) :
             binding.apply {
                 sourceName.text = data.sourceName
                 amount.text = "+ Rp ${numberFormat(data.amount ?: 0.0)}"
+                amount.contentDescription = "Saldo Masuk ${numberFormat(data.amount ?: 0.0)} Rupiah"
                 transactionDate.text = formatDate(data.transactionDate ?: "")
             }
         }
