@@ -7,11 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.team6.connectbca.databinding.FragmentFindDestinationBankBinding
-import com.team6.connectbca.ui.fragment.adapter.DestinationBankAdapter
-import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.team6.connectbca.ui.fragment.adapter.transfer.DestinationBankAdapter
 
 class FindDestinationBankFragment : Fragment() {
 

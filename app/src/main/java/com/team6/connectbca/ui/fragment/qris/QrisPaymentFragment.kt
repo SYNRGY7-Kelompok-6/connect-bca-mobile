@@ -54,7 +54,10 @@ class QrisPaymentFragment : Fragment(), TextToSpeech.OnInitListener {
         Log.d("QrisPaymentFragment", jsonData.toString())
         if (isScan == true) {
             binding.beneficiaryAccountName.text = jsonData?.get("beneficiaryName") as String
-            binding.beneficiaryAccountNumber.text = jsonData?.get("beneficiaryAccountNumber") as String
+            var accountNumber = jsonData?.get("beneficiaryAccountNumber") as String
+            binding.beneficiaryAccountNumber.text = accountNumber
+            val spacedAccountNumber = accountNumber?.map { it -> "$it " }?.joinToString(" ")
+            binding.beneficiaryAccountNumber.contentDescription = "Nomor rekening tujuan $spacedAccountNumber"
             binding.remark.text = jsonData?.get("remark") as String
         }
         binding.tvBankAccount.text = "Bank Connect"
@@ -70,7 +73,8 @@ class QrisPaymentFragment : Fragment(), TextToSpeech.OnInitListener {
             }
         }
 
-        binding.tvTotalAmount.text = "0"
+        binding.tvTotalAmount.text = "Rp 0"
+        binding.tvTotalAmount.contentDescription = "0 rupiah"
         binding.btnDelete.setOnClickListener {
             viewModel.removeDigit()
         }
@@ -80,7 +84,7 @@ class QrisPaymentFragment : Fragment(), TextToSpeech.OnInitListener {
             numberFormat.minimumFractionDigits = 0
             numberFormat.maximumFractionDigits = 0
             val formattedAmount = numberFormat.format(number)
-            binding.tvTotalAmount.text = formattedAmount
+            binding.tvTotalAmount.text = "Rp $formattedAmount"
             binding.tvTotalAmount.contentDescription = "$it rupiah"
         }
 
@@ -124,7 +128,11 @@ class QrisPaymentFragment : Fragment(), TextToSpeech.OnInitListener {
                 val accountNumber = balanceInquiry.accountNo
                 val balanceInquiry = getFormattedBalance(balance = amount ?: 0)
                 binding.tvAccountNumber.text = accountNumber
-                binding.tvBalanceInquiry.text = balanceInquiry.toString()
+                val spacedAccountNumber = accountNumber?.map { it -> "$it " }?.joinToString(" ")
+                binding.tvAccountNumber.contentDescription =
+                    "Nomor rekening anda $spacedAccountNumber"
+                binding.tvBalanceInquiry.text = "Rp $balanceInquiry"
+                binding.tvBalanceInquiry.contentDescription = "Saldo anda $balanceInquiry rupiah"
 
                 showSnackbar("Data berhasil dimuat")
             }

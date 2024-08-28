@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.team6.connectbca.databinding.FragmentInputTransferAmountBinding
 import com.team6.connectbca.domain.model.SavedAccountData
-import com.team6.connectbca.ui.fragment.adapter.InputTransferAmountTabPagerAdapter
+import com.team6.connectbca.ui.fragment.adapter.transfer.InputTransferAmountTabPagerAdapter
 import com.team6.connectbca.ui.listener.TransferDataListener
 import com.team6.connectbca.ui.viewmodel.InputTransferAmountViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
