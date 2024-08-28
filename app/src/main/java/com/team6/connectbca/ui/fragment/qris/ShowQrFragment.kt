@@ -60,13 +60,17 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
 
         binding.tvExpired.text = getFormattedExpirationTime(expiresAt)
 
+        binding.ivQrCode.contentDescription = "Gambar kode QR pengguna"
+
         binding.ivQrCode.setOnClickListener {
             showQrCodeInDialog()
         }
 
+        binding.cardRefresh.contentDescription = "Tombol Refresh Kode QR"
         binding.cardRefresh.setOnClickListener(View.OnClickListener {
             refreshQrCode()
         })
+        binding.cardShare.contentDescription = "Tombol Bagikan Kode QR"
         binding.cardShare.setOnClickListener(View.OnClickListener {
             shareQr()
         })
@@ -87,6 +91,9 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
 
                 binding.tvName.text = name
                 binding.tvAccountNumber.text = accountNumber
+                val spacedAccountNumber = accountNumber?.map { it -> "$it " }?.joinToString(" ")
+                binding.tvAccountNumber.contentDescription =
+                    "Nomor rekening anda $spacedAccountNumber"
                 binding.tvBank.text = "Bank Connect"
             }
         }
@@ -196,7 +203,7 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
         binding.toolbar.setupWithNavController(navController)
         binding.toolbar.title = "Tampilkan QR"
         binding.toolbar.navigationContentDescription =
-            getString(R.string.back_to_menu_button_description)
+            "Tombol kembali ke halaman sebelumnya"
     }
 
 
@@ -250,7 +257,10 @@ class ShowQrFragment : Fragment(), TextToSpeech.OnInitListener {
             .asBitmap()
             .load(qrImage)
             .into(object : com.bumptech.glide.request.target.CustomTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?) {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?
+                ) {
                     // Get the URI for the QR image
                     val imgUri: Uri? = getImageUri(resource)
                     val shareIntent: Intent = Intent().apply {
