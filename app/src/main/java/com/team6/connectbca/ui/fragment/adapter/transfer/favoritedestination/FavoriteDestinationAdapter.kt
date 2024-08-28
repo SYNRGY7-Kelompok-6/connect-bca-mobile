@@ -1,17 +1,18 @@
-package com.team6.connectbca.ui.fragment.adapter
+package com.team6.connectbca.ui.fragment.adapter.transfer.favoritedestination
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ItemFavoriteDestinationBinding
 import com.team6.connectbca.domain.model.SavedAccountData
 
 class FavoritesDestinationAdapter(
-    private var favorites: List<SavedAccountData>,
-    private val onItemClick: (SavedAccountData) -> Unit
-) : RecyclerView.Adapter<FavoritesDestinationAdapter.FavoriteViewHolder>() {
+    private val favoriteDestinationAdapterListener: FavoriteDestinationAdapterListener
+) : ListAdapter<SavedAccountData, FavoritesDestinationAdapter.FavoriteViewHolder>(
+    FavoriteDestinationDiffUtil()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val binding = ItemFavoriteDestinationBinding.inflate(
@@ -23,15 +24,10 @@ class FavoritesDestinationAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        holder.bind(favorites[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = favorites.size
-
-    fun updateFavorites(newFavorites: List<SavedAccountData>) {
-        favorites = newFavorites
-        notifyDataSetChanged()
-    }
+    override fun getItemCount(): Int = currentList.size
 
     inner class FavoriteViewHolder(private val binding: ItemFavoriteDestinationBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -49,7 +45,7 @@ class FavoritesDestinationAdapter(
                 } else {
                     heartIcon.setImageResource(R.drawable.ic_heart_outline)
                 }
-                root.setOnClickListener { onItemClick(favorite) }
+                root.setOnClickListener { favoriteDestinationAdapterListener.onClickDestination(favorite) }
             }
         }
     }

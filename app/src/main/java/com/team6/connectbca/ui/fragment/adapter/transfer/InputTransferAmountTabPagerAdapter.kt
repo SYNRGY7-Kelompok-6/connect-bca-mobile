@@ -1,4 +1,4 @@
-package com.team6.connectbca.ui.fragment.adapter
+package com.team6.connectbca.ui.fragment.adapter.transfer
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

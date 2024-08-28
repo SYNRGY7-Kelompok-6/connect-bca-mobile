@@ -8,15 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.team6.connectbca.databinding.FragmentFavoritesTransferBinding
-import com.team6.connectbca.ui.fragment.adapter.FavoritesDestinationAdapter
+import com.team6.connectbca.domain.model.SavedAccountData
+import com.team6.connectbca.ui.fragment.adapter.transfer.favoritedestination.FavoriteDestinationAdapterListener
+import com.team6.connectbca.ui.fragment.adapter.transfer.favoritedestination.FavoritesDestinationAdapter
 import com.team6.connectbca.ui.viewmodel.SavedAccountViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoritesTransferFragment : Fragment() {
+class FavoritesTransferFragment : Fragment(), FavoriteDestinationAdapterListener {
     private var _binding: FragmentFavoritesTransferBinding? = null
     private val binding get() = _binding!!
     private val savedAccountViewModel by viewModel<SavedAccountViewModel>()
-    private lateinit var favoritesAdapter: FavoritesDestinationAdapter
+    private val favoritesAdapter = FavoritesDestinationAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,17 +51,17 @@ class FavoritesTransferFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupRecyclerView() {
-        favoritesAdapter = FavoritesDestinationAdapter(emptyList()) { selectedAccount ->
-            val action = TransferFragmentDirections.actionTransferFragmentToRecepientDetailFragment(
-                selectedAccount.savedBeneficiaryId!!,
-                selectedAccount.beneficiaryAccountNumber,
-                selectedAccount.beneficiaryAccountName,
-                selectedAccount.favorite ?: false
-            )
-            findNavController().navigate(action)
-        }
+    override fun onClickDestination(savedAccount: SavedAccountData) {
+        val action = TransferFragmentDirections.actionTransferFragmentToRecepientDetailFragment(
+            savedAccount.savedBeneficiaryId!!,
+            savedAccount.beneficiaryAccountNumber,
+            savedAccount.beneficiaryAccountName,
+            savedAccount.favorite ?: false
+        )
+        findNavController().navigate(action)
+    }
 
+    private fun setupRecyclerView() {
         binding.recyclerView.apply {
             adapter = favoritesAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -99,7 +101,7 @@ class FavoritesTransferFragment : Fragment() {
         savedAccountViewModel.getSavedAccounts("", false)
             .observe(viewLifecycleOwner) { savedAccounts ->
                 savedAccounts.data?.let { accounts ->
-                    favoritesAdapter.updateFavorites(accounts)
+                    favoritesAdapter.submitList(accounts)
                 }
             }
     }

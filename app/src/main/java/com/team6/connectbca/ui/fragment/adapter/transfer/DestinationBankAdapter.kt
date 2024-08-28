@@ -1,4 +1,4 @@
-package com.team6.connectbca.ui.fragment.adapter
+package com.team6.connectbca.ui.fragment.adapter.transfer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

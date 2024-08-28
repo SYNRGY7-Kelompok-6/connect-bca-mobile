@@ -1,12 +1,9 @@
-package com.team6.connectbca.ui.fragment.adapter
+package com.team6.connectbca.ui.fragment.adapter.transfer
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.team6.connectbca.R
 import com.team6.connectbca.databinding.ItemTransactionBinding
-import com.team6.connectbca.domain.model.SavedAccountData
 import com.team6.connectbca.domain.model.TransactionData
 import java.text.NumberFormat
 import java.text.SimpleDateFormat

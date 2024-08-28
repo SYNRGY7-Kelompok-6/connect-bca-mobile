@@ -26,7 +26,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import com.team6.connectbca.R
 import com.team6.connectbca.databinding.FragmentShowQrBinding
-import com.team6.connectbca.ui.fragment.adapter.LatestTransactionAdapter
+import com.team6.connectbca.ui.fragment.adapter.transfer.LatestTransactionAdapter
 import com.team6.connectbca.ui.viewmodel.ShowQrViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
