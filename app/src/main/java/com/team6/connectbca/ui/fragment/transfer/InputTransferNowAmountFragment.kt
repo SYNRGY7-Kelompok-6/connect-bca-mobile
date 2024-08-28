@@ -116,6 +116,7 @@ class InputTransferNowAmountFragment : Fragment() {
             numberFormat.maximumFractionDigits = 0
             val formattedAmount = numberFormat.format(amount)
             binding.sourceBankId.text = accountNumber
+            binding.sourceBankId.contentDescription = accountNumber?.split("")?.joinToString(" ")
             binding.senderBalance.text = "Rp $formattedAmount"
             binding.senderBalance.contentDescription = "$amount Rupiah"
 

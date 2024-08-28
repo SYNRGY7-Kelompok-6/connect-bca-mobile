@@ -55,6 +55,7 @@ class NewDestinationFragment : Fragment() {
 
         accountNumber = arguments?.getString("accountNumber")
         binding.accountNumberEditText.setText(accountNumber ?: "")
+        binding.accountNumberEditText.contentDescription = accountNumber?.split("")?.joinToString(" ")
     }
 
     private fun setupBankNameButtonBinding() {

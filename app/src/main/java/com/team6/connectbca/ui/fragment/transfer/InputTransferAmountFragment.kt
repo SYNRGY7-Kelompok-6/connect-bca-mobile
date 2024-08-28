@@ -63,6 +63,7 @@ class InputTransferAmountFragment : Fragment(), TransferDataListener {
         binding.logoText.text = getAcronym(beneficiaryAccountName ?: "Pengguna")
         binding.recipientName.text = beneficiaryAccountName
         binding.recipientBankId.text = beneficiaryAccountNumber
+        binding.recipientBankId.contentDescription = beneficiaryAccountNumber?.split("")?.joinToString(" ")
     }
 
     private fun setupTabLayout() {

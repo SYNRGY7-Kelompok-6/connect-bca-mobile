@@ -104,44 +104,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Penerima"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvRecipientName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NABILA MAZAYA"
-                    android:textSize="20sp"
                     android:layout_marginTop="8dp"
+                    android:text="NABILA MAZAYA"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/tvRecipientLabel"
-                    app:layout_constraintStart_toStartOf="@id/tvRecipientLabel"/>
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@id/tvRecipientLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvRecipientLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvBeneficiaryBank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bank Connect - *****5162"
                     android:layout_marginTop="8dp"
+                    android:text="Bank Connect - *****5162"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/tvRecipientName"
-                    app:layout_constraintStart_toStartOf="@id/tvRecipientName"/>
+                    app:layout_constraintStart_toStartOf="@id/tvRecipientName"
+                    app:layout_constraintTop_toBottomOf="@id/tvRecipientName" />
 
                 <View
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?android:attr/listDivider"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryBank"
-                    app:layout_constraintBottom_toTopOf="@id/tvDetailTransaction"/>
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toTopOf="@id/tvDetailTransaction"
+                    app:layout_constraintTop_toBottomOf="@id/tvBeneficiaryBank" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvDetailTransaction"
@@ -149,11 +149,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Detail Transaksi"
-                    android:textStyle="bold"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/divider"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvTransferMethodLabel"
@@ -163,8 +163,8 @@
                     android:text="Metode Transaksi"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/tvDetailTransaction"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDetailTransaction" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvTransferMethod"
@@ -173,9 +173,9 @@
                     android:text="Intra-Bank"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toTopOf="@id/tvTransferMethodLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvTransferMethodLabel"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvTransferMethodLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvTotalTransactionLabel"
@@ -185,8 +185,8 @@
                     android:text="Total Transaksi"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/tvTransferMethodLabel"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTransferMethodLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvTotalTransaction"
@@ -195,55 +195,55 @@
                     android:text="Rp150.000"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toTopOf="@id/tvTotalTransactionLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvTotalTransactionLabel"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvTotalTransactionLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvSourceLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
                     android:text="Sumber Dana"
-                    android:textStyle="bold"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvTotalTransactionLabel"
-                    app:layout_constraintStart_toStartOf="@id/tvTotalTransactionLabel"/>
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvTotalTransactionLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvTotalTransactionLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvSourceName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NIA MILLATUL IZZA"
-                    android:textSize="20sp"
                     android:layout_marginTop="8dp"
+                    android:text="NIA MILLATUL IZZA"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/tvSourceLabel"
-                    app:layout_constraintStart_toStartOf="@id/tvSourceLabel"/>
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@id/tvSourceLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvSourceLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvSourceBank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bank Connect - *****5162"
                     android:layout_marginTop="8dp"
+                    android:text="Bank Connect - *****5162"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/tvSourceName"
-                    app:layout_constraintStart_toStartOf="@id/tvSourceName"/>
+                    app:layout_constraintStart_toStartOf="@id/tvSourceName"
+                    app:layout_constraintTop_toBottomOf="@id/tvSourceName" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvQrisRefLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
                     android:text="No. Referensi QRIS"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvSourceBank"
-                    app:layout_constraintStart_toStartOf="@id/tvSourceBank"/>
+                    app:layout_constraintStart_toStartOf="@id/tvSourceBank"
+                    app:layout_constraintTop_toBottomOf="@id/tvSourceBank" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvQrisRef"
@@ -252,67 +252,67 @@
                     android:text="56789584370"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toTopOf="@id/tvQrisRefLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvQrisRefLabel"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvQrisRefLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvTransactionDescLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
                     android:text="Keterangan Transaksi"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvQrisRefLabel"
-                    app:layout_constraintStart_toStartOf="@id/tvQrisRefLabel"/>
+                    app:layout_constraintStart_toStartOf="@id/tvQrisRefLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvQrisRefLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvTransactionDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Keterangan"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:scrollHorizontally="true"
+                    android:text="Keterangan"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/tvTransactionDescLabel"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTransactionDescLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvAcquirerLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
                     android:text="Pengakuisisi"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvTransactionDesc"
-                    app:layout_constraintStart_toStartOf="@id/tvTransactionDesc"/>
+                    app:layout_constraintStart_toStartOf="@id/tvTransactionDesc"
+                    app:layout_constraintTop_toBottomOf="@id/tvTransactionDesc" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvAcquirer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DANA"
+                    android:text="Bank BCA"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toTopOf="@id/tvAcquirerLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvAcquirerLabel"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvAcquirerLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvMerchantPanLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
                     android:text="Merchant PAN"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvAcquirerLabel"
-                    app:layout_constraintStart_toStartOf="@id/tvAcquirerLabel"/>
+                    app:layout_constraintStart_toStartOf="@id/tvAcquirerLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvAcquirerLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvMerchantPan"
@@ -321,20 +321,20 @@
                     android:text="98765432101234"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toTopOf="@id/tvMerchantPanLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvMerchantPanLabel"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvMerchantPanLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvCustomerPanLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
                     android:text="Customer PAN"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:textColorPrimary"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvMerchantPanLabel"
-                    app:layout_constraintStart_toStartOf="@id/tvMerchantPanLabel"/>
+                    app:layout_constraintStart_toStartOf="@id/tvMerchantPanLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvMerchantPanLabel" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvCustomerPan"
@@ -343,9 +343,9 @@
                     android:text="123456789034567"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:textColorPrimary"
-                    app:layout_constraintTop_toTopOf="@id/tvCustomerPanLabel"
                     app:layout_constraintBottom_toBottomOf="@id/tvCustomerPanLabel"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvCustomerPanLabel" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -95,7 +95,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_item"
             android:padding="15dp"
-            android:src="@drawable/ic_gallery" />
+            android:src="@drawable/ic_gallery"
+            app:tint="@color/neutral01" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

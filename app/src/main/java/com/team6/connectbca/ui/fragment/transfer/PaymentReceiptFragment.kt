@@ -78,6 +78,7 @@ class PaymentReceiptFragment : Fragment() {
                         binding.tvTitle.text = transaction.remark
                         binding.tvDate.text = date
                         binding.tvRefNumber.text = "No. Ref: ${transaction.refNumber}"
+                        binding.tvRefNumber.contentDescription = transaction.refNumber?.split("")?.joinToString(" ")
                         binding.tvRecipientName.text = transaction.beneficiaryName
                         binding.tvBeneficiaryBank.text = transaction.beneficiaryAccountNumber
                         binding.tvTotalTransaction.text = "Rp $amount"
@@ -96,9 +97,9 @@ class PaymentReceiptFragment : Fragment() {
 
                         binding.tvTotalTransaction.contentDescription = "$amount rupiah"
                         binding.tvSourceBank.contentDescription =
-                            "Nomor rekening ${binding.tvSourceBank.text}"
+                            "Nomor rekening ${binding.tvSourceBank.text.split("").joinToString(" ")}"
                         binding.tvBeneficiaryBank.contentDescription =
-                            "Nomor rekening ${binding.tvBeneficiaryBank.text}"
+                            "Nomor rekening ${binding.tvBeneficiaryBank.text.split("").joinToString(" ")}"
 
                         if (transaction.remark.equals("Transfer")) {
                             binding.tvStatus.text = "Transfer Berhasil!"
@@ -106,6 +107,8 @@ class PaymentReceiptFragment : Fragment() {
                             hideQrisView()
                         } else {
                             binding.tvStatus.text = "Pembayaran Berhasil!"
+                            binding.tvQrisRef.text = transaction.refNumber
+                            binding.tvQrisRef.contentDescription = transaction.refNumber?.split("")?.joinToString(" ")
                             hideTransferView()
                         }
 

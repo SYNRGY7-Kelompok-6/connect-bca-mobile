@@ -103,7 +103,7 @@
     <string name="show_qr_button_description">Tombol Tampilkan QR</string>
     <string name="flash_on_button_description">Tombol Menyalakan Flash</string>
     <string name="flash_off_button_description">Tombol Mematikan Flash</string>
-    <string name="gallery_button_description">Tombol upload kode qr dari galeri</string>
+    <string name="gallery_button_description">Tombol unggah kode QR dari galeri</string>
     <string name="qr_logo_description">Gambar Logo QRIS</string>
     <string name="qr_scanner_description">QR Scanner</string>
     <string name="repeat_button_description">Tombol Ulangi</string>

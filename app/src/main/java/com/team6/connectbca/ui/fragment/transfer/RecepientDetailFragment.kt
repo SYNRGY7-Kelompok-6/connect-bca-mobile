@@ -1,6 +1,5 @@
 package com.team6.connectbca.ui.fragment.transfer
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -60,6 +59,7 @@ class RecepientDetailFragment : Fragment() {
         }
         binding.recipientName.text = beneficiaryBank
         binding.recipientAccountNumber.text = beneficiaryAccountNo
+        binding.recipientAccountNumber.contentDescription = beneficiaryAccountNo?.split("")?.joinToString(" ")
         if (isFavorite) binding.heartIcon.setImageResource(R.drawable.ic_heart) else binding.heartIcon.setImageResource(R.drawable.ic_heart_outline)
     }
 

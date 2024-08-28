@@ -2,14 +2,13 @@ package com.team6.connectbca.ui.fragment.transfer
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.team6.connectbca.R
-import com.team6.connectbca.databinding.FragmentInputTransferAmountBinding
 import com.team6.connectbca.databinding.FragmentTransactionConfirmationBinding
 import org.json.JSONObject
 import java.text.NumberFormat
@@ -87,11 +86,13 @@ class TransactionConfirmationFragment : Fragment() {
         binding.logoText.text = getAcronym(beneficiaryAccountName ?: "Pengguna")
         binding.recipientName.text = beneficiaryAccountName
         binding.recipientAccountNumber.text = beneficiaryAccountNumber
+        binding.recipientAccountNumber.contentDescription = beneficiaryAccountNumber?.split("")?.joinToString(" ")
         binding.destinationBank.text = destinationBank
         binding.nominalTransactionAmount.text = "Rp ${numberFormat(nominalTransactionAmount)}"
         binding.nominalTransactionAmount.contentDescription =
             "Nominal Transfer $nominalTransactionAmount Rupiah"
         binding.sourceBankId.text = accountNumber
+        binding.sourceBankId.contentDescription = accountNumber?.split("")?.joinToString(" ")
         binding.senderBalance.text = "Rp ${numberFormat(accountBalance)}"
         binding.senderBalance.contentDescription = "Saldo Anda $accountBalance Rupiah"
     }

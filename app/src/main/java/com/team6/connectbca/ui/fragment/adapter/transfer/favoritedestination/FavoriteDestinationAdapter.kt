@@ -39,6 +39,7 @@ class FavoritesDestinationAdapter(
                 tvName.text = favorite.beneficiaryAccountName
                 tvBankInfo.text = "BCA"
                 tvAccountNumber.text = favorite.beneficiaryAccountNumber
+                tvAccountNumber.contentDescription = favorite.beneficiaryAccountNumber?.split("")?.joinToString(" ")
                 logoText.text = nickname
                 if (favorite.favorite == true) {
                     heartIcon.setImageResource(R.drawable.ic_heart)
