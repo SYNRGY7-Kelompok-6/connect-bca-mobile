@@ -1,4 +1,4 @@
-name: Build, Test, & Deploy on Workflow Dispatch
+name: Build, Test, & Deploy
 
 on:
   push:
@@ -8,6 +8,10 @@ on:
     branches:
       - main
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-test-and-deploy:
@@ -34,19 +38,86 @@ jobs:
       - name: Ensure bump-version.sh is executable
         run: chmod +x ./bump-version.sh
 
+      - name: Create results directory structure
+        run: mkdir -p results/release results/test-results results/outputs
+
       - name: Decode Google Services JSON
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $GOOGLE_SERVICES_JSON > app/google-services.json
 
-      - name: Increment Version Name
+      - name: Get all tags
+        id: get_tags
+        run: |
+          tags=$(git tag -l)
+          latest_tag=$(echo "$tags" | sort -V | tail -n 1)
+          if [ -z "$latest_tag" ]; then
+            latest_tag="v0.0.0"
+          fi
+          echo "LATEST_TAG=$latest_tag" >> $GITHUB_ENV
+
+      - name: Count changed files
+        id: count_changes
+        run: |
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            changed_files=$(git diff --name-only HEAD~1 HEAD | wc -l)
+          else
+            changed_files=0
+          fi
+          echo "CHANGED_FILES=$changed_files" >> $GITHUB_ENV
+
+      - name: Increment version
+        id: increment_version
+        run: |
+          latest_tag=${{ env.LATEST_TAG }}
+          current_version=${latest_tag#v}
+          
+          IFS='.' read -ra VERSION_PARTS <<< "$current_version"
+          MAJOR=${VERSION_PARTS[0]:-0}
+          MINOR=${VERSION_PARTS[1]:-0}
+          PATCH=${VERSION_PARTS[2]:-0}
+          
+          if [ ${{ env.CHANGED_FILES }} -gt 20 ]; then
+            MAJOR=$((MAJOR + 1))
+            MINOR=0
+            PATCH=0
+          elif [ ${{ env.CHANGED_FILES }} -gt 5 ]; then
+            MINOR=$((MINOR + 1))
+            PATCH=0
+          else
+            PATCH=$((PATCH + 1))
+          fi
+          
+          new_version="$MAJOR.$MINOR.$PATCH"
+          echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
+
+      - name: Debug version
+        run: |
+          echo "Latest tag is ${{ env.LATEST_TAG }}"
+          echo "Number of changed files: ${{ env.CHANGED_FILES }}"
+          echo "New version is ${{ env.NEW_VERSION }}"
+
+      - name: Run bump-version.sh
         run: ./bump-version.sh
 
-      - name: Get version name
-        id: get_version
+      - name: Stage changes
         run: |
-          version_name=$(grep "versionName =" app/build.gradle.kts | awk '{ print $3 }' | tr -d '"')
-          echo "version_name=$version_name" >> $GITHUB_OUTPUT
+          if git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git add .
+          fi
+
+      - name: Commit version bump
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git commit -m "Bump version to ${{ env.NEW_VERSION }}"
+            git push
+          fi
 
       - name: Run Unit Tests
         run: ./gradlew test
@@ -86,7 +157,7 @@ jobs:
           releaseNotes: |
             Changes in this build:
             - ${{ github.event.head_commit.message }}
-          versionName: ${{ steps.get_version.outputs.version_name }}
+          versionName: ${{ env.NEW_VERSION }}
 
       - name: Create GitHub Release
         id: create_release
@@ -94,8 +165,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.get_version.outputs.version_name }}
-          release_name: Release ${{ steps.get_version.outputs.version_name }}
+          tag_name: v${{ env.NEW_VERSION }}
+          release_name: Release ${{ env.NEW_VERSION }}
           draft: false
           prerelease: false
 
@@ -106,7 +177,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./results/release/app-release.apk
-          asset_name: app-release-${{ steps.get_version.outputs.version_name }}.apk
+          asset_name: app-release-${{ env.NEW_VERSION }}.apk
           asset_content_type: application/vnd.android.package-archive
 
       - name: Upload APK as artifact
@@ -122,7 +193,7 @@ jobs:
             mkdir -p ./results/test-results
           fi
           if [ -d "app/build/test-results" ]; then
-            cp -R app/build/test-results/* results/test-results/
+            cp -R app/build/test-results/* ./results/test-results/
           fi
 
       - name: Upload Test Results
@@ -139,7 +210,7 @@ jobs:
             mkdir -p ./results/outputs
           fi
           if [ -d "app/build/outputs" ]; then
-            cp -R app/build/outputs/* results/outputs/
+            cp -R app/build/outputs/* ./results/outputs/
           fi
 
       - name: Upload build outputs
